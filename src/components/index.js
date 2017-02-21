@@ -6,7 +6,7 @@ import Register from './Register'
 import Home from './Home'
 import Dashboard from './protected/Dashboard'
 import Courses from './protected/Courses'
-import { logout } from '../helpers/auth'
+import { logout,loadCourse } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 function MatchWhenAuthed ({component: Component, authed, ...rest}) {
@@ -43,6 +43,8 @@ export default class App extends Component {
           authed: true,
           loading: false,
         })
+      this.emner = loadCourse();
+      console.log("ting"+this.emner);
       } else {
         this.setState({
           loading: false

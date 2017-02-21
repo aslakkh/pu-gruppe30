@@ -34,17 +34,24 @@ export function saveCourse (course){
   });
 }
 
-  export function getCourse(){
-    const userUid = firebase.auth().currentUser.uid;
-    this.firebase.database().ref(userUid).once()
-    return firebase.database().ref(userUid).on("value", function(snapshot) {
-      console.log(snapshot.val());
-
-
+export function getCourse(){
+  const userUid = firebase.auth().currentUser.uid;
+  this.firebase.database().ref(userUid).once()
+  return firebase.database().ref(userUid).on("value", function(snapshot) {
+    console.log(snapshot.val());
     });
+}
 
+//Function for getting all courses of a student (not fully implemented, see componentDidMount() in Courses.js)
+export function getCourses(){
+  const userUid = firebase.auth().currentUser.uid;
+  //firebase.database().ref(userUid).once();
+  return firebase.database().ref(userUid).child('courses').on("value", snap => {
+    snap.val();
+  });
+}
 
-
-  
-
+export function getUserUid(){
+  const userUid = firebase.auth().currentUser.uid;
+  return userUid;
 }

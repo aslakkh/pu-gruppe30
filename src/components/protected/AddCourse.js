@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { saveCourse,getCourse } from '../../helpers/auth'
-import {Forms, FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
+import {FormGroup, FormControl} from 'react-bootstrap'
 
 //Component for adding AddCourse
 //https://react-bootstrap.github.io/components.html#forms
@@ -15,36 +15,36 @@ export default class AddCourse extends Component{
         }
     }
 
-    //get intialstate of form component
+    //get intialstate of form component. 
     getInitialState(){
         return {
             value: ''
         }
     }
 
-    //handle change in form value
+    //handle change in form value. Sets the state value to form input value
     handleChange(e){
         this.setState({value: e.target.value});
-        console.log(this.state.value);
     }
 
-    //function for validating 
+    //function for validating input. Allows anything over 4 characters for now
     getValidationState(){
-        return 'success';
+        const length = this.state.value.length;
+        return (length > 4) ? 'success' : 'error'; //validates input greater than 4 characters
     }
 
-    //fuction for handling click on add-button
+    //function for handling click on add-button
     handleAdd = (e) => {
-		e.preventDefault();
-		saveCourse("TMA4245")
-		console.log("hei")
-		getCourse();
+		e.preventDefault(); //prevents default browser behaviour on click, whatever that means
+		saveCourse(this.state.value); //saveCourse(course) adds course to user in Firebase
+		//getCourse();
 	}
 
+    //Renders a form and a button for submission
     render(){
         return(
             <div className="AddCourse">
-                <div className ="Form">
+                <div className="Form">
                     <form>
                         <FormGroup controlId="1" bsSize="small" style={{width: "50%"}}>
                             <FormControl 
@@ -55,7 +55,7 @@ export default class AddCourse extends Component{
                             />
                         </FormGroup>
                     </form>
-                    <button className="btn btn-primary btn-lg">legg til emne</button>
+                    <button className="btn btn-primary btn-lg" onClick={this.handleAdd}>legg til emne</button>
                 </div>
             </div>
         )

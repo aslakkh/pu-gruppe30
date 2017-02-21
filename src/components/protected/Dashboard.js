@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Course from './Course'
+import AddCourse from './AddCourse'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import {getCourse } from '../../helpers/auth'
 export default class Dashboard extends Component {
@@ -20,7 +21,7 @@ getCoursesDisp(){
   render () {
     return (
     	<div>
-       	<Course />
+       	<AddCourse />
       </div>
     )
   }

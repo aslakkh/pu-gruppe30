@@ -10,7 +10,7 @@ export default class Course extends Component {
 	}
 	handleAdd = (e) => {
 		e.preventDefault();
-		saveCourse("TMA4245")
+		saveCourse("TDT9000")
 		console.log("hei")
 		getCourse();
 

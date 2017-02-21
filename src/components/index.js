@@ -31,6 +31,10 @@ function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   )
 }
 
+var Global = require('react-global');
+
+
+
 
 export default class App extends Component {
   state = {
@@ -38,6 +42,7 @@ export default class App extends Component {
     loading: true,
   }
   componentDidMount () {
+    console.log(Global.get('FOO'))
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
@@ -58,7 +63,8 @@ export default class App extends Component {
     return this.state.loading === true ? <h1>Loading</h1> : (
       <Router>
           <div>
-
+          <Global values={{FOO:"test" }} />
+          {Global.get('FOO')}
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                   <Navbar.Brand>

@@ -6,30 +6,58 @@ import { ref } from '../../config/constants'
 import firebase from 'firebase';
 import Sidebar from './Sidebar'
 
+function getCourses(props){
+      console.log("const");
+  const that = props;
+    const userUid = firebase.auth().currentUser.uid;
+    ref.child('users/'+userUid+'/courses').once("value").then(function(snapshot){
+      snapshot.forEach(function(data){
+        console.log(data.val(),data.key)
+        that.emner.push(data.key)
+
+    })})
+    
+    console.log(that.state)
+
+
+}
+function loadedDone(props){
+
+}
+
 export default class Courses extends Component {
 constructor(props) {
   super(props);
   this.emner=[];
+  this.state=({
+    emner: ["tma","bull"]
+  })
 };
 
 
 
 
 componentWillMount(){
-      console.log("const");
-  let that = this;
+  const that = this;
     const userUid = firebase.auth().currentUser.uid;
-    ref.child('users/'+userUid+'/courses').once("value", function(snapshot){
+    ref.child('users/'+userUid+'/courses').once("value").then(function(snapshot){
       snapshot.forEach(function(data){
         console.log(data.val(),data.key)
-        that.emner.push(data.key);
+        that.emner.push(data.key)
 
-    })});
-    this
+    })})
+
+}
+
+componentDidMount(){
 }
 	render (){
+/*        if(!this.state.done) {
+        return (<div className="chatapp">Loading...</div>);
+    }*/
 		return (
 			<Sidebar emner={this.emner}/>
+
 
 
 

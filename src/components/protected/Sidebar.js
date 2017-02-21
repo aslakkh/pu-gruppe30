@@ -4,32 +4,31 @@ import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import { ref } from '../../config/constants'
 import firebase from 'firebase';
 import getCourse from '../index'
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
 
 
 function TestEmner(props){
-	const emner = props.emner;
-	console.log(emner)
+	let emner = props.emner;
 
-	const course = emner.map((emne,i) =>
-        <NavItem eventKey={i}>
-            {emne}
-            {console.log(i)}
+	let course = emner.map((emne,i) =>
+        <NavItem  eventKey={i} key={i} >
+            <div  className="navbar-link">{emne}</div>
         </NavItem>
 
 			)
-	const info = emner.map((emne,i) =>
-		<Tab.Pane eventKey={i}>
-            Tab 1 content
+	let info = emner.map((emne,i) =>
+		<Tab.Pane eventKey={i} key={i}>
+            {emne} Stuff goes here
           </Tab.Pane>
-
+ 
 		)
 
 	return(
 
-	<Tab.Container id="left-tabs-example"defaultActiveKey={0} style={{border: 'none', marginleft: '0px'}}>
+	<Tab.Container id="left-tabs-example" defaultActiveKey={0} style={{border: 'black', marginleft: '0px'}}>
     <Row className="clearfix">
       <Col sm={2}>
-        <Nav bsStyle="pills" stacked>
+        <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
         {course}
         </Nav>
       </Col>
@@ -55,17 +54,27 @@ function TestEmner(props){
 export default class Courses extends Component {
 constructor(props) {
   super(props);
+  this.emner=[]
+  this.state=({emner:["hehe"]})
 };
 
 
 componentWillMount(){
+  const that = this;
+    const userUid = firebase.auth().currentUser.uid;
+    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
+      snapshot.forEach(function(data){
+        console.log(data.val(),data.key)
+        that.emner.push(data.key)
+        that.setState({})
+    })})
 
 }
 	render (){
 		return (
 
 
-		<TestEmner emner ={["test","hallo"]}/>
+		<TestEmner emner ={this.emner}/>
 
 
 

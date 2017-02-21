@@ -31,9 +31,6 @@ function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   )
 }
 
-export function getCourse(){
-  return(this.emner);
-}
 
 export default class App extends Component {
   state = {
@@ -47,8 +44,6 @@ export default class App extends Component {
           authed: true,
           loading: false,
         })
-      this.emner = loadCourse();
-      console.log("ting"+this.emner);
       } else {
         this.setState({
           loading: false

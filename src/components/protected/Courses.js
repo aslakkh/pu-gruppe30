@@ -9,26 +9,27 @@ import Sidebar from './Sidebar'
 export default class Courses extends Component {
 constructor(props) {
   super(props);
-  this.state={
-  	course: 'potet',
-  	extra: 'ting'
-
-  }
-
+  this.emner=[];
 };
 
 
 
+
 componentWillMount(){
-	console.log("tester")
+      console.log("const");
+  let that = this;
+    const userUid = firebase.auth().currentUser.uid;
+    ref.child('users/'+userUid+'/courses').once("value", function(snapshot){
+      snapshot.forEach(function(data){
+        console.log(data.val(),data.key)
+        that.emner.push(data.key);
 
-}
-
-componentDidMount(){
+    })});
+    this
 }
 	render (){
 		return (
-			<Sidebar/>
+			<Sidebar emner={this.emner}/>
 
 
 

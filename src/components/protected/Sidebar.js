@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Course from './Course'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
-import {getCourse } from '../../helpers/auth'
 import { ref } from '../../config/constants'
 import firebase from 'firebase';
+import getCourse from '../index'
 
 
 function TestEmner(props){
@@ -28,7 +28,8 @@ export default class Courses extends Component {
 constructor(props) {
   super(props);
   this.state={courses:[]};
-  this.emner =getCourse()
+  this.emner =getCourse();
+  console.log(this.emner)
 };
 
 

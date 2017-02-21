@@ -31,6 +31,10 @@ function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   )
 }
 
+export function getCourse(){
+  return(this.emner);
+}
+
 export default class App extends Component {
   state = {
     authed: false,

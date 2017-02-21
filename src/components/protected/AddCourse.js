@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { saveCourse,getCourse } from '../../helpers/auth'
+import { saveCourse, getCourse } from '../../helpers/auth'
 import {FormGroup, FormControl, Button, HelpBlock} from 'react-bootstrap'
 import './AddCourse.css'
 
@@ -64,23 +64,22 @@ export default class AddCourse extends Component{
     //Renders a form and a button for submission
     render(){
         return(
-            <div className="AddCourse">
-                <div className="Form">
+            <div className="FormWrapper">
                     <form>
                         <FormGroup controlId="addCourseForm" validationState={this.getValidationState()}>
                             <FormControl 
-                            id="addCourseForm" value={this.state.value} 
+                            id="addCourseForm" 
+                            value={this.state.value}
+                            className="InputForm" 
                             type="text" 
                             placeholder="Course name"
                             onChange={this.handleChange}
-                            style={{width: "400px"}}
                             />
                             <FormControl.Feedback/>
                             <HelpBlock>Enter a course (must have at least 5 characters)</HelpBlock>
                         </FormGroup>
                     </form>
-                    <Button bsStyle="primary" bsSize="large" onClick={this.handleAdd}>legg til emne</Button>
-                </div>
+                    <Button bsStyle="primary" bsSize="large" onClick={this.handleAdd} style={{marginLeft: "20px"}}>legg til emne</Button>
             </div>
         )
     } 

@@ -4,10 +4,10 @@
     align-items: center;
 }
 
-.Form{
+.FormWrapper{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 50%;
     margin-top: 10px;
 }
+

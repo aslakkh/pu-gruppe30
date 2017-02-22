@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { ref } from '../../config/constants'
 import firebase from 'firebase';
-
+import { browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
+import StopWatch from './StopWatch';
 
 
 
@@ -32,7 +34,14 @@ componentWillMount(){
 }
 	render(){
 		return(
-		<div>hello{this.state.emne} {this.state.points}</div>)}
+
+		<div>hello{this.state.emne} {this.state.points}
+		<StopWatch/>
+
+
+
+		</div>)}
+
 
 
 

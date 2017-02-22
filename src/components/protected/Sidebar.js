@@ -6,14 +6,16 @@ import firebase from 'firebase';
 import getCourse from '../index'
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
 import SpecificCourse from './specificCourse'
-
+import { LinkContainer } from 'react-router-bootstrap';
 function TestEmner(props){
 	let emner = props.emner;
 
 	let course = emner.map((emne,i) =>
-        <NavItem  eventKey={emne} key={i} >
-            <div  className="navbar-link"><Link to={"/Courses/"+emne} >{emne}</Link></div>
+        
+        <NavItem eventKey={emne} key={i} >
+            <Link to={"/Courses/"+emne}>{emne}</Link>
         </NavItem>
+        
 
 			)
 	let info = emner.map((emne,i) =>
@@ -26,7 +28,7 @@ function TestEmner(props){
 
 	return(
 
-	<Tab.Container id="left-tabs-example" defaultActiveKey={0} style={{border: 'black', marginleft: '0px'}}>
+	<Tab.Container id="left-tabs" defaultActiveKey={0} style={{border: 'black', marginleft: '0px'}}>
     <Row className="clearfix">
       <Col sm={2}>
         <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
@@ -73,7 +75,7 @@ componentWillMount(){
 	render (){
 		return (
 
-
+      
 		<TestEmner emner ={this.emner}/>
 
 

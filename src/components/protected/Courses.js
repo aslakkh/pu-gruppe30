@@ -7,17 +7,14 @@ import firebase from 'firebase';
 import Sidebar from './Sidebar'
 
 function getCourses(props){
-      console.log("const");
   const that = props;
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value").then(function(snapshot){
       snapshot.forEach(function(data){
-        console.log(data.val(),data.key)
         that.emner.push(data.key)
 
     })})
     
-    console.log(that.state)
 
 
 }
@@ -42,7 +39,6 @@ componentWillMount(){
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value").then(function(snapshot){
       snapshot.forEach(function(data){
-        console.log(data.val(),data.key)
         that.emner.push(data.key)
 
     })})

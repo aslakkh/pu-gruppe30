@@ -36,6 +36,35 @@ export function saveCourse (course){
   });
 }
 
+export function getCourse(){
+  const userUid = firebase.auth().currentUser.uid;
+  this.firebase.database().ref(userUid).once()
+  return firebase.database().ref(userUid).on("value", function(snapshot) {
+    console.log(snapshot.val());
+    });
+}
+
+//Function for getting all courses of a student (not fully implemented, see componentDidMount() in Courses.js)
+export function getCourses(){
+  const userUid = firebase.auth().currentUser.uid;
+  //firebase.database().ref(userUid).once();
+  return firebase.database().ref(userUid).child('courses').on("value", snap => {
+    snap.val();
+  });
+}
+
+export function getUserUid(){
+  const userUid = firebase.auth().currentUser.uid;
+  return userUid;
+}
+
+//function for removing course from user
+export function removeCourse(course){
+  const userUid = getUserUid();
+  var userRef = ref.child('users/'+userUid+'/courses/');
+  userRef.child(course).remove();
+}
+
  export function loadCourse(){
     console.log("const");
     var emner =[]
@@ -52,13 +81,4 @@ export function saveCourse (course){
   
 
 }
-  export function getCourse(user){
-    let emner = []
-    const userUid = user;
-    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
-      snapshot.forEach(function(data){
-        emner.push(data.key)
-    })})
-    return(emner)
 
-  }

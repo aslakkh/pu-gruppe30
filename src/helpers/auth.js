@@ -55,3 +55,10 @@ export function getUserUid(){
   const userUid = firebase.auth().currentUser.uid;
   return userUid;
 }
+
+//function for removing course from user
+export function removeCourse(course){
+  const userUid = getUserUid();
+  var userRef = ref.child('users/'+userUid+'/courses/');
+  userRef.child(course).remove();
+}

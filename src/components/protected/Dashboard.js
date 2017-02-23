@@ -23,6 +23,7 @@ getCoursesDisp(){
   render () {
     return (
     	<div className="Dashboard">
+        <h4>My courses</h4>
         <CoursesList />
        	<AddCourse />
       </div>

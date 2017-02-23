@@ -33,14 +33,23 @@ export default class AddCourse extends Component{
 
     //handle change in form value. Sets the state value to form input value
     handleChange(e){
-        this.setState({value: e.target.value});
+        this.setState({value: e.target.value.toUpperCase()});
         
+    }
+
+    //function for handling keypress
+    handleKeyPress(e){
+        if(e.key == 'Enter'){
+            this.handleAdd;
+        }
     }
 
     //function for validating input. For now returns error if form has input of length greater than 0 but less than 5, and success for anything of length > 4
     getValidationState(){
-        const length = this.state.value.length;
-        if(length > 4){
+        var length = this.state.value.length;
+        var re = /^[A-Z]{2,3}[0-9]{4}$/
+
+        if(re.test(this.state.value)){
             return 'success';
         }else if(length > 0){
             return 'error';
@@ -64,11 +73,12 @@ export default class AddCourse extends Component{
     //Renders a form and a button for submission
     render(){
         return(
-            <div className="FormWrapper">
+            <div className="FormWrapper" >
                     <form>
                         <FormGroup controlId="addCourseForm" validationState={this.getValidationState()}>
                             <FormControl 
                             id="addCourseForm" 
+                            componentClass='input'
                             value={this.state.value}
                             className="InputForm" 
                             type="text" 
@@ -76,10 +86,10 @@ export default class AddCourse extends Component{
                             onChange={this.handleChange}
                             />
                             <FormControl.Feedback/>
-                            <HelpBlock>Enter a course (must have at least 5 characters)</HelpBlock>
+                            <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
                         </FormGroup>
                     </form>
-                    <Button bsStyle="primary" bsSize="large" onClick={this.handleAdd} style={{marginLeft: "20px"}}>legg til emne</Button>
+                    <Button type='submit' bsStyle="primary" bsSize="large" onClick={this.handleAdd} style={{marginLeft: "20px"}}>Add</Button>
             </div>
         )
     } 

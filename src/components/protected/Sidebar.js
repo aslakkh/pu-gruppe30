@@ -1,61 +1,82 @@
 import React, { Component } from 'react'
 import Course from './Course'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
-import {getCourse } from '../../helpers/auth'
 import { ref } from '../../config/constants'
 import firebase from 'firebase';
+import getCourse from '../index'
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
+import SpecificCourse from './specificCourse'
+import { LinkContainer } from 'react-router-bootstrap';
+function TestEmner(props){
+	let emner = props.emner;
+
+	let course = emner.map((emne,i) =>
+        
+        <NavItem eventKey={emne} className="navbar-link" key={i} >
+            <Link to={"/Courses/"+emne}>{emne}</Link>
+        </NavItem>
+        
+
+			)
+	let info = emner.map((emne,i) =>
+		<Tab.Pane eventKey={emne} key={i}>
+            <h1>{emne}</h1>
+            <SpecificCourse emne={emne}/>
+          </Tab.Pane>
+ 
+		)
+
+	return(
+
+	<Tab.Container id="left-tabs" defaultActiveKey={0} style={{border: 'black', marginleft: '0px'}}>
+    <Row className="clearfix">
+      <Col sm={2}>
+        <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
+        {course}
+        </Nav>
+      </Col>
+            <Col sm={10}>
+        <Tab.Content animation>
+        	{info}
+        </Tab.Content>
+      </Col>
+    </Row>
+  </Tab.Container>
+
+
+
+
+
+		)
+
+
+};
+
 
 
 export default class Courses extends Component {
 constructor(props) {
   super(props);
-  this.state={courses:["ikke def"]};
-  this.emner =[];
+  this.emner=[]
+  this.state=({emner:["hehe"]})
 };
 
 
-
 componentWillMount(){
-	console.log("const")
-	let that = this;
-  	const userUid = firebase.auth().currentUser.uid;
-  	ref.child('users/'+userUid+'/courses').once("value", function(snapshot){
-  		snapshot.forEach(function(data){
-  			console.log(data.val(),data.key)
-  			that.emner.push(data.key);
+  const that = this;
+    const userUid = firebase.auth().currentUser.uid;
+    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
+      snapshot.forEach(function(data){
+        that.emner.push(data.key)
+        that.setState({})
+    })})
 
-  	})});
-	console.log(this.state.courses)
-}
-
-componentDidMount(){
 }
 	render (){
 		return (
-			  <Tab.Container id="left-tabs-example" defaultActiveKey="first" style={{border: 'none', marginleft: '0px'}}>
-    <Row className="clearfix">
-      <Col sm={2}>
-        <Nav bsStyle="pills" stacked>
-          <NavItem eventKey="first">
-            Tab 1{console.log(this.emner)}
-          </NavItem>
-          <NavItem eventKey="second">
-            Tab 2
-          </NavItem>
-        </Nav>
-      </Col>
-      <Col sm={10}>
-        <Tab.Content animation>
-          <Tab.Pane eventKey="first">
-            Tab 1 content
-          </Tab.Pane>
-          <Tab.Pane eventKey="second">
-            Tab 2 content
-          </Tab.Pane>
-        </Tab.Content>
-      </Col>
-    </Row>
-  </Tab.Container>
+
+
+		<TestEmner emner ={this.emner}/>
 
 
 

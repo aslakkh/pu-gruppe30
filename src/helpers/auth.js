@@ -1,6 +1,8 @@
 import { ref, firebaseAuth } from '../config/constants'
 import firebase from 'firebase';
 
+
+
 export function auth (email, pw) {
   return firebaseAuth().createUserWithEmailAndPassword(email, pw)
     .then(saveUser)
@@ -62,3 +64,21 @@ export function removeCourse(course){
   var userRef = ref.child('users/'+userUid+'/courses/');
   userRef.child(course).remove();
 }
+
+ export function loadCourse(){
+    console.log("const");
+    var emner =[]
+  let that = this;
+    const userUid = firebase.auth().currentUser.uid;
+    ref.child('users/'+userUid+'/courses').once("value", function(snapshot){
+      snapshot.forEach(function(data){
+        console.log(data.val(),data.key)
+        emner.push(data.key);
+
+    })});
+  return(emner);
+
+  
+
+}
+

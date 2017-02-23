@@ -6,19 +6,33 @@ import Register from './Register'
 import Home from './Home'
 import Dashboard from './protected/Dashboard'
 import Courses from './protected/Courses'
-import { logout } from '../helpers/auth'
-import { firebaseAuth } from '../config/constants'
+import { logout,loadCourse, } from '../helpers/auth'
+import { firebaseAuth,ref } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
+import firebase from 'firebase';
 function MatchWhenAuthed ({component: Component, authed, ...rest}) {
   return (
     <Route
       {...rest}
       render={(props) => authed === true
-        ? <Component {...props} />
+        ? <Component {...props}/>
         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
     />
   )
 }
+
+function getCourse(user){
+    let emner = []
+    let that = this
+    const userUid = user;
+    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
+      snapshot.forEach(function(data){
+        emner.push(data.key)
+        that.setState({})
+    })})
+    return(emner)
+
+  }
 
 function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   return (
@@ -31,24 +45,45 @@ function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   )
 }
 
+
 export default class App extends Component {
   state = {
     authed: false,
-    loading: true,
+    loading: true
   }
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
+        this.useruid = user.uid
+        console.log(this.useruid)
         this.setState({
           authed: true,
           loading: false,
+          user : this.useruid
         })
+        let that = this
+        let courseRef = firebase.database().ref()
+        courseRef.child('users/'+this.useruid+'/courses').once('value', snap => {
+          that.setState({
+            courses: snap.val(),
+            ting: Math.random()
+          })
+          that.forceUpdate()
+
+        })
+        console.log(this.state.ting)
+
+
+        
+
+
       } else {
         this.setState({
           loading: false
         })
       }
     })
+    
   }
   componentWillUnmount () {
     this.removeListener()
@@ -93,7 +128,7 @@ export default class App extends Component {
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                   <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} />
-                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} />
+                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} course={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>
               </div>

@@ -11,8 +11,10 @@ Returns courses as ListGroup
 Renders upon change in DB
 
 TODO: 
-FIX ERROR REMOVING LAST ELEMENT IN LIST / LOADING A USER WITH NO COURSES
-FIX WARNING MESSAGE ON LOAD AFTER VIEWING COURSES
+- FIX ERROR REMOVING LAST ELEMENT IN LIST / LOADING A USER WITH NO COURSES
+- FIX WARNING MESSAGE ON LOAD AFTER VIEWING COURSES
+- Ask for confirmation on Delete
+- ()
 Could probably be split into a Course-component for each courses
 */ 
 

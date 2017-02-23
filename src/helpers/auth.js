@@ -68,7 +68,6 @@ export function removeCourse(course){
  export function loadCourse(){
     console.log("const");
     var emner =[]
-  let that = this;
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value", function(snapshot){
       snapshot.forEach(function(data){

@@ -3,7 +3,6 @@ import { ref } from '../../config/constants'
 import firebase from 'firebase';
 import { browserHistory } from 'react-router';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
-import StopWatch from './StopWatch';
 
 
 
@@ -36,7 +35,6 @@ componentWillMount(){
 		return(
 
 		<div>hello{this.state.emne} {this.state.points}
-		<StopWatch/>
 
 
 

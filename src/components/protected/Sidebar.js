@@ -12,7 +12,7 @@ function TestEmner(props){
 
 	let course = emner.map((emne,i) =>
         
-        <NavItem eventKey={emne} key={i} >
+        <NavItem eventKey={emne} className="navbar-link" key={i} >
             <Link to={"/Courses/"+emne}>{emne}</Link>
         </NavItem>
         
@@ -75,7 +75,7 @@ componentWillMount(){
 	render (){
 		return (
 
-      
+
 		<TestEmner emner ={this.emner}/>
 
 

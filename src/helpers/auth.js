@@ -31,7 +31,8 @@ export function saveCourse (course){
   var usersRef = ref.child('users/'+userUid+"/courses/"+course);
 
   usersRef.update({
-    active: true
+    active: true,
+    time: 0
 
   });
 }

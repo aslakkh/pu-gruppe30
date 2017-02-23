@@ -6,8 +6,8 @@ import Register from './Register'
 import Home from './Home'
 import Dashboard from './protected/Dashboard'
 import Courses from './protected/Courses'
-import { logout,loadCourse, } from '../helpers/auth'
-import { firebaseAuth,ref } from '../config/constants'
+import { logout,} from '../helpers/auth'
+import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 import firebase from 'firebase';
 function MatchWhenAuthed ({component: Component, authed, ...rest}) {
@@ -21,7 +21,8 @@ function MatchWhenAuthed ({component: Component, authed, ...rest}) {
   )
 }
 
-function getCourse(user){
+//Unused
+/*function getCourse(user){
     let emner = []
     let that = this
     const userUid = user;
@@ -32,7 +33,7 @@ function getCourse(user){
     })})
     return(emner)
 
-  }
+}*/
 
 function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   return (
@@ -55,7 +56,7 @@ export default class App extends Component {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.useruid = user.uid
-        console.log(this.useruid)
+        //console.log(this.useruid)
         this.setState({
           authed: true,
           loading: false,
@@ -71,7 +72,7 @@ export default class App extends Component {
           that.forceUpdate()
 
         })
-        console.log(this.state.ting)
+        //console.log(this.state.ting)
 
 
         

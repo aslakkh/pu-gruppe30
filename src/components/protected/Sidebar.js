@@ -20,7 +20,7 @@ function TestEmner(props){
 			)
 	let info = emner.map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
-            {emne} Stuff goes here
+            <h1>{emne}</h1>
             <SpecificCourse emne={emne}/>
           </Tab.Pane>
  

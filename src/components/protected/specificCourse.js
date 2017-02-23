@@ -3,7 +3,7 @@ import { ref } from '../../config/constants'
 import firebase from 'firebase';
 import { browserHistory } from 'react-router';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
-import StopWatch from './StopWatch'
+import Stopwatch from './Stopwatch'
 
 
 export default class SpecificCourse extends Component {
@@ -14,6 +14,7 @@ export default class SpecificCourse extends Component {
 			points: undefined
 
 		})
+		this.extra= []
 
 
 	}
@@ -27,16 +28,29 @@ componentWillMount(){
       	that.setState(newState)
     })})
     console.log("hello" +this.state.points)
+    const userUid = firebase.auth().currentUser.uid;
+    ref.child('users/'+userUid+'/courses/'+this.props.emne+'/time').once("value").then(function(snapshot){
+      snapshot.forEach(function(data){
+      	console.log(data.val())
+        that.extra.push(data.val())
 
+    })})
+    
 
 
 }
+
+
+
+
 	render(){
 		return(
 
-		<div>hello{this.state.emne} {this.state.points}
-
-		 <StopWatch/>
+		<div>
+			{this.state.points}
+			{this.state.time}
+			{this.extra}
+		 <Stopwatch />
 
 		</div>)}
 

@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import Course from './Course'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
-import {getCourse, getCourses, getUserUid, removeCourse} from '../../helpers/auth'
-import { ref } from '../../config/constants'
-import firebase from 'firebase';
-import Sidebar from './Sidebar'
-import './CoursesList.css';
+import { getUserUid, removeCourse} from '../../helpers/auth'
+import firebase from 'firebase'
+import './CoursesList.css'
 
 
 /*      Component for displaying a users courses   
@@ -13,7 +10,9 @@ import './CoursesList.css';
 Returns courses as ListGroup
 Renders upon change in DB
 
-TODO: Styling
+TODO: 
+FIX ERROR REMOVING LAST ELEMENT IN LIST / LOADING A USER WITH NO COURSES
+FIX WARNING MESSAGE ON LOAD AFTER VIEWING COURSES
 Could probably be split into a Course-component for each courses
 */ 
 

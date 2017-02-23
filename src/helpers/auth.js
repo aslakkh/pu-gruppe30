@@ -52,7 +52,13 @@ export function saveCourse (course){
   
 
 }
-  export function getCourse(){
-
+  export function getCourse(user){
+    let emner = []
+    const userUid = user;
+    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
+      snapshot.forEach(function(data){
+        emner.push(data.key)
+    })})
+    return(emner)
 
   }

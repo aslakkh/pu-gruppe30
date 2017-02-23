@@ -13,7 +13,7 @@ function TestEmner(props){
 	let course = emner.map((emne,i) =>
         
         <NavItem eventKey={emne} className="navbar-link" key={i} >
-            <Link to={"/Courses/"+emne}>{emne}</Link>
+            {emne}
         </NavItem>
         
 
@@ -28,14 +28,14 @@ function TestEmner(props){
 
 	return(
 
-	<Tab.Container id="left-tabs" defaultActiveKey={0} style={{border: 'black', marginleft: '0px'}}>
+	<Tab.Container id="left-tabs" defaultActiveKey={0} style={{border: 'white', marginleft: '0px'}}>
     <Row className="clearfix">
-      <Col sm={2}>
+      <Col sm={3}>
         <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
         {course}
         </Nav>
       </Col>
-            <Col sm={10}>
+            <Col sm={9}>
         <Tab.Content animation>
         	{info}
         </Tab.Content>

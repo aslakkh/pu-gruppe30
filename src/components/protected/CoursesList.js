@@ -14,6 +14,8 @@ TODO:
 - FIX ERROR REMOVING LAST ELEMENT IN LIST / LOADING A USER WITH NO COURSES
 - FIX WARNING MESSAGE ON LOAD AFTER VIEWING COURSES
 - Ask for confirmation on Delete
+- Submit with enter
+- Add courses in chronological order?
 - ()
 Could probably be split into a Course-component for each courses
 */ 

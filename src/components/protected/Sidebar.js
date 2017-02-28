@@ -25,8 +25,8 @@ function TestEmner(props){
 	let info = Object.keys(props.courses).map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>{emne}</h1>
-            <SpecificCourse emne={emne}/>
-          </Tab.Pane>
+            <SpecificCourse emne={emne} time={emne.time}/>
+    </Tab.Pane>
  
 		)
 

@@ -67,7 +67,7 @@ export default class App extends Component {
         })
         let that = this
         let courseRef = firebase.database().ref()
-        courseRef.child('users/'+this.useruid+'/courses').on('value', snap => {
+        courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
           that.setState({
             courses: snap.val(),
             
@@ -132,7 +132,7 @@ export default class App extends Component {
                   <Route exact path='/'  component={Home} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
-                  <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} />
+                  <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} courses={this.state.courses}/>
                   <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>

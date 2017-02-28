@@ -33,15 +33,20 @@ export default class SpecificCourse extends Component {
   }
 
 componentDidMount(){
-	  const that = this;
+	const that = this;
+	/*
+	  
     ref.child('courses/'+that.props.emne+"/").once("value",function(snapshot){
       snapshot.forEach(function(data){
       	var newState ={};
       	newState[data.key] = data.val();
       	that.setState(newState)
     })})
+	*/
     const userUid = firebase.auth().currentUser.uid;
     //console.log(userUid)
+
+	//
     ref.child('users/'+userUid+'/courses/'+this.props.emne).on("value", function(snapshot){
       snapshot.forEach(function(data){
       	if (data.key === "time"){
@@ -50,7 +55,7 @@ componentDidMount(){
       	})}
     })})
     
-
+	
 
 }
 

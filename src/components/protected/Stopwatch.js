@@ -4,6 +4,8 @@
 import React, { Component } from 'react';
 import './stopwatch.css';
 import Progress from 'react-progressbar';
+import { firebaseAuth,ref } from '../../config/constants'
+import firebase from 'firebase';
 
 
 const formattedSeconds = (sec) =>
@@ -15,22 +17,40 @@ function getFromFirebase(){
 
 }
 
-function castToFirebase(){
-
-}
+/*function castToFirebase(){
+    const userUid = firebase.auth().currentUser.uid;
+    console.log(userUid)
+    const time = this.props.time+this.state.secondsElapsed
+    const timeRef = ref.child('users/'+userUid+'/courses/'+this.props.emne+'/time')
+    timeRef.update(time)
+    this.props.time= this.props.time
+}*/
 
 class Stopwatch extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this.props)
         this.state = {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
-            goal: 5
+            goal: 400
         };
         this.incrementer = null;
         this.started = false
     }
 
+    castToFirebase(){
+        console.log("emne: "+this.state.emne)
+    const userUid = firebase.auth().currentUser.uid;
+    console.log(userUid)
+
+    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne)
+    timeRef.update({time:this.state.secondsElapsed+this.state.time})
+    console.log("worked")
+    this.setState({
+        secondsElapsed: 0
+    })
+}
     handleStartClick() {
                 if(!this.started){
             this.started = true
@@ -49,22 +69,36 @@ class Stopwatch extends React.Component {
         });
     }
 
-    handleResetClick() {
-        
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            time: nextProps.time,
+        })
+    }
 
+    componentDidMount(){
+        this.setState ({
+            secondsElapsed: 0,
+            lastClearedIncrementer: null,
+            goal: 400,
+            emne: this.props.emne
+        })
+        this.incrementer = null;
+        this.started = false
+        console.log(this.state.emne)
+
+    }
+    handleResetClick() {
+        this.castToFirebase()
         clearInterval(this.incrementer);
         let sec = this.state.secondsElapsed;
-
-        this.setState({
-            secondsElapsed: 0,
-        });
     }
 
     render() {
         return (
             <div className="stopwatch">
                 <h1 className="progressbar">
-                    <Progress completed={(this.state.secondsElapsed >= this.state.goal) ? 100 : (this.state.secondsElapsed/this.state.goal) * 100}>
+                    <h3>Total time spent:{formattedSeconds(this.state.secondsElapsed+this.state.time)}</h3>
+                    <Progress completed={(this.state.secondsElapsed >= this.state.goal) ? 100 : ((this.state.secondsElapsed+this.state.time)/this.state.goal) * 100}>
                     </Progress>
                 </h1>
                 <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>

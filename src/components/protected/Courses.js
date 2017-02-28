@@ -26,7 +26,6 @@ function loadedDone(props){
 export default class Courses extends Component {
 constructor(props) {
   super(props);
-  //console.log("courses" + props.courses)
   this.emner=[];
   this.state=({
     emner: ["tma","bull"]
@@ -48,7 +47,7 @@ componentWillMount(){
 }
 
 componentDidMount(){
-  //console.log(this.props.courses+" yo")
+
 }
 	render (){
 /*        if(!this.state.done) {

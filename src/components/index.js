@@ -72,7 +72,7 @@ export default class App extends Component {
           that.forceUpdate()
 
         })
-        //console.log(this.state.ting)
+
 
 
         

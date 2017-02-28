@@ -66,10 +66,18 @@ export function removeCourse(course){
   userRef.child(course).remove();
 }
 
+//function for setting a courses child 'active' to false
+export function disableCourse(course){
+  const userUid = getUserUid();
+  var userRef = ref.child('users/'+userUid+'/courses/');
+  userRef.child(course).update({
+    active: false
+  });
+}
+
  export function loadCourse(){
     console.log("const");
     var emner =[]
-  let that = this;
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value", function(snapshot){
       snapshot.forEach(function(data){

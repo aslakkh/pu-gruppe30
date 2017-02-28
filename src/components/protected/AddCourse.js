@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { saveCourse, getCourse } from '../../helpers/auth'
+import { saveCourse } from '../../helpers/auth'
 import {FormGroup, FormControl, Button, HelpBlock} from 'react-bootstrap'
 import './AddCourse.css'
 
@@ -39,8 +39,8 @@ export default class AddCourse extends Component{
 
     //function for handling keypress
     handleKeyPress(e){
-        if(e.key == 'Enter'){
-            this.handleAdd;
+        if(e.key === 'Enter'){
+            this.handleAdd();
         }
     }
 
@@ -60,7 +60,7 @@ export default class AddCourse extends Component{
     handleAdd = (e) => {
 		e.preventDefault(); //prevents default browser behaviour on click, whatever that means
 
-        if(this.getValidationState() == 'success'){
+        if(this.getValidationState() === 'success'){
             saveCourse(this.state.value); //saveCourse(course) adds course to currently logged in user in Firebase
             this.setState({value: ''}); //resets value to empty string
         }

@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import Course from './Course'
-import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
-import {getCourse } from '../../helpers/auth'
 import { ref } from '../../config/constants'
 import firebase from 'firebase';
 import Sidebar from './Sidebar'
 
-function getCourses(props){
+//unused
+/*function getCourses(props){
   const that = props;
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value").then(function(snapshot){
@@ -17,10 +15,13 @@ function getCourses(props){
     
 
 
-}
+}*/
+
+//unused
+/*
 function loadedDone(props){
 
-}
+}*/
 
 export default class Courses extends Component {
 constructor(props) {
@@ -46,6 +47,7 @@ componentWillMount(){
 }
 
 componentDidMount(){
+
 }
 	render (){
 /*        if(!this.state.done) {

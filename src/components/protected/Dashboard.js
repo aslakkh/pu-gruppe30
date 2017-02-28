@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import CoursesList from './CoursesList'
 import AddCourse from './AddCourse'
-import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import {getCourse } from '../../helpers/auth'
 import './Dashboard.css'
 

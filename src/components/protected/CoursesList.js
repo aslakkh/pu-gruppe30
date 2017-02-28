@@ -28,13 +28,13 @@ export default class CoursesList extends Component {
 		var firebaseRef = "";
 		this.state={
 			
-			courses: undefined
+			courses: this.props.courses
 		}
 	}
 
 	componentDidMount(){
 		//should be implemented in auth.js
-		var self = this;
+		/*var self = this;
 		var userUid = getUserUid(); //gets userid of user currently logged in
 
         //following code gets users courses from firebase and updates the components state
@@ -46,13 +46,21 @@ export default class CoursesList extends Component {
 				
 				courses: snap.val() //sets courses to whatever is at users/userUid/courses in database
 			});
-		});
+		});*/
 		
 	}
 
+	componentWillReceiveProps(nextProps){
+		console.log("CoursesList willReceiveProps: ");
+		console.log(nextProps.courses);
+		this.setState({
+			courses: nextProps.courses
+		});
+}
+
 	componentWillUnmount(){
 
-		this.firebaseRef.off('value');
+		//this.firebaseRef.off('value');
 	}
 
 	//handles click

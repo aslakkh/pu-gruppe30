@@ -10,12 +10,14 @@ import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 import firebase from 'firebase';
-function MatchWhenAuthed ({component: Component, authed, ...rest}) {
+function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
+  //console.log("Inside MatchWhenAuthed - courses = ");
+  //console.log(rest.courses);
   return (
     <Route
       {...rest}
       render={(props) => authed === true
-        ? <Component {...props}/>
+        ? <Component courses={courses}/>
         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
     />
   )
@@ -50,7 +52,8 @@ function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
 export default class App extends Component {
   state = {
     authed: false,
-    loading: true
+    loading: true,
+
   }
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
@@ -64,12 +67,13 @@ export default class App extends Component {
         })
         let that = this
         let courseRef = firebase.database().ref()
-        courseRef.child('users/'+this.useruid+'/courses').once('value', snap => {
+        courseRef.child('users/'+this.useruid+'/courses').on('value', snap => {
           that.setState({
             courses: snap.val(),
-            ting: Math.random()
+            
           })
-          that.forceUpdate()
+          console.log(this.state.courses);
+          
 
         })
 
@@ -129,7 +133,7 @@ export default class App extends Component {
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                   <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} />
-                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} course={this.state.courses}/>
+                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>
               </div>

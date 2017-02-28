@@ -6,11 +6,15 @@ import firebase from 'firebase';
 import getCourse from '../index'
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
 import SpecificCourse from './specificCourse'
+import CoursesList from './CoursesList'
 import { LinkContainer } from 'react-router-bootstrap';
-function TestEmner(props){
-	let emner = props.emner;
 
-	let course = emner.map((emne,i) =>
+
+function TestEmner(props){
+  console.log("TestEmner: ");
+  console.log(props);
+
+	let course = Object.keys(props.courses).map((emne,i) =>
         
         <NavItem eventKey={emne} className="navbar-link" key={i} >
             {emne}
@@ -18,7 +22,7 @@ function TestEmner(props){
         
 
 			)
-	let info = emner.map((emne,i) =>
+	let info = Object.keys(props.courses).map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>{emne}</h1>
             <SpecificCourse emne={emne}/>
@@ -57,31 +61,51 @@ function TestEmner(props){
 export default class Courses extends Component {
 constructor(props) {
   super(props);
-  this.emner=[]
-  this.state=({emner:["hehe"]})
+  this.state={
+			
+			courses: this.props.courses
+		}
+  
 };
 
+componentWillReceiveProps(nextProps){
+  console.log("Sidebar willReceiveProps: ");
+  console.log(nextProps.courses);
+  console.log(Object.keys(nextProps.courses));
+  this.setState({
+    courses: nextProps.courses
+  });
+}
 
 componentWillMount(){
-  const that = this;
+  /*const that = this;
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
       snapshot.forEach(function(data){
         that.emner.push(data.key)
         that.setState({})
-    })})
+    })})*/
 
 }
 	render (){
-		return (
 
+    if(this.state.courses == undefined){
+      return(
+        <h4>ingenting</h4>
+      );
+    }
+    else{
+      return (
+      
 
-		<TestEmner emner ={this.emner}/>
+		    <TestEmner courses={this.state.courses}/>
 
 
 
 
 			)
+    }
+		
 	}
 
 

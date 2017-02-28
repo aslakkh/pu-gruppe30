@@ -41,7 +41,7 @@ componentDidMount(){
       	that.setState(newState)
     })})
     const userUid = firebase.auth().currentUser.uid;
-    console.log(userUid)
+    //console.log(userUid)
     ref.child('users/'+userUid+'/courses/'+this.props.emne).on("value", function(snapshot){
       snapshot.forEach(function(data){
       	if (data.key === "time"){

@@ -29,7 +29,7 @@ function getFromFirebase(){
 class Stopwatch extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
+        //console.log(this.props)
         this.state = {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
@@ -40,13 +40,13 @@ class Stopwatch extends React.Component {
     }
 
     castToFirebase(){
-        console.log("emne: "+this.state.emne)
+        //console.log("emne: "+this.state.emne)
     const userUid = firebase.auth().currentUser.uid;
-    console.log(userUid)
+    //console.log(userUid)
 
     const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne)
     timeRef.update({time:this.state.secondsElapsed+this.state.time})
-    console.log("worked")
+    //console.log("worked")
     this.setState({
         secondsElapsed: 0
     })
@@ -84,7 +84,7 @@ class Stopwatch extends React.Component {
         })
         this.incrementer = null;
         this.started = false
-        console.log(this.state.emne)
+        //console.log(this.state.emne)
 
     }
     handleResetClick() {

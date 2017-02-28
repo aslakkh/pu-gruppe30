@@ -41,10 +41,13 @@ export default class CoursesList extends Component {
         //Should maybe be implemented in a function in auth.js
 		self.firebaseRef = firebase.database().ref().child("users/"+userUid+"/courses");
 		self.firebaseRef.orderByChild("active").equalTo(true).on('value', snap => {
+			console.log(snap.val());
 			self.setState({
+				
 				courses: snap.val() //sets courses to whatever is at users/userUid/courses in database
 			});
 		});
+		
 	}
 
 	componentWillUnmount(){

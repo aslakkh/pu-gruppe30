@@ -8,7 +8,7 @@ import {ref } from '../../config/constants'
 import firebase from 'firebase';
 
 
-const formattedSeconds = ((sec) => //formats to mm:ss
+const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2))
 
 
@@ -28,7 +28,7 @@ class Stopwatch extends Component {
     castToFirebase(){
         const tid = this.state.time
     const userUid = firebase.auth().currentUser.uid;
-    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne)
+    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now())
     timeRef.update({time:this.state.secondsElapsed+this.state.time})
     this.setState({
         secondsElapsed: 0,

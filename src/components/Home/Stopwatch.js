@@ -6,6 +6,7 @@ import './stopwatch.css';
 import Progress from 'react-progressbar';
 import {ref } from '../../config/constants'
 import firebase from 'firebase';
+import {FormControl, Form, FormGroup} from 'react-bootstrap'
 
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
@@ -19,20 +20,19 @@ class Stopwatch extends Component {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
             goal: 400,
-            time: this.props.course.time
         };
         this.incrementer = null;
         this.started = false
     }
 
     castToFirebase(){
-        const tid = this.state.time
+        console.log("desc")
+        console.log(this.state.desc.value)
     const userUid = firebase.auth().currentUser.uid;
     const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now())
-    timeRef.update({time:this.state.secondsElapsed+this.state.time})
+    timeRef.set({time:this.state.secondsElapsed,desc: this.state.desc.value});
     this.setState({
-        secondsElapsed: 0,
-        time: tid+this.state.secondsElapsed
+        secondsElapsed: 0
     })
 }
     handleStartClick() {
@@ -61,8 +61,7 @@ class Stopwatch extends Component {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
             goal: 400,
-            emne: this.props.emne,
-            time: this.props.course.time
+            emne: this.props.emne
         })
         this.incrementer = null;
         this.started = false
@@ -76,22 +75,24 @@ class Stopwatch extends Component {
     render() {
         return (
             <div className="stopwatch">
-                <h3>Total time spent:{formattedSeconds(this.state.secondsElapsed+this.state.time)}</h3>
                 <h1 className="progressbar">
-                    <Progress color={'#000000'} completed={(this.state.secondsElapsed >= this.state.goal) ? 100 : ((this.state.secondsElapsed+this.state.time)/this.state.goal) * 100}>
+                    <Progress color={'#000000'} completed={(this.state.secondsElapsed >= this.state.goal) ? 100 : ((this.state.secondsElapsed)/this.state.goal) * 100}>
                     </Progress>
                 </h1>
                 <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>
 
                 {(this.state.secondsElapsed === 0 ||
                     this.incrementer === this.state.lastClearedIncrementer
-                        ? <Button className="start-btn" onClick={this.handleStartClick.bind(this)}>start</Button>
-                        : <Button className="stop-btn" onClick={this.handleStopClick.bind(this)}>stop</Button>
+                        ? <button className="start-btn" onClick={this.handleStartClick.bind(this)}>start</button>
+                        : <button className="stop-btn" onClick={this.handleStopClick.bind(this)}>stop</button>
                 )}
 
                 {(this.state.secondsElapsed !== 0 &&
                     this.incrementer === this.state.lastClearedIncrementer
-                        ? <Button onClick={this.handleResetClick.bind(this)}>save</Button>
+                        ? <div>  <form><label>What did you do?{this.state.desc}</label>
+                            <input className="form-control" ref={(desc) => this.state.desc = desc} placeholder="Description"/>
+                                </form>
+                            <button onClick={this.handleResetClick.bind(this)}>save</button></div>
                         : null
                 )}
 
@@ -110,8 +111,6 @@ class Stopwatch extends Component {
 }
  */
 
-const Button = (props) =>
-    <button type="button" {...props} className={"Stopwatch-btn " + props.className } />;
 
 export default Stopwatch;
 

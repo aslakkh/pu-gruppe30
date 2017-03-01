@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { ref } from '../../config/constants'
-import firebase from 'firebase';
 import Sidebar from './Sidebar'
 
 //unused
@@ -26,8 +24,6 @@ function loadedDone(props){
 export default class Courses extends Component {
 constructor(props) {
   super(props);
-  console.log("Component Courses receives the following props: ");
-  console.log(this.props.courses);
   this.state=({
     courses: this.props.courses,
     emner: ["tma","bull"]

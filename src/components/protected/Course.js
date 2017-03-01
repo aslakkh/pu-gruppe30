@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { saveCourse,getCourse } from '../../helpers/auth'
-import Tabs from '../tabs'
+import Tabs from '../unused/tabs'
 export default class Course extends Component {
 	constructor(props){
 		super();

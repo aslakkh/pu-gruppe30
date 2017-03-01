@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
-import Login from './Login'
-import Register from './Register'
-import Home from './Home'
-import Dashboard from './protected/Dashboard'
-import Courses from './protected/Courses'
+import Login from './Login/Login'
+import Register from './Register/Register'
+import Home from './Home/Home'
+import Dashboard from './Dashboard/Dashboard'
+import Courses from './Courses/Courses'
 import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
@@ -72,7 +72,6 @@ export default class App extends Component {
             courses: snap.val(),
             
           })
-          console.log(this.state.courses);
           
 
         })
@@ -129,7 +128,7 @@ export default class App extends Component {
             <div className="container">
               <div className="row">
                 <Switch>
-                  <Route exact path='/'  component={Home} />
+                  <Route exact path='/'  component={() => this.state.authed ? (<Home courses={this.state.courses} authed={this.state.authed} />) : <Home/>}/>
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                   <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} courses={this.state.courses}/>

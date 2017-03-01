@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
-import { getUserUid, disableCourse} from '../../helpers/auth'
-import firebase from 'firebase'
+import {disableCourse} from '../../helpers/auth'
 import './CoursesList.css'
 
 
@@ -25,7 +24,6 @@ export default class CoursesList extends Component {
 
 	constructor(props) {
 		super(props);
-		var firebaseRef = "";
 		this.state={
 			
 			courses: this.props.courses
@@ -51,8 +49,6 @@ export default class CoursesList extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		console.log("CoursesList willReceiveProps: ");
-		console.log(nextProps.courses);
 		this.setState({
 			courses: nextProps.courses
 		});
@@ -73,7 +69,7 @@ export default class CoursesList extends Component {
     //Component renders a header, followed by the keys of json object retrieved from firebase mapped to list
 	render(){
 		
-		if(this.state.courses == undefined){
+		if(this.state.courses === undefined){
 			return(
 				<h5>You have no active courses. Add a course below.</h5>
 			);

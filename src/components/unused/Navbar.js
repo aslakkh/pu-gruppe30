@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
-import Login from './Login'
-import Register from './Register'
-import Home from './Home'
-import Dashboard from './protected/Dashboard'
-import { logout } from '../helpers/auth'
-import { firebaseAuth } from '../config/constants'
+import Login from '../Login/Login'
+import Register from '../Register/Register'
+import Home from '../Home/Home'
+import Dashboard from '../Dashboard/Dashboard'
+import { logout } from '../../helpers/auth'
+import { firebaseAuth } from '../../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 
 const navbarInstance = (

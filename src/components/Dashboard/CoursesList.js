@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
-import { getUserUid, disableCourse} from '../../helpers/auth'
-import firebase from 'firebase'
+import {disableCourse} from '../../helpers/auth'
 import './CoursesList.css'
 
 
@@ -25,31 +24,39 @@ export default class CoursesList extends Component {
 
 	constructor(props) {
 		super(props);
-		var firebaseRef = "";
 		this.state={
 			
-			courses: undefined
+			courses: this.props.courses
 		}
 	}
 
 	componentDidMount(){
 		//should be implemented in auth.js
-		var self = this;
+		/*var self = this;
 		var userUid = getUserUid(); //gets userid of user currently logged in
 
         //following code gets users courses from firebase and updates the components state
         //Should maybe be implemented in a function in auth.js
 		self.firebaseRef = firebase.database().ref().child("users/"+userUid+"/courses");
 		self.firebaseRef.orderByChild("active").equalTo(true).on('value', snap => {
+			console.log(snap.val());
 			self.setState({
+				
 				courses: snap.val() //sets courses to whatever is at users/userUid/courses in database
 			});
-		});
+		});*/
+		
 	}
+
+	componentWillReceiveProps(nextProps){
+		this.setState({
+			courses: nextProps.courses
+		});
+}
 
 	componentWillUnmount(){
 
-		this.firebaseRef.off('value');
+		//this.firebaseRef.off('value');
 	}
 
 	//handles click
@@ -62,7 +69,7 @@ export default class CoursesList extends Component {
     //Component renders a header, followed by the keys of json object retrieved from firebase mapped to list
 	render(){
 		
-		if(this.state.courses == undefined){
+		if(this.state.courses === undefined){
 			return(
 				<h5>You have no active courses. Add a course below.</h5>
 			);

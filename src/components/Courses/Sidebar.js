@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-import Course from './Course'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
-import { ref } from '../../config/constants'
-import firebase from 'firebase';
-import getCourse from '../index'
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
 import SpecificCourse from './specificCourse'
-import { LinkContainer } from 'react-router-bootstrap';
-function TestEmner(props){
-	let emner = props.emner;
 
-	let course = emner.map((emne,i) =>
+/*Maps the courses to make the sidebar and the site for the specific courses */
+function TestEmner(props){
+
+	let course = Object.keys(props.courses).map((emne,i) =>
         
         <NavItem eventKey={emne} className="navbar-link" key={i} >
             {emne}
@@ -18,11 +13,11 @@ function TestEmner(props){
         
 
 			)
-	let info = emner.map((emne,i) =>
+	let info = Object.keys(props.courses).map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>{emne}</h1>
-            <SpecificCourse emne={emne}/>
-          </Tab.Pane>
+            <SpecificCourse courseID={emne} course={props.courses[emne]}/>
+    </Tab.Pane>
  
 		)
 
@@ -57,31 +52,42 @@ function TestEmner(props){
 export default class Courses extends Component {
 constructor(props) {
   super(props);
-  this.emner=[]
-  this.state=({emner:["hehe"]})
+  this.state={
+			
+			courses: this.props.courses
+		}
+  
 };
 
+componentWillReceiveProps(nextProps){
+  this.setState({
+    courses: nextProps.courses
+  });
+}
 
 componentWillMount(){
-  const that = this;
+  /*const that = this;
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
       snapshot.forEach(function(data){
         that.emner.push(data.key)
         that.setState({})
-    })})
+    })})*/
 
 }
 	render (){
-		return (
 
-
-		<TestEmner emner ={this.emner}/>
-
-
-
-
+    if(this.state.courses === undefined){ //checks if props are loaded
+      return(
+        <h4>ingenting</h4>
+      );
+    }
+    else{
+      return (
+		    <TestEmner courses={this.state.courses}/>
 			)
+    }
+		
 	}
 
 

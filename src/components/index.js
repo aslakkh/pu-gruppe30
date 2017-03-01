@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
-import Login from './Login'
-import Register from './Register'
-import Home from './Home'
-import Dashboard from './protected/Dashboard'
-import Courses from './protected/Courses'
+import Login from './Login/Login'
+import Register from './Register/Register'
+import Home from './Home/Home'
+import Dashboard from './Dashboard/Dashboard'
+import Courses from './Courses/Courses'
 import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 import firebase from 'firebase';
-function MatchWhenAuthed ({component: Component, authed, ...rest}) {
+function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
+  //console.log("Inside MatchWhenAuthed - courses = ");
+  //console.log(rest.courses);
   return (
     <Route
       {...rest}
       render={(props) => authed === true
-        ? <Component {...props}/>
+        ? <Component courses={courses}/>
         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
     />
   )
@@ -50,7 +52,8 @@ function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
 export default class App extends Component {
   state = {
     authed: false,
-    loading: true
+    loading: true,
+
   }
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
@@ -64,12 +67,12 @@ export default class App extends Component {
         })
         let that = this
         let courseRef = firebase.database().ref()
-        courseRef.child('users/'+this.useruid+'/courses').once('value', snap => {
+        courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
           that.setState({
             courses: snap.val(),
-            ting: Math.random()
+            
           })
-          that.forceUpdate()
+          
 
         })
 
@@ -125,11 +128,11 @@ export default class App extends Component {
             <div className="container">
               <div className="row">
                 <Switch>
-                  <Route exact path='/'  component={Home} />
+                  <Route exact path='/'  component={() => this.state.authed ? (<Home courses={this.state.courses} authed={this.state.authed} />) : <Home/>}/>
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
-                  <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} />
-                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} course={this.state.courses}/>
+                  <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} courses={this.state.courses}/>
+                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>
               </div>

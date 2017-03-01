@@ -11,6 +11,11 @@ Should be updated to include better form validation. User should probably only b
 
 //https://react-bootstrap.github.io/components.html#forms
 
+TODO
+
+- prevent adding an already existing course from replacing previous course
+- make it possible to submit form by pressing enter
+
 */
 
 

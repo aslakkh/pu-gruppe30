@@ -28,7 +28,7 @@ export function saveUser (user) {
 
 export function saveCourse (course){
   const userUid = firebase.auth().currentUser.uid;
-  var usersRef = ref.child('users/'+userUid+"/courses/"+course);
+  let usersRef = ref.child('users/'+userUid+"/courses/"+course);
 
   usersRef.update({
     active: true,

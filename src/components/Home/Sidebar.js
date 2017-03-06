@@ -66,14 +66,6 @@ componentWillReceiveProps(nextProps){
 }
 
 componentWillMount(){
-  /*const that = this;
-    const userUid = firebase.auth().currentUser.uid;
-    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
-      snapshot.forEach(function(data){
-        that.emner.push(data.key)
-        that.setState({})
-    })})*/
-
 }
 	render (){
 

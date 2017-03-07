@@ -27,24 +27,24 @@ export default class PlannedSession extends Component{
         super(props)
         this.state={
             desc: "hei",
-            emne: this.props.emne
+            emne: this.props.emne,
+            activeTabClassName: "tab1"
         }
 
     }
 componentWillMount(){
     let that = this
     const userUid = firebase.auth().currentUser.uid;
-    firebase.database().ref().child('users/'+userUid+'/courses/'+that.state.emne+'/planned-sessions/').orderByValue().startAt().on('value', snap => {
-        console.log(snap.val())
+    firebase.database().ref().child('users/'+userUid+'/courses/'+that.state.emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
         that.setState({
             sessions: snap.val()
         })
-        console.log(snap.val())
 })
 }
 
     handleClick(key){
-        this.props.callbackParent(key);
+    this.props.callbackParent(this.state.sessions[key].goal)
+        this.setState({activeTabClassName:key})
     }
 
 
@@ -53,9 +53,8 @@ componentWillMount(){
         return(
             <ListGroup >
                 {Object.keys(this.state.sessions).map((key) => {
-                    return <ListGroupItem key={key} className="CoursesList">
+                    return <ListGroupItem key={key}  className={(this.state.activeTabClassName === key) ? "active" : ""} onClick={() => this.handleClick(key)}>
                         {this.state.sessions[key].goal}
-                        {console.log(key)}
                         {new Date(parseInt(key)).toISOString()}
                     </ListGroupItem>
                 })}

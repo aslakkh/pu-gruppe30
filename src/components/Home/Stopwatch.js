@@ -62,7 +62,8 @@ class Stopwatch extends Component {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
             goal: 400,
-            emne: this.props.emne
+            emne: this.props.emne,
+            theme: undefined
         })
         this.incrementer = null;
         this.started = false
@@ -74,9 +75,8 @@ class Stopwatch extends Component {
         clearInterval(this.incrementer);
     }
     onChildChanged(newState){
-        this.setState({
-            theme: newState
-        })
+        console.log(newState)
+        this.setState({theme:newState})
 
     }
 
@@ -86,10 +86,7 @@ class Stopwatch extends Component {
                 <Row>
                     <Col md={7}>
             <div className="stopwatch" >
-                <h1 className="progressbar">
-                    <ProgressBar now={this.state.secondsElapsed} max={400}/>
-
-                </h1>
+                <h4>Planned Session: {this.state.theme}</h4>
                 <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>
 
                 {(this.state.secondsElapsed === 0 ||
@@ -113,7 +110,7 @@ class Stopwatch extends Component {
             <Col md={4}>
 
                 <div>
-                    <PlannedSession emne={this.props.emne} callbackParent={this.onChildChanged}/>
+                    <PlannedSession emne={this.props.emne} callbackParent={(newState) => this.onChildChanged(newState) }/>
                 </div>
 </Col>
                 </Row>

@@ -50,7 +50,7 @@ export default class SessionPlanner extends Component{
             //sets the time of the date sent to firebase to system time
             //so that every planned session gets a unique key (in ms)
             let today = new Date();
-            d.setHours(today.getHours(), today.getMinutes(), today.getSeconds(), today.getMilliseconds());
+            d.setHours(today.getHours()+1, today.getMinutes(), today.getSeconds(), today.getMilliseconds());
             planSession(this.state.course, d.getTime(), this.state.goal);
         }
         else{

@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import {Button, ProgressBar, ListGroup, ListGroupItem, Grid,Col,Row} from 'react-bootstrap'
+import firebase from 'firebase'
 
 
 function Test(props){
@@ -21,23 +22,44 @@ function Test(props){
 
 export default class PlannedSession extends Component{
 
-    callbackParent(item){
-        console.log(item)
-    }
 
     constructor(props){
         super(props)
         this.state={
-            desc: "hei"
+            desc: "hei",
+            emne: this.props.emne
         }
-    }
 
+    }
+componentWillMount(){
+    let that = this
+    const userUid = firebase.auth().currentUser.uid;
+    firebase.database().ref().child('users/'+userUid+'/courses/'+that.state.emne+'/planned-sessions/').orderByValue().startAt().on('value', snap => {
+        console.log(snap.val())
+        that.setState({
+            sessions: snap.val()
+        })
+        console.log(snap.val())
+})
+}
+
+    handleClick(key){
+        this.props.callbackParent(key);
+    }
 
 
 
     render(){
         return(
-            <Test this={this}/>
+            <ListGroup >
+                {Object.keys(this.state.sessions).map((key) => {
+                    return <ListGroupItem key={key} className="CoursesList">
+                        {this.state.sessions[key].goal}
+                        {console.log(key)}
+                        {new Date(parseInt(key)).toISOString()}
+                    </ListGroupItem>
+                })}
+            </ListGroup>
         )
     }
 }

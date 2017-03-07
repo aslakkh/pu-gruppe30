@@ -45,7 +45,6 @@ export default class SessionPlanner extends Component{
     handleClick(e){
         let d = new Date(this.state.date);
         if(this.validateState()){
-            
             planSession(this.state.course, d.getTime(), this.state.goal);
         }
         else{

@@ -19,12 +19,12 @@ export default class SpecificCourse extends Component {
 
 
 
+
 	render(){
 		return(
 
 		<div>
 			<TabView course={this.state.course} emne={this.state.courseID} />
-
 		</div>)}
 
 

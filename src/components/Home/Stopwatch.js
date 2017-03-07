@@ -66,6 +66,7 @@ class Stopwatch extends Component {
         })
         this.incrementer = null;
         this.started = false
+        console.log(this.props.emne)
 
     }
     handleResetClick() {
@@ -112,7 +113,7 @@ class Stopwatch extends Component {
             <Col md={4}>
 
                 <div>
-                    <PlannedSession callbackParent={this.onChildChanged}/>
+                    <PlannedSession emne={this.props.emne} callbackParent={this.onChildChanged}/>
                 </div>
 </Col>
                 </Row>

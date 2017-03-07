@@ -17,6 +17,7 @@ export default class SessionPlanner extends Component{
         this.state = {
             date: new Date(new Date().getTime() + (24*60*60*1000)).toISOString(),
             goal: "",
+            course: this.props.course,
         }
     }
 
@@ -44,7 +45,8 @@ export default class SessionPlanner extends Component{
     handleClick(e){
         let d = new Date(this.state.date);
         if(this.validateState()){
-            planSession("IT0000", d.getTime(), this.state.goal);
+            
+            planSession(this.state.course, d.getTime(), this.state.goal);
         }
         else{
             console.log("Error: tried submitting invalid values");
@@ -59,6 +61,10 @@ export default class SessionPlanner extends Component{
         let stateDate = new Date(this.state.date);
         stateDate.setHours(0,0,0,0);
         return(stateDate.getTime() >= today.getTime() && this.state.goal.trim() !== "")
+    }
+
+    componentDidMount(){
+        console.log(this.state.course);
     }
 
 

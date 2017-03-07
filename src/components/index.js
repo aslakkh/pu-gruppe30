@@ -55,19 +55,19 @@ export default class App extends Component {
     authed: false,
     loading: true,
 
-  }
+  };
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
-        this.useruid = user.uid
+        this.useruid = user.uid;
         //console.log(this.useruid)
         this.setState({
           authed: true,
           loading: false,
           user : this.useruid
-        })
-        let that = this
-        let courseRef = firebase.database().ref()
+        });
+        let that = this;
+        let courseRef = firebase.database().ref();
         courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
           that.setState({
             courses: snap.val(),

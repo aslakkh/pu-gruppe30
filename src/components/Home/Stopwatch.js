@@ -62,8 +62,10 @@ class Stopwatch extends Component {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
             goal: 20,
+
             emne: this.props.emne,
-            time: this.props.course.time
+            time: this.props.course.time,
+            monthTime:this.monthTime+this.props.course.time
         })
         this.incrementer = null;
         this.started = false
@@ -74,11 +76,11 @@ class Stopwatch extends Component {
         clearInterval(this.incrementer);
     }
 
-    setProgressColor(){
-        if(this.state.secondsElapsed > (this.state.goal)/1.6){
+    setProgressColor(goal){
+        if(this.state.secondsElapsed > (goal)/1.6){
             return("success")
         }
-        else if (this.state.secondsElapsed > (this.state.goal)/2.8){
+        else if (this.state.secondsElapsed > (goal)/2.8){
             return("warning")
 
         }
@@ -91,7 +93,12 @@ class Stopwatch extends Component {
         return (
             <div className="stopwatch">
                 <h1 className="progressbar">
-                    <ProgressBar now={this.state.secondsElapsed} bsStyle={this.setProgressColor()} label={formattedSeconds(this.state.secondsElapsed)} max={200}/>
+                    Daglig
+                    <ProgressBar now={this.state.secondsElapsed} bsStyle={this.setProgressColor(this.state.goal/5)} label={formattedSeconds(this.state.secondsElapsed)} max={50}/>
+                    Ukentlig
+                    <ProgressBar now={this.state.secondsElapsed+this.state.time} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.secondsElapsed+this.state.time)} max={100}/>
+                    Månedlig
+                    <ProgressBar now={this.state.secondsElapsed+this.state.monthTime} bsStyle={this.setProgressColor(this.state.goal*4)} label={formattedSeconds(this.state.secondsElapsed)} max={200}/>
 
 
                 </h1>

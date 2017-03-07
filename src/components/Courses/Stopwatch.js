@@ -57,27 +57,11 @@ class Stopwatch extends Component {
     }
 
 
-    setProgressColor(){
-        if(this.state.secondsElapsed > (this.state.goal)/1.6){
-            return("success")
-        }
-        else if (this.state.secondsElapsed > (this.state.goal)/2.8){
-            return("warning")
-
-        }
-        else{
-            return("danger")
-        }
-    }
-
-
-
-
     componentWillMount(){
         this.setState ({
             secondsElapsed: 0,
             lastClearedIncrementer: null,
-            goal: 20,
+            goal: 40,
             emne: this.props.emne,
             time: this.props.course.time
         })
@@ -90,14 +74,53 @@ class Stopwatch extends Component {
         clearInterval(this.incrementer);
     }
 
+    setProgressColor(goal,time){
+        if(this.state.secondsElapsed+time > (goal)/1.6){
+            return("success")
+        }
+        else if (this.state.secondsElapsed+time > (goal)/2.8){
+            return("warning")
+
+        }
+        else{
+            return("danger")
+        }
+    }
+
+    setProgressNow(time,boo,vari){
+        if(boo){
+            if(this.state.secondsElapsed+time > this.state.goal/vari){
+                return this.state.goal/vari
+            }
+            else{
+                return this.state.secondsElapsed+time
+            }
+        }
+        else{
+            if(this.state.secondsElapsed+time > this.state.goal*vari){
+                return this.state.goal*vari
+            }
+            else{
+                return this.state.secondsElapsed+time
+            }
+        }
+    }
+
     render() {
         return (
             <div className="stopwatch">
                 <h3>Total time spent:{formattedSeconds(this.state.secondsElapsed+this.state.time)}</h3>
+                Daglig
                  <ProgressBar>
-
-                    <ProgressBar label={this.state.emne} bsStyle={this.setProgressColor()} now={this.state.secondsElapsed} max={this.state.goal}/>
-
+                    <ProgressBar label={formattedSeconds(this.state.secondsElapsed)} bsStyle={this.setProgressColor(this.state.goal/5,0)} now={this.setProgressNow(0,true,5)} max={this.state.goal/5}/>
+                 </ProgressBar>
+                Uke
+                <ProgressBar>
+                    <ProgressBar label={formattedSeconds(this.state.secondsElapsed+this.state.time)} bsStyle={this.setProgressColor(this.state.goal,this.state.time)} now={this.setProgressNow(this.state.time,true,1)} max={this.state.goal}/>
+                </ProgressBar>
+                Måned
+                <ProgressBar>
+                    <ProgressBar label={formattedSeconds(this.state.secondsElapsed+this.state.time)} bsStyle={this.setProgressColor(this.state.goal*4,this.state.time)} now={this.setProgressNow(this.state.time,false,4)} max={this.state.goal*4}/>
                 </ProgressBar>
                 <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>
 

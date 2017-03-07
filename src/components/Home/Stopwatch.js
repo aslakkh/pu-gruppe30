@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import Progress from 'react-progressbar';
 import {ref } from '../../config/constants'
 import firebase from 'firebase';
-import {Button, ProgressBar} from 'react-bootstrap'
+import {Button, ProgressBar, ListGroup, Grid,Col,Row} from 'react-bootstrap'
+import PlannedSession from './PlannedSession'
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2));
@@ -19,6 +20,7 @@ class Stopwatch extends Component {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
             goal: 400,
+            desc: ""
         };
         this.incrementer = null;
         this.started = false
@@ -70,14 +72,21 @@ class Stopwatch extends Component {
         this.castToFirebase();
         clearInterval(this.incrementer);
     }
+    onChildChanged(newState){
+        this.setState({
+            theme: newState
+        })
+
+    }
 
     render() {
         return (
-            <div className="stopwatch">
+            <Grid fluid={true}>
+                <Row>
+                    <Col md={7}>
+            <div className="stopwatch" >
                 <h1 className="progressbar">
-                    <ProgressBar now={this.state.secondsElapsed} label={formattedSeconds(this.state.secondsElapsed)} max={400}/>
-                    /*<Progress color={'#000000'} completed={(this.state.secondsElapsed >= this.state.goal) ? 100 : ((this.state.secondsElapsed)/this.state.goal) * 100}>
-                    </Progress>*/
+                    <ProgressBar now={this.state.secondsElapsed} max={400}/>
 
                 </h1>
                 <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>
@@ -93,12 +102,21 @@ class Stopwatch extends Component {
                         ? <div>  <form><label>What did you do?{this.state.desc}</label>
                             <input className="form-control" ref={(desc) => this.state.desc = desc} placeholder="Description"/>
                                 </form>
-                            <Button block className="btn" onClick={this.handleResetClick.bind(this)}>save</Button></div>
+                            <Button block className="btn btn-lg" onClick={this.handleResetClick.bind(this)}>save</Button></div>
                         : null
                 )}
 
             </div>
+                    </Col>
+                    <Col md={1}/>
+            <Col md={4}>
 
+                <div>
+                    <PlannedSession callbackParent={this.onChildChanged}/>
+                </div>
+</Col>
+                </Row>
+            </Grid>
         );
     }
 }

@@ -23,9 +23,7 @@ export default class SpecificCourse extends Component {
 		return(
 
 		<div>
-			<TabView course={this.state.course} emne={this.state.courseID}/>
-		
-		
+			<TabView course={this.state.course} emne={this.state.courseID} />
 
 		</div>)}
 

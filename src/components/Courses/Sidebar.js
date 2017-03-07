@@ -6,11 +6,11 @@ import CourseView from './CourseView';
 function TestEmner(props){
 
 	let course = Object.keys(props.courses).map((emne,i) =>
-        
+
         <NavItem eventKey={emne} className="navbar-link" key={i} >
             {emne}
         </NavItem>
-        
+
 
 			);
 	let info = Object.keys(props.courses).map((emne,i) =>
@@ -20,7 +20,7 @@ function TestEmner(props){
             </h1>
             <SpecificCourse courseID={emne} course={props.courses[emne]}/>
     </Tab.Pane>
- 
+
 		);
 
 	return(
@@ -55,10 +55,10 @@ export default class Courses extends Component {
 constructor(props) {
   super(props);
   this.state={
-			
+
 			courses: this.props.courses
 		}
-  
+
 };
 
 componentWillReceiveProps(nextProps){
@@ -78,15 +78,17 @@ componentWillMount(){
 
 }
 	render (){
-        if(this.state.courses === undefined || this.state.courses === null){ //checks if props are loaded//
-            return(
+    if(this.state.courses === undefined || this.state.courses === null){ //checks if props are loaded
+          return(
             <h4>ingenting</h4>
-            );
-        } else{
-            return (
-                <TestEmner courses={this.state.courses}/>
-            )
+          );
         }
+        else{
+          return (
+                <TestEmner courses={this.state.courses}/>
+                )
+        }
+
 	}
 
 

@@ -56,7 +56,7 @@ componentDidMount(){
     }*/
 		return (
 			<Sidebar courses={this.state.courses}/>
-			)
+        )
 	}
 
 

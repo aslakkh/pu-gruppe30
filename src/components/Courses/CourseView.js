@@ -1,7 +1,10 @@
+/**
+ * Created by anderssalvesen on 07.03.2017.
+ */
+
 import React, { Component } from 'react';
-import {Tab, MenuItem, Row, Col, Nav, NavItem, NavDropdown} from 'react-bootstrap';
-
-
+import {Tab, MenuItem, Row, Col, Nav, NavItem, NavDropdown, ProgressBar} from 'react-bootstrap';
+import Progress from 'react-progressbar';
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2))
@@ -29,10 +32,21 @@ export  default class CourseView extends Component {
 
     componentWillMount(){
         this.setState ({
-           course: this.props.course
+            course: this.props.course
         });
+    }
 
+    setProgressColor(goal){
+        if(this.state.time > (goal)/1.6){
+            return("success")
+        }
+        else if (this.state.time > (goal)/2.8){
+            return("warning")
 
+        }
+        else{
+            return("danger")
+        }
     }
 
 
@@ -59,16 +73,28 @@ export  default class CourseView extends Component {
                         <Tab.Content animation>
 
                             <Tab.Pane eventKey={2}>
-                                Daily Content
+                                <h3 >Daily progress:</h3>
+                                <h1 className="progressbar">
+                                    <ProgressBar now={this.state.time} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.time)} max={200}/>
+                                </h1>
                             </Tab.Pane>
                             <Tab.Pane eventKey={3}>
-                                Weekly content
+                                <h3 >Weekly progress:</h3>
+                                <h1 className="progressbar">
+                                    <ProgressBar now={this.state.time} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.time)} max={200}/>
+                                </h1>
                             </Tab.Pane>
                             <Tab.Pane eventKey={4}>
-                                Monthly content
+                                <h3 >Monthly progress:</h3>
+                                <h1 className="progressbar">
+                                    <ProgressBar now={this.state.time} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.time)} max={200}/>
+                                </h1>
                             </Tab.Pane>
                             <Tab.Pane eventKey={5}>
-                                <h3>Total time spent: {formattedSeconds(this.state.time)}</h3>
+                                <h3>Total progress:</h3>
+                                <h1 className="progressbar">
+                                    <ProgressBar now={this.state.time} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.time)} max={200}/>
+                                </h1>
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

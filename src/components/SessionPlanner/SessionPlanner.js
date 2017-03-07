@@ -31,8 +31,10 @@ export default class SessionPlanner extends Component{
     handleDateChange(e){
         //let temp = new Date(e);
         //console.log(temp);
+        
+        
         this.setState({
-            date: e
+            date: e,
         });
     }
 
@@ -45,7 +47,10 @@ export default class SessionPlanner extends Component{
     handleClick(e){
         let d = new Date(this.state.date);
         if(this.validateState()){
-            
+            //sets the time of the date sent to firebase to system time
+            //so that every planned session gets a unique key (in ms)
+            let today = new Date();
+            d.setHours(today.getHours(), today.getMinutes(), today.getSeconds(), today.getMilliseconds());
             planSession(this.state.course, d.getTime(), this.state.goal);
         }
         else{
@@ -64,7 +69,7 @@ export default class SessionPlanner extends Component{
     }
 
     componentDidMount(){
-        console.log(this.state.course);
+        //console.log(this.state.course);
     }
 
 
@@ -88,7 +93,6 @@ export default class SessionPlanner extends Component{
                     <DatePicker id="example-datepicker" value={this.state.date} onChange={this.handleDateChange}/>
                 </FormGroup>
                 <Button
-                type = 'submit'
                 bsStyle='primary'
                 bsSize='large'
                 onClick={this.handleClick}

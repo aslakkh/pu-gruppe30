@@ -6,6 +6,7 @@ import Register from './Register/Register'
 import Home from './Home/Home'
 import Dashboard from './Dashboard/Dashboard'
 import Courses from './Courses/Courses'
+import SessionPlanner from './SessionPlanner/SessionPlanner'
 import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
@@ -133,6 +134,7 @@ export default class App extends Component {
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                   <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} courses={this.state.courses}/>
                   <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
+                  <MatchWhenAuthed authed={this.state.authed} path='/SessionPlanner' component={SessionPlanner} courses={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>
               </div>

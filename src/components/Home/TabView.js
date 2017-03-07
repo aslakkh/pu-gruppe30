@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'react-bootstrap'
 import StopWatch from './Stopwatch'
+import SessionPlanner from './../SessionPlanner/SessionPlanner'
 
 
 
@@ -28,7 +29,7 @@ export default class TabView extends Component{
         return(
             <Tabs activeKey={this.state.key} unmountOnExit={true} defaultActiveKey={"session"} onSelect={this.handleSelect} id="montlyweeklyselecter">
                 <Tab eventKey={"session"} title="Session"><StopWatch course={this.state.course} emne={this.state.emne}/> </Tab>
-                <Tab eventKey={"planSession"} title={"Plan Session"}><h1>Hello</h1> </Tab>
+                <Tab eventKey={"planSession"} title={"Plan Session"}><SessionPlanner course={this.state.emne}/></Tab>
             </Tabs>
         )
 }

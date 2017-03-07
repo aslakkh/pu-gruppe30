@@ -69,7 +69,7 @@ export default class CoursesList extends Component {
     //Component renders a header, followed by the keys of json object retrieved from firebase mapped to list
 	render(){
 		
-		if(this.state.courses === undefined){
+		if(this.state.courses === undefined || this.state.courses === null){
 			return(
 				<h5>You have no active courses. Add a course below.</h5>
 			);
@@ -83,7 +83,7 @@ export default class CoursesList extends Component {
 								return <ListGroupItem key={key} className="CoursesList"> 
 										{key} 
 										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
-										</ListGroupItem>;
+										</ListGroupItem>
 							})} 
 					</ListGroup>
 			</div>

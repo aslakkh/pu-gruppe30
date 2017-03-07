@@ -7,25 +7,17 @@ export default class SpecificCourse extends Component {
 		this.state = ({
 			courseID:props.courseID,
 			points: undefined,
-			course: props.course
+			course: props.course,
+			totalTime: props.time
 
 		})
-
-
 	}
-
-
-
-
 
 	render(){
 		return(
 
 		<div>
-		 <Stopwatch course={this.state.course} emne={this.state.courseID} />
-		
-		
-
+			hallo
 		</div>)}
 
 

@@ -27,18 +27,18 @@ class Stopwatch extends Component {
 
     castToFirebase(){
         const tid = this.state.time
-    const userUid = firebase.auth().currentUser.uid;
-    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now())
-    timeRef.update({time:this.state.secondsElapsed+this.state.time})
-    this.setState({
-        secondsElapsed: 0,
-        time: tid+this.state.secondsElapsed
-    })
+        const userUid = firebase.auth().currentUser.uid;
+        const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now())
+        timeRef.update({time:this.state.secondsElapsed+this.state.time})
+        this.setState({
+            secondsElapsed: 0,
+            time: tid+this.state.secondsElapsed
+        })
 }
     handleStartClick() {
                 if(!this.started){ //Makes sure the button isnt clicked twice
             this.started = true
-        this.incrementer = setInterval( () =>
+            this.incrementer = setInterval( () =>
                 this.setState({
                     secondsElapsed: this.state.secondsElapsed + 1
                 })

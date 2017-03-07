@@ -86,8 +86,13 @@ export function disableCourse(course){
 
     })});
   return(emner);
-
-  
-
 }
+
+  export function planSession(course, date, goal){
+    const userUid = getUserUid();
+    var userRef = ref.child('users/'+userUid+'/courses/'+course+'/planned-sessions/');
+    userRef.child(date).update({
+      goal: goal,
+    });
+  }
 

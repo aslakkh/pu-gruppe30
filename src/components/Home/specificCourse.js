@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Stopwatch from './Stopwatch'
-import 'bootstrap/dist/css/bootstrap.css'
-import {ProgressBar} from 'react-bootstrap'
+import TabView from './TabView'
 
 export default class SpecificCourse extends Component {
 	constructor(props){
@@ -24,7 +23,10 @@ export default class SpecificCourse extends Component {
 		return(
 
 		<div>
-		 <Stopwatch course={this.state.course} emne={this.state.courseID} />
+			<TabView course={this.state.course} emne={this.state.courseID}/>
+		
+		
+
 		</div>)}
 
 

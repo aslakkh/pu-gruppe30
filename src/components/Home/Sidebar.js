@@ -23,7 +23,7 @@ function TestEmner(props){
 
 	return(
 
-	<Tab.Container id="left-tabs" defaultActiveKey={"TDT4100"} style={{border: 'white', marginleft: '0px'}}>
+	<Tab.Container id="left-tabs" defaultActiveKey={0} style={{border: 'white', marginleft: '0px'}}>
     <Row className="clearfix">
       <Col sm={3}>
         <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
@@ -66,14 +66,6 @@ componentWillReceiveProps(nextProps){
 }
 
 componentWillMount(){
-  /*const that = this;
-    const userUid = firebase.auth().currentUser.uid;
-    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
-      snapshot.forEach(function(data){
-        that.emner.push(data.key)
-        that.setState({})
-    })})*/
-
 }
 	render (){
 

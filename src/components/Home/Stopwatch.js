@@ -2,21 +2,19 @@
  * Created by anderssalvesen on 23.02.2017.
  */
 import React, { Component } from 'react';
-import './stopwatch.css';
 import Progress from 'react-progressbar';
 import {ref } from '../../config/constants'
 import firebase from 'firebase';
-import 'bootstrap/dist/css/bootstrap.css'
-import {ProgressBar} from 'react-bootstrap'
-
+import {Button, ProgressBar} from 'react-bootstrap'
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
-Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2))
+Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2));
 
 
 class Stopwatch extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
@@ -29,19 +27,19 @@ class Stopwatch extends Component {
     }
 
     castToFirebase(){
-        const tid = this.state.time
+        console.log("desc");
+        console.log(this.state.desc.value);
     const userUid = firebase.auth().currentUser.uid;
-    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now())
-    timeRef.update({time:this.state.secondsElapsed+this.state.time})
+    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now());
+    timeRef.set({time:this.state.secondsElapsed,desc: this.state.desc.value});
     this.setState({
-        secondsElapsed: 0,
-        time: tid+this.state.secondsElapsed
+        secondsElapsed: 0
     })
 }
     handleStartClick() {
-                if(!this.started){ //Makes sure the button isnt clicked twice
-            this.started = true
-        this.incrementer = setInterval( () =>
+        if(!this.started){ //Makes sure the button isnt clicked twice
+            this.started = true;
+            this.incrementer = setInterval( () =>
                 this.setState({
                     secondsElapsed: this.state.secondsElapsed + 1
                 })
@@ -49,25 +47,11 @@ class Stopwatch extends Component {
     }
 
     handleStopClick() {
-        this.started = false
+        this.started = false;
         clearInterval(this.incrementer);
         this.setState({
             lastClearedIncrementer: this.incrementer
         });
-    }
-
-
-    setProgressColor(){
-        if(this.state.secondsElapsed > (this.state.goal)/1.6){
-            return("success")
-        }
-        else if (this.state.secondsElapsed > (this.state.goal)/2.8){
-            return("warning")
-
-        }
-        else{
-            return("danger")
-        }
     }
 
 
@@ -86,30 +70,45 @@ class Stopwatch extends Component {
 
     }
     handleResetClick() {
-        this.castToFirebase()
+        this.castToFirebase();
         clearInterval(this.incrementer);
+    }
+
+    setProgressColor(){
+        if(this.state.secondsElapsed > (this.state.goal)/1.6){
+            return("success")
+        }
+        else if (this.state.secondsElapsed > (this.state.goal)/2.8){
+            return("warning")
+
+        }
+        else{
+            return("danger")
+        }
     }
 
     render() {
         return (
             <div className="stopwatch">
-                <h3>Total time spent:{formattedSeconds(this.state.secondsElapsed+this.state.time)}</h3>
-                 <ProgressBar>
+                <h1 className="progressbar">
+                    <ProgressBar now={this.state.secondsElapsed} bsStyle={this.setProgressColor()} label={formattedSeconds(this.state.secondsElapsed)} max={200}/>
 
-                    <ProgressBar label={this.state.emne} bsStyle={this.setProgressColor()} now={this.state.secondsElapsed} max={this.state.goal}/>
 
-                </ProgressBar>
+                </h1>
                 <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>
 
                 {(this.state.secondsElapsed === 0 ||
                     this.incrementer === this.state.lastClearedIncrementer
-                        ? <Button className="start-btn" onClick={this.handleStartClick.bind(this)}>start</Button>
-                        : <Button className="stop-btn" onClick={this.handleStopClick.bind(this)}>stop</Button>
+                        ? <Button block className="btn btn-lg" onClick={this.handleStartClick.bind(this)}>start</Button>
+                        : <Button block className="btn btn-lg" onClick={this.handleStopClick.bind(this)}>stop</Button>
                 )}
 
                 {(this.state.secondsElapsed !== 0 &&
                     this.incrementer === this.state.lastClearedIncrementer
-                        ? <Button onClick={this.handleResetClick.bind(this)}>save</Button>
+                        ? <div>  <form><label>What did you do?{this.state.desc}</label>
+                            <input className="form-control" ref={(desc) => this.state.desc = desc} placeholder="Description"/>
+                                </form>
+                            <Button block className="btn" onClick={this.handleResetClick.bind(this)}>save</Button></div>
                         : null
                 )}
 
@@ -119,17 +118,6 @@ class Stopwatch extends Component {
     }
 }
 
-/** verbose component before 0.14
- class Button extends React.Component {
-  render() {
-    return <button type="button" {...this.props}
-                   className={"btn " + this.props.className } />;
-  }
-}
- */
-
-const Button = (props) =>
-    <button type="button" {...props} className={"Stopwatch-btn " + props.className } />;
 
 export default Stopwatch;
 

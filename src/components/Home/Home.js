@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {ProgressBar} from 'react-bootstrap'
+import Courses from './Courses'
 export default class Home extends Component {
   constructor(props){
     super(props);
@@ -21,7 +23,7 @@ export default class Home extends Component {
   render () {
       if(this.state.authed){
           return(
-            <div>authed</div>
+              <Courses courses={this.state.courses}/>
           )
       }
 

@@ -69,7 +69,6 @@ export default class SessionPlanner extends Component{
     }
 
     componentDidMount(){
-        //console.log(this.state.course);
     }
 
 

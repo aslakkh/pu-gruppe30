@@ -78,6 +78,27 @@ export default class SessionPlanner extends Component{
         return(stateDate.getTime() >= today.getTime() && this.state.goal.trim() !== "")
     }
 
+    formValidateState(){
+        
+        if(this.state.goal.trim() !== ""){
+            return 'success';
+        }
+        else{
+            return 'error';
+        }
+    }
+
+    datePickerValidateState(){
+        let stateDate = new Date(this.state.date);
+        stateDate.setHours(0,0,0,0);
+        if(stateDate.getTime() >= Date.now()){
+            return 'success';
+        }
+        else{
+            return 'error';
+        }
+    }
+
     componentDidMount(){
         //console.log(this.state.course);
     }
@@ -90,6 +111,7 @@ export default class SessionPlanner extends Component{
             <div>
                 <FormGroup 
                 controlId="planSessionForm"
+                validationState={this.formValidateState()}
                 >
                     <ControlLabel>Goal/Description</ControlLabel>
                     <FormControl 
@@ -99,6 +121,12 @@ export default class SessionPlanner extends Component{
                     value={this.state.goal}
                     onChange={this.handleGoalChange}
                     />
+                    
+                </FormGroup>
+                <FormGroup
+                controlId="datePicker"
+                validationState={this.datePickerValidateState()}
+                >
                     <ControlLabel>Date</ControlLabel>
                     <DatePicker id="example-datepicker" value={this.state.date} onChange={this.handleDateChange}/>
                 </FormGroup>

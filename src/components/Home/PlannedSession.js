@@ -50,7 +50,11 @@ componentWillMount(){
 
 
     render(){
-        return(
+        if(this.state.sessions == null || this.state.sessions == undefined){
+            return <h4></h4>
+        }
+        else{
+            return(
             <ListGroup >
                 {Object.keys(this.state.sessions).map((key) => {
                     return <ListGroupItem key={key}  className={(this.state.activeTabClassName === key) ? "active" : ""} onClick={() => this.handleClick(key)}>
@@ -60,5 +64,7 @@ componentWillMount(){
                 })}
             </ListGroup>
         )
+        }
+        
     }
 }

@@ -63,8 +63,6 @@ class Stopwatch extends Component {
         let tid = 0;
         let d = new Date()
         d.setDate(d.getDate() - d.getDay())
-        console.log(d)
-        console.log(d.valueOf())
         if (!(this.props.course.sessions === null) || !(this.props.course.sessions === undefined))
         {Object.keys(list).map((key) => {
             tid = tid + list[key].time

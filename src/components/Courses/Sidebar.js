@@ -5,6 +5,7 @@ import CourseView from './CourseView';
 /*Maps the courses to make the sidebar and the site for the specific courses */
 function TestEmner(props){
 
+    console.log(props.courses)
 	let course = Object.keys(props.courses).map((emne,i) =>
 
         <NavItem eventKey={emne} className="navbar-link" key={i} >
@@ -17,6 +18,7 @@ function TestEmner(props){
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>
                 <CourseView courseID={emne} course={props.courses[emne]} courses={props.courses}/>
+                {console.log(props.courses[emne].sessions)}
             </h1>
             <SpecificCourse courseID={emne} course={props.courses[emne]}/>
     </Tab.Pane>
@@ -40,13 +42,7 @@ function TestEmner(props){
     </Row>
   </Tab.Container>
 
-
-
-
-
 		)
-
-
 };
 
 

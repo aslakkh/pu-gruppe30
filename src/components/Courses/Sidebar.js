@@ -76,7 +76,6 @@ componentWillMount(){
 
 }
 	render (){
-
     if(this.state.courses === undefined || this.state.courses === null){ //checks if props are loaded
       return(
         <h4>ingenting</h4>

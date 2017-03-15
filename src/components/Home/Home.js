@@ -22,9 +22,14 @@ export default class Home extends Component {
 
   render () {
       if(this.state.authed){
-          return(
+          if(this.state.courses != undefined || this.state.courses != null){
+            return(
               <Courses courses={this.state.courses}/>
-          )
+          );
+        }
+        else{
+            return <h4>No courses</h4>
+        }
       }
 
 

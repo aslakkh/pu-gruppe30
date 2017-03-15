@@ -43,8 +43,9 @@ componentWillMount(){
 }
 
     handleClick(key){
-    this.props.callbackParent(this.state.sessions[key].goal)
+    this.props.callbackParent(this.state.sessions[key],key)
         this.setState({activeTabClassName:key})
+
     }
 
 

@@ -11,6 +11,7 @@ import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 import firebase from 'firebase';
+
 function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
   //console.log("Inside MatchWhenAuthed - courses = ");
   //console.log(rest.courses);

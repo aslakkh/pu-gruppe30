@@ -29,13 +29,18 @@ class Stopwatch extends Component {
     castToFirebase(){
         console.log("desc");
         console.log(this.state.desc.value);
-    const userUid = firebase.auth().currentUser.uid;
-    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now());
-    timeRef.set({time:this.state.secondsElapsed,desc: this.state.desc.value});
-    this.setState({
-        secondsElapsed: 0
-    })
-}
+        const userUid = firebase.auth().currentUser.uid;
+        const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now());
+        timeRef.set({time:this.state.secondsElapsed,desc: this.state.desc.value});
+        this.setState({
+            secondsElapsed: 0
+        });
+        console.log(this.state.key);
+        console.log('users/'+userUid+'/courses/'+this.state.emne+'/planned-sessions/'+this.state.key);
+        const removeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/planned-sessions/' + this.state.key);
+        console.log('users/'+userUid+'/courses/'+this.state.emne+'/planned-sessions/'+this.state.key);
+        removeRef.remove();
+    }
     handleStartClick() {
         if(!this.started){ //Makes sure the button isnt clicked twice
             this.started = true;
@@ -69,15 +74,17 @@ class Stopwatch extends Component {
         this.started = false
         console.log(this.props.emne)
 
+
+    }
+    componentDidMount(){
     }
     handleResetClick() {
         this.castToFirebase();
         clearInterval(this.incrementer);
     }
-    onChildChanged(newState){
-        console.log(newState)
-        this.setState({theme:newState})
-
+    onChildChanged(newState,key){
+        this.setState({theme:newState.goal,
+        key: key})
     }
 
     render() {
@@ -110,7 +117,7 @@ class Stopwatch extends Component {
             <Col md={4}>
 
                 <div>
-                    <PlannedSession emne={this.props.emne} callbackParent={(newState) => this.onChildChanged(newState) }/>
+                    <PlannedSession emne={this.props.emne} callbackParent={(newState,key) => this.onChildChanged(newState,key) }/>
                 </div>
 </Col>
                 </Row>

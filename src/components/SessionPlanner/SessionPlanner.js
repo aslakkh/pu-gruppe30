@@ -3,13 +3,20 @@ import {FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import { planSession } from '../../helpers/auth'
 import './SessionPlanner.css'
 
+/*
+TODO:
+- prevent from moving back to homepage on submit
+- Add better feedback to user (about validation state)
+
+*/
+
 var DatePicker = require("react-bootstrap-date-picker");
 
 export default class SessionPlanner extends Component{
 
     constructor(props){
         super(props);
-        this.getInitialState = this.getInitialState.bind(this);
+        //this.getInitialState = this.getInitialState.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleGoalChange = this.handleGoalChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -21,31 +28,33 @@ export default class SessionPlanner extends Component{
         }
     }
 
+    /*
     getInitialState(){
         var d = new Date(new Date().getTime() + (24*60*60*1000)).toISOString();
         return{
             date: d
         }
-    }
+    }*/
 
+    //handler for change in datepicker. Sets state.date to the ISO-string provided by datepicker
     handleDateChange(e){
-        //let temp = new Date(e);
-        //console.log(temp);
-        
         
         this.setState({
             date: e,
         });
     }
 
+    //handler for change in text area
     handleGoalChange(e){
         this.setState({
             goal: e.target.value,
         });
     }
 
+    //handles click on submit button
     handleClick(e){
-        let d = new Date(this.state.date);
+        e.preventDefault(); //prevent default HTML-action on submitting a form
+        let d = new Date(this.state.date); //creates a date object from the ISO-string provided by datepicker
         if(this.validateState()){
             //sets the time of the date sent to firebase to system time
             //so that every planned session gets a unique key (in ms)
@@ -54,30 +63,55 @@ export default class SessionPlanner extends Component{
             planSession(this.state.course, d.getTime(), this.state.goal);
         }
         else{
+            //TODO: provide better user feedback
             console.log("Error: tried submitting invalid values");
         }
         
     }
 
     validateState(){
-        //validate that date is after today
-        //validate that goal is not empty
+        //validates that date is after today
+        //validates that goal is not empty
         let today = new Date(new Date);
         let stateDate = new Date(this.state.date);
         stateDate.setHours(0,0,0,0);
         return(stateDate.getTime() >= today.getTime() && this.state.goal.trim() !== "")
     }
 
+    formValidateState(){
+        
+        if(this.state.goal.trim() !== ""){
+            return 'success';
+        }
+        else{
+            return 'error';
+        }
+    }
+
+    datePickerValidateState(){
+        let stateDate = new Date(this.state.date);
+        stateDate.setHours(0,0,0,0);
+        if(stateDate.getTime() >= Date.now()){
+            return 'success';
+        }
+        else{
+            return 'error';
+        }
+    }
+
     componentDidMount(){
     }
 
 
+    //Component renders a Formgroup containing a textarea and a datepicker, and a button for submitting data
     render(){
         //<DatePicker defaultValue={this.state.date}/>
         return(
             <div>
-                <h4>SessionPlanner is working</h4>
-                <FormGroup controlId="formControlsTextarea">
+                <FormGroup 
+                controlId="planSessionForm"
+                validationState={this.formValidateState()}
+                >
                     <ControlLabel>Goal/Description</ControlLabel>
                     <FormControl 
                     componentClass="textarea" 
@@ -86,8 +120,12 @@ export default class SessionPlanner extends Component{
                     value={this.state.goal}
                     onChange={this.handleGoalChange}
                     />
+                    
                 </FormGroup>
-                <FormGroup>
+                <FormGroup
+                controlId="datePicker"
+                validationState={this.datePickerValidateState()}
+                >
                     <ControlLabel>Date</ControlLabel>
                     <DatePicker id="example-datepicker" value={this.state.date} onChange={this.handleDateChange}/>
                 </FormGroup>

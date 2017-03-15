@@ -78,7 +78,7 @@ class Stopwatch extends Component {
             <div className="stopwatch">
                 <h3>Total time spent:{formattedSeconds(this.state.secondsElapsed+this.state.time)}</h3>
                 <h1 className="progressbar">
-                    <Progress completed={(this.state.secondsElapsed >= this.state.goal) ? 100 : ((this.state.secondsElapsed+this.state.time)/this.state.goal) * 100}>
+                    <Progress color={'#000000'} completed={(this.state.secondsElapsed >= this.state.goal) ? 100 : ((this.state.secondsElapsed+this.state.time)/this.state.goal) * 100}>
                     </Progress>
                 </h1>
                 <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>

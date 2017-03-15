@@ -72,10 +72,7 @@ export default class SessionPlanner extends Component{
     validateState(){
         //validates that date is after today
         //validates that goal is not empty
-        let today = new Date(new Date);
-        let stateDate = new Date(this.state.date);
-        stateDate.setHours(0,0,0,0);
-        return(stateDate.getTime() >= today.getTime() && this.state.goal.trim() !== "")
+        return(this.datePickerValidateState() === 'success' && this.formValidateState() === 'success');
     }
 
     formValidateState(){

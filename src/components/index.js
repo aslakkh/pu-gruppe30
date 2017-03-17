@@ -6,6 +6,7 @@ import Register from './Register/Register'
 import Home from './Home/Home'
 import Dashboard from './Dashboard/Dashboard'
 import Courses from './Courses/Courses'
+import SessionPlanner from './SessionPlanner/SessionPlanner'
 import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
@@ -54,19 +55,19 @@ export default class App extends Component {
     authed: false,
     loading: true,
 
-  }
+  };
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
-        this.useruid = user.uid
+        this.useruid = user.uid;
         //console.log(this.useruid)
         this.setState({
           authed: true,
           loading: false,
           user : this.useruid
-        })
-        let that = this
-        let courseRef = firebase.database().ref()
+        });
+        let that = this;
+        let courseRef = firebase.database().ref();
         courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
           that.setState({
             courses: snap.val(),
@@ -133,6 +134,7 @@ export default class App extends Component {
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                   <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} courses={this.state.courses}/>
                   <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
+                  <MatchWhenAuthed authed={this.state.authed} path='/SessionPlanner' component={SessionPlanner} courses={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>
               </div>

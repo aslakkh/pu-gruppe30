@@ -24,6 +24,7 @@ export default class AddCourse extends Component{
         super(props);
         this.handleAdd = this.handleAdd.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.state = {
             value: ''
         }
@@ -45,7 +46,9 @@ export default class AddCourse extends Component{
     //function for handling keypress
     handleKeyPress(e){
         if(e.key === 'Enter'){
-            this.handleAdd();
+            e.preventDefault();
+            e.stopPropagation();
+            this.handleAdd(e);
         }
     }
 
@@ -79,8 +82,8 @@ export default class AddCourse extends Component{
     render(){
         return(
             <div className="FormWrapper" >
-                    <form>
-                        <FormGroup controlId="addCourseForm" validationState={this.getValidationState()}>
+                    
+                        <FormGroup controlId="addCourseForm" validationState={this.getValidationState()} >
                             <FormControl 
                             id="addCourseForm" 
                             componentClass='input'
@@ -89,12 +92,13 @@ export default class AddCourse extends Component{
                             type="text" 
                             placeholder="Course name"
                             onChange={this.handleChange}
+                            onKeyPress={this.handleKeyPress}
+                            
                             />
                             <FormControl.Feedback/>
                             <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
                         </FormGroup>
-                    </form>
-                    <Button className="AddCourse-addBtn "type='submit' bsStyle="primary" bsSize="large" onClick={this.handleAdd} style={{marginLeft: "20px"}}>Add</Button>
+                    <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.handleAdd} style={{marginLeft: "20px"}}>Add</Button>
             </div>
         )
     } 

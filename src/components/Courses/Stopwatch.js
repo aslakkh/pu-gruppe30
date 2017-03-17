@@ -31,6 +31,7 @@ class Stopwatch extends Component {
 
     castToFirebase(){
         const tid = this.state.time
+        console.log("test")
         const userUid = firebase.auth().currentUser.uid;
         const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now())
         timeRef.update({time:this.state.secondsElapsed+this.state.time})

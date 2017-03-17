@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
+import CourseView from './CourseView'
 
 //unused
 /*function getCourses(props){
@@ -55,12 +56,7 @@ componentDidMount(){
     }*/
 		return (
 			<Sidebar courses={this.state.courses}/>
-
-
-
-
-
-			)
+        )
 	}
 
 

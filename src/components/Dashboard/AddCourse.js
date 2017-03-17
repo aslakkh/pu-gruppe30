@@ -98,7 +98,6 @@ export default class AddCourse extends Component{
                             <FormControl.Feedback/>
                             <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
                         </FormGroup>
-                   
                     <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.handleAdd} style={{marginLeft: "20px"}}>Add</Button>
             </div>
         )

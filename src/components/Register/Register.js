@@ -1,18 +1,30 @@
 import React, { Component } from 'react'
-import { auth } from '../../helpers/auth'
+import { auth, privilige } from '../../helpers/auth'
 
 export default class Register extends Component {
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if(this.pw.value === this.pwcon.value){
-      auth(this.email.value, this.pw.value)}
+        (auth(this.email.value, this.pw.value)).then( (user)=>  privilige(user, this.state.authUser))
+    }
   
   else{
-    console.log("hehe")
-    this.error = "Password did not match"}
-    this.setState({})
+    console.log("hehe");
+    this.error = "Password did not match"
+    }
+  };
+  constructor(props){
+    super(props);
+    this.state={
+      authUser:10
+    }
+    this.handleOptionChange= this.handleOptionChange.bind(this)
   }
 
+  handleOptionChange(changeEvent){
+    this.setState({
+      authUser: changeEvent.target.value})
+  }
   render () {
     return (
       <div className="col-sm-6 col-sm-offset-3">
@@ -29,6 +41,25 @@ export default class Register extends Component {
           <div className="form-group">
             <input type="password" className="form-control" placeholder="Confirm Password" ref={(pwcon) => this.pwcon = pwcon}/>
           </div>
+            <div className="form-group">
+            <div className="radio">
+              <label>
+                <input type="radio" value={10}
+                       checked={this.state.authUser == 10}
+                       onChange={this.handleOptionChange} />
+                Student
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input type="radio" value={99}
+                       checked={this.state.authUser == 99}
+                       onChange={this.handleOptionChange} />
+                Professor
+              </label>
+            </div>
+          </div>
+
           <button type="submit" className="btn btn-primary">Register</button>
         <label>{this.error}</label>
         </form>

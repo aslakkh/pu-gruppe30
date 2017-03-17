@@ -70,8 +70,10 @@ export default class App extends Component {
         let courseRef = firebase.database().ref();
         courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
           that.setState({
-            courses: snap.val(),
-            
+            courses: snap.val()
+          })
+          firebase.database().ref().child('courses').on('value', snap => {
+            console.log(snap.val())
           })
           
 

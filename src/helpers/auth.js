@@ -9,6 +9,15 @@ export function auth (email, pw) {
     .catch((error) => console.log('Oops', error))
 }
 
+export function privilige(user, auth0) {
+    console.log(user.uid);
+    console.log(auth0);
+    return ref.child(`users/${user.uid}/info`)
+        .update({
+        privilege: auth0
+        })
+}
+
 export function logout () {
   return firebaseAuth().signOut()
 }

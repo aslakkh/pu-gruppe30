@@ -32,7 +32,7 @@ export default class CourseView extends Component {
 
     componentWillMount(){
         let tid = 0;
-        if (!(this.props.course.sessions === null) || !(this.props.course.sessions === undefined)) {
+        if (!(this.props.course.sessions == null) || !(this.props.course.sessions == undefined)) {
             let list = this.props.course.sessions;
             let today = 0;
             let last_week = 0;
@@ -100,6 +100,7 @@ export default class CourseView extends Component {
     }
 
     render() {
+
         return (
             <div className="courseView">
                 <h1 className="total">Total time spent {formattedSeconds(this.state.time)}

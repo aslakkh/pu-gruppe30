@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import AddMessage from './AddMessage'
 import MessageList from './MessageList'
+import Statistics from './Statistics'
 
 /*Maps the courses to make the sidebar and the site for the specific courses
  *
@@ -24,6 +25,7 @@ function TestEmner(props){
             <h1>{emne}</h1>
             <AddMessage courseID={emne}/>
             <MessageList courseID={emne}/>
+            <Statistics courseID={emne}/>
 
     </Tab.Pane>
  

@@ -6,12 +6,16 @@ import firebase from 'firebase';
 import {ref } from '../../config/constants'
 import {Form, FieldGroup, FormControl} from 'react-bootstrap'
 
+
+/*
+* Lets the professor add a message the student can see
+ */
+
 export default class AddMessage extends Component {
     constructor(props){
         super(props);
         this.state={
             courseID:this.props.courseID,
-            course:this.props.course
         }
     }
     handleSubmit = (e) =>{
@@ -19,6 +23,9 @@ export default class AddMessage extends Component {
         this.castMessageToFirebase()
 
     }
+    /*
+    * Send the message to firebase and uses timestap as ID
+    */
      castMessageToFirebase(){
          const userUid = firebase.auth().currentUser.uid;
          console.log(this.state.courseID)

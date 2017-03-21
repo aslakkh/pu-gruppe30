@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import SpecificCourse from './specificCourse'
 
-/*Maps the courses to make the sidebar and the site for the specific courses */
+/*Maps the courses to make the sidebar and the site for the specific courses
+*
+*
+* Changes:
+* Change the way SpecificCourse is called, so you only load the course you are viewing.
+*
+* */
 function TestEmner(props){
 	let course = Object.keys(props.courses).map((emne,i) =>
 

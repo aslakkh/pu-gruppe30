@@ -4,6 +4,10 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
 
+/*
+* "Start"-site for the professor.
+ */
+
 export default class ProfessorHome extends Component {
     constructor(props) {
         super(props);
@@ -13,13 +17,6 @@ export default class ProfessorHome extends Component {
         };
     }
 
-    getData(){
-
-    }
-
-    castCommentToFirebase(){
-
-    }
 
     render() {
         return (

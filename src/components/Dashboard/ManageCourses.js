@@ -181,10 +181,12 @@ export default class ManageCourses extends Component{
         }
         return(
             <div>
-                <h4>Manage Courses is working!</h4>
+                <h5>Here you can add and remove courses from the database. </h5>
+                <h5>You can also add a course to the list of courses you manage.
+                </h5>
                 <ListGroup>
                     {(this.state.courses).map((key) => {
-                        return <ListGroupItem key={key} className="CoursesList">
+                        return <ListGroupItem key={key} className="List">
                             <div className="CourseName">{key}</div>
                         <Button className="Button" bsStyle="success" onClick={(e) => this.handleAddToMyCourses(key, e)}>Add to My Courses</Button>
                         <Button className="Button" bsStyle="danger" onClick={() => this.open(key)}>Delete</Button>

@@ -123,7 +123,7 @@ export default class App extends Component {
 
   dashboardDecide(){
     if(this.state.admin === true){
-      return (<ProfessorDashboard/>)
+      return (<ProfessorDashboard courses={this.state.courses}/>)
     }
     else{
       return (<Dashboard courses={this.state.courses}/>);

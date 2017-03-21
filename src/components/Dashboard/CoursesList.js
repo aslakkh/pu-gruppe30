@@ -19,7 +19,6 @@ Could probably be split into a Course-component for each courses
 
 //http://stackoverflow.com/questions/40494787/get-user-object-properties-from-firebase-in-react
 
-
 export default class CoursesList extends Component {
 
 	constructor(props) {

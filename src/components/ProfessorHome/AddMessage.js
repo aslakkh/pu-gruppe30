@@ -28,6 +28,8 @@ export default class AddMessage extends Component {
          timeRef.set({
              Message: this.message.value
          })
+         this.message.value=""
+
 
     }
 

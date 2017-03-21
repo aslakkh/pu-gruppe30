@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
-import SpecificCourse from './specificCourse'
+import AddMessage from './AddMessage'
 
 /*Maps the courses to make the sidebar and the site for the specific courses */
 function TestEmner(props){
@@ -15,7 +15,8 @@ function TestEmner(props){
 	let info = Object.keys(props.courses).map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>{emne}</h1>
-            <SpecificCourse courseID={emne} course={props.courses[emne]}/>
+            <AddMessage courseID={emne} course={props.courses[emne]}/>
+
     </Tab.Pane>
  
 		)

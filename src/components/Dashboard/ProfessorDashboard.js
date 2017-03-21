@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Tabs, Tab} from 'react-bootstrap'
 import ManageCourses from './ManageCourses'
+import CoursesList from './CoursesList'
 
 import firebase from 'firebase';
 
@@ -13,29 +14,12 @@ export default class ProfessorDashboard extends Component {
     - let professor choose a course already in database to be assigned to
 */
 
-    constructor(props){
-        super(props);
-        this.state={
-            courses: null,
-        }
-    }
 
 
     componentDidMount(){
-        let that = this;
-        let coursesRef = firebase.database().ref().child('courses/');
-        coursesRef.on('value', snap => {
-            that.setState({
-                courses: snap.val(),
-            });
-        });
     }
 
-    componentWillUnMount(){
-        let that = this;
-        let coursesRef = firebase.database().ref().child('courses/');
-        coursesRef.off();
-    }
+    
 
 
 
@@ -45,8 +29,8 @@ export default class ProfessorDashboard extends Component {
             <div>
                 <h4>Professor dashboard working</h4>
                 <Tabs defaultActiveKey={0} id="dashboardTab">
-                    <Tab eventKey={0} title="My Courses">My courses</Tab>
-                    <Tab eventKey={1} title="Manage All Courses"><ManageCourses courses={this.state.courses}/></Tab>
+                    <Tab eventKey={0} title="My Courses"><CoursesList courses={this.props.courses}/></Tab>
+                    <Tab eventKey={1} title="Manage All Courses"><ManageCourses/></Tab>
                 </Tabs>
             </div>
         )

@@ -8,7 +8,8 @@ export default class Home extends Component {
     console.log(this.props.courses);
     this.state=({
         courses: this.props.courses,
-        authed: this.props.authed
+        authed: this.props.authed,
+        admin: this.props.admin
     })
   };
   componentWillReceiveProps(nextProps){
@@ -16,13 +17,14 @@ export default class Home extends Component {
       console.log(nextProps.courses);
       this.setState({
           courses: nextProps.courses,
-          authed: nextProps.authed
+          authed: nextProps.authed,
+          admin: nextProps.admin
       });
   }
 
   render () {
-      if(this.state.authed){
-          if(this.state.courses != undefined || this.state.courses != null){
+      if(this.state.authed && (this.state.admin != undefined || this.state.admin != null)){
+          if(this.state.courses != undefined && this.state.courses != null){
             return(
               <Courses courses={this.state.courses}/>
           );
@@ -31,8 +33,6 @@ export default class Home extends Component {
             return <h4>No courses</h4>
         }
       }
-
-
     else{return (
       <div>
         Home. Not Protected. Anyone can see this.

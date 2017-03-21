@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
-import SpecificCourse from './specificCourse'
+import AddMessage from './AddMessage'
+import MessageList from './MessageList'
+import Statistics from './Statistics'
 
 /*Maps the courses to make the sidebar and the site for the specific courses
-*
-*
-* Changes:
-* Change the way SpecificCourse is called, so you only load the course you are viewing.
-*
-* */
+ *
+ *
+ * Changes:
+ * Change the way SpecificCourse is called, so you only load the course you are viewing.
+ *
+ * */
 function TestEmner(props){
 	let course = Object.keys(props.courses).map((emne,i) =>
 
@@ -21,7 +23,10 @@ function TestEmner(props){
 	let info = Object.keys(props.courses).map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>{emne}</h1>
-            <SpecificCourse courseID={emne} course={props.courses[emne]}/>
+            <AddMessage courseID={emne}/>
+            <MessageList courseID={emne}/>
+            <Statistics courseID={emne}/>
+
     </Tab.Pane>
  
 		)

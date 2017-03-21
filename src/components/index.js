@@ -11,6 +11,7 @@ import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 import firebase from 'firebase';
+import ProfessorHome from './ProfessorHome/ProfessorHome'
 function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
   //console.log("Inside MatchWhenAuthed - courses = ");
   //console.log(rest.courses);
@@ -53,20 +54,32 @@ function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
 export default class App extends Component {
   state = {
     authed: false,
-    loading: true,
+    loading: true
 
   };
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.useruid = user.uid;
-        //console.log(this.useruid)
+          let that = this;
+        console.log(user)
+          firebase.database().ref().child('users/'+ this.useruid+'/info/privilege').once('value').then(function(snapshot){
+              if(snapshot.val() === "99"){
+                  that.setState({
+                      admin:true
+                  })
+              }else{
+                  that.setState({
+                      admin:false
+                  })
+              }
+          });
         this.setState({
           authed: true,
           loading: false,
           user : this.useruid
         });
-        let that = this;
+
         let courseRef = firebase.database().ref();
         courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
           that.setState({
@@ -95,6 +108,18 @@ export default class App extends Component {
   componentWillUnmount () {
     this.removeListener()
   }
+
+  homeDecide(){
+      if(this.state.admin === true){
+          return (<ProfessorHome courses={this.state.courses}/>)
+      }
+      else{
+          return(
+              <Home courses={this.state.courses} authed={this.state.authed} admin={this.state.admin}/>
+          )
+      }
+  }
+
   render() {
     return this.state.loading === true ? <h1>Loading</h1> : (
       <Router>
@@ -131,7 +156,7 @@ export default class App extends Component {
             <div className="container">
               <div className="row">
                 <Switch>
-                  <Route exact path='/'  component={() => this.state.authed ? (<Home courses={this.state.courses} authed={this.state.authed} />) : <Home/>}/>
+                  <Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Home/>}/>
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                   <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} courses={this.state.courses}/>

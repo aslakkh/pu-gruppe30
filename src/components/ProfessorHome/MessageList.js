@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase';
 import {ref } from '../../config/constants'
-import {Form, FieldGroup, FormControl, ListGroup, ListGroupItem, Button} from 'react-bootstrap'
+import {FieldGroup, ListGroup, ListGroupItem, Button} from 'react-bootstrap'
 
 
 /*
@@ -24,7 +24,6 @@ export default class MessageList extends Component {
         let messageRef = firebase.database().ref();
         let that = this;
         var messages =[]
-        var koder = []
         messageRef.child('courses/'+this.state.courseID+'/Messages').on('value', function(snapshot) {
             snapshot.forEach(function(data){
                 messages.unshift([ data.key,data.val().Message])

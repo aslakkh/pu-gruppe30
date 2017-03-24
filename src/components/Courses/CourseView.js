@@ -115,18 +115,18 @@ export default class CourseView extends React.Component {
         let items = [];
         if (hours == 0 && minutes == 0) {
             items.push(
-                <label className="label-goal">not set</label>
+                <label className="label-goal" key={0}>not set</label>
             )
         } else {
             if (hours != 0) {
                 items.push(
-                    <label className="label-goal">{hours} hours </label>
+                    <label className="label-goal" key={1}>{hours} hours </label>
                 )
             }
             if (minutes != 0) {
                 items.push(" ");
                 items.push(
-                    <label className="label-goal"> {minutes} minutes</label>
+                    <label className="label-goal" key={2}> {minutes} minutes</label>
                 )
             }
         }
@@ -135,12 +135,6 @@ export default class CourseView extends React.Component {
     }
 
     render() {
-        console.log("Monthly: " + this.state.monthly)
-        console.log("Weekly: " + this.state.weekly)
-        console.log("Daily: " + this.state.daily)
-
-
-        //TODO read goals from firebase
         return (
             <div className="courseView">
                 <Form inline>

@@ -72,13 +72,13 @@ export default class EditGoals extends React.Component {
     getView() {
         let items = [];
         if (this.state.activeDropdownBtn==='monthly' || this.state.activeDropdownBtn==='weekly') {
-            items.push(<Label>Days:</Label>);
-            items.push(<DropdownButton title={this.state.daySelected} id={'dropdown-basic'}>{this.getMenuItems('days')}</DropdownButton>);
+            items.push(<Label key={1}>Days:</Label>);
+            items.push(<DropdownButton key={2} title={this.state.daySelected} id={'dropdown-basic'}>{this.getMenuItems('days')}</DropdownButton>);
         }
-        items.push(<Label>Hours:</Label>);
-        items.push(<DropdownButton title={this.state.hourSelected} id={'dropdown-basic'} >{this.getMenuItems('hours')}</DropdownButton>);
-        items.push(<Label>Minutes:</Label>);
-        items.push(<DropdownButton title={this.state.minSelected} id={'dropdown-basic'}>{this.getMenuItems('mins')}</DropdownButton>);
+        items.push(<Label key={3}>Hours:</Label>);
+        items.push(<DropdownButton key={4} title={this.state.hourSelected} id={'dropdown-basic'} >{this.getMenuItems('hours')}</DropdownButton>);
+        items.push(<Label key={5}>Minutes:</Label>);
+        items.push(<DropdownButton key={6} title={this.state.minSelected} id={'dropdown-basic'}>{this.getMenuItems('mins')}</DropdownButton>);
 
         return (
             <Form className="enter-form" inline>
@@ -93,17 +93,17 @@ export default class EditGoals extends React.Component {
         (this.state.activeDropdownBtn==='monthly') ? max=21 : (this.state.activeDropdownBtn==='weekly') ? max = 8 : 0;
         if (box==='days') {
             for(let i=0; i<max; i++) {
-                items.push(<MenuItem onClick={() => this.setDays(i)}>{i}</MenuItem>);
+                items.push(<MenuItem onClick={() => this.setDays(i)} key={i}>{i}</MenuItem>);
             }
         }
         if (box==='hours') {
             for(let i=0; i<9; i++) {
-                items.push(<MenuItem onClick={() => this.setHours(i)}>{i}</MenuItem>);
+                items.push(<MenuItem onClick={() => this.setHours(i)} key={i}>{i}</MenuItem>);
             }
         }
         if (box==='mins') {
             for(let i=0; i<60; i+=15) {
-                items.push(<MenuItem onClick={() => this.setMinutes(i)}>{i}</MenuItem>);
+                items.push(<MenuItem onClick={() => this.setMinutes(i)} key={i}>{i}</MenuItem>);
             }
         }
         return items;

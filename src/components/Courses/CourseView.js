@@ -78,13 +78,12 @@ export default class CourseView extends React.Component {
 
     }
 
-    setProgressColor(goal){
-        if(this.state.time > (goal)/1.6){
+    setProgressColor(goal, view){
+        if(view > (goal/1.6)){
             return("success")
         }
-        else if (this.state.time > (goal)/2.8){
+        else if (view > (goal/2.8)){
             return("warning")
-
         }
         else{
             return("danger")
@@ -161,15 +160,15 @@ export default class CourseView extends React.Component {
                 <h3 className="total">Total time spent {formattedSeconds(this.state.time)}</h3>
                 <h3>Daily progress</h3>
                     <h1 className = "daily">
-                        <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.daily)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*20)} label={formattedSeconds(this.state.monthly/20)} max={200}/>
                 </h1>
                 <h3>Weekly progress</h3>
                     <h1 className = "weekly">
-                        <ProgressBar now={this.setProgressBar("week")} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.weekly)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("week")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*4)} label={formattedSeconds(this.state.monthly/4)} max={200}/>
                     </h1>
                 <h3>Monthly progress</h3>
                     <h1 className = "monthly">
-                        <ProgressBar now={this.setProgressBar("month")} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.monthly)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("month")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly)} label={formattedSeconds(this.state.monthly)} max={200}/>
                     </h1>
                 <EditGoals courseID={this.props.courseID}/>
             </div>

@@ -1,69 +1,112 @@
 import React, { Component } from 'react';
-import {Button, Modal, FormControl, FormGroup, Radio, Label, Form, DropdownButton, MenuItem, } from 'react-bootstrap';
+import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem} from 'react-bootstrap';
 import './editGoals.css'
+import { saveGoal } from '../../helpers/auth'
+import { getGoal } from '../../helpers/auth'
+
+
 
 
 export default class EditGoals extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleTimeClick = this.handleTimeClick.bind(this);
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
-        this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.setDays = this.setDays.bind(this);
+        this.setHours = this.setHours.bind(this);
+        this.setMinutes = this.setMinutes.bind(this);
+
         this.state = {
+            courseID: this.props.courseID,
             show: false,
-            value: '',
             activeDropdownBtn: 'monthly',
-            activeRadioBtn: 'hour',
+            daySelected: '0',
+            hourSelected: '0',
+            minSelected: '0',
+            goalInSeconds: '0'
         }
-    }
-
-    handleChange(e) {
-        this.setState({value: e.target.value});
-    }
-
-    handleTimeClick(time) {
-        this.setState({activeTimeBtn: time})
     }
 
     handleDropdownClick(time) {
         this.setState({activeDropdownBtn: time})
     }
 
-    handleOptionChange(e) {
-        this.setState({activeRadioBtn: e.target.value})
+    setDays(num) {
+        this.setState({
+            daySelected: num
+        })
+    }
+
+    setHours(num) {
+        this.setState({
+            hourSelected: num
+        })
+    }
+
+    setMinutes(num) {
+        this.setState({
+            minSelected: num
+        })
     }
 
     handleSave = (e) => {
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
+        let seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 3600) + (parseInt(this.state.daySelected) * 8 * 3600);
+        if (seconds > 0) {
+            this.setState({goalInSeconds: seconds});
+            saveGoal(this.state.courseID, seconds);
+            this.setState({
+                show:false
+            })
+        }
 
-        if(this.getValidationState() === 'success'){
-            //TODO add to firebase
-        }
-        else {
-            //TODO
-        }
     };
 
-    getValidationState(){
-        console.log("val: ")
-        console.log(this.state.value)
-        const length = this.state.value.length;
-        const reg = /^\d+(\.\d{1,1})?$/;
-        if(reg.test(this.state.value)){
-            return 'success';
-        }else if(length > 0){
-            return 'error';
+    getView() {
+        let items = [];
+        if (this.state.activeDropdownBtn==='monthly' || this.state.activeDropdownBtn==='weekly') {
+            items.push(<Label>Days:</Label>);
+            items.push(<DropdownButton title={this.state.daySelected} id={'dropdown-basic'}>{this.getMenuItems('days')}</DropdownButton>);
         }
+        items.push(<Label>Hours:</Label>);
+        items.push(<DropdownButton title={this.state.hourSelected} id={'dropdown-basic'} >{this.getMenuItems('hours')}</DropdownButton>);
+        items.push(<Label>Minutes:</Label>);
+        items.push(<DropdownButton title={this.state.minSelected} id={'dropdown-basic'}>{this.getMenuItems('mins')}</DropdownButton>);
+
+        return (
+            <Form className="enter-form" inline>
+                {items}
+            </Form>
+        )
+    }
+
+    getMenuItems(box) {
+        let items = [];
+        let max = 0;
+        (this.state.activeDropdownBtn==='monthly') ? max=21 : (this.state.activeDropdownBtn==='weekly') ? max = 8 : 0;
+        if (box==='days') {
+            for(let i=0; i<max; i++) {
+                items.push(<MenuItem onClick={() => this.setDays(i)}>{i}</MenuItem>);
+            }
+        }
+        if (box==='hours') {
+            for(let i=0; i<9; i++) {
+                items.push(<MenuItem onClick={() => this.setHours(i)}>{i}</MenuItem>);
+            }
+        }
+        if (box==='mins') {
+            for(let i=0; i<60; i+=15) {
+                items.push(<MenuItem onClick={() => this.setMinutes(i)}>{i}</MenuItem>);
+            }
+        }
+        return items;
     }
 
     render() {
-        console.log(this.state.activeBtn);
         let close = () => this.setState({show: false});
 
         return (
-            <div className="editBtn" style={{height: 250}}>
+            <div className="main" style={{height: 250}}>
                 <Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
                     Edit goals
                 </Button>
@@ -71,44 +114,26 @@ export default class EditGoals extends React.Component {
                     <Modal.Header closeButton>
                         <Form inline>
                             <FormGroup className="validation-form">
-                                <Label className="bold">Enter</Label>
-                                {' '}
+                                <Label className="bold">{this.state.courseID}</Label>
+                                <Label>Enter</Label>
                             </FormGroup>
-                            {' '}
                             <FormGroup>
                                 <DropdownButton title={this.state.activeDropdownBtn} id={'dropdown-basic'}>
                                     <MenuItem onClick={() => this.handleDropdownClick('monthly')}>monthly</MenuItem>
                                     <MenuItem onClick={() => this.handleDropdownClick('weekly')}>weekly</MenuItem>
                                     <MenuItem onClick={() => this.handleDropdownClick('daily')}>daily</MenuItem>
                                 </DropdownButton>
-                                {' '}
                                 <Label> goal:</Label>
                             </FormGroup>
-                            {' '}
                         </Form>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form className="enter-form" inline>
-                            <Label>Hours:</Label>
-                            <DropdownButton title={'00'} id={'dropdown-basic'}>
-                                <MenuItem>01</MenuItem>
-                                <MenuItem>02</MenuItem>
-                                <MenuItem>03</MenuItem>
-
-                                </DropdownButton>
-                            {' '}
-                            <Label>Minutes:</Label>
-                            <DropdownButton title={'00'} id={'dropdown-basic'}>
-                                <MenuItem>01</MenuItem>
-                                <MenuItem>02</MenuItem>
-                                <MenuItem>03</MenuItem>
-                            </DropdownButton>
-                            {' '}
-                        </Form>
+                        {this.getView()}
+                        <Label className="help-label">1 day is considered 8 working hours</Label>
                     </Modal.Body>
                     <Modal.Footer>
                         <div>
-                            <Button active onClick={this.handleSave}>Save</Button>
+                            <Button onClick={this.handleSave}>Save</Button>
                             <Button onClick={close}>Close</Button>
                         </div>
                     </Modal.Footer>

@@ -1,26 +1,26 @@
-/**
- * Created by anderssalvesen on 07.03.2017.
- */
-
 import React, { Component } from 'react';
-import {ProgressBar} from 'react-bootstrap';
+import {ProgressBar, Form} from 'react-bootstrap';
+import EditGoals from './EditGoals';
+import "./courseview.css"
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2))
 
-export default class CourseView extends Component {
+export default class CourseView extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
+            showEdit: false,
             courses: this.props.courses,
             course: this.props.course,
+            courseID: this.props.courseID,
             time: this.props.course.time,
-            goal: this.props.goal,
+            //goal: this.props.goal,
             daily: 0,
             weekly: 0,
-            monthly: 0
-        }
+            monthly: 0,
+        };
     }
 
 
@@ -64,17 +64,8 @@ export default class CourseView extends Component {
                 if (key > firstInMonth.valueOf()) {
                     last_month = last_month + list[key].time;
                 }
-
-
             })}
-            console.log(this_day);
-            console.log("First in week: " + monday);
-            console.log("First in month " + firstInMonth);
 
-            console.log(this.props.courseID)
-            console.log(today);
-            console.log(last_week);
-            console.log(last_month);
             this.setState ({
                 course: this.props.course,
                 time : tid,
@@ -100,11 +91,17 @@ export default class CourseView extends Component {
     }
 
     render() {
+        //TODO read goals from firebase
         return (
             <div className="courseView">
-                <h1 className="total">Total time spent {formattedSeconds(this.state.time)}
-                </h1>
-                    <h3>Daily progress</h3>
+                <Form inline>
+                    <label className="label-goal">Goal:</label>
+                    {" "}
+                    <label className="label-goal">8 hours/week</label>
+                    {"  "}
+                </Form>
+                <h3 className="total">Total time spent {formattedSeconds(this.state.time)}</h3>
+                <h3>Daily progress</h3>
                     <h1 className = "daily">
                         <ProgressBar now={this.state.daily} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.daily)} max={200}/>
                 </h1>
@@ -116,9 +113,12 @@ export default class CourseView extends Component {
                     <h1 className = "monthly">
                         <ProgressBar now={this.state.monthly} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.monthly)} max={200}/>
                     </h1>
+                <EditGoals courseID={this.props.courseID}/>
             </div>
-
         );
     }
-
 }
+
+
+
+

@@ -46,6 +46,14 @@ export function saveCourse (course){
   });
 }
 
+export function saveGoal(course, goal) {
+    const userUid = firebase.auth().currentUser.uid;
+    let courseRef = ref.child('users/'+userUid+'/courses/'+course);
+    courseRef.update({
+        goal:goal
+    });
+}
+
 export function getCourse(){
   const userUid = firebase.auth().currentUser.uid;
   this.firebase.database().ref(userUid).once()

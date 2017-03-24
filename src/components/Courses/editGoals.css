@@ -7,6 +7,14 @@
 
 }
 
+.help-label {
+    background: white;
+    color: grey;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+
 .radio-inline {
     font-size: 18px;
     width:4em;
@@ -23,6 +31,13 @@
     background: white;
     color: #000;
     font-size: 18px;
+    font-weight: bolder;
+}
+
+.subject-label {
+    background: white;
+    color: #000;
+    font-size: 18px;
     font-style: normal;
-    font-weight: bold;
+    font-weight: normal;
 }

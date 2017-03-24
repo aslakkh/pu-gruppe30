@@ -1,32 +1,32 @@
-/**
- * Created by anderssalvesen on 07.03.2017.
- */
-
 import React, { Component } from 'react';
-import {ProgressBar} from 'react-bootstrap';
+import {ProgressBar, Form} from 'react-bootstrap';
+import EditGoals from './EditGoals';
+import "./courseview.css"
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2))
 
-export default class CourseView extends Component {
+export default class CourseView extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
+            showEdit: false,
             courses: this.props.courses,
             course: this.props.course,
+            courseID: this.props.courseID,
             time: this.props.course.time,
-            goal: this.props.goal,
+            goal: this.props.course.goal,
             daily: 0,
             weekly: 0,
-            monthly: 0
-        }
+            monthly: 0,
+        };
     }
-
 
     componentWillReceiveProps(nextProps){
         this.setState({
-            course: nextProps.course
+            course: nextProps.course,
+            goal: nextProps.course.goal
         });
     }
 
@@ -64,62 +64,119 @@ export default class CourseView extends Component {
                 if (key > firstInMonth.valueOf()) {
                     last_month = last_month + list[key].time;
                 }
-
-
             })}
-            console.log(this_day);
-            console.log("First in week: " + monday);
-            console.log("First in month " + firstInMonth);
 
-            console.log(this.props.courseID)
-            console.log(today);
-            console.log(last_week);
-            console.log(last_month);
             this.setState ({
                 course: this.props.course,
                 time : tid,
                 daily: today,
                 weekly: last_week,
-                monthly: last_month
+                monthly: last_month,
+                goal: this.props.course.goal
             });
         }
 
     }
 
-    setProgressColor(goal){
-        if(this.state.time > (goal)/1.6){
+    setProgressColor(goal, view){
+        if(view > (goal/1.6)){
             return("success")
         }
-        else if (this.state.time > (goal)/2.8){
+        else if (view > (goal/2.8)){
             return("warning")
-
         }
         else{
             return("danger")
         }
     }
 
+    setProgressBar(view) {
+
+        if (this.state.goal == 0) {
+            return 0;
+        }
+        if (view == 'month') {
+            let percent = (this.state.time/this.state.goal) * 100;
+            if (percent >= 100) {
+                return 200;
+            } else {
+                return percent * 2;
+            }
+        } else if (view == 'week') {
+            let percent = ((this.state.time/(this.state.goal/4)) * 100);
+            if (percent >= 100) {
+                return 200;
+            } else {
+                return percent * 2;
+            }
+        } else if (view == 'day') {
+            let percent = ((this.state.time/(this.state.goal/20)) * 100);
+            if (percent >= 100) {
+                return 200;
+            } else {
+                return percent * 2;
+            }
+        }
+    }
+
+
+
+    parseGoal() {
+        let seconds = this.state.goal;
+        let hours = Math.floor(seconds/(60*60));
+        let remainder = seconds % (60*60);
+        let minutes = remainder/60;
+        let items = [];
+        if (hours == 0 && minutes == 0) {
+            items.push(
+                <label className="label-goal" key={0}>not set</label>
+            )
+        } else {
+            if (hours != 0) {
+                items.push(
+                    <label className="label-goal" key={1}>{hours} hours </label>
+                )
+            }
+            if (minutes != 0) {
+                items.push(" ");
+                items.push(
+                    <label className="label-goal" key={2}> {minutes} minutes</label>
+                )
+            }
+        }
+        return items;
+
+    }
+
     render() {
 
         return (
             <div className="courseView">
-                <h1 className="total">Total time spent {formattedSeconds(this.state.time)}
-                </h1>
-                    <h3>Daily progress</h3>
+                <Form inline>
+                    <label className="label-goal">Monthly goal:</label>
+                    {" "}
+                    <label className="label-goal"> {this.parseGoal()}</label>
+                    {"  "}
+                </Form>
+                <h3 className="total">Total time spent {formattedSeconds(this.state.time)}</h3>
+                <h3>Daily progress</h3>
                     <h1 className = "daily">
-                        <ProgressBar now={this.state.daily} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.daily)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*20)} label={formattedSeconds(this.state.monthly/20)} max={200}/>
                 </h1>
                 <h3>Weekly progress</h3>
                     <h1 className = "weekly">
-                        <ProgressBar now={this.state.weekly} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.weekly)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("week")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*4)} label={formattedSeconds(this.state.monthly/4)} max={200}/>
                     </h1>
                 <h3>Monthly progress</h3>
                     <h1 className = "monthly">
-                        <ProgressBar now={this.state.monthly} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.monthly)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("month")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly)} label={formattedSeconds(this.state.monthly)} max={200}/>
                     </h1>
+                <EditGoals courseID={this.props.courseID}/>
             </div>
-
         );
     }
-
 }
+
+
+
+

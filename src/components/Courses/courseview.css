@@ -1,0 +1,18 @@
+
+.submitBtn {
+    padding-left: 10px;
+}
+
+.FormWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.label-goal {
+    color: #000;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: bold;
+}

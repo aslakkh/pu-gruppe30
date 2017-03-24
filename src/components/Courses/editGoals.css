@@ -1,0 +1,43 @@
+.label {
+    background: white;
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+
+}
+
+.help-label {
+    background: white;
+    color: grey;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.radio-inline {
+    font-size: 18px;
+    width:4em;
+    height:4em;
+    padding-top: 20px;
+    padding-right: 5px;
+}
+
+.enter-form {
+    height: 50px;
+}
+
+.bold {
+    background: white;
+    color: #000;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.subject-label {
+    background: white;
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+}

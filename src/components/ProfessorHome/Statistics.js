@@ -80,7 +80,6 @@ export default class Statistics extends Component {
             if(snapshot.val().courses[kurs] != undefined && snapshot.val().courses[kurs]['sessions']) {
                 ting.push(snapshot.val().courses[kurs]['sessions'])
                 ting.forEach(function (session) {
-                    console.log(session)
 
 
 
@@ -88,7 +87,6 @@ export default class Statistics extends Component {
             }
 
         })
-        console.log(ting)
     }
 
 

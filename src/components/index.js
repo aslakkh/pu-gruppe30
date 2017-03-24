@@ -5,6 +5,7 @@ import Login from './Login/Login'
 import Register from './Register/Register'
 import Home from './Home/Home'
 import Dashboard from './Dashboard/Dashboard'
+import ProfessorDashboard from './Dashboard/ProfessorDashboard'
 import Courses from './Courses/Courses'
 import SessionPlanner from './SessionPlanner/SessionPlanner'
 import { logout,} from '../helpers/auth'
@@ -120,6 +121,15 @@ export default class App extends Component {
       }
   }
 
+  dashboardDecide(){
+    if(this.state.admin === true){
+      return (<ProfessorDashboard courses={this.state.courses}/>)
+    }
+    else{
+      return (<Dashboard courses={this.state.courses}/>);
+    }
+  }
+
   render() {
     return this.state.loading === true ? <h1>Loading</h1> : (
       <Router>
@@ -159,7 +169,7 @@ export default class App extends Component {
                   <Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Home/>}/>
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
-                  <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={Dashboard} courses={this.state.courses}/>
+                  <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={() => this.dashboardDecide()}/>
                   <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
                   <MatchWhenAuthed authed={this.state.authed} path='/SessionPlanner' component={SessionPlanner} courses={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />

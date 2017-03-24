@@ -79,10 +79,10 @@ export default class CourseView extends React.Component {
     }
 
     setProgressColor(goal){
-        if(this.state.monthly > (goal)/1.6){
+        if(this.state.time > (goal)/1.6){
             return("success")
         }
-        else if (this.state.monthly > (goal)/2.8){
+        else if (this.state.time > (goal)/2.8){
             return("warning")
 
         }
@@ -97,11 +97,26 @@ export default class CourseView extends React.Component {
             return 0;
         }
         if (view == 'month') {
-            return ((this.state.time/this.state.goal) * 100);
+            let percent = (this.state.time/this.state.goal) * 100;
+            if (percent >= 100) {
+                return 200;
+            } else {
+                return percent * 2;
+            }
         } else if (view == 'week') {
-            return ((this.state.time/(this.state.goal/4)) * 100);
+            let percent = ((this.state.time/(this.state.goal/4)) * 100);
+            if (percent >= 100) {
+                return 200;
+            } else {
+                return percent * 2;
+            }
         } else if (view == 'day') {
-            return ((this.state.time/(this.state.goal/20)) * 100);
+            let percent = ((this.state.time/(this.state.goal/20)) * 100);
+            if (percent >= 100) {
+                return 200;
+            } else {
+                return percent * 2;
+            }
         }
     }
 

@@ -36,12 +36,33 @@ export function saveUser (user) {
 }
 
 export function saveCourse (course){
-  const userUid = firebase.auth().currentUser.uid;
-  let usersRef = ref.child('users/'+userUid+"/courses/"+course);
-  usersRef.update({
+  const userUid = getUserUid();
+  let usersRef = ref.child('users/'+userUid+"/courses/");
+
+  usersRef.child(course).update({
     active: true,
     time: 0
   });
+}
+
+//add course to courses/course
+//for now sets all points to 7.5
+export function addCourseToRoot(course){
+  var courseRef = ref.child('courses/');
+  courseRef.child(course).update({
+    points: 7.5,
+    weekly: 36000,
+  })
+}
+
+//check for existing course at root 
+export function courseExistsAtRoot(course){
+  var courseRef = ref.child('courses/');
+  var courseExists;
+  courseRef.once('value', function(snapshot) {
+    courseExists = snapshot.hasChild(course);
+  });
+  return courseExists;
 }
 
 export function getCourse(){
@@ -85,6 +106,11 @@ export function removeCourse(course){
   const userUid = getUserUid();
   var userRef = ref.child('users/'+userUid+'/courses/');
   userRef.child(course).remove();
+}
+
+export function removeCourseFromRoot(course){
+  var courseRef = ref.child('courses');
+  courseRef.child(course).remove();
 }
 
 //function for setting a courses child 'active' to false

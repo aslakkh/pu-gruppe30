@@ -5,17 +5,18 @@ export default class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if(this.pw.value === this.pwcon.value){
-        (auth(this.email.value, this.pw.value)).then( (user)=>  privilige(user, this.state.authUser))
+        (auth(this.email.value, this.pw.value)).then( (user)=>  privilige(user, this.state.authUser)).catch( error => console.log("errorgreier" + error.message))
     }
   
   else{
     console.log("hehe");
-    this.error = "Password did not match"
+    this.setState({error: "Password did not match"})
     }
   };
   constructor(props){
     super(props);
     this.state={
+        error:"",
       authUser:10
     }
     this.handleOptionChange= this.handleOptionChange.bind(this)
@@ -61,8 +62,9 @@ export default class Register extends Component {
           </div>
 
           <button type="submit" className="btn btn-primary">Register</button>
-        <label>{this.error}</label>
+
         </form>
+          <label>{this.state.error}</label>
       </div>
     )
   }

@@ -32,7 +32,7 @@ export default class CourseView extends React.Component {
 
     componentWillMount(){
         let tid = 0;
-        if (!(this.props.course.sessions === null) || !(this.props.course.sessions === undefined)) {
+        if (!(this.props.course.sessions == null) || !(this.props.course.sessions == undefined)) {
             let list = this.props.course.sessions;
             let today = 0;
             let last_week = 0;
@@ -149,6 +149,7 @@ export default class CourseView extends React.Component {
     }
 
     render() {
+
         return (
             <div className="courseView">
                 <Form inline>

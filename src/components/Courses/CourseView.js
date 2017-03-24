@@ -16,17 +16,17 @@ export default class CourseView extends React.Component {
             course: this.props.course,
             courseID: this.props.courseID,
             time: this.props.course.time,
-            //goal: this.props.goal,
+            goal: this.props.course.goal,
             daily: 0,
             weekly: 0,
             monthly: 0,
         };
     }
 
-
     componentWillReceiveProps(nextProps){
         this.setState({
-            course: nextProps.course
+            course: nextProps.course,
+            goal: nextProps.course.goal
         });
     }
 
@@ -71,17 +71,18 @@ export default class CourseView extends React.Component {
                 time : tid,
                 daily: today,
                 weekly: last_week,
-                monthly: last_month
+                monthly: last_month,
+                goal: this.props.course.goal
             });
         }
 
     }
 
     setProgressColor(goal){
-        if(this.state.time > (goal)/1.6){
+        if(this.state.monthly > (goal)/1.6){
             return("success")
         }
-        else if (this.state.time > (goal)/2.8){
+        else if (this.state.monthly > (goal)/2.8){
             return("warning")
 
         }
@@ -90,28 +91,76 @@ export default class CourseView extends React.Component {
         }
     }
 
+    setProgressBar(view) {
+
+        if (this.state.goal == 0) {
+            return 0;
+        }
+        if (view == 'month') {
+            return ((this.state.time/this.state.goal) * 100);
+        } else if (view == 'week') {
+            return ((this.state.time/(this.state.goal/4)) * 100);
+        } else if (view == 'day') {
+            return ((this.state.time/(this.state.goal/20)) * 100);
+        }
+    }
+
+
+
+    parseGoal() {
+        let seconds = this.state.goal;
+        let hours = Math.floor(seconds/(60*60));
+        let remainder = seconds % (60*60);
+        let minutes = remainder/60;
+        let items = [];
+        if (hours == 0 && minutes == 0) {
+            items.push(
+                <label className="label-goal">not set</label>
+            )
+        } else {
+            if (hours != 0) {
+                items.push(
+                    <label className="label-goal">{hours} hours </label>
+                )
+            }
+            if (minutes != 0) {
+                items.push(" ");
+                items.push(
+                    <label className="label-goal"> {minutes} minutes</label>
+                )
+            }
+        }
+        return items;
+
+    }
+
     render() {
+        console.log("Monthly: " + this.state.monthly)
+        console.log("Weekly: " + this.state.weekly)
+        console.log("Daily: " + this.state.daily)
+
+
         //TODO read goals from firebase
         return (
             <div className="courseView">
                 <Form inline>
-                    <label className="label-goal">Goal:</label>
+                    <label className="label-goal">Monthly goal:</label>
                     {" "}
-                    <label className="label-goal">8 hours/week</label>
+                    <label className="label-goal"> {this.parseGoal()}</label>
                     {"  "}
                 </Form>
                 <h3 className="total">Total time spent {formattedSeconds(this.state.time)}</h3>
                 <h3>Daily progress</h3>
                     <h1 className = "daily">
-                        <ProgressBar now={this.state.daily} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.daily)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.daily)} max={200}/>
                 </h1>
                 <h3>Weekly progress</h3>
                     <h1 className = "weekly">
-                        <ProgressBar now={this.state.weekly} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.weekly)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("week")} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.weekly)} max={200}/>
                     </h1>
                 <h3>Monthly progress</h3>
                     <h1 className = "monthly">
-                        <ProgressBar now={this.state.monthly} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.monthly)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("month")} bsStyle={this.setProgressColor(this.state.goal)} label={formattedSeconds(this.state.monthly)} max={200}/>
                     </h1>
                 <EditGoals courseID={this.props.courseID}/>
             </div>

@@ -51,7 +51,14 @@ export default class EditGoals extends React.Component {
 
     handleSave = (e) => {
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
-        let seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 3600) + (parseInt(this.state.daySelected) * 8 * 3600);
+        let seconds = 0;
+        if (this.state.activeDropdownBtn === 'monthly') {
+             seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 3600) + (parseInt(this.state.daySelected) * 8 * 3600);
+        } else if (this.state.activeDropdownBtn ==='weekly') {
+            seconds = (4 * parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 3600) + (parseInt(this.state.daySelected) * 8 * 3600);
+        } else if (this.state.activeDropdownBtn ==='daily') {
+            seconds = (20 * parseInt(this.state.minSelected) * 60) + (parseInt(this.state.daySelected) * 8 * 3600);
+        }
         if (seconds > 0) {
             this.setState({goalInSeconds: seconds});
             saveGoal(this.state.courseID, seconds);

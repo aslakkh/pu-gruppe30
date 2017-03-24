@@ -38,25 +38,15 @@ export function saveUser (user) {
 export function saveCourse (course){
   const userUid = firebase.auth().currentUser.uid;
   let usersRef = ref.child('users/'+userUid+"/courses/"+course);
-
   usersRef.update({
     active: true,
     time: 0
-
   });
-}
-
-export function saveGoal(course, goal) {
-    const userUid = firebase.auth().currentUser.uid;
-    let courseRef = ref.child('users/'+userUid+'/courses/'+course);
-    courseRef.update({
-        goal:goal
-    });
 }
 
 export function getCourse(){
   const userUid = firebase.auth().currentUser.uid;
-  this.firebase.database().ref(userUid).once()
+  this.firebase.database().ref(userUid).once();
   return firebase.database().ref(userUid).on("value", function(snapshot) {
     console.log(snapshot.val());
     });
@@ -71,7 +61,21 @@ export function getCourses(){
   });
 }
 
-export function getUserUid(){
+export function saveGoal(course, goal) {
+    const userUid = firebase.auth().currentUser.uid;
+    let courseRef = ref.child('users/'+userUid+'/courses/'+course);
+    courseRef.update({
+        goal:goal
+    });
+}
+
+export function getGoal(course) {
+    const userUid = firebase.auth().currentUser.uid;
+    console.log(userUid)
+}
+
+
+    export function getUserUid(){
   const userUid = firebase.auth().currentUser.uid;
   return userUid;
 }

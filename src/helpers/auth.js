@@ -41,7 +41,8 @@ export function saveCourse (course){
 
   usersRef.child(course).update({
     active: true,
-    time: 0
+    time: 0,
+    goal: 0
   });
 }
 

@@ -113,7 +113,7 @@ export default class EditGoals extends React.Component {
         let close = () => this.setState({show: false});
 
         return (
-            <div className="main" style={{height: 250}}>
+            <div className="main" style={{marginBottom: 10}}>
                 <Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
                     Edit goals
                 </Button>

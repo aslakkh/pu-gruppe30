@@ -9,9 +9,10 @@ import Courses from './Courses/Courses'
 import SessionPlanner from './SessionPlanner/SessionPlanner'
 import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
-import {Navbar,NavItem, Nav} from 'react-bootstrap'
+import {Navbar,NavItem, Nav, Image} from 'react-bootstrap'
 import firebase from 'firebase';
 import ProfessorHome from './ProfessorHome/ProfessorHome'
+import './index.css'
 function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
   //console.log("Inside MatchWhenAuthed - courses = ");
   //console.log(rest.courses);
@@ -87,6 +88,7 @@ export default class App extends Component {
           })
           firebase.database().ref().child('courses').on('value', snap => {
             console.log(snap.val())
+
           })
           
 
@@ -128,7 +130,7 @@ export default class App extends Component {
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                   <Navbar.Brand>
-                  <Link to="/" className="navbar-brand">PST</Link>
+                  <Link to="/" className="navbar-brand"><img src="https://firebasestorage.googleapis.com/v0/b/pu-gruppe30.appspot.com/o/logo2.png?alt=media&token=79e5f90c-1bd3-417b-b5a7-af3289315987"/></Link>
                   </Navbar.Brand>
                   <Navbar.Toggle />
                   </Navbar.Header>

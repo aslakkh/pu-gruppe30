@@ -1,0 +1,13 @@
+
+.navbar-link{
+
+
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.navbar-brand>img {
+    height: 150%;
+    width: auto;
+}

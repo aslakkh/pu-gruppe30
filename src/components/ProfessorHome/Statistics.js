@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import firebase from 'firebase';
+import {Image} from 'react-bootstrap'
 import {ref } from '../../config/constants'
 /*
  * Professors can see statistics over student in their classes
@@ -92,7 +93,7 @@ export default class Statistics extends Component {
 
     render() {
         return (
-            <h1>{console.log(this.state.time)}</h1>
+            <h1>Statistics</h1>
 
         )
     }

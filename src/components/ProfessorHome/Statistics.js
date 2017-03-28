@@ -54,7 +54,33 @@ import {Button} from 'react-bootstrap'
 
  }
  */
+Date.prototype.getWeek = function() {
 
+    // Create a copy of this date object
+    var target  = new Date(this.valueOf());
+
+    // ISO week date weeks start on monday, so correct the day number
+    var dayNr   = (this.getDay() + 6) % 7;
+
+    // Set the target to the thursday of this week so the
+    // target date is in the right year
+    target.setDate(target.getDate() - dayNr + 3);
+
+    // ISO 8601 states that week 1 is the week with january 4th in it
+    var jan4    = new Date(target.getFullYear(), 0, 4);
+
+    // Number of days between target date and january 4th
+    var dayDiff = (target - jan4) / 86400000;
+
+    if(new Date(target.getFullYear(), 0, 1).getDay() < 5) {
+        // Calculate week number: Week 1 (january 4th) plus the
+        // number of weeks between target date and january 4th
+        return 1 + Math.ceil(dayDiff / 7);
+    }
+    else {  // jan 4th is on the next week (so next week is week 1)
+        return Math.ceil(dayDiff / 7);
+    }
+};
 const options = {
     // Elements options apply to all of the options unless overridden in a dataset
     // In this case, we are setting the border of each bar to be 2px wide and green
@@ -79,33 +105,29 @@ const options = {
 
 let BarChart = require("react-chartjs").Bar;
 
-
+const {Bar} = require("react-chartjs")
 export default class Statistics extends Component {
     constructor(props) {
         super(props);
+        this.list2=[]
         this.show=false
         this.state = {
+            show: false,
             courseID: this.props.courseID,
             daily:0,
             weekly:0,
-            monthly:0
-
-        };
-        this.data={
-            labels: [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July"
-            ],
-            datasets: [
-                {
-                    data: [1,2,3,4,5,6,7
+            monthly:0,
+            data:{
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Time',
+                        backgroundColor: "rgba(0,0,220,0.5)",
+                        data: []
+                    }
                     ]
-                }]
+            }
+
         };
         this.sessions =[]
     }
@@ -141,10 +163,39 @@ export default class Statistics extends Component {
     }
 
     handleClick2(){
-
+        if(this.sessions.length >0){
+            var list = this.sessions;
+            console.log("list")
+            let monday = new Date();
+            monday.setDate(monday.getDate()-monday.getDay()+1);
+            let tuesday = new Date();
+            tuesday.setDate(monday.getDate()-7)
+            Object.keys(list).map((key) => {
+                if(list[key]['key']> tuesday.getTime() ){
+                    if(this.state.data.labels[0] !== tuesday.getWeek()){
+                        this.state.data.labels.unshift(tuesday.getWeek());
+                        this.list2.unshift(0);
+                    }
+                    this.list2[0] =this.list2[0]+list[key]["time"];
+                    tuesday.setDate(tuesday.getDate()- 7);
+                    delete list[key];
+                }
+            });
+            this.state.data.datasets[0].data=this.list2.slice(this.list2.length-11,this.list2.length-1)
+            this.state.data.labels=this.state.data.labels.slice(this.state.data.labels.length-11,this.state.data.labels.length-1)
+            console.log(list)
+            console.log("labels")
+            console.log(this.state.data.labels)
+            console.log("dataset")
+            console.log(this.state.data.datasets)
+        this.setState({
+            show:true
+        })}
     }
     handleClick(){
-        this.show = true
+        this.setState({
+            show:true
+        })
         if((this.sessions.length > 0 )){
             let list = this.sessions;
             console.log(list)
@@ -195,11 +246,11 @@ export default class Statistics extends Component {
             )}
             else{
             return(<div>
-                    <Button bsStyle="primary" bsSize="large" onClick={this.handleClick.bind(this)}>Get Statiscts</Button>
+                    <Button bsStyle="primary" bsSize="large" onClick={this.handleClick2.bind(this)}>Get Statiscts</Button>
                 <h1>we got stuff.
                     {this.state.monthly}
                 </h1>
-                    {this.show ? <BarChart data={this.data}  options={options}/> : <h5>Loading statistics may take a while.</h5>}
+                    {this.state.show ? <BarChart data={this.state.data}  options={options}/> : <h5>Loading statistics may take a while.</h5>}
 
                 </div>
             )

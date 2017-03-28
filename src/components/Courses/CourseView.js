@@ -161,11 +161,11 @@ export default class CourseView extends React.Component {
                 <h3 className="total">Total time spent {formattedSeconds(this.state.time)}</h3>
                 <h3>Daily progress</h3>
                     <h1 className = "daily">
-                        <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*20)} label={formattedSeconds(this.state.monthly/20)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*20)} label={formattedSeconds(this.state.monthly)} max={200}/>
                 </h1>
                 <h3>Weekly progress</h3>
                     <h1 className = "weekly">
-                        <ProgressBar now={this.setProgressBar("week")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*4)} label={formattedSeconds(this.state.monthly/4)} max={200}/>
+                        <ProgressBar now={this.setProgressBar("week")} bsStyle={this.setProgressColor(this.state.goal, this.state.monthly*4)} label={formattedSeconds(this.state.monthly)} max={200}/>
                     </h1>
                 <h3>Monthly progress</h3>
                     <h1 className = "monthly">

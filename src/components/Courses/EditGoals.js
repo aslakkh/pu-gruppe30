@@ -26,7 +26,7 @@ export default class EditGoals extends React.Component {
             hourSelected: '0',
             minSelected: '0',
             tr: '',
-            test: null
+            teacherRecommendation: null
         }
     }
 
@@ -35,7 +35,7 @@ export default class EditGoals extends React.Component {
         let coursesRef = ref.child("/courses/" + this.state.courseID + "/weekly");
         coursesRef.on("value", function(snapshot){
             that.setState({
-                test: snapshot.val(),
+                teacherRecommendation: snapshot.val(),
             });
 
 
@@ -110,7 +110,7 @@ export default class EditGoals extends React.Component {
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
         let seconds = 0;
         if (this.state.activeDropdownBtn === 'monthly' || this.state.activeDropdownBtn === 'weekly') {
-             seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 60 * 60) + (parseInt(this.state.daySelected) * 8 * 60 * 60);
+             seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 60 * 60) + (parseInt(this.state.daySelected) * 12 * 60 * 60);
         } else if (this.state.activeDropdownBtn ==='daily') {
             seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 60 * 60);
         }
@@ -121,7 +121,35 @@ export default class EditGoals extends React.Component {
                 show:false
             })
         }
+    };
 
+    getDaysHoursMins(sec) {
+        let days = Math.floor(sec / (60 * 60 * 12));
+        let remainder = sec - (days * 60 * 60 * 12);
+        let hours = Math.floor(remainder / (60 * 60));
+        remainder = sec - (days * 60 * 60 * 12) - (hours * 60 * 60);
+        let minutes = Math.floor(remainder / 60);
+        return [days, hours, minutes];
+    }
+
+    handleUse = (e) => {
+
+        e.preventDefault(); //prevents default browser behaviour on click, whatever that means
+        if (this.state.activeDropdownBtn == 'weekly') {
+            let time = this.getDaysHoursMins(this.state.teacherRecommendation);
+            this.setState({
+                daySelected: time[0],
+                hourSelected: time[1],
+                minSelected: time[2]
+            })
+        } else if (this.state.activeDropdownBtn == 'monthly') {
+            let time = this.getDaysHoursMins(this.state.teacherRecommendation * 4);
+            this.setState({
+                daySelected: time[0],
+                hourSelected: time[1],
+                minSelected: time[2]
+            })
+        }
     };
 
     getView() {
@@ -166,7 +194,7 @@ export default class EditGoals extends React.Component {
 
     render() {
         console.log(this.state.courseID)
-        console.log(this.state.test)
+        console.log(this.state.teacherRecommendation)
         let close = () => this.setState({show: false});
 
         return (
@@ -192,14 +220,26 @@ export default class EditGoals extends React.Component {
                         </Form>
                     </Modal.Header>
                     <Modal.Body>
-                        {this.getView()}
-                        <Label className="help-label">{this.state.test != null ? "Teacher expectation: " +  this.secondsToString(this.state.test)[1] + " / week"  : "Teacher expectation: not set"}</Label>
+                        <div>
+                            {this.getView()}
+                            <Label className="help-label">
+                                {this.state.teacherRecommendation != null && this.state.activeDropdownBtn == 'monthly' ?
+                                "Teacher expectation: " +  this.secondsToString(this.state.teacherRecommendation * 4)[1] :
+                                (this.state.teacherRecommendation != null && this.state.activeDropdownBtn == 'weekly') ?
+                                    "Teacher expectation: " +  this.secondsToString(this.state.teacherRecommendation)[1] :
+                                    (this.state.teacherRecommendation != null && this.state.activeDropdownBtn == 'daily') ?
+                                    null : "Teacher expectation not set"}
+                            </Label>
+                            {this.state.teacherRecommendation != null && this.state.activeDropdownBtn != 'daily' ? <Button bsSize="small" onClick={this.handleUse}>Use</Button> : null}
+                        </div>
 
                     </Modal.Body>
                     <Modal.Footer>
                         <div>
+                            {" "}
                             <Button onClick={this.handleSave}>Save</Button>
                             <Button onClick={close}>Close</Button>
+
                         </div>
                     </Modal.Footer>
                 </Modal>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ProgressBar, Form, Button} from 'react-bootstrap';
+import {ProgressBar, Form, Button, ButtonGroup, ButtonToolbar} from 'react-bootstrap';
 import EditGoals from './EditGoals';
 import "./courseview.css"
 
@@ -128,6 +128,7 @@ export default class CourseView extends React.Component {
     }
 
     secondsToString(seconds) {
+
         /*
          returns short/long formatted string of seconds.
          */
@@ -245,7 +246,6 @@ export default class CourseView extends React.Component {
                         <ProgressBar now={this.setProgressBar("month")} bsStyle={this.setProgressColor(this.state.monthlyGoal, this.state.monthlyTimeSpent)} label={this.state.monthlyTimeSpent != null ? this.secondsToString(this.state.monthlyTimeSpent)[0]: "00:00:00"} max={200}/>
                     </h1>
                 <EditGoals courseID={this.props.courseID}/>
-                <Button>Use teacher recommendation</Button>
             </div>
         );
     }

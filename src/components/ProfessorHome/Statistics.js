@@ -246,10 +246,8 @@ export default class Statistics extends Component {
             )}
             else{
             return(<div>
-                    <Button bsStyle="primary" bsSize="large" onClick={this.handleClick2.bind(this)}>Get Statiscts</Button>
-                <h1>we got stuff.
-                    {this.state.monthly}
-                </h1>
+                    <Button bsStyle="primary" bsSize="large" onClick={this.handleClick2.bind(this)}>Get Statistics</Button>
+
                     {this.state.show ? <BarChart data={this.state.data}  options={options}/> : <h5>Loading statistics may take a while.</h5>}
 
                 </div>

@@ -1,4 +1,5 @@
 /**
+
  * Created by KasperKBerg on 28.03.2017.
  */
 
@@ -9,12 +10,14 @@ import {ref } from '../../config/constants'
 import firebase from 'firebase';
 
 
+
 let DatePicker = require("react-bootstrap-date-picker");
 export default class AddSession extends Component{
     constructor(props){
         super(props);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleGoalChange = this.handleGoalChange.bind(this);
+
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
         this.validateState = this.validateState.bind(this);
         this.setHours = this.setHours.bind(this);
@@ -47,6 +50,7 @@ export default class AddSession extends Component{
 
 
 
+
     validateState(){
         //validates that date is after today
         //validates that goal is not empty
@@ -68,6 +72,7 @@ export default class AddSession extends Component{
             goal: e.target.value,
         });
     }
+
 
     handleSave = (e) => {
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
@@ -93,6 +98,7 @@ export default class AddSession extends Component{
     }
 
 
+
     formValidateState(){
 
         if(this.state.goal.trim() !== ""){
@@ -113,6 +119,7 @@ export default class AddSession extends Component{
             return 'error';
         }
     }
+
 
     getView() {
         let items = [];
@@ -147,13 +154,14 @@ export default class AddSession extends Component{
 
 
 
+
     render() {
         let close = () => this.setState({show: false});
 
         return (
             <div className="main" style={{marginBottom: 10}}>
                 <Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
-                    Register previous sessions
+
                 </Button>
                 <Modal className="modal" show={this.state.show} onHide={close} container={this}>
                     <Modal.Header closeButton>
@@ -161,6 +169,7 @@ export default class AddSession extends Component{
                     <Modal.Body>
                         <FormGroup
                             controlId="datePicker"
+
                             validationState={this.datePickerValidateState()}>
                             <ControlLabel>Date</ControlLabel>
                             <DatePicker id="example-datepicker" value={this.state.date} onChange={this.handleDateChange}/>
@@ -168,6 +177,7 @@ export default class AddSession extends Component{
                     </Modal.Body>
                     <Modal.Body>
                         {this.getView()}
+
                     </Modal.Body>
                     <Modal.Footer>
                         <div>

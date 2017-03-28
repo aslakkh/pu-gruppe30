@@ -153,7 +153,7 @@ export default class AddSession extends Component{
         return (
             <div className="main" style={{marginBottom: 10}}>
                 <Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
-                    After Registrer a Session
+                    Register previous sessions
                 </Button>
                 <Modal className="modal" show={this.state.show} onHide={close} container={this}>
                     <Modal.Header closeButton>
@@ -161,15 +161,13 @@ export default class AddSession extends Component{
                     <Modal.Body>
                         <FormGroup
                             controlId="datePicker"
-                            validationState={this.datePickerValidateState()}
-                        >
+                            validationState={this.datePickerValidateState()}>
                             <ControlLabel>Date</ControlLabel>
                             <DatePicker id="example-datepicker" value={this.state.date} onChange={this.handleDateChange}/>
                         </FormGroup>
                     </Modal.Body>
                     <Modal.Body>
                         {this.getView()}
-                        <Label className="help-label">1 day is considered 8 working hours</Label>
                     </Modal.Body>
                     <Modal.Footer>
                         <div>

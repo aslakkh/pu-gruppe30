@@ -104,7 +104,7 @@ class Stopwatch extends Component {
                             <Button block className="btn btn-lg" onClick={this.handleResetClick.bind(this)}>save</Button></div>
                         : null
                 )}
-
+            </div>
             </div><div>
                         <AddSession courseID = {this.props.emne}/>
                     </div>

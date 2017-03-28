@@ -16,7 +16,9 @@ export default class AddMessage extends Component {
         super(props);
         this.state={
             courseID:this.props.courseID,
+            value: "",
         }
+        this.handleChange = this.handleChange.bind(this);
     }
     handleSubmit = (e) =>{
         e.preventDefault();
@@ -27,6 +29,7 @@ export default class AddMessage extends Component {
     * Send the message to firebase and uses timestap as ID
     */
      castMessageToFirebase(){
+
          const userUid = firebase.auth().currentUser.uid;
          console.log(this.state.courseID)
          console.log(this.message.value)
@@ -35,11 +38,24 @@ export default class AddMessage extends Component {
          timeRef.set({
              Message: this.message.value
          })
-         this.message.value=""
-
-
+         this.setState({value: ""})
+         this.message.value = ""
+         this.checkMessage()
     }
 
+    handleChange(event) {
+        this.setState({value: event.target.value});
+      }
+
+    checkMessage(){
+        if (this.state.value === ""){
+            return true
+        }
+        else {
+            return false
+        }
+
+    }
 
     render(){
         return(
@@ -52,8 +68,10 @@ export default class AddMessage extends Component {
                     inputRef={ (ref) => {this.message = ref;}}
                     label="Message"
                     placeholder="Message"
+                    value={this.state.value}
+                    onChange={this.handleChange}
                 />
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button disabled={this.checkMessage()} type="submit" className="btn btn-primary">Submit</button>
 
             </form>
 

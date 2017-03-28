@@ -7,6 +7,7 @@ import {ref } from '../../config/constants'
 import firebase from 'firebase';
 import {Button, ProgressBar, ListGroup, Grid,Col,Row} from 'react-bootstrap'
 import PlannedSession from './PlannedSession'
+import AddSession from './AddSession'
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2));
@@ -103,8 +104,10 @@ class Stopwatch extends Component {
                             <Button block className="btn btn-lg" onClick={this.handleResetClick.bind(this)}>save</Button></div>
                         : null
                 )}
-
             </div>
+            </div><div>
+                        <AddSession courseID = {this.props.emne}/>
+                    </div>
                     </Col>
                     <Col md={1}/>
             <Col md={4}>

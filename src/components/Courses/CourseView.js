@@ -128,6 +128,7 @@ export default class CourseView extends React.Component {
     }
 
     secondsToString(seconds) {
+
         /*
          returns short/long formatted string of seconds.
          */

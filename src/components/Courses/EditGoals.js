@@ -133,6 +133,7 @@ export default class EditGoals extends React.Component {
     }
 
     handleUse = (e) => {
+
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
         if (this.state.activeDropdownBtn == 'weekly') {
             let time = this.getDaysHoursMins(this.state.teacherRecommendation);

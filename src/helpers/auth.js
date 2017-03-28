@@ -36,14 +36,30 @@ export function saveUser (user) {
 }
 
 export function saveCourse (course){
-  const userUid = getUserUid();
-  let usersRef = ref.child('users/'+userUid+"/courses/");
+    const userUid = getUserUid();
+    let usersRef = ref.child('users/'+userUid+"/courses/");
+    let monthlyRef = ref.child('users/'+userUid+"/courses/" + course + "/goals/monthlyGoal/");
+    let weeklyRef = ref.child('users/'+userUid+"/courses/" + course + "/goals/weeklyGoal/");
+    let dailyRef = ref.child('users/'+userUid+"/courses/" + course + "/goals/dailyGoal/");
 
-  usersRef.child(course).update({
-    active: true,
-    time: 0,
-    goal: 0
-  });
+    usersRef.child(course).update({
+        active: true
+    });
+
+    monthlyRef.update({
+        timeSet: 0,
+        value: 0
+    });
+
+    weeklyRef.update({
+        timeSet: 0,
+        value: 0
+    });
+
+    dailyRef.update({
+        timeSet: 0,
+        value: 0
+    });
 }
 
 //add course to courses/course
@@ -83,18 +99,6 @@ export function getCourses(){
   });
 }
 
-export function saveGoal(course, goal) {
-    const userUid = firebase.auth().currentUser.uid;
-    let courseRef = ref.child('users/'+userUid+'/courses/'+course);
-    courseRef.update({
-        goal:goal
-    });
-}
-
-export function getGoal(course) {
-    const userUid = firebase.auth().currentUser.uid;
-    console.log(userUid)
-}
 
 
     export function getUserUid(){
@@ -116,14 +120,14 @@ export function removeCourseFromRoot(course){
 
 //function for setting a courses child 'active' to false
 export function disableCourse(course){
-  const userUid = getUserUid();
-  var userRef = ref.child('users/'+userUid+'/courses/');
-  userRef.child(course).update({
+    const userUid = getUserUid();
+    var userRef = ref.child('users/'+userUid+'/courses/');
+    userRef.child(course).update({
     active: false
   });
 }
 
- export function loadCourse(){
+export function loadCourse(){
     console.log("const");
     var emner =[]
     const userUid = firebase.auth().currentUser.uid;
@@ -136,11 +140,48 @@ export function disableCourse(course){
   return(emner);
 }
 
-  export function planSession(course, date, goal){
+export function planSession(course, date, goal){
     const userUid = getUserUid();
     var userRef = ref.child('users/'+userUid+'/courses/'+course+'/planned-sessions/');
     userRef.child(date).update({
       goal: goal,
     });
-  }
+ }
 
+
+export function saveGoal(course, goal) {
+    const userUid = firebase.auth().currentUser.uid;
+    let courseRef = ref.child('users/'+userUid+'/courses/'+course);
+    courseRef.update({
+        goal:goal
+    });
+}
+export function saveGoal2(view, course, seconds, date) {
+    const userUid = firebase.auth().currentUser.uid;
+    let courseRef = ref.child('users/'+userUid+'/courses/'+course + '/goals/' + view);
+    courseRef.update({
+        value:seconds,
+        timeSet:date
+    });
+}
+
+export function test(course){
+    //const userUid = firebase.auth().currentUser.uid;
+    //firebase.database().ref(userUid).once();
+    var s;
+    let coursesRef = ref.child("/courses/" + course + "/weekly");
+    coursesRef.on("value", function(snapshot){
+        s = snapshot.val();
+    });
+    return s;
+}
+
+export function getSec(course) {
+    var ratingRef = firebase.database().ref("courses/" + course);
+    var s;
+    ratingRef.on("value", function (data) {
+        s = data.val().weekly;
+    });
+    return s;
+
+}

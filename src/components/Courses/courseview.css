@@ -12,7 +12,13 @@
 
 .label-goal {
     color: #000;
-    font-size: 28px;
+    font-size: 25px;
     font-style: normal;
     font-weight: bold;
 }
+
+.teacher-rec {
+    font-size: 25px;
+    font-weight: normal;
+}
+

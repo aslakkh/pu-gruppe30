@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem} from 'react-bootstrap';
 import './editGoals.css'
+import {getSec} from '../../helpers/auth';
 import { saveGoal } from '../../helpers/auth'
-import { getGoal } from '../../helpers/auth'
+import { ref } from '../../config/constants'
+import { saveGoal2 } from '../../helpers/auth'
 
-
+//TODO ENDRE TIMER FRA 8 TIL 12
 
 
 export default class EditGoals extends React.Component {
@@ -23,9 +25,60 @@ export default class EditGoals extends React.Component {
             daySelected: '0',
             hourSelected: '0',
             minSelected: '0',
-            goalInSeconds: '0'
+            tr: '',
+            test: null
         }
     }
+
+    componentWillMount(){
+        let that = this;
+        let coursesRef = ref.child("/courses/" + this.state.courseID + "/weekly");
+        coursesRef.on("value", function(snapshot){
+            that.setState({
+                test: snapshot.val(),
+            });
+
+
+        });
+    }
+
+    secondsToString(seconds) {
+        /*
+         returns short/long formatted string of seconds.
+         */
+        let out = [];
+        let hours = Math.floor(seconds / (60 * 60));
+        let remainder = seconds % (60 * 60);
+        let minutes = Math.floor(remainder / 60);
+        let sec = Math.floor(remainder - (minutes * 60));
+        let long = "";
+        if (hours != 0) {
+            if (hours === 1) {
+                long = hours + " hour"
+
+            } else {
+                long = hours + " hours"
+
+            }
+        }
+        if (hours != 0 && minutes != 0) {
+            long = long + " and ";
+        }
+        if (minutes != 0) {
+            long = long + minutes + " minutes"
+        }
+        let short = hours + ":" + minutes + ":" + sec;
+        out.push(short);
+        out.push(long);
+        return out;
+    }
+
+
+    componentDidMount() {
+
+    }
+
+
 
     handleDropdownClick(time) {
         this.setState({activeDropdownBtn: time})
@@ -49,19 +102,21 @@ export default class EditGoals extends React.Component {
         })
     }
 
+    getTeacherRecommendation(course) {
+
+    }
+
     handleSave = (e) => {
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
         let seconds = 0;
-        if (this.state.activeDropdownBtn === 'monthly') {
-             seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 3600) + (parseInt(this.state.daySelected) * 8 * 3600);
-        } else if (this.state.activeDropdownBtn ==='weekly') {
-            seconds = (4 * parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 3600) + (parseInt(this.state.daySelected) * 8 * 3600);
+        if (this.state.activeDropdownBtn === 'monthly' || this.state.activeDropdownBtn === 'weekly') {
+             seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 60 * 60) + (parseInt(this.state.daySelected) * 8 * 60 * 60);
         } else if (this.state.activeDropdownBtn ==='daily') {
-            seconds = (20 * parseInt(this.state.minSelected) * 60) + (parseInt(this.state.daySelected) * 8 * 3600);
+            seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 60 * 60);
         }
         if (seconds > 0) {
-            this.setState({goalInSeconds: seconds});
-            saveGoal(this.state.courseID, seconds);
+            let view = this.state.activeDropdownBtn + "Goal";
+            saveGoal2(view, this.state.courseID, seconds, Date.now());
             this.setState({
                 show:false
             })
@@ -97,7 +152,7 @@ export default class EditGoals extends React.Component {
             }
         }
         if (box==='hours') {
-            for(let i=0; i<9; i++) {
+            for(let i=0; i<13; i++) {
                 items.push(<MenuItem onClick={() => this.setHours(i)} key={i}>{i}</MenuItem>);
             }
         }
@@ -110,6 +165,8 @@ export default class EditGoals extends React.Component {
     }
 
     render() {
+        console.log(this.state.courseID)
+        console.log(this.state.test)
         let close = () => this.setState({show: false});
 
         return (
@@ -136,7 +193,8 @@ export default class EditGoals extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         {this.getView()}
-                        <Label className="help-label">1 day is considered 8 working hours</Label>
+                        <Label className="help-label">{this.state.test != null ? "Teacher expectation: " +  this.secondsToString(this.state.test)[1] + " / week"  : "Teacher expectation: not set"}</Label>
+
                     </Modal.Body>
                     <Modal.Footer>
                         <div>

@@ -105,10 +105,10 @@ class Stopwatch extends Component {
                         : null
                 )}
 
-            </div>
-                        <div>
-                            <AddSession/>
-                        </div>
+            </div><div>
+                        <AddSession courseID = {this.props.emne}/>
+                    </div>
+
                     </Col>
                     <Col md={1}/>
             <Col md={4}>

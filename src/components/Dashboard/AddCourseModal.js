@@ -27,10 +27,10 @@ export default class AddCourseModal extends Component{
         })
     }
 
-    componentDidMount(){
+    componentWillMount(){
         let that = this;
         let coursesRef = firebase.database().ref().child('courses/');
-        coursesRef.on('value', snap => {
+        coursesRef.once('value', snap => {
             var temp = snap.val();
             var coursesArray = Object.keys(temp).map(key => key); //create array from key values from database
             that.setState({
@@ -39,6 +39,12 @@ export default class AddCourseModal extends Component{
             });
         });
     }
+
+    componentWillUnmount(){
+        let coursesRef = firebase.database().ref().child('courses/');
+        coursesRef.off();
+    }
+    
 
     //required to use Modal. uses function closeModal received through props
     close(){

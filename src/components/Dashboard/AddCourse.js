@@ -23,6 +23,15 @@ TODO
 
 export default class AddCourse extends Component{
     constructor(props){
+
+        var style = {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            marginTop: '10px',
+        }
+
         super(props);
         this.handleAdd = this.handleAdd.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -96,13 +105,14 @@ export default class AddCourse extends Component{
         });
     }
 
+    
 
     //Renders a form and a button for submission
     render(){
         return(
             <div>
                     
-                <div className="AddCourseForm">
+                <div style={this.style}>
                             <FormGroup controlId="addCourseForm" validationState={this.getValidationState()} >
                                 <FormControl 
                                 id="addCourseForm" 
@@ -118,9 +128,9 @@ export default class AddCourse extends Component{
                                 <FormControl.Feedback/>
                                 <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
                             </FormGroup>
+                    <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.handleAdd}>Add</Button>
                 </div>
-                <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.handleAdd} style={{marginLeft: "20px"}}>Add</Button>
-
+                
             </div>
         )
     } 

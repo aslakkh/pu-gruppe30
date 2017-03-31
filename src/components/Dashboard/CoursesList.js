@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
 import {disableCourse, courseExistsAtRoot} from '../../helpers/auth'
+import {CourseWarning} from '../various/CourseWarning'
 import './CoursesList.css'
 
 
@@ -81,14 +82,14 @@ export default class CoursesList extends Component {
 							{Object.keys(this.state.courses).map((key) => {
 								if(!courseExistsAtRoot(key)){
 									return <ListGroupItem key={key} className="CoursesList"> 
-										{key}
+										<div className="ListElementHere"><CourseWarning /> {key} </div>
 										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
-										*
+										
 										</ListGroupItem>
 								}
 								else{
 									return <ListGroupItem key={key} className="CoursesList"> 
-										{key} 
+										<div>{key}</div>
 										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
 										</ListGroupItem>
 								}

@@ -4,7 +4,9 @@ import {Modal, Panel, FormGroup, FormControl, Button, HelpBlock, ListGroup, List
 import firebase from 'firebase'
 import AddCourse from './AddCourse'
 import {HelpButton} from '../various/HelpButton'
-import './AddCourseModal.css'
+import {styles} from './AddCourseModalStyles.js'
+
+
 
 export default class AddCourseModal extends Component{
     constructor(props){
@@ -93,8 +95,8 @@ export default class AddCourseModal extends Component{
                     <Modal.Title>Add course</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="ModalBodyWrapper">
-                        <div className="ModalBodyLeft">
+                    <div /*className="ModalBodyWrapper"*/ style={styles.modalBodyWrapper}>
+                        <div /*className="ModalBodyLeft" */ style={styles.modalBodyLeft} >
                             {/*<h4>Add existing course <img src={require("../../assets/helpicon.png")} alt="helpicon" height="20" width="20"/></h4>*/}
                             <h4>Add existing course 
                                 <HelpButton
@@ -118,12 +120,12 @@ export default class AddCourseModal extends Component{
                                 <FormControl.Feedback/>
                                 <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
                             </FormGroup>
-                            <Panel className="ModalPane">
-                                <ListGroup className="ModalList">
+                            <Panel /*className="ModalPane"*/ style={styles.modalPane}>
+                                <ListGroup /*className="ModalList"*/ style={styles.modalList}>
                                     {(this.state.courses).map((key) => {
-                                        return <ListGroupItem key={key} className="List">
-                                            <div className="CourseName">{key}</div>
-                                            <Button className="Button" bsStyle="success" onClick={(e) => this.handleAddToMyCourses(key, e)}>Add to My Courses</Button>
+                                        return <ListGroupItem key={key} style={styles.listElement}>
+                                            <div style={styles.listName}>{key}</div>
+                                            <Button style={styles.listButton} bsStyle="success" onClick={(e) => this.handleAddToMyCourses(key, e)}>Add to My Courses</Button>
                                         </ListGroupItem>
                                     })}
                     
@@ -131,8 +133,8 @@ export default class AddCourseModal extends Component{
                             </Panel>
 
                         </div>
-                        <div className="ModalBodySeparator" />
-                        <div className="ModalBodyRight">
+                        <div /*className="ModalBodySeparator"*/ style={styles.modalBodySeparator} />
+                        <div /*className="ModalBodyRight"*/ style={styles.modalBodyRight}>
                             <h4>Add new course
                                 <HelpButton 
                                     placement="right"

@@ -3,6 +3,7 @@ import { saveCourse } from '../../helpers/auth'
 import {Modal, Panel, FormGroup, FormControl, Button, HelpBlock, ListGroup, ListGroupItem} from 'react-bootstrap'
 import firebase from 'firebase'
 import AddCourse from './AddCourse'
+import {HelpButton} from '../various/HelpButton'
 import './AddCourseModal.css'
 
 export default class AddCourseModal extends Component{
@@ -94,8 +95,14 @@ export default class AddCourseModal extends Component{
                 <Modal.Body>
                     <div className="ModalBodyWrapper">
                         <div className="ModalBodyLeft">
-                            <h4>Add existing course <img src={require("../../assets/helpicon.png")} alt="helpicon" height="20" width="20"/></h4>
-                            
+                            {/*<h4>Add existing course <img src={require("../../assets/helpicon.png")} alt="helpicon" height="20" width="20"/></h4>*/}
+                            <h4>Add existing course 
+                                <HelpButton
+                                    placement="right"
+                                    title="Adding existing courses" 
+                                    helpText="Courses appearing here have been added to the database by a professor. Find your course and add it to your courses to start tracking!"
+                                />
+                            </h4>
                             <FormGroup controlId="addCourseForm">
                                 <FormControl 
                                 id="addCourseForm" 
@@ -126,7 +133,13 @@ export default class AddCourseModal extends Component{
                         </div>
                         <div className="ModalBodySeparator" />
                         <div className="ModalBodyRight">
-                            <h4>Add new course</h4>
+                            <h4>Add new course
+                                <HelpButton 
+                                    placement="right"
+                                    title="Adding new courses"
+                                    helpText="If you want to track your progress in a course that has not been added to the database by the course staff, you can enter the course code here."
+                                />
+                            </h4>
                             <AddCourse/>
                         </div>
                     </div>

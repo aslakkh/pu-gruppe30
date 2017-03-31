@@ -95,9 +95,8 @@ export default class AddCourseModal extends Component{
                     <Modal.Title>Add course</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div /*className="ModalBodyWrapper"*/ style={styles.modalBodyWrapper}>
-                        <div /*className="ModalBodyLeft" */ style={styles.modalBodyLeft} >
-                            {/*<h4>Add existing course <img src={require("../../assets/helpicon.png")} alt="helpicon" height="20" width="20"/></h4>*/}
+                    <div style={styles.modalBodyWrapper}>
+                        <div style={styles.modalBodyLeft} >
                             <h4>Add existing course 
                                 <HelpButton
                                     placement="right"
@@ -120,8 +119,8 @@ export default class AddCourseModal extends Component{
                                 <FormControl.Feedback/>
                                 <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
                             </FormGroup>
-                            <Panel /*className="ModalPane"*/ style={styles.modalPane}>
-                                <ListGroup /*className="ModalList"*/ style={styles.modalList}>
+                            <Panel style={styles.modalPane}>
+                                <ListGroup style={styles.modalList}>
                                     {(this.state.courses).map((key) => {
                                         return <ListGroupItem key={key} style={styles.listElement}>
                                             <div style={styles.listName}>{key}</div>
@@ -133,8 +132,8 @@ export default class AddCourseModal extends Component{
                             </Panel>
 
                         </div>
-                        <div /*className="ModalBodySeparator"*/ style={styles.modalBodySeparator} />
-                        <div /*className="ModalBodyRight"*/ style={styles.modalBodyRight}>
+                        <div style={styles.modalBodySeparator} />
+                        <div style={styles.modalBodyRight}>
                             <h4>Add new course
                                 <HelpButton 
                                     placement="right"

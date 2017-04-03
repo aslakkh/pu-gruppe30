@@ -4,8 +4,14 @@ import { login } from '../../helpers/auth'
 export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
-    login(this.email.value, this.pw.value)
+    login(this.email.value, this.pw.value).catch(error => this.setState({errormess: "Email or Password is wrong."}) )
   }
+  constructor(props){
+    super(props)
+    this.state={errormess:""}
+  }
+
+
   render () {
     return (
       <div className="col-sm-6 col-sm-offset-3">
@@ -18,9 +24,11 @@ export default class Login extends Component {
           <div className="form-group">
             <label>Password</label>
             <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
+            <label>{this.state.errormess}</label>
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
+
       </div>
     )
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import SpecificCourse from './specificCourse'
 import CourseView from './CourseView';
+import CourseInformation from './CourseInformation'
 /*Maps the courses to make the sidebar and the site for the specific courses */
 function TestEmner(props){
 
@@ -18,6 +19,7 @@ function TestEmner(props){
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>
                 <CourseView courseID={emne} course={props.courses[emne]} courses={props.courses}/>
+                <CourseInformation courseID={emne}/>
                 {console.log(props.courses[emne].sessions)}
             </h1>
             <SpecificCourse courseID={emne} course={props.courses[emne]}/>

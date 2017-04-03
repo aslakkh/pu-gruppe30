@@ -9,6 +9,15 @@ export function auth (email, pw) {
     .catch((error) => console.log('Oops', error))
 }
 
+export function privilige(user, auth0) {
+    console.log(user.uid);
+    console.log(auth0);
+    return ref.child(`users/${user.uid}/info`)
+        .update({
+        privilege: auth0
+        })
+}
+
 export function logout () {
   return firebaseAuth().signOut()
 }
@@ -27,19 +36,55 @@ export function saveUser (user) {
 }
 
 export function saveCourse (course){
-  const userUid = firebase.auth().currentUser.uid;
-  let usersRef = ref.child('users/'+userUid+"/courses/"+course);
+    const userUid = getUserUid();
+    let usersRef = ref.child('users/'+userUid+"/courses/");
+    let monthlyRef = ref.child('users/'+userUid+"/courses/" + course + "/goals/monthlyGoal/");
+    let weeklyRef = ref.child('users/'+userUid+"/courses/" + course + "/goals/weeklyGoal/");
+    let dailyRef = ref.child('users/'+userUid+"/courses/" + course + "/goals/dailyGoal/");
 
-  usersRef.update({
-    active: true,
-    time: 0
+    usersRef.child(course).update({
+        active: true
+    });
 
+    monthlyRef.update({
+        timeSet: 0,
+        value: 0
+    });
+
+    weeklyRef.update({
+        timeSet: 0,
+        value: 0
+    });
+
+    dailyRef.update({
+        timeSet: 0,
+        value: 0
+    });
+}
+
+//add course to courses/course
+//for now sets all points to 7.5
+export function addCourseToRoot(course){
+  var courseRef = ref.child('courses/');
+  courseRef.child(course).update({
+    points: 7.5,
+    weekly: 36000,
+  })
+}
+
+//check for existing course at root 
+export function courseExistsAtRoot(course){
+  var courseRef = ref.child('courses/');
+  var courseExists;
+  courseRef.once('value', function(snapshot) {
+    courseExists = snapshot.hasChild(course);
   });
+  return courseExists;
 }
 
 export function getCourse(){
   const userUid = firebase.auth().currentUser.uid;
-  this.firebase.database().ref(userUid).once()
+  this.firebase.database().ref(userUid).once();
   return firebase.database().ref(userUid).on("value", function(snapshot) {
     console.log(snapshot.val());
     });
@@ -54,7 +99,9 @@ export function getCourses(){
   });
 }
 
-export function getUserUid(){
+
+
+    export function getUserUid(){
   const userUid = firebase.auth().currentUser.uid;
   return userUid;
 }
@@ -66,16 +113,21 @@ export function removeCourse(course){
   userRef.child(course).remove();
 }
 
+export function removeCourseFromRoot(course){
+  var courseRef = ref.child('courses');
+  courseRef.child(course).remove();
+}
+
 //function for setting a courses child 'active' to false
 export function disableCourse(course){
-  const userUid = getUserUid();
-  var userRef = ref.child('users/'+userUid+'/courses/');
-  userRef.child(course).update({
+    const userUid = getUserUid();
+    var userRef = ref.child('users/'+userUid+'/courses/');
+    userRef.child(course).update({
     active: false
   });
 }
 
- export function loadCourse(){
+export function loadCourse(){
     console.log("const");
     var emner =[]
     const userUid = firebase.auth().currentUser.uid;
@@ -88,11 +140,48 @@ export function disableCourse(course){
   return(emner);
 }
 
-  export function planSession(course, date, goal){
+export function planSession(course, date, goal){
     const userUid = getUserUid();
     var userRef = ref.child('users/'+userUid+'/courses/'+course+'/planned-sessions/');
     userRef.child(date).update({
       goal: goal,
     });
-  }
+ }
 
+
+export function saveGoal(course, goal) {
+    const userUid = firebase.auth().currentUser.uid;
+    let courseRef = ref.child('users/'+userUid+'/courses/'+course);
+    courseRef.update({
+        goal:goal
+    });
+}
+export function saveGoal2(view, course, seconds, date) {
+    const userUid = firebase.auth().currentUser.uid;
+    let courseRef = ref.child('users/'+userUid+'/courses/'+course + '/goals/' + view);
+    courseRef.update({
+        value:seconds,
+        timeSet:date
+    });
+}
+
+export function test(course){
+    //const userUid = firebase.auth().currentUser.uid;
+    //firebase.database().ref(userUid).once();
+    var s;
+    let coursesRef = ref.child("/courses/" + course + "/weekly");
+    coursesRef.on("value", function(snapshot){
+        s = snapshot.val();
+    });
+    return s;
+}
+
+export function getSec(course) {
+    var ratingRef = firebase.database().ref("courses/" + course);
+    var s;
+    ratingRef.on("value", function (data) {
+        s = data.val().weekly;
+    });
+    return s;
+
+}

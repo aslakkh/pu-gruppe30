@@ -162,7 +162,7 @@ export default class AddSession extends Component{
         return (
             <div className="main" style={{marginBottom: 10}}>
                 <Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
-
+                    Set previous session
                 </Button>
                 <Modal className="modal" show={this.state.show} onHide={close} container={this}>
                     <Modal.Header closeButton>

@@ -52,6 +52,7 @@ export default class CoursesList extends Component {
 		this.setState({
 			courses: nextProps.courses
 		});
+
 }
 
 	componentWillUnmount(){
@@ -78,21 +79,21 @@ export default class CoursesList extends Component {
 			return(
 			<div>
 					
-					<ListGroup >
+					<ListGroup>
 							{Object.keys(this.state.courses).map((key) => {
-								if(!courseExistsAtRoot(key)){
+								{/*if(!courseExistsAtRoot(key)){
 									return <ListGroupItem key={key} className="CoursesList"> 
 										<div className="ListElementHere"><CourseWarning /> {key} </div>
 										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
 										
 										</ListGroupItem>
 								}
-								else{
+								else{*/}
 									return <ListGroupItem key={key} className="CoursesList"> 
 										<div>{key}</div>
 										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
 										</ListGroupItem>
-								}
+								{/*}*/}
 								
 							})} 
 					</ListGroup>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
-import {disableCourse} from '../../helpers/auth'
+import {disableCourse, courseExistsAtRoot} from '../../helpers/auth'
+import {CourseWarning} from '../various/CourseWarning'
 import './CoursesList.css'
 
 
@@ -79,10 +80,20 @@ export default class CoursesList extends Component {
 					
 					<ListGroup >
 							{Object.keys(this.state.courses).map((key) => {
-								return <ListGroupItem key={key} className="CoursesList"> 
-										{key} 
+								if(!courseExistsAtRoot(key)){
+									return <ListGroupItem key={key} className="CoursesList"> 
+										<div className="ListElementHere"><CourseWarning /> {key} </div>
+										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
+										
+										</ListGroupItem>
+								}
+								else{
+									return <ListGroupItem key={key} className="CoursesList"> 
+										<div>{key}</div>
 										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
 										</ListGroupItem>
+								}
+								
 							})} 
 					</ListGroup>
 			</div>

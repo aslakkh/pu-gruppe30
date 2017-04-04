@@ -3,6 +3,7 @@ import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem} from 'r
 import './editGoals.css'
 import {getSec} from '../../helpers/auth';
 import { saveGoal } from '../../helpers/auth'
+
 import { ref } from '../../config/constants'
 import { saveGoal2 } from '../../helpers/auth'
 
@@ -25,7 +26,6 @@ export default class EditGoals extends React.Component {
             daySelected: '0',
             hourSelected: '0',
             minSelected: '0',
-            tr: '',
             teacherRecommendation: null
         }
     }
@@ -42,10 +42,49 @@ export default class EditGoals extends React.Component {
         });
     }
 
-    secondsToString(seconds) {
+    getDaysHoursMins(sec) {
+
         /*
-         returns short/long formatted string of seconds.
+         -param: seconds
+         -converts seconds into different formats.
+         -Returns a list containing: Number of days, number of hours, number of minutes, short textual format,
+         long textual format
          */
+
+        let days = Math.floor(sec / (60 * 60 * 12));
+        let remainder = sec - (days * 60 * 60 * 12);
+        let hours = Math.floor(remainder / (60 * 60));
+        remainder = sec - (days * 60 * 60 * 12) - (hours * 60 * 60);
+        let minutes = Math.floor(remainder / 60);
+        let seconds = remainder - (minutes * 60);
+        let longString = "";
+        if ((hours + days * 12) != 0) {
+            if ((hours + days * 12) === 1) {
+                longString = (hours + days * 12) + " hour"
+            } else {
+                longString = (hours + days * 12) + " hours"
+            }
+        }
+        if ((hours + days * 12) != 0 && minutes != 0) {
+            longString = longString + " and ";
+        }
+        if (minutes != 0) {
+            longString = longString + minutes + " minutes"
+        }
+        let shortString = (hours + days * 12) + ":" + minutes + ":" + seconds;
+        return [days, hours, minutes, shortString, longString];
+    }
+
+
+
+
+    /*
+     returns short/long formatted string of seconds.
+     */
+/*
+
+ secondsToString(seconds) {
+
         let out = [];
         let hours = Math.floor(seconds / (60 * 60));
         let remainder = seconds % (60 * 60);
@@ -72,6 +111,7 @@ export default class EditGoals extends React.Component {
         out.push(long);
         return out;
     }
+ */
 
 
     componentDidMount() {
@@ -85,25 +125,16 @@ export default class EditGoals extends React.Component {
     }
 
     setDays(num) {
-        this.setState({
-            daySelected: num
-        })
+        num != 0 ? this.setState({daySelected: num}) : this.setState({daySelected : '0'});
     }
 
     setHours(num) {
-        this.setState({
-            hourSelected: num
-        })
+        num != 0 ? this.setState({hourSelected: num}) : this.setState({hourSelected : '0'});
+
     }
 
     setMinutes(num) {
-        this.setState({
-            minSelected: num
-        })
-    }
-
-    getTeacherRecommendation(course) {
-
+        num != 0 ? this.setState({minSelected: num}) : this.setState({minSelected : '0'});
     }
 
     handleSave = (e) => {
@@ -119,36 +150,23 @@ export default class EditGoals extends React.Component {
             saveGoal2(view, this.state.courseID, seconds, Date.now());
             this.setState({
                 show:false
-            })
+            });
         }
     };
-
-    getDaysHoursMins(sec) {
-        let days = Math.floor(sec / (60 * 60 * 12));
-        let remainder = sec - (days * 60 * 60 * 12);
-        let hours = Math.floor(remainder / (60 * 60));
-        remainder = sec - (days * 60 * 60 * 12) - (hours * 60 * 60);
-        let minutes = Math.floor(remainder / 60);
-        return [days, hours, minutes];
-    }
 
     handleUse = (e) => {
 
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
         if (this.state.activeDropdownBtn == 'weekly') {
             let time = this.getDaysHoursMins(this.state.teacherRecommendation);
-            this.setState({
-                daySelected: time[0],
-                hourSelected: time[1],
-                minSelected: time[2]
-            })
+            this.setDays(time[0]);
+            this.setHours(time[1]);
+            this.setMinutes(time[2]);
         } else if (this.state.activeDropdownBtn == 'monthly') {
             let time = this.getDaysHoursMins(this.state.teacherRecommendation * 4);
-            this.setState({
-                daySelected: time[0],
-                hourSelected: time[1],
-                minSelected: time[2]
-            })
+            this.setDays(time[0]);
+            this.setHours(time[1]);
+            this.setMinutes(time[2]);
         }
     };
 
@@ -193,8 +211,6 @@ export default class EditGoals extends React.Component {
     }
 
     render() {
-        console.log(this.state.courseID)
-        console.log(this.state.teacherRecommendation)
         let close = () => this.setState({show: false});
 
         return (
@@ -222,15 +238,19 @@ export default class EditGoals extends React.Component {
                     <Modal.Body>
                         <div>
                             {this.getView()}
+                            <div>
+                                <Label className="help-label">{this.state.activeDropdownBtn != 'daily' ? "1 day is considered 12 hours" : null}</Label>
+                            </div>
                             <Label className="help-label">
                                 {this.state.teacherRecommendation != null && this.state.activeDropdownBtn == 'monthly' ?
-                                "Teacher expectation: " +  this.secondsToString(this.state.teacherRecommendation * 4)[1] :
+                                "Teacher expectation: " +  this.getDaysHoursMins(this.state.teacherRecommendation * 4)[4] :
                                 (this.state.teacherRecommendation != null && this.state.activeDropdownBtn == 'weekly') ?
-                                    "Teacher expectation: " +  this.secondsToString(this.state.teacherRecommendation)[1] :
+                                    "Teacher expectation: " +  this.getDaysHoursMins(this.state.teacherRecommendation)[4] :
                                     (this.state.teacherRecommendation != null && this.state.activeDropdownBtn == 'daily') ?
                                     null : "Teacher expectation not set"}
                             </Label>
-                            {this.state.teacherRecommendation != null && this.state.activeDropdownBtn != 'daily' ? <Button bsSize="small" onClick={this.handleUse}>Use</Button> : null}
+                            {this.state.teacherRecommendation != null && this.state.activeDropdownBtn != 'daily' ?
+                                <Button bsSize="small" onClick={this.handleUse}>Use</Button> : null}
                         </div>
 
                     </Modal.Body>
@@ -239,7 +259,6 @@ export default class EditGoals extends React.Component {
                             {" "}
                             <Button onClick={this.handleSave}>Save</Button>
                             <Button onClick={close}>Close</Button>
-
                         </div>
                     </Modal.Footer>
                 </Modal>

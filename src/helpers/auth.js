@@ -47,19 +47,48 @@ export function saveCourse (course){
     });
 
     monthlyRef.update({
+        active: true,
         timeSet: 0,
-        value: 0
+        value: 0,
+        timeSpent: 0
+
     });
 
     weeklyRef.update({
+        active: true,
         timeSet: 0,
-        value: 0
+        value: 0,
+        timeSpent: 0
     });
 
     dailyRef.update({
+        active: true,
         timeSet: 0,
-        value: 0
+        value: 0,
+        timeSpent: 0
     });
+
+    let goalRef = ref.child('users/'+userUid+"/courses/" + course + "/oldGoals/daily/1");
+    goalRef.update({
+        goal: 0,
+        timeSet: 0,
+        timeSpent: 0,
+    });
+
+    goalRef = ref.child('users/'+userUid+"/courses/" + course + "/oldGoals/weekly/1");
+    goalRef.update({
+        goal: 0,
+        timeSet: 0,
+        timeSpent: 0,
+    });
+
+    goalRef = ref.child('users/'+userUid+"/courses/" + course + "/oldGoals/monthly/1");
+    goalRef.update({
+        goal: 0,
+        timeSet: 0,
+        timeSpent: 0,
+    });
+
 }
 
 //add course to courses/course
@@ -162,6 +191,63 @@ export function saveGoal2(view, course, seconds, date) {
     courseRef.update({
         value:seconds,
         timeSet:date
+    });
+}
+
+
+// saves goal and links seconds elapsed to a specific goal
+//daily/monthly, weekly goal functions as active goal. Need a method that checks if goal expired
+export function saveGoal3(goalType, course, goalInSeconds, secondsElapsed=null) {
+    const userUid = firebase.auth().currentUser.uid;
+    const timeRef = ref.child('users/'+userUid+'/courses/'+ course +'/goals/'+ '/goalRegister/' +  Date.now());
+    timeRef.set({
+        goalType: goalType,
+        goalInSeconds: goalInSeconds,
+        secondsElapsed: secondsElapsed
+    });
+}
+
+export function saveExpiredGoal(goalType, timeCreated, course, goalInSeconds, secondsSpent) {
+    const userUid = firebase.auth().currentUser.uid;
+    console.log("halloiluken")
+    console.log('users/'+userUid+'/courses/'+ course + '/oldGoals/' + goalType + "/" + timeCreated)
+    const goalRef = ref.child('users/'+userUid+'/courses/'+ course + '/oldGoals/' + goalType + "/" + timeCreated);
+    goalRef.set({
+        goal: goalInSeconds,
+        timeSet: timeCreated,
+        timeSpent: secondsSpent
+    });
+}
+
+export function saveProgress(course, view, timeSpent) {
+    const userUid = firebase.auth().currentUser.uid;
+    const goalRef = ref.child('users/'+userUid+'/courses/'+ course +'/goals/'+ view);
+    goalRef.update({
+        timeSpent: timeSpent
+    });
+
+}
+
+/*
+export function gg(course, goalType, dateNow) {
+    const userUid = firebase.auth().currentUser.uid;
+    var goalRef = ref.child('users/'+userUid+"/courses/" + course +'/goals/'+ '/goalRegister/');
+
+    var s;
+    ratingRef.on("value", function (data) {
+        s = data.val().weekly;
+    });
+    return s;
+
+}
+
+*/
+
+export function activateGoal(type, course, boolean) {
+    const userUid = firebase.auth().currentUser.uid;
+    let courseRef = ref.child('users/'+userUid+'/courses/'+course + '/goals/' + type);
+    courseRef.update({
+        active: boolean
     });
 }
 

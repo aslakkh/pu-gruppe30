@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
+import {NavItem, Nav, Col,Row, Tabs, Tab} from 'react-bootstrap'
 import SpecificCourse from './specificCourse'
 import CourseView from './CourseView';
+import PastGoals from './PastGoals';
+
+import "./courseview.css"
+
 import CourseInformation from './CourseInformation'
 /*Maps the courses to make the sidebar and the site for the specific courses */
 function TestEmner(props){
@@ -17,11 +21,24 @@ function TestEmner(props){
 			);
 	let info = Object.keys(props.courses).map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
-            <h1>
-                <CourseView courseID={emne} course={props.courses[emne]} courses={props.courses}/>
-                <CourseInformation courseID={emne}/>
-                {console.log(props.courses[emne].sessions)}
-            </h1>
+            <Tabs id="goalView">
+                <Tab eventKey={1} title="Current goals">
+                    <CourseView courseID={emne} course={props.courses[emne]} courses={props.courses}/>
+                </Tab>
+                <Tab eventKey={2} title="Past goals">
+                    <Tabs id="type-goals">
+                        <Tab eventKey="1" title="Daily goals">
+                            <PastGoals view="Daily" courseID={emne} course={props.courses[emne]} courses={props.courses}/>
+                        </Tab>
+                        <Tab eventKey="2" title="Weekly goals">
+                            <PastGoals view="Weekly" courseID={emne} course={props.courses[emne]} courses={props.courses}/>
+                        </Tab>
+                        <Tab eventKey="3" title="Monthly goals">
+                            <PastGoals view="Monthly" courseID={emne} course={props.courses[emne]} courses={props.courses}/>
+                        </Tab>
+                    </Tabs>
+                </Tab>
+            </Tabs>
             <SpecificCourse courseID={emne} course={props.courses[emne]}/>
     </Tab.Pane>
 

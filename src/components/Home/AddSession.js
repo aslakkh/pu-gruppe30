@@ -90,7 +90,8 @@ export default class AddSession extends Component{
     castToFirebase(){
         const userUid = firebase.auth().currentUser.uid;
         const variabel = new Date(this.state.date)
-        const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime()+Math.floor((Math.random()*1000)+1));
+        variabel.setMilliseconds(Math.random()*1000)
+        const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime());
         timeRef.set({time:(this.state.minSelected * 60) + (this.state.hourSelected * 3600),desc: "secondsPlanned"});
         this.setState({
             secondsPlanned: 0

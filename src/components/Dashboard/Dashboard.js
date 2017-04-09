@@ -3,7 +3,13 @@ import CoursesList from './CoursesList'
 import AddCourse from './AddCourse'
 import AddCourseModal from './AddCourseModal'
 import {Button} from 'react-bootstrap'
-import './Dashboard.css'
+
+const styles = {
+  dashboard: {
+    display: 'flex',
+    flexDirection: 'column',
+  }
+}
 
 export default class Dashboard extends Component {
 
@@ -29,10 +35,10 @@ export default class Dashboard extends Component {
 
   render () {
     return (
-    	<div className="Dashboard">
+    	<div /*className="Dashboard"*/ style={styles.dashboard}>
         <h4>My courses</h4>
         <CoursesList courses={this.props.courses}/>
-        <Button onClick={this.handleModal}>Add new course</Button>
+        <Button onClick={this.handleModal} bsStyle="primary"><b>Add new course</b></Button>
 {/*       	<AddCourse courses/>*/}
         <AddCourseModal showModal={this.state.showModal} closeModal={this.closeModal.bind(this)}/>
       </div>

@@ -165,29 +165,43 @@ export default class Statistics extends Component {
     handleClick2(){
         if(this.sessions.length >0){
             var list = this.sessions;
-            console.log("list")
+            console.log(list);
             let monday = new Date();
             monday.setDate(monday.getDate()-monday.getDay()+1);
             let tuesday = new Date();
-            tuesday.setDate(monday.getDate()-7)
-            Object.keys(list).map((key) => {
-                if(list[key]['key']> tuesday.getTime() ){
+            tuesday.setDate(monday.getDate()-7);
+/*            Object.keys(list).map((key) => {
+                let day = new Date(list[key]["key"])
+                console.log("uke "+tuesday.getWeek())
+
+                if(day> tuesday ){
                     if(this.state.data.labels[0] !== tuesday.getWeek()){
+
                         this.state.data.labels.unshift(tuesday.getWeek());
                         this.list2.unshift(0);
+                        console.log("New week")
                     }
+                    console.log("Time added")
                     this.list2[0] =this.list2[0]+list[key]["time"];
-                    tuesday.setDate(tuesday.getDate()- 7);
                     delete list[key];
+                }else{
+                    tuesday.setDate(tuesday.getDate()- 7);
                 }
+            });*/
+
+            Object.keys(list).map((key) => {
+               let day = new Date(list[key]["key"]);
+               console.log(day.getWeek())
+                this.list2[day.getWeek()]=this.list2[day.getWeek()]+list[key]["time"]
+                console.log(this.list2)
             });
-            this.state.data.datasets[0].data=this.list2.slice(this.list2.length-11,this.list2.length-1)
-            this.state.data.labels=this.state.data.labels.slice(this.state.data.labels.length-11,this.state.data.labels.length-1)
-            console.log(list)
-            console.log("labels")
-            console.log(this.state.data.labels)
-            console.log("dataset")
-            console.log(this.state.data.datasets)
+            this.state.data.datasets[0].data=this.list2;//.slice(this.list2.length-11,this.list2.length-1)
+            //this.state.data.labels=this.state.data.labels;//.slice(this.state.data.labels.length-11,this.state.data.labels.length-1)
+            console.log(list);
+            console.log("labels");
+            console.log(this.state.data.labels);
+            console.log("dataset");
+            console.log(this.state.data.datasets);
         this.setState({
             show:true
         })}
@@ -195,7 +209,7 @@ export default class Statistics extends Component {
     handleClick(){
         this.setState({
             show:true
-        })
+        });
         if((this.sessions.length > 0 )){
             let list = this.sessions;
             console.log(list)

@@ -1,0 +1,32 @@
+.AddCourseModal{
+    width: 70%;
+}
+
+.ModalBodyWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ModalBodySeparator{
+    width: 1%;
+    background-color: #000;
+}
+
+.ModalBodyLeft{
+    flex-basis: 45%;
+}
+
+.ModalBodyRight{
+    flex-basis: 45%;
+}
+
+.ModalPane{
+    background-color: darkslategray;
+}
+
+.ModalList{
+    height: 400px;
+    overflow-y: scroll;
+}

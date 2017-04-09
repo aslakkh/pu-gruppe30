@@ -35,7 +35,7 @@ export default class ManageCourses extends Component{
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
         let that = this;
         let coursesRef = firebase.database().ref().child('courses/');
         coursesRef.on('value', snap => {
@@ -48,7 +48,7 @@ export default class ManageCourses extends Component{
         });
     }
 
-    componentWillUnMount(){
+    componentWillUnmount(){
         let coursesRef = firebase.database().ref().child('courses/');
         coursesRef.off();
     }

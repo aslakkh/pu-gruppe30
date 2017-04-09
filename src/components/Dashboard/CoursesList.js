@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
 import {disableCourse, courseExistsAtRoot} from '../../helpers/auth'
 import {CourseWarning} from '../various/CourseWarning'
-import './CoursesList.css'
+import {styles} from './CoursesListStyles.js'
 
 
 /*      Component for displaying a users courses   
@@ -89,8 +89,8 @@ export default class CoursesList extends Component {
 										</ListGroupItem>
 								}
 								else{*/}
-									return <ListGroupItem key={key} className="CoursesList"> 
-										<div>{key}</div>
+									return <ListGroupItem key={key} /*className="CoursesList"*/ style={styles.coursesList}> 
+										<div style={styles.listElement}>{key}</div>
 										<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
 										</ListGroupItem>
 								{/*}*/}

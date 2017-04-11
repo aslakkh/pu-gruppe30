@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddCourse renders FormGroup and button 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "flex-start",
+      "marginTop": "10px",
+    }
+  }
+>
+  <div
+    className="form-group has-feedback"
+  >
+    <input
+      className="form-control"
+      id="addCourseForm"
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      placeholder="Course name"
+      type="text"
+      value=""
+    />
+    <span
+      className="help-block"
+    >
+      Enter course code (up to three letters followed by four digits)
+    </span>
+  </div>
+  <button
+    className="btn btn-lg btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    type="submit"
+  >
+    Add
+  </button>
+</div>
+`;

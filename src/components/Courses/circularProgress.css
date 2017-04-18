@@ -1,0 +1,96 @@
+.CircularProgressbar {
+    /*
+     * This fixes an issue where the CircularProgressbar svg has
+     * 0 width inside a "display: flex" container, and thus not visible.
+     *
+     * If you're not using "display: flex", you can remove this style.
+     */
+    width: 60%;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: #3e98c7;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+    display:inline-block;
+
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+    stroke: #d6d6d6;
+
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    fill: #566573;
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+
+}
+
+.CircularProgressbar.start .CircularProgressbar-path {
+    stroke: #A93226;
+}
+
+.CircularProgressbar.oneEight .CircularProgressbar-path {
+    stroke: #EC7063;
+
+}
+
+.CircularProgressbar.oneFourth .CircularProgressbar-path {
+    stroke: #F4D03F;
+    vertical-align:middle;
+}
+
+.CircularProgressbar.half .CircularProgressbar-path {
+    stroke: #3e98c7;
+}
+
+
+.CircularProgressbar.threeQuarters .CircularProgressbar-path {
+    stroke: #17A589;
+
+}
+
+.CircularProgressbar.complete .CircularProgressbar-path {
+    stroke: #75CA88;
+
+}
+
+.view-label {
+    background: #EAEDED;
+    color: #506165;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: normal;
+
+}
+
+.circular-form {
+    display: inline-flex;
+    margin: 0 20px 10px 0;
+
+}
+
+.information-text{
+    margin: 45px 40px 0px -90px;
+}
+
+.view-box {
+    margin: 15px 0 10px;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    display: inline;
+    font: inherit;
+    margin: 0 0 5px 5px;
+    padding: 0;
+    outline: none;
+    outline-offset: 0;
+    /* Additional styles to look like a link */
+    color: #3e98D6;
+    cursor: pointer;
+}

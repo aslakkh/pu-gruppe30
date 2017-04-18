@@ -271,7 +271,7 @@ export default class CourseView extends React.Component {
                 </h3>
 
                 <h1 className = "daily">
-                    <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.dailyGoal, this.state.dailyTimeSpent)} label={this.state.dailyTimeSpent != null ? this.secondsToString(this.state.dailyTimeSpent)[0] : "00:00:00"} max={200}/>
+                    <ProgressBar now={this.setProgressBar("day")} bsStyle={this.setProgressColor(this.state.dailyGoal, this.state.dailyTimeSpent)} label={this.state.dailyGoal === 0 ? this.state.dailyTimeSpent != null ? this.secondsToString(this.state.dailyTimeSpent)[0] : "00:00:00": '00:00:00'} max={200}/>
                 </h1>
 
                 <Form inline>

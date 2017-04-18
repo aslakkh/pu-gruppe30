@@ -269,5 +269,14 @@ export function getSec(course) {
         s = data.val().weekly;
     });
     return s;
+}
 
+export function isGoalActive(course, view) {
+    const userUid = firebase.auth().currentUser.uid;
+    let out = 0;
+    let coursesRef = ref.child('users/'+userUid+'/courses/' + course + "/goals/" + view + "/active/");
+    coursesRef.on("value", function(snapshot){
+        out = snapshot.val();
+    });
+    return out;
 }

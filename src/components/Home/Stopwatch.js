@@ -1,6 +1,3 @@
-/**
- * Created by anderssalvesen on 23.02.2017.
- */
 import React, { Component } from 'react';
 import Progress from 'react-progressbar';
 import {ref } from '../../config/constants'

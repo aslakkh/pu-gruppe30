@@ -59,7 +59,7 @@
 }
 
 .view-label {
-    background: #f1f1f1;
+    background: #EAEDED;
     color: #506165;
     font-size: 22px;
     font-style: normal;
@@ -74,7 +74,7 @@
 }
 
 .information-text{
-    margin: 45px 40px 0px -90px;
+    margin: 45px 40px 0 -90px;
 }
 
 .view-box {

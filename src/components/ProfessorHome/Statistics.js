@@ -5,55 +5,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase';
 import {ref } from '../../config/constants'
 import {Button} from 'react-bootstrap'
-/*
- * Professors can see statistics over student in their classes
- componentWillMount(){
- let tid = 0;
- if (!(this.props.course.sessions === null) || !(this.props.course.sessions === undefined)) {
- let list = this.props.course.sessions;
- let today = 0;
- let last_week = 0;
- let last_month = 0;
 
-
- //last month:
- let date = new Date();
- let firstInMonth = new Date(date.getFullYear(), date.getMonth(), 1);
- firstInMonth.setHours(0,0,0,0);
-
- //today
- let this_day = new Date();
- this_day.setHours(0,0,0,0);
-
- //last week (monday)
- let monday = new Date();
- monday.setDate(monday.getDate() - monday.getDay() + 1);
- monday.setHours(0,0,0,0);
-
- {Object.keys(list).map((key) => {
- tid = tid + list[key].time;
- if (key > this_day.valueOf()) {
- today = today + list[key].time;
- }
- if (key > monday.valueOf()) {
- last_week = last_week + list[key].time;
- }
- if (key > firstInMonth.valueOf()) {
- last_month = last_month + list[key].time;
- }
- })}
-
- this.setState ({
- course: this.props.course,
- time : tid,
- daily: today,
- weekly: last_week,
- monthly: last_month
- });
- }
-
- }
- */
 Date.prototype.getWeek = function() {
 
     // Create a copy of this date object
@@ -86,7 +38,7 @@ const options = {
     // In this case, we are setting the border of each bar to be 2px wide and green
     elements: {
         rectangle: {
-            borderWidth: 2,
+            borderWidth: 5,
             borderColor: 'rgb(0, 255, 0)',
             borderSkipped: 'bottom'
         }
@@ -109,10 +61,12 @@ const {Bar} = require("react-chartjs")
 export default class Statistics extends Component {
     constructor(props) {
         super(props);
-        this.list2=[]
-        this.show=false
+        this.list2=[];
+        this.labels=[];
+        this.show=false;
         this.state = {
             show: false,
+            done:false,
             courseID: this.props.courseID,
             daily:0,
             weekly:0,
@@ -122,7 +76,7 @@ export default class Statistics extends Component {
                 datasets: [
                     {
                         label: 'Time',
-                        backgroundColor: "rgba(0,0,220,0.5)",
+                        backgroundColor: "rgba(0,220,0,0.5)",
                         data: []
                     }
                     ]
@@ -141,12 +95,16 @@ export default class Statistics extends Component {
 
     }
 
-
+    componentWillUnmount(){
+        this.setState({
+            show:false
+        })
+    }
     getDataFromFirebase(){
-        console.log(this.state.courseID)
+        console.log(this.state.courseID);
         let that = this;
-        let kurs = this.state.courseID
-        let ting = []
+        let kurs = this.state.courseID;
+        let ting = [];
         let messageRef = firebase.database().ref();
         messageRef.child('users/').on('child_added', function(snapshot) {
             if(snapshot.val().courses[kurs] != undefined && snapshot.val().courses[kurs]['sessions']) {
@@ -161,96 +119,33 @@ export default class Statistics extends Component {
         }});
 
     }
+    sortNumber(a,b) {
+        return a - b;
+    }
 
     handleClick2(){
-        if(this.sessions.length >0){
+        if(this.sessions.length >0 &&!this.state.done){
             var list = this.sessions;
-            console.log(list);
-            let monday = new Date();
-            monday.setDate(monday.getDate()-monday.getDay()+1);
-            let tuesday = new Date();
-            tuesday.setDate(monday.getDate()-7);
-/*            Object.keys(list).map((key) => {
-                let day = new Date(list[key]["key"])
-                console.log("uke "+tuesday.getWeek())
-
-                if(day> tuesday ){
-                    if(this.state.data.labels[0] !== tuesday.getWeek()){
-
-                        this.state.data.labels.unshift(tuesday.getWeek());
-                        this.list2.unshift(0);
-                        console.log("New week")
-                    }
-                    console.log("Time added")
-                    this.list2[0] =this.list2[0]+list[key]["time"];
-                    delete list[key];
-                }else{
-                    tuesday.setDate(tuesday.getDate()- 7);
-                }
-            });*/
-
             Object.keys(list).map((key) => {
                let day = new Date(list[key]["key"]);
-               console.log(day.getWeek())
+                if(isNaN(this.list2[day.getWeek()])){
+                   this.list2[day.getWeek()]=0;
+                }
+                this.labels.indexOf(day.getWeek()) === -1 ? this.labels.push(day.getWeek()) : console.log("This item already exists");
                 this.list2[day.getWeek()]=this.list2[day.getWeek()]+list[key]["time"]
-                console.log(this.list2)
             });
+            this.list2 = this.list2.map((x) => x/3600);
+            this.list2 = this.list2.filter(function(n){ return n != undefined });
+
+            this.state.data.labels=this.labels.sort(this.sortNumber);
             this.state.data.datasets[0].data=this.list2;//.slice(this.list2.length-11,this.list2.length-1)
             //this.state.data.labels=this.state.data.labels;//.slice(this.state.data.labels.length-11,this.state.data.labels.length-1)
-            console.log(list);
-            console.log("labels");
-            console.log(this.state.data.labels);
-            console.log("dataset");
-            console.log(this.state.data.datasets);
         this.setState({
-            show:true
+            show:true,
+            done:true
         })}
     }
-    handleClick(){
-        this.setState({
-            show:true
-        });
-        if((this.sessions.length > 0 )){
-            let list = this.sessions;
-            console.log(list)
-            let today = 0;
-            let last_week = 0;
-            let last_month = 0;
-            let tid =0;
-            //last month:
-            let date = new Date();
-            let firstInMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-            firstInMonth.setHours(0,0,0,0);
 
-            //today
-            let this_day = new Date();
-            this_day.setHours(0,0,0,0);
-
-            //last week (monday)
-            let monday = new Date();
-            monday.setDate(monday.getDate() - monday.getDay() + 1);
-            monday.setHours(0,0,0,0);
-
-            {Object.keys(list).map((key) => {
-                tid = tid + list[key].time;
-                if (list[key].key > this_day.valueOf()) {
-                    today = today + list[key].time;
-                }
-                if (list[key].key > monday.valueOf()) {
-                    last_week = last_week + list[key].time;
-                }
-                if (list[key].key > firstInMonth.valueOf()) {
-                    last_month = last_month + list[key].time;
-                }
-            })}
-            console.log(today,last_month,last_week)
-            this.setState ({
-                daily: today,
-                weekly: last_week,
-                monthly: last_month
-            });
-        }
-    }
 
     render() {
         if(!this.sessions.length > 0 ){

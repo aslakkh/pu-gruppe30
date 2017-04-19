@@ -224,14 +224,14 @@ export default class CircularProgress extends Component {
             goal = secondsToString(goalValue);
             percent = Math.floor((timeSpent / goalValue) * 100);
             if (timeSpent != 0) {
-                percent <= 100 ? remaining = "Remaining: " + secondsToString(goalValue - timeSpent + 60): remaining = "Completed";
+                percent < 100 ? remaining = "Remaining: " + secondsToString(goalValue - timeSpent + 60): remaining = "Completed";
                 if (percent > 100) percent = 100;
             }
         } else if (goalValue === 0) {
             goal = "Not Set";
             percent = 0;
         }
-
+        console.log("P: " + percent)
         return [percent, goal, remaining, spent];
 
     }

@@ -277,3 +277,11 @@ export function isGoalActive(course, view) {
     });
     return out;
 }
+
+
+export function removeOldGoal(course, type, key) {
+    const userUid = firebase.auth().currentUser.uid;
+    let oldGoalRef = ref.child('users/'+userUid+'/courses/'+course + '/oldGoals/' + type + "/");
+    console.log(oldGoalRef);
+    oldGoalRef.child(key).remove();
+}

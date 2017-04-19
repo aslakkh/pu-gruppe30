@@ -112,7 +112,7 @@ export default class Results extends Component {
 
             }
         })}
-        return rows;
+        return rows.reverse();
     }
 
     onAfterDeleteRow(rowKeys) {

@@ -3,7 +3,16 @@ import { saveCourse } from '../../helpers/auth'
 import {FormGroup, FormControl, Button, HelpBlock, ListGroup, ListGroupItem} from 'react-bootstrap'
 import firebase from 'firebase'
 import AddCourseModal from './AddCourseModal.js'
-import './AddCourse.css'
+
+const styles = {
+    AddCourse: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        marginTop: '10px',
+    }
+}
 
 /*      Component for adding course
 
@@ -23,14 +32,6 @@ TODO
 
 export default class AddCourse extends Component{
     constructor(props){
-
-        var style = {
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            marginTop: '10px',
-        }
 
         super(props);
         this.handleAdd = this.handleAdd.bind(this);
@@ -81,8 +82,8 @@ export default class AddCourse extends Component{
     }
 
     //function for handling click on add-button. Only saves course to database if input is valid.
-    handleAdd = (e) => {
-		e.preventDefault(); //prevents default browser behaviour on click, whatever that means
+    handleAdd(e){
+        e.preventDefault(); //prevents default browser behaviour on click, whatever that means
 
         if(this.getValidationState() === 'success'){
             saveCourse(this.state.value); //saveCourse(course) adds course to currently logged in user in Firebase
@@ -92,7 +93,7 @@ export default class AddCourse extends Component{
             console.log("Error: Tried submitting invalid value: " + this.state.value);
         }
 		//getCourse();
-	}
+    }
 
     handleAddToMyCourses(course,e){
         e.preventDefault();
@@ -109,16 +110,13 @@ export default class AddCourse extends Component{
 
     //Renders a form and a button for submission
     render(){
-        return(
-            <div>
-                    
-                <div style={this.style}>
+        return(   
+                <div style={styles.AddCourse}>
                             <FormGroup controlId="addCourseForm" validationState={this.getValidationState()} >
                                 <FormControl 
                                 id="addCourseForm" 
                                 componentClass='input'
                                 value={this.state.value}
-                                className="InputForm" 
                                 type="text" 
                                 placeholder="Course name"
                                 onChange={this.handleChange}
@@ -131,7 +129,6 @@ export default class AddCourse extends Component{
                     <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.handleAdd}>Add</Button>
                 </div>
                 
-            </div>
         )
     } 
 

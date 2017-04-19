@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard renders student dashboard 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <h4>
+    My courses
+  </h4>
+  <h5>
+    You have no active courses. Add a course below.
+  </h5>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    <b>
+      Add new course
+    </b>
+  </button>
+</div>
+`;
+
+exports[`Dashboard renders student dashboard 2`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <h4>
+    My courses
+  </h4>
+  <ul
+    className="list-group"
+  >
+    <li
+      className="list-group-item"
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "row",
+          }
+        }
+      >
+        IT5555
+      </div>
+      <button
+        className="btn btn-danger"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Delete
+      </button>
+    </li>
+  </ul>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    <b>
+      Add new course
+    </b>
+  </button>
+</div>
+`;

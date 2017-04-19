@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button, Modal, FormGroup, FormControl} from 'react-bootstrap'
-import './ManageCourses.css'
 import {removeCourseFromRoot, addCourseToRoot, courseExistsAtRoot, saveCourse} from '../../helpers/auth.js'
 import firebase from 'firebase'
 import FeedbackMessage from '../FeedbackMessage'
-
+import {styles} from './ManageCoursesStyles.js'
 
 /* 
     ManageCourses displays all courses in database
@@ -69,7 +68,7 @@ export default class ManageCourses extends Component{
     }
 
     //handles add to firebase/courses
-    handleAddCourse = (e) => {
+    handleAddCourse(e){
         e.preventDefault();
         if(this.getValidationState() === 'success'){
             //save to courses
@@ -179,23 +178,24 @@ export default class ManageCourses extends Component{
                 <h4>No courses in database</h4>
             )
         }
-        return(
+        else{
+            return(
             <div>
                 <h5>Here you can add and remove courses from the database. </h5>
                 <h5>You can also add a course to the list of courses you manage.
                 </h5>
                 <ListGroup>
                     {(this.state.courses).map((key) => {
-                        return <ListGroupItem key={key} className="List">
-                            <div className="CourseName">{key}</div>
-                        <Button className="Button" bsStyle="success" onClick={(e) => this.handleAddToMyCourses(key, e)}>Add to My Courses</Button>
-                        <Button className="Button" bsStyle="danger" onClick={() => this.open(key)}>Delete</Button>
+                        return <ListGroupItem key={key} style={styles.List}>
+                            <div style={styles.CourseName}>{key}</div>
+                        <Button style={styles.Button} bsStyle="success" onClick={(e) => this.handleAddToMyCourses(key, e)}>Add to My Courses</Button>
+                        <Button style={styles.Button} bsStyle="danger" onClick={() => this.open(key)}>Delete</Button>
                         </ListGroupItem>
                     })}
                     
                 </ListGroup>
                 
-                <div className="FormWrapper">
+                <div style={styles.FormWrapper}>
                     <FormGroup validationState={this.getValidationState()}>
                         <FormControl
                         id='searchBar'
@@ -208,13 +208,13 @@ export default class ManageCourses extends Component{
                         />
                         <FormControl.Feedback/>
                     </FormGroup>
-                    <Button type="submit" bsStyle="primary" onClick={this.handleAddCourse} className="Button">Add Course </Button>
+                    <Button type="submit" bsStyle="primary" onClick={this.handleAddCourse} style={styles.Button}>Add Course </Button>
                 </div>
                 <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} positive={this.state.feedbackMessagePositive}/>
                 
                 <Modal show={this.state.showModal} onHide={this.close}>
-                    <Modal.Header closeButton className="ModalHeader">
-                        <Modal.Title className="ModalTitle">Warning</Modal.Title>
+                    <Modal.Header closeButton style={styles.ModalHeader}>
+                        <Modal.Title style={styles.ModalTitle}>Warning</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h4>{this.state.modalWarning}
@@ -222,11 +222,13 @@ export default class ManageCourses extends Component{
                         <p>
                             Are you sure you want to delete this course?
                         </p>
-                        <Button className="Button" bsStyle="success" onClick={() => this.handleDelete(this.state.activeCourse)}>Yes</Button>
-                        <Button className="Button" bsStyle="danger" onClick={this.close}>No</Button>
+                        <Button style={styles.Button} bsStyle="success" onClick={() => this.handleDelete(this.state.activeCourse)}>Yes</Button>
+                        <Button style={styles.Button} bsStyle="danger" onClick={this.close}>No</Button>
                     </Modal.Body>
                 </Modal>
             </div>
         );
+        }
+        
     }
 }

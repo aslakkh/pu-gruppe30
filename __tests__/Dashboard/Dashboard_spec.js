@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Dashboard from '../src/components/Dashboard/Dashboard.js';
+import Dashboard from '../../src/components/Dashboard/Dashboard.js';
 
 const courses = {
     IT5555: {

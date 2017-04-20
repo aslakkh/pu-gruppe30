@@ -25,40 +25,30 @@ export default class CoursesList extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			
+			showModal: this.props.showModal,
 			courses: this.props.courses
 		}
 	}
 
-	componentDidMount(){
-		//should be implemented in auth.js
-		/*var self = this;
-		var userUid = getUserUid(); //gets userid of user currently logged in
-
-        //following code gets users courses from firebase and updates the components state
-        //Should maybe be implemented in a function in auth.js
-		self.firebaseRef = firebase.database().ref().child("users/"+userUid+"/courses");
-		self.firebaseRef.orderByChild("active").equalTo(true).on('value', snap => {
-			console.log(snap.val());
-			self.setState({
-				
-				courses: snap.val() //sets courses to whatever is at users/userUid/courses in database
-			});
-		});*/
-		
-	}
 
 	componentWillReceiveProps(nextProps){
 		this.setState({
-			courses: nextProps.courses
-		});
-
+				courses: nextProps.courses,
+				showModal: nextProps.showModal,
+			});
+		
 }
 
-	componentWillUnmount(){
-
-		//this.firebaseRef.off('value');
+	shouldComponentUpdate(){
+		console.log(this.state.showModal);
+		if(!this.state.showModal){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
+
 
 	//handles click
 	handleClick(key){
@@ -69,7 +59,7 @@ export default class CoursesList extends Component {
 
     //Component renders a header, followed by the keys of json object retrieved from firebase mapped to list
 	render(){
-		
+		console.log(this.state.showModal);
 		if(this.state.courses === undefined || this.state.courses === null){
 			return(
 				<h5>You have no active courses. Add a course below.</h5>
@@ -79,19 +69,12 @@ export default class CoursesList extends Component {
 			return(
 				<ListGroup>
 						{Object.keys(this.state.courses).map((key) => {
-							{/*if(!courseExistsAtRoot(key)){
-								return <ListGroupItem key={key} className="CoursesList"> 
-									<div className="ListElementHere"><CourseWarning /> {key} </div>
-									<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
-										
-									</ListGroupItem>
-							}
-							else{*/}
-								return <ListGroupItem key={key} /*className="CoursesList"*/ style={styles.coursesList}> 
+							return (
+								<ListGroupItem key={key} style={styles.coursesList}> 
 									<div style={styles.listElement}>{key}</div>
 									<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
-									</ListGroupItem>
-							{/*}*/}
+								</ListGroupItem>
+							);
 								
 						})} 
 				</ListGroup>

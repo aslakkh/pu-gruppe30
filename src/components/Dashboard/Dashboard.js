@@ -33,11 +33,12 @@ export default class Dashboard extends Component {
         })
     }
 
+
   render () {
     return (
     	<div style={styles.dashboard}>
         <h4>My courses</h4>
-        <CoursesList courses={this.props.courses}/>
+        <CoursesList showModal={this.state.showModal} courses={this.props.courses}/>
         <Button onClick={this.handleModal} bsStyle="primary"><b>Add new course</b></Button>
         <AddCourseModal showModal={this.state.showModal} closeModal={this.closeModal.bind(this)}/>
       </div>

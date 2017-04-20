@@ -49,18 +49,12 @@ export default class AddCourseModal extends Component{
     //required to use Modal. uses function closeModal received through props
     close(){
         this.props.closeModal();
-        //this.setState({ showModal: false });
     }
 
     handleAddToMyCourses(course,e){
         e.preventDefault();
         //add to users courses in firebase
         saveCourse(course);
-        /*this.setState({
-                    displayFeedbackMessage: true,
-                    feedbackMessage: course + " has been added to your courses!",
-                    feedbackMessagePositive: true,
-        });*/
     }
 
     handleChange(e){

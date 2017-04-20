@@ -3,7 +3,6 @@
  */
 import React, { Component } from 'react'
 import firebase from 'firebase';
-import {ref } from '../../config/constants'
 import {Button} from 'react-bootstrap'
 
 Date.prototype.getWeek = function() {

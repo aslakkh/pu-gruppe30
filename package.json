@@ -16,8 +16,10 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "chart.js": "^1.1.1",
+    "enzyme": "^2.8.2",
     "firebase": "^3.7.0",
     "immutability-helper": "^2.1.1",
+    "jest-enzyme": "^3.0.1",
     "react": "^15.4.0",
     "react-bootstrap": "^0.30.7",
     "react-bootstrap-date-picker": "^4.0.0",
@@ -35,6 +37,7 @@
     "eject": "react-scripts eject"
   },
   "jest": {
+    "collectCoverage":true,
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"

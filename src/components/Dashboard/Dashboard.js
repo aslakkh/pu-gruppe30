@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import CoursesList from './CoursesList'
-import AddCourse from './AddCourse'
 import AddCourseModal from './AddCourseModal'
 import {Button} from 'react-bootstrap'
 

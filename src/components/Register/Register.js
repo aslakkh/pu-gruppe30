@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { auth, privilige } from '../../helpers/auth'
-
+const red ={
+  color: 'red'
+}
 export default class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if(this.pw.value === this.pwcon.value){
-        (auth(this.email.value, this.pw.value)).then( (user)=>  privilige(user, this.state.authUser)).catch( error => console.log("errorgreier" + error.message))
+        (auth(this.email.value, this.pw.value)).then( (user)=>  privilige(user, this.state.authUser)).catch( error => this.setState({error: error.message}))
     }
   
   else{
@@ -40,6 +42,7 @@ export default class Register extends Component {
             <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
           </div>
           <div className="form-group">
+            <label>Confirm password</label>
             <input type="password" className="form-control" placeholder="Confirm Password" ref={(pwcon) => this.pwcon = pwcon}/>
           </div>
             <div className="form-group">
@@ -64,7 +67,7 @@ export default class Register extends Component {
           <button type="submit" className="btn btn-primary">Register</button>
 
         </form>
-          <label>{this.state.error}</label>
+          <label style={red}>{this.state.error}</label>
       </div>
     )
   }

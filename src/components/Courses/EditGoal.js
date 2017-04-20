@@ -45,7 +45,7 @@ export default class EditGoal extends Component {
         });
     }
 
-    handleUseBtn = (e) => {
+    handleUseBtn(e){
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
         if (this.state.view == 'Weekly Goal') {
             let time = getDaysHoursMins(this.state.teacherRecommendation);
@@ -60,7 +60,7 @@ export default class EditGoal extends Component {
         }
     };
 
-    handleSaveBtn = (e) => {
+    handleSaveBtn(e){
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
         let seconds = 0;
         if (this.state.view === 'Monthly Goal' || this.state.view === 'Weekly Goal') {

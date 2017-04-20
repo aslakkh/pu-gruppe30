@@ -2,12 +2,12 @@
  * Created by anderssalvesen on 23.02.2017.
  */
 import React, { Component } from 'react';
-import Progress from 'react-progressbar';
 import {ref } from '../../config/constants'
 import firebase from 'firebase';
-import {Button, ProgressBar, ListGroup, Grid,Col,Row} from 'react-bootstrap'
+import {Button, Grid,Col,Row} from 'react-bootstrap'
 import PlannedSession from './PlannedSession'
 import AddSession from './AddSession'
+import {styles} from './StopwatchStyles.js'
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2));
@@ -21,7 +21,9 @@ class Stopwatch extends Component {
             secondsElapsed: 0,
             lastClearedIncrementer: null,
             goal: 400,
-            desc: ""
+            desc: "",
+            focus:false,
+            key: null
         };
         this.incrementer = null;
         this.started = false
@@ -35,14 +37,19 @@ class Stopwatch extends Component {
     timeRef.set({time:this.state.secondsElapsed,desc: this.state.desc.value});
     this.setState({
         secondsElapsed: 0
-    })
+    });
+        if(this.state.key !== null){
+        const planRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/planned-sessions/'+ this.state.key);
+        planRef.remove();
+        }
 }
     handleStartClick() {
         if(!this.started){ //Makes sure the button isnt clicked twice
             this.started = true;
             this.incrementer = setInterval( () =>
                 this.setState({
-                    secondsElapsed: this.state.secondsElapsed + 1
+                    secondsElapsed: this.state.secondsElapsed + 1,
+                    focus:true
                 })
             , 1000);}
     }
@@ -75,9 +82,12 @@ class Stopwatch extends Component {
         this.castToFirebase();
         clearInterval(this.incrementer);
     }
-    onChildChanged(newState){
-        console.log(newState)
-        this.setState({theme:newState})
+    onChildChanged(newState,newState2){
+        console.log(newState,newState2)
+        this.setState({
+            theme:newState,
+            key: newState2
+        })
 
     }
 
@@ -86,22 +96,22 @@ class Stopwatch extends Component {
             <Grid fluid={true}>
                 <Row>
                     <Col md={7}>
-            <div className="stopwatch" >
-                <h4>Planned Session: {this.state.theme}</h4>
-                <h1 className="app-timer">{formattedSeconds(this.state.secondsElapsed)}</h1>
+            <div style={styles.margin}>
+                {this.state.theme === undefined ? null : <h4>Planned Session: {this.state.theme}</h4>}
+                <div style={styles.timer}>{formattedSeconds(this.state.secondsElapsed)}</div>
 
                 {(this.state.secondsElapsed === 0 ||
                     this.incrementer === this.state.lastClearedIncrementer
-                        ? <Button block className="btn btn-lg" onClick={this.handleStartClick.bind(this)}>start</Button>
-                        : <Button block className="btn btn-lg" onClick={this.handleStopClick.bind(this)}>stop</Button>
+                        ? <Button block style={styles.center} className="btn btn-lg" bsStyle="primary" onClick={this.handleStartClick.bind(this)}>Start</Button>
+                        : <Button block style={styles.center} className="btn btn-lg" bsStyle="primary" onClick={this.handleStopClick.bind(this)}>Stop</Button>
                 )}
 
                 {(this.state.secondsElapsed !== 0 &&
                     this.incrementer === this.state.lastClearedIncrementer
-                        ? <div>  <form><label>What did you do?{this.state.desc}</label>
-                            <input className="form-control" ref={(desc) => this.state.desc = desc} placeholder="Description"/>
+                        ? <div style={styles.margin}>  <form><label >What did you do?{this.state.desc}</label>
+                            <input autoFocus={this.state.focus} className="form-control" ref={(desc) => this.state.desc = desc} placeholder="Description"/>
                                 </form>
-                            <Button block className="btn btn-lg" onClick={this.handleResetClick.bind(this)}>save</Button></div>
+                            <Button style={styles.margin}  block className="btn btn-lg" bsStyle="primary" onClick={this.handleResetClick.bind(this)}>save</Button></div>
                         : null
                 )}
 
@@ -114,7 +124,7 @@ class Stopwatch extends Component {
             <Col md={4}>
 
                 <div>
-                    <PlannedSession emne={this.props.emne} callbackParent={(newState) => this.onChildChanged(newState) }/>
+                    <PlannedSession emne={this.props.emne} callbackParent={(newState,newState2) => this.onChildChanged(newState, newState2) }/>
                 </div>
 </Col>
                 </Row>

@@ -6,7 +6,6 @@ import firebase from 'firebase';
 export function auth (email, pw) {
     return firebaseAuth().createUserWithEmailAndPassword(email, pw)
         .then(saveUser)
-        .catch((error) => console.log('Oops', error))
 }
 
 export function privilige(user, auth0) {
@@ -276,4 +275,13 @@ export function isGoalActive(course, view) {
         out = snapshot.val();
     });
     return out;
+}
+
+export function addSession(date,courseID,minSelected, hourSelected){
+    const userUid = firebase.auth().currentUser.uid;
+    const variabel = new Date(date)
+    variabel.setMilliseconds(Math.random()*1000)
+    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime());
+    timeRef.set({time:(minSelected * 60) + (hourSelected * 3600),desc: "secondsPlanned"});
+    return true;
 }

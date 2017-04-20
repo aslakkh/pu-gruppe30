@@ -6,7 +6,6 @@ import Register from './Register/Register'
 import Home from './Home/Home'
 import Dashboard from './Dashboard/Dashboard'
 import ProfessorDashboard from './Dashboard/ProfessorDashboard'
-import Courses from './Courses/Courses'
 import SessionPlanner from './SessionPlanner/SessionPlanner'
 import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
@@ -112,6 +111,9 @@ export default class App extends Component {
     this.removeListener()
   }
 
+  //                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
+//                    <NavItem><Link to="/Courses" className="navbar-link">Courses</Link></NavItem>
+    //<Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Home/>}/>
   homeDecide(){
       if(this.state.admin === true){
           return (<ProfessorHome courses={this.state.courses}/>)
@@ -147,7 +149,6 @@ export default class App extends Component {
                   <Navbar.Collapse>
                     <Nav pullRight>
                     <NavItem><Link to="/" className="navbar-link">Home</Link></NavItem>
-                    <NavItem><Link to="/Courses" className="navbar-link">Courses</Link></NavItem>
                     <NavItem><Link to="/dashboard" className="navbar-link">Dashboard</Link></NavItem>
                     {this.state.authed //Velger om man skal vise logout eller login og register
                       ? <NavItem><button
@@ -168,11 +169,10 @@ export default class App extends Component {
             <div className="container">
               <div className="row">
                 <Switch>
-                  <Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Home/>}/>
+                    <Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Login/>}/>
                   <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                   <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                   <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={() => this.dashboardDecide()}/>
-                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
                   <MatchWhenAuthed authed={this.state.authed} path='/SessionPlanner' component={SessionPlanner} courses={this.state.courses}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>

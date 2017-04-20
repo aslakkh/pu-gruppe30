@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { saveCourse } from '../../helpers/auth'
-import {FormGroup, FormControl, Button, HelpBlock, ListGroup, ListGroupItem} from 'react-bootstrap'
-import firebase from 'firebase'
-import AddCourseModal from './AddCourseModal.js'
+import {FormGroup, FormControl, Button, HelpBlock} from 'react-bootstrap'
+
 
 const styles = {
     AddCourse: {

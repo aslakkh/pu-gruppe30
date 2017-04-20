@@ -3,7 +3,6 @@ import {Tabs, Tab} from 'react-bootstrap'
 import ManageCourses from './ManageCourses'
 import CoursesList from './CoursesList'
 
-import firebase from 'firebase';
 
 export default class ProfessorDashboard extends Component {
 /*

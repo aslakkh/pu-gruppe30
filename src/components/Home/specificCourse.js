@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Stopwatch from './Stopwatch'
 import TabView from './TabView'
 
 export default class SpecificCourse extends Component {

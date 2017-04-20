@@ -6,7 +6,6 @@ import Register from '../Register/Register'
 import Home from '../Home/Home'
 import Dashboard from '../Dashboard/Dashboard'
 import { logout } from '../../helpers/auth'
-import { firebaseAuth } from '../../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 
 const navbarInstance = (

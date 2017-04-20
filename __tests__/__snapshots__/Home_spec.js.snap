@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Not logged in 1`] = `
+<div>
+  Home. Not Protected. Anyone can see this.
+</div>
+`;
+
+exports[`Home log in, no courses 1`] = `
+<h4>
+  No courses
+</h4>
+`;
+
+exports[`Home log in, with courses 1`] = `null`;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import {ProgressBar} from 'react-bootstrap'
-import Courses from './Courses'
+import Sidebar from './Sidebar'
 export default class Home extends Component {
   constructor(props){
     super(props);
@@ -26,7 +25,7 @@ export default class Home extends Component {
       if(this.state.authed && (this.state.admin != undefined || this.state.admin != null)){
           if(this.state.courses != undefined && this.state.courses != null){
             return(
-              <Courses courses={this.state.courses}/>
+              <Sidebar courses={this.state.courses}/>
           );
         }
         else{

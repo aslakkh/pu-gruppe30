@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase';
 import {ref } from '../../config/constants'
-import {Form, FieldGroup, FormControl} from 'react-bootstrap'
+import {FieldGroup, FormControl} from 'react-bootstrap'
 
 
 /*

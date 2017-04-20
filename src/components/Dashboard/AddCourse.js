@@ -11,7 +11,7 @@ const styles = {
         alignItems: 'flex-start',
         marginTop: '10px',
     }
-}
+};
 
 /*      Component for adding course
 
@@ -71,7 +71,7 @@ export default class AddCourse extends Component{
     //function for validating input. For now returns error if form has input of length greater than 0 but less than 5, and success for anything of length > 4
     getValidationState(){
         var length = this.state.value.length;
-        var re = /^[A-Z]{2,3}[0-9]{4}$/
+        var re = /^[A-Z]{2,3}[0-9]{4}$/;
 
         if(re.test(this.state.value)){
             return 'success';

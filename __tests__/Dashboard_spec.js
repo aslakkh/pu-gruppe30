@@ -10,7 +10,7 @@ const courses = {
         oldGoals: {},
         time: 0,
     },
-}
+};
 
 test('Dashboard renders student dashboard', () => {
     const component = renderer.create(
@@ -22,4 +22,4 @@ test('Dashboard renders student dashboard', () => {
         <Dashboard courses={courses} />
     ).toJSON();
     expect(component2).toMatchSnapshot();
-})
+});

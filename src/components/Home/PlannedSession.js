@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { ListGroup, ListGroupItem} from 'react-bootstrap'
 import firebase from 'firebase'
 import {styles} from './StopwatchStyles.js'
+import { plannedSession} from '../../helpers/auth'
 
 
 function Test(props){
@@ -25,7 +26,7 @@ export default class PlannedSession extends Component{
 
 
     constructor(props){
-        super(props)
+        super(props);
         this.state={
             desc: "hei",
             emne: this.props.emne,
@@ -34,7 +35,8 @@ export default class PlannedSession extends Component{
 
     }
 componentWillMount(){
-    let that = this
+
+    let that = this;
     const userUid = firebase.auth().currentUser.uid;
     firebase.database().ref().child('users/'+userUid+'/courses/'+that.state.emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
         that.setState({
@@ -44,7 +46,7 @@ componentWillMount(){
 }
 
     handleClick(key){
-    console.log(key)
+    console.log(key);
     this.props.callbackParent(this.state.sessions[key].goal, key);
         this.setState({activeTabClassName:key})
     }

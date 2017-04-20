@@ -21,6 +21,7 @@ export default class AddSession extends Component{
         this.validateState = this.validateState.bind(this);
         this.setHours = this.setHours.bind(this);
         this.setMinutes = this.setMinutes.bind(this);
+        console.log( new Date().getTime())
         this.state = {
             courseID: this.props.courseID,
             date: new Date(new Date().getTime() + (24*60*60*1000)).toISOString(),
@@ -79,7 +80,7 @@ export default class AddSession extends Component{
         //saveGoal(this.state.courseID, seconds);
         this.setState({
             show:false
-        })
+        });
         addSession(this.state.date,this.state.courseID,this.state.minSelected,this.state.hourSelected);
         this.setState({secondsplanned:0});
         //this.castToFirebase();
@@ -89,8 +90,8 @@ export default class AddSession extends Component{
 
     castToFirebase(){
         const userUid = firebase.auth().currentUser.uid;
-        const variabel = new Date(this.state.date)
-        variabel.setMilliseconds(Math.random()*1000)
+        const variabel = new Date(this.state.date);
+        variabel.setMilliseconds(Math.random()*1000);
         const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime());
         timeRef.set({time:(this.state.minSelected * 60) + (this.state.hourSelected * 3600),desc: "secondsPlanned"});
         this.setState({

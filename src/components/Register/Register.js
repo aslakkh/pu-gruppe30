@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { auth, privilige } from '../../helpers/auth'
 const red ={
   color: 'red'
-}
+};
 export default class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export default class Register extends Component {
     this.state={
         error:"",
       authUser:10
-    }
+    };
     this.handleOptionChange= this.handleOptionChange.bind(this)
   }
 

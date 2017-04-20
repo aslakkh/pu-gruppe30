@@ -9,7 +9,7 @@ import ProfessorDashboard from './Dashboard/ProfessorDashboard'
 import SessionPlanner from './SessionPlanner/SessionPlanner'
 import { logout,} from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
-import {Navbar,NavItem, Nav, Image} from 'react-bootstrap'
+import {Navbar,NavItem, Nav} from 'react-bootstrap'
 import firebase from 'firebase';
 import ProfessorHome from './ProfessorHome/ProfessorHome'
 import './index.css'
@@ -63,7 +63,7 @@ export default class App extends Component {
       if (user) {
         this.useruid = user.uid;
           let that = this;
-        console.log(user)
+        console.log(user);
           firebase.database().ref().child('users/'+ this.useruid+'/info/privilege').once('value').then(function(snapshot){
               if(snapshot.val() === "99"){
                   that.setState({
@@ -85,7 +85,7 @@ export default class App extends Component {
         courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
           that.setState({
             courses: snap.val()
-          })
+          });
           firebase.database().ref().child('courses').on('value', snap => {
             console.log(snap.val())
 
@@ -142,7 +142,7 @@ export default class App extends Component {
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                   <Navbar.Brand>
-                  <Link to="/" className="navbar-brand"><img src="https://firebasestorage.googleapis.com/v0/b/pu-gruppe30.appspot.com/o/logo2.png?alt=media&token=79e5f90c-1bd3-417b-b5a7-af3289315987"/></Link>
+                  <Link to="/" className="navbar-brand"><img alt="Logo" src="https://firebasestorage.googleapis.com/v0/b/pu-gruppe30.appspot.com/o/logo2.png?alt=media&token=79e5f90c-1bd3-417b-b5a7-af3289315987"/></Link>
                   </Navbar.Brand>
                   <Navbar.Toggle />
                   </Navbar.Header>
@@ -154,8 +154,8 @@ export default class App extends Component {
                       ? <NavItem><button
                           style={{border: 'none', background: 'transparent'}}
                           onClick={() => {
-                            logout()
-                            this.setState({authed: false})
+                            logout();
+                            this.setState({authed: false});
                             Router.transitionTo('/')
                           }}
                           className="navbar-link"><span className="glyphicon glyphicon-log-out"></span> Logout</button></NavItem>

@@ -50,13 +50,13 @@ const options = {
         display: true,
         text: 'Chart.js Bar Chart'
     }
-}
+};
 
 
 
 let BarChart = require("react-chartjs").Bar;
 
-const {Bar} = require("react-chartjs")
+const {Bar} = require("react-chartjs");
 export default class Statistics extends Component {
     constructor(props) {
         super(props);
@@ -107,7 +107,7 @@ export default class Statistics extends Component {
         let messageRef = firebase.database().ref();
         messageRef.child('users/').on('child_added', function(snapshot) {
             if(snapshot.val().courses[kurs] != undefined && snapshot.val().courses[kurs]['sessions']) {
-                ting.push(snapshot.val().courses[kurs]['sessions'])
+                ting.push(snapshot.val().courses[kurs]['sessions']);
                 ting.forEach(function (session) {
                     Object.keys(session).map((session2) => {that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
 

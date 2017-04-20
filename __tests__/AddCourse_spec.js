@@ -7,4 +7,4 @@ test('AddCourse renders FormGroup and button', () => {
         <AddCourse />
     ).toJSON();
     expect(component).toMatchSnapshot();
-})
+});

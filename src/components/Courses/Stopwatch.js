@@ -9,7 +9,7 @@ import {ProgressBar} from 'react-bootstrap'
 
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
-Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2))
+Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2));
 
 
 class Stopwatch extends Component {
@@ -27,10 +27,10 @@ class Stopwatch extends Component {
     }
 
     castToFirebase(){
-        const tid = this.state.time
+        const tid = this.state.time;
         const userUid = firebase.auth().currentUser.uid;
-        const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now())
-        timeRef.update({time:this.state.secondsElapsed+this.state.time})
+        const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now());
+        timeRef.update({time:this.state.secondsElapsed+this.state.time});
         this.setState({
             secondsElapsed: 0,
             time: tid+this.state.secondsElapsed
@@ -38,7 +38,7 @@ class Stopwatch extends Component {
     }
     handleStartClick() {
         if(!this.started){ //Makes sure the button isnt clicked twice
-            this.started = true
+            this.started = true;
             this.incrementer = setInterval( () =>
                     this.setState({
                         secondsElapsed: this.state.secondsElapsed + 1
@@ -47,7 +47,7 @@ class Stopwatch extends Component {
     }
 
     handleStopClick() {
-        this.started = false
+        this.started = false;
         clearInterval(this.incrementer);
         this.setState({
             lastClearedIncrementer: this.incrementer
@@ -62,13 +62,13 @@ class Stopwatch extends Component {
             goal: 40,
             emne: this.props.emne,
             time: this.props.course.time
-        })
+        });
         this.incrementer = null;
         this.started = false
 
     }
     handleResetClick() {
-        this.castToFirebase()
+        this.castToFirebase();
         clearInterval(this.incrementer);
     }
 

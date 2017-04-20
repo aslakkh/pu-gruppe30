@@ -8,7 +8,7 @@ export function CourseWarning(){
         paddingRight: '5px',
         paddingTop: '5px',
         paddingBottom: '5px',
-    }
+    };
 
     const infoPopover = (
         <Popover id="info-popover" title="Unlinked course">
@@ -18,7 +18,7 @@ export function CourseWarning(){
                 (You can still track your personal progress in this course).
             </p>
         </Popover>
-    )
+    );
 
     return(
         <OverlayTrigger 

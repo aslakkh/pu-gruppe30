@@ -9,6 +9,9 @@ exports[`AddSession One course 1`] = `
     }
   }
 >
+  <h4>
+    Forgot to start timer?
+  </h4>
   <Button
     active={false}
     block={false}
@@ -54,6 +57,9 @@ exports[`AddSession One course 1`] = `
                             }
               }
       >
+              <h4>
+                      Forgot to start timer?
+              </h4>
               <Button
                       active={false}
                       block={false}
@@ -155,7 +161,7 @@ exports[`AddSession One course 1`] = `
                                                             }
                                               }
                                               todayButtonLabel="Today"
-                                              value="2017-04-21T08:29:31.631Z"
+                                              value="2017-04-21T12:49:51.951Z"
                                       />
                               </FormGroup>
                       </ModalBody>
@@ -381,6 +387,9 @@ exports[`AddSession One course 1`] = `
                             }
               }
       >
+              <h4>
+                      Forgot to start timer?
+              </h4>
               <Button
                       active={false}
                       block={false}
@@ -482,7 +491,7 @@ exports[`AddSession One course 1`] = `
                                                             }
                                               }
                                               todayButtonLabel="Today"
-                                              value="2017-04-21T08:29:31.631Z"
+                                              value="2017-04-21T12:49:51.951Z"
                                       />
                               </FormGroup>
                       </ModalBody>
@@ -718,7 +727,7 @@ exports[`AddSession One course 1`] = `
         "setMinutes": [Function],
         "state": Object {
           "courseID": "TES1000",
-          "date": "2017-04-21T08:29:31.631Z",
+          "date": "2017-04-21T12:49:51.951Z",
           "hourSelected": 0,
           "minSelected": 0,
           "secondsPlanned": 0,
@@ -820,7 +829,7 @@ exports[`AddSession One course 1`] = `
             }
           }
           todayButtonLabel="Today"
-          value="2017-04-21T08:29:31.631Z"
+          value="2017-04-21T12:49:51.951Z"
         />
       </FormGroup>
     </ModalBody>

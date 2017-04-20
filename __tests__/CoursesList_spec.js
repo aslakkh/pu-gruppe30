@@ -17,11 +17,11 @@ const courses = {
         oldGoals: {},
         time: 0,
     }
-}
+};
 
 test('CoursesList renders ListGroup', () => {
     const component = renderer.create(
         <CoursesList courses={courses} />
     ).toJSON();
     expect(component).toMatchSnapshot();
-})
+});

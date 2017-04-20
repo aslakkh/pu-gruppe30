@@ -72,9 +72,9 @@ class Stopwatch extends Component {
             goal: 400,
             emne: this.props.emne,
             theme: undefined
-        })
+        });
         this.incrementer = null;
-        this.started = false
+        this.started = false;
         console.log(this.props.emne)
 
     }
@@ -83,7 +83,7 @@ class Stopwatch extends Component {
         clearInterval(this.incrementer);
     }
     onChildChanged(newState,newState2){
-        console.log(newState,newState2)
+        console.log(newState,newState2);
         this.setState({
             theme:newState,
             key: newState2

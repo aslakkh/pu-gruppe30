@@ -8,7 +8,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
   }
-}
+};
 
 export default class Dashboard extends Component {
 

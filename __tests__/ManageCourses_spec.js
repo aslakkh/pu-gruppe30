@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import ManageCourses from '../src/components/Dashboard/ManageCourses.js';
 
-const courses = ["IT1010", "TDT4100"]
+const courses = ["IT1010", "TDT4100"];
 
 test('ManageCourses renders listgroup, searchbar and functional Modal', () => {
     const component = renderer.create(
@@ -14,4 +14,4 @@ test('ManageCourses renders listgroup, searchbar and functional Modal', () => {
         <ManageCourses courses={courses} />
     ).toJSON();
     expect(componentWithProps).toMatchSnapshot();
-})
+});

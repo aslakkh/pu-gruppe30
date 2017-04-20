@@ -2,6 +2,14 @@ import { ref, firebaseAuth } from '../config/constants'
 import firebase from 'firebase';
 
 
+export function plannedSession(emne){
+
+    const userUid = firebase.auth().currentUser.uid;
+    firebase.database().ref().child('users/'+userUid+'/courses/'+emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
+        return snap.val()
+    })
+}
+
 
 export function auth (email, pw) {
     return firebaseAuth().createUserWithEmailAndPassword(email, pw)
@@ -157,11 +165,11 @@ export function disableCourse(course){
 
 export function loadCourse(){
     console.log("const");
-    var emner =[]
+    var emner =[];
     const userUid = firebase.auth().currentUser.uid;
     ref.child('users/'+userUid+'/courses').once("value", function(snapshot){
         snapshot.forEach(function(data){
-            console.log(data.val(),data.key)
+            console.log(data.val(),data.key);
             emner.push(data.key);
 
         })});
@@ -208,8 +216,8 @@ export function saveGoal3(goalType, course, goalInSeconds, secondsElapsed=null) 
 
 export function saveExpiredGoal(goalType, timeCreated, course, goalInSeconds, secondsSpent) {
     const userUid = firebase.auth().currentUser.uid;
-    console.log("halloiluken")
-    console.log('users/'+userUid+'/courses/'+ course + '/oldGoals/' + goalType + "/" + timeCreated)
+    console.log("halloiluken");
+    console.log('users/'+userUid+'/courses/'+ course + '/oldGoals/' + goalType + "/" + timeCreated);
     const goalRef = ref.child('users/'+userUid+'/courses/'+ course + '/oldGoals/' + goalType + "/" + timeCreated);
     goalRef.set({
         goal: goalInSeconds,
@@ -279,8 +287,8 @@ export function isGoalActive(course, view) {
 
 export function addSession(date,courseID,minSelected, hourSelected){
     const userUid = firebase.auth().currentUser.uid;
-    const variabel = new Date(date)
-    variabel.setMilliseconds(Math.random()*1000)
+    const variabel = new Date(date);
+    variabel.setMilliseconds(Math.random()*1000);
     const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime());
     timeRef.set({time:(minSelected * 60) + (hourSelected * 3600),desc: "secondsPlanned"});
     return true;

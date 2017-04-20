@@ -16,26 +16,37 @@ exports[`Stopwatch One course 1`] = `
       md={7}
     >
       <div
-        className="stopwatch"
+        style={
+          Object {
+            "marginTop": "4%",
+          }
+        }
       >
-        <h4>
-          Planned Session: 
-        </h4>
-        <h1
-          className="app-timer"
+        <div
+          style={
+            Object {
+              "fontSize": "500%",
+              "textAlign": "center",
+            }
+          }
         >
           0:0:00
-        </h1>
+        </div>
         <Button
           active={false}
           block={true}
           bsClass="btn"
-          bsStyle="default"
+          bsStyle="primary"
           className="btn btn-lg"
           disabled={false}
           onClick={[Function]}
+          style={
+            Object {
+              "textAlign": "center",
+            }
+          }
         >
-          start
+          Start
         </Button>
       </div>
       <div>

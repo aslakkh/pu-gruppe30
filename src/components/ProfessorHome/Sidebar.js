@@ -19,7 +19,7 @@ function TestEmner(props){
         </NavItem>
         
 
-			)
+			);
 	let info = Object.keys(props.courses).map((emne,i) =>
 		<Tab.Pane eventKey={emne} key={i}>
             <h1>{emne}</h1>
@@ -29,7 +29,7 @@ function TestEmner(props){
 
     </Tab.Pane>
  
-		)
+		);
 
 	return(
 
@@ -55,10 +55,7 @@ function TestEmner(props){
 		)
 
 
-};
-
-
-
+}
 export default class Courses extends Component {
 constructor(props) {
   super(props);

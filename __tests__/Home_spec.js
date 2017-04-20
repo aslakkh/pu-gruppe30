@@ -51,7 +51,7 @@ describe("Home", function () {
     component3 = renderer3.getRenderOutput();
     it("log in, with courses", () => {
         expect(component3).toMatchSnapshot();
-    })
+    });
     renderer4 = TestUtils.createRenderer();
     renderer4.render(
         <Home courses={coursesNull} authed={true} admin={false}/>

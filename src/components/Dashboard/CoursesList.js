@@ -89,7 +89,7 @@ export default class CoursesList extends Component {
 								return <ListGroupItem key={key} /*className="CoursesList"*/ style={styles.coursesList}> 
 									<div style={styles.listElement}>{key}</div>
 									<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
-									</ListGroupItem>
+									</ListGroupItem>;
 							{/*}*/}
 								
 						})} 

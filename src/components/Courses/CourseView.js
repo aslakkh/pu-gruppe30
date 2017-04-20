@@ -8,7 +8,7 @@ import { saveProgress } from '../../helpers/auth'
 
 
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
-Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2))
+Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + '.' + ('0' + sec % 60).slice(-2));
 
 export default class CourseView extends React.Component {
 
@@ -238,7 +238,7 @@ export default class CourseView extends React.Component {
             activateGoal("weeklyGoal", this.state.courseID, true);
         }
         if (this.state.monthlySet <= parseInt(dates[2].valueOf())) {
-            activateGoal("monthlyGoal", this.state.courseID, false)
+            activateGoal("monthlyGoal", this.state.courseID, false);
             if (this.state.monthlySet != 0) saveExpiredGoal('monthly',this.state.monthlySet, this.state.courseID, this.state.monthlyGoal, this.state.monthlyTimeSpent);
         } else {
             activateGoal("monthlyGoal", this.state.courseID, true);

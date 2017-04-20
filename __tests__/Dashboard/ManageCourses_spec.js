@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ManageCourses from '../src/components/Dashboard/ManageCourses.js';
+import ManageCourses from '../../src/components/Dashboard/ManageCourses.js';
 
 const courses = ["IT1010", "TDT4100"];
 

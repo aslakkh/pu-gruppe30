@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
-import {disableCourse} from '../../helpers/auth'
+import {disableCourse, courseExistsAtRoot} from '../../helpers/auth'
+import {CourseWarning} from '../various/CourseWarning'
 import {styles} from './CoursesListStyles.js'
 
 
@@ -61,7 +62,7 @@ export default class CoursesList extends Component {
 
 	//handles click
 	handleClick(key){
-		disableCourse(key);
+		return true;
 	}
 
 
@@ -78,14 +79,13 @@ export default class CoursesList extends Component {
 			return(
 				<ListGroup>
 						{Object.keys(this.state.courses).map((key) => {
-
 							
 							return <ListGroupItem key={key} /*className="CoursesList"*/ style={styles.coursesList}> 
 								<div style={styles.listElement}>{key}</div>
 								<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
 								</ListGroupItem>
 			
-
+							
 						})} 
 				</ListGroup>
 		);

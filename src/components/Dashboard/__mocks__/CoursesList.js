@@ -62,7 +62,7 @@ export default class CoursesList extends Component {
 
 	//handles click
 	handleClick(key){
-		disableCourse(key);
+		return true;
 	}
 
 

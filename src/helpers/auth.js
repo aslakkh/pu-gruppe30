@@ -254,6 +254,7 @@ export function isGoalActive(course, view) {
     return out;
 }
 
+
 export function addSession(date,courseID,minSelected, hourSelected){
     const userUid = firebase.auth().currentUser.uid;
     const variabel = new Date(date);
@@ -262,3 +263,4 @@ export function addSession(date,courseID,minSelected, hourSelected){
     timeRef.set({time:(minSelected * 60) + (hourSelected * 3600),desc: "secondsPlanned"});
     return true;
 }
+

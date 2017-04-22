@@ -10,6 +10,11 @@ const styles = {
   }
 };
 
+/*
+  Dashboard for students
+  Renders a div containing CoursesList, Button for adding course, and a AddCourseModal controlled by button
+*/
+
 export default class Dashboard extends Component {
 
   constructor(props){

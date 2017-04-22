@@ -9,15 +9,8 @@ import {styles} from './CoursesListStyles.js'
 Returns courses as ListGroup
 Renders upon change in DB
 
-TODO: 
-- Ask for confirmation on Delete
-- Submit with enter
-- Add courses in chronological order?
-- ()
-Could probably be split into a Course-component for each courses
 */ 
 
-//http://stackoverflow.com/questions/40494787/get-user-object-properties-from-firebase-in-react
 
 export default class CoursesList extends Component {
 
@@ -38,9 +31,8 @@ export default class CoursesList extends Component {
 
 
 
-	//handles click
 	handleClick(key){
-		disableCourse(key);
+		disableCourse(key); //sets "active" to false in database
 	}
 
 

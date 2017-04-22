@@ -17,14 +17,6 @@ const styles = {
 
 Returns a form and a button.
 Saves form data in firebase upon button click.
-Should be updated to include better form validation. User should probably only be able to add courses that are already in database.
-
-//https://react-bootstrap.github.io/components.html#forms
-
-TODO
-
-- prevent adding an already existing course from replacing previous course
-- make it possible to submit form by pressing enter
 
 */
 
@@ -36,8 +28,6 @@ export default class AddCourse extends Component{
         this.handleAdd = this.handleAdd.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
-        //console.log(this.props.courses);
-        //var coursesArray = Object.keys(this.props.courses).map(key => key);
         this.state = {
             value: '',
         }
@@ -68,10 +58,10 @@ export default class AddCourse extends Component{
         }
     }
 
-    //function for validating input. For now returns error if form has input of length greater than 0 but less than 5, and success for anything of length > 4
+    //function for validating input. 
     getValidationState(){
         var length = this.state.value.length;
-        var re = /^[A-Z]{2,3}[0-9]{4}$/;
+        var re = /^[A-Z]{2,3}[0-9]{4}$/; //2 or 3 capital letters followed by 4 digits
 
         if(re.test(this.state.value)){
             return 'success';
@@ -82,7 +72,7 @@ export default class AddCourse extends Component{
 
     //function for handling click on add-button. Only saves course to database if input is valid.
     handleAdd(e){
-        e.preventDefault(); //prevents default browser behaviour on click, whatever that means
+        e.preventDefault();
 
         if(this.getValidationState() === 'success'){
             saveCourse(this.state.value); //saveCourse(course) adds course to currently logged in user in Firebase
@@ -91,7 +81,6 @@ export default class AddCourse extends Component{
         else{
             console.log("Error: Tried submitting invalid value: " + this.state.value);
         }
-		//getCourse();
     }
 
     handleAddToMyCourses(course,e){

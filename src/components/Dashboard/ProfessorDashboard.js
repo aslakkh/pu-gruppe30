@@ -4,12 +4,13 @@ import ManageCourses from './ManageCourses'
 import CoursesList from './CoursesList'
 
 
-export default class ProfessorDashboard extends Component {
 /*
-    TODO:
-    - improve MyCourses-view
-    - add link in all list elements in mycoursesview
+    Dashboard for Professor 
+    Renders Tab with CoursesList and ManageCourses
 */
+
+export default class ProfessorDashboard extends Component {
+
 
     render () {
         return (

@@ -7,6 +7,15 @@ export const styles = {
         justifyContent: 'flex-end',
     },
 
+    ListPane: {
+                backgroundColor: 'darkslategray',
+        },
+
+    ListGroup: {
+                height: '400px',
+                overflowY: 'scroll',
+        },
+
     CourseName:{
         flexBasis: '90%',
     },

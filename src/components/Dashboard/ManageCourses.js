@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
-import {ListGroup, ListGroupItem, Button, Modal, FormGroup, FormControl} from 'react-bootstrap'
+import {ListGroup, Panel, ListGroupItem, Button, Modal, FormGroup, FormControl} from 'react-bootstrap'
 import {removeCourseFromRoot, addCourseToRoot, courseExistsAtRoot, saveCourse} from '../../helpers/auth.js'
 import firebase from 'firebase'
 import FeedbackMessage from '../FeedbackMessage'
 import {styles} from './ManageCoursesStyles.js'
 
 /* 
+    Renders ListGroup, FormGroup, Modal, FeedbackMessage-component
     ManageCourses displays all courses in database
     Professor can add new courses and remove courses permanently from database
     Professor can add courses to "my courses"
+    
 */
 export default class ManageCourses extends Component{
 
 
     constructor(props){
         super(props);
+
+        //BINDINGS
         this.handleAddToMyCourses = this.handleAddToMyCourses.bind(this);
         this.handleAddCourse = this.handleAddCourse.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -23,13 +27,14 @@ export default class ManageCourses extends Component{
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
+
         this.state = {
             courses: this.props.courses,
             allCourses: this.props.courses,
             modalWarning: "Warning",
             inputValue: "",
             displayFeedbackMessage: false,
-            feedbackMessage: "",
+            feedbackMessage: "", //passed to FeedbackMessage component
             feedbackMessagePositive: false,
         }
     }
@@ -75,7 +80,7 @@ export default class ManageCourses extends Component{
             if(courseExistsAtRoot(this.state.inputValue)){
                 this.setState({
                     displayFeedbackMessage: true,
-                    feedbackMessage: "Error: Course already exists in database!",
+                    feedbackMessage: "Course already exists in database!",
                     feedbackMessagePositive: false,
                 });
             }
@@ -90,6 +95,11 @@ export default class ManageCourses extends Component{
             
         }
         else{
+            this.setState({
+                    displayFeedbackMessage: true,
+                    feedbackMessage: "Course code must be two or three letters followed by four numbers.",
+                    feedbackMessagePositive: false,
+                });
             console.log("Error: Tried submitting invalid value: " + this.state.inputValue);
         }
     }
@@ -182,19 +192,8 @@ export default class ManageCourses extends Component{
             return(
             <div>
                 <h5>Here you can add and remove courses from the database. </h5>
-                <h5>You can also add a course to the list of courses you manage.
-                </h5>
-                <ListGroup>
-                    {(this.state.courses).map((key) => {
-                        return <ListGroupItem key={key} style={styles.List}>
-                            <div style={styles.CourseName}>{key}</div>
-                        <Button style={styles.Button} bsStyle="success" onClick={(e) => this.handleAddToMyCourses(key, e)}>Add to My Courses</Button>
-                        <Button style={styles.Button} bsStyle="danger" onClick={() => this.open(key)}>Delete</Button>
-                        </ListGroupItem>
-                    })}
-                    
-                </ListGroup>
-                
+                <h5>You can also add a course to the list of courses you manage.</h5>
+
                 <div style={styles.FormWrapper}>
                     <FormGroup validationState={this.getValidationState()}>
                         <FormControl
@@ -211,6 +210,19 @@ export default class ManageCourses extends Component{
                     <Button type="submit" bsStyle="primary" onClick={this.handleAddCourse} style={styles.Button}>Add Course </Button>
                 </div>
                 <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} positive={this.state.feedbackMessagePositive}/>
+                
+                <Panel style={styles.ListPane}>
+                    <ListGroup style={styles.ListGroup}>
+                        {(this.state.courses).map((key) => {
+                            return <ListGroupItem key={key} style={styles.List}>
+                                <div style={styles.CourseName}>{key}</div>
+                            <Button style={styles.Button} bsStyle="success" onClick={(e) => this.handleAddToMyCourses(key, e)}>Add to My Courses</Button>
+                            <Button style={styles.Button} bsStyle="danger" onClick={() => this.open(key)}>Delete</Button>
+                            </ListGroupItem>
+                        })}
+                        
+                    </ListGroup>
+                </Panel>
                 
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton style={styles.ModalHeader}>

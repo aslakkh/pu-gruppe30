@@ -32,7 +32,7 @@ componentWillMount(){
 }
 	render (){
 
-    if(this.state.courses === undefined || this.state.course === null){ //checks if props are loaded
+    if(this.state.courses === undefined || this.state.courses === null){ //checks if props are loaded
       return(
         <h4>No courses</h4>
       );

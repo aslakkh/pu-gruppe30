@@ -63,7 +63,7 @@ export default class CourseInformation extends Component{
                     <ListGroup fill>
                         {Object.keys(this.state.messages).map((key) => {
                                     return <ListGroupItem key={key} header={this.state.messages[key].Message} className="MessagesListItem">
-                                                <h5>{this.msToDateString(key)}</h5>
+                                                <h5>{this.msToDateString(key)} </h5>
                                             </ListGroupItem>
                                 })} 
                     </ListGroup>

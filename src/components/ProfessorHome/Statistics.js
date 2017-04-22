@@ -90,10 +90,10 @@ export default class Statistics extends Component {
 
 
 
-
+        this.getDataFromFirebase()
     }
     componentDidMount(){
-        this.getDataFromFirebase()
+
 
     }
 
@@ -102,9 +102,6 @@ export default class Statistics extends Component {
             show:false
         })
     }
-
-
-
     getDataFromFirebase(){
         console.log(this.state.courseID);
         let that = this;
@@ -112,7 +109,7 @@ export default class Statistics extends Component {
         let ting = [];
         let messageRef = firebase.database().ref();
         messageRef.child('users/').on('child_added', function(snapshot) {
-            if(snapshot.val().courses[kurs] !== undefined && snapshot.val().courses[kurs]['sessions']) {
+            if(snapshot.val().courses[kurs] != undefined && snapshot.val().courses[kurs]['sessions']) {
                 ting.push(snapshot.val().courses[kurs]['sessions']);
                 ting.forEach(function (session) {
                     Object.keys(session).map((session2) => {that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});

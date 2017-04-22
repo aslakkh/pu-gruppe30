@@ -6,6 +6,7 @@ import {Tabs, Tab, DropdownButton, MenuItem} from 'react-bootstrap'
 import StopWatch from './Stopwatch'
 import SessionPlanner from './../SessionPlanner/SessionPlanner'
 import CircularProgress from './../Courses/CircularProgress'
+import CourseInformation from './../Courses/CourseInformation'
 import Results from './../Courses/Results'
 import './../Courses/results.css'
 
@@ -18,6 +19,8 @@ export default class TabView extends Component{
             view: "Daily Goals",
         });
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
+        console.log("kurs")
+        console.log(this.props.course)
 
     }
     handleSelect(key){
@@ -47,6 +50,7 @@ export default class TabView extends Component{
                     </DropdownButton>
                     <Results courseID={this.state.emne} course={this.state.course} view={this.state.view}/>
                 </Tab>
+                <Tab eventKey={"Message"} title="Messages"><CourseInformation courseID={this.state.emne}/></Tab>
             </Tabs>
         )
     }

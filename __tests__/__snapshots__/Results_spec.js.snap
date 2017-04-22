@@ -1,0 +1,859 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Results Daily 1`] = `
+<div
+  className="table-module"
+>
+  <BootstrapTable
+    bodyContainerClass={null}
+    bodyStyle={undefined}
+    bordered={true}
+    cellEdit={
+      Object {
+        "afterSaveCell": undefined,
+        "beforeSaveCell": undefined,
+        "blurToSave": false,
+        "mode": "none",
+        "nonEditableRows": undefined,
+      }
+    }
+    columnFilter={false}
+    condensed={false}
+    containerClass={null}
+    containerStyle={undefined}
+    csvFileName="spreadsheet.csv"
+    data={
+      Array [
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+      ]
+    }
+    deleteRow={true}
+    expandColumnOptions={
+      Object {
+        "expandColumnBeforeSelectColumn": true,
+        "expandColumnComponent": undefined,
+        "expandColumnVisible": false,
+      }
+    }
+    expandComponent={undefined}
+    expandableRow={undefined}
+    exportCSV={false}
+    fetchInfo={
+      Object {
+        "dataTotalSize": 0,
+      }
+    }
+    headerContainerClass={null}
+    headerStyle={undefined}
+    height="100%"
+    hover={false}
+    ignoreSinglePage={false}
+    insertRow={false}
+    keyBoardNav={false}
+    maxHeight={undefined}
+    multiColumnSearch={false}
+    multiColumnSort={1}
+    options={
+      Object {
+        "afterDeleteRow": [Function],
+      }
+    }
+    pagination={false}
+    printable={false}
+    scrollTop={undefined}
+    search={false}
+    searchPlaceholder={undefined}
+    selectRow={
+      Object {
+        "bgColor": "#CEE3F6",
+        "mode": "checkbox",
+      }
+    }
+    strictSearch={undefined}
+    striped={false}
+    tableBodyClass={null}
+    tableContainerClass={null}
+    tableHeaderClass={null}
+    tableStyle={undefined}
+    trClassName=""
+  >
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="id"
+      dataFormat={undefined}
+      dataSort={true}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={true}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Goal set
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="set"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Span
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="goal"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Goal
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="spent"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Time spent
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="percent"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      % completed
+    </TableHeaderColumn>
+  </BootstrapTable>
+</div>
+`;
+
+exports[`Results Monthly 1`] = `
+<div
+  className="table-module"
+>
+  <BootstrapTable
+    bodyContainerClass={null}
+    bodyStyle={undefined}
+    bordered={true}
+    cellEdit={
+      Object {
+        "afterSaveCell": undefined,
+        "beforeSaveCell": undefined,
+        "blurToSave": false,
+        "mode": "none",
+        "nonEditableRows": undefined,
+      }
+    }
+    columnFilter={false}
+    condensed={false}
+    containerClass={null}
+    containerStyle={undefined}
+    csvFileName="spreadsheet.csv"
+    data={
+      Array [
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+      ]
+    }
+    deleteRow={true}
+    expandColumnOptions={
+      Object {
+        "expandColumnBeforeSelectColumn": true,
+        "expandColumnComponent": undefined,
+        "expandColumnVisible": false,
+      }
+    }
+    expandComponent={undefined}
+    expandableRow={undefined}
+    exportCSV={false}
+    fetchInfo={
+      Object {
+        "dataTotalSize": 0,
+      }
+    }
+    headerContainerClass={null}
+    headerStyle={undefined}
+    height="100%"
+    hover={false}
+    ignoreSinglePage={false}
+    insertRow={false}
+    keyBoardNav={false}
+    maxHeight={undefined}
+    multiColumnSearch={false}
+    multiColumnSort={1}
+    options={
+      Object {
+        "afterDeleteRow": [Function],
+      }
+    }
+    pagination={false}
+    printable={false}
+    scrollTop={undefined}
+    search={false}
+    searchPlaceholder={undefined}
+    selectRow={
+      Object {
+        "bgColor": "#CEE3F6",
+        "mode": "checkbox",
+      }
+    }
+    strictSearch={undefined}
+    striped={false}
+    tableBodyClass={null}
+    tableContainerClass={null}
+    tableHeaderClass={null}
+    tableStyle={undefined}
+    trClassName=""
+  >
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="id"
+      dataFormat={undefined}
+      dataSort={true}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={true}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Goal set
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="set"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Span
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="goal"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Goal
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="spent"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Time spent
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="percent"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      % completed
+    </TableHeaderColumn>
+  </BootstrapTable>
+</div>
+`;
+
+exports[`Results Weekly 1`] = `
+<div
+  className="table-module"
+>
+  <BootstrapTable
+    bodyContainerClass={null}
+    bodyStyle={undefined}
+    bordered={true}
+    cellEdit={
+      Object {
+        "afterSaveCell": undefined,
+        "beforeSaveCell": undefined,
+        "blurToSave": false,
+        "mode": "none",
+        "nonEditableRows": undefined,
+      }
+    }
+    columnFilter={false}
+    condensed={false}
+    containerClass={null}
+    containerStyle={undefined}
+    csvFileName="spreadsheet.csv"
+    data={
+      Array [
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+        Object {
+          "goal": "NaN hours and NaN minutes",
+          "id": "undefined/undefined-NaN undefined:undefined:undefined",
+          "percent": NaN,
+          "set": "undefined, NaN",
+          "spent": "NaN hours and NaN minutes",
+        },
+      ]
+    }
+    deleteRow={true}
+    expandColumnOptions={
+      Object {
+        "expandColumnBeforeSelectColumn": true,
+        "expandColumnComponent": undefined,
+        "expandColumnVisible": false,
+      }
+    }
+    expandComponent={undefined}
+    expandableRow={undefined}
+    exportCSV={false}
+    fetchInfo={
+      Object {
+        "dataTotalSize": 0,
+      }
+    }
+    headerContainerClass={null}
+    headerStyle={undefined}
+    height="100%"
+    hover={false}
+    ignoreSinglePage={false}
+    insertRow={false}
+    keyBoardNav={false}
+    maxHeight={undefined}
+    multiColumnSearch={false}
+    multiColumnSort={1}
+    options={
+      Object {
+        "afterDeleteRow": [Function],
+      }
+    }
+    pagination={false}
+    printable={false}
+    scrollTop={undefined}
+    search={false}
+    searchPlaceholder={undefined}
+    selectRow={
+      Object {
+        "bgColor": "#CEE3F6",
+        "mode": "checkbox",
+      }
+    }
+    strictSearch={undefined}
+    striped={false}
+    tableBodyClass={null}
+    tableContainerClass={null}
+    tableHeaderClass={null}
+    tableStyle={undefined}
+    trClassName=""
+  >
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="id"
+      dataFormat={undefined}
+      dataSort={true}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={true}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Goal set
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="set"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Span
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="goal"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Goal
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="spent"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      Time spent
+    </TableHeaderColumn>
+    <TableHeaderColumn
+      className="column"
+      columnClassName=""
+      columnTitle={false}
+      csvFormat={undefined}
+      csvHeader={undefined}
+      dataAlign="left"
+      dataField="percent"
+      dataFormat={undefined}
+      dataSort={false}
+      editColumnClassName=""
+      editable={true}
+      expandable={true}
+      filter={undefined}
+      filterFormatted={false}
+      filterValue={undefined}
+      formatExtraData={undefined}
+      headerAlign={undefined}
+      headerTitle={true}
+      hidden={false}
+      hiddenOnInsert={false}
+      invalidEditColumnClassName=""
+      isKey={false}
+      keyValidator={false}
+      onSort={undefined}
+      searchable={true}
+      sort={undefined}
+      sortFunc={undefined}
+      sortFuncExtraData={undefined}
+      sortIndicator={true}
+      tdAttr={undefined}
+      tdStyle={undefined}
+      thStyle={undefined}
+      width={null}
+    >
+      % completed
+    </TableHeaderColumn>
+  </BootstrapTable>
+</div>
+`;

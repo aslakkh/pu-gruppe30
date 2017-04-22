@@ -6,7 +6,6 @@ import Register from '../Register/Register'
 import Home from '../Home/Home'
 import Dashboard from '../Dashboard/Dashboard'
 import { logout } from '../../helpers/auth'
-import { firebaseAuth } from '../../config/constants'
 import {Navbar,NavItem, Nav} from 'react-bootstrap'
 
 const navbarInstance = (
@@ -28,8 +27,8 @@ const navbarInstance = (
                       ? <NavItem><button
                           style={{border: 'none', background: 'transparent'}}
                           onClick={() => {
-                            logout()
-                            this.setState({authed: false})
+                            logout();
+                            this.setState({authed: false});
                             Router.transitionTo('/')
                           }}
                           className="navbar-link"><span className="glyphicon glyphicon-log-out"></span> Logout</button></NavItem>

@@ -231,7 +231,7 @@ export default class CircularProgress extends Component {
             goal = "Not Set";
             percent = 0;
         }
-        console.log("P: " + percent)
+        console.log("P: " + percent);
         return [percent, goal, remaining, spent];
 
     }

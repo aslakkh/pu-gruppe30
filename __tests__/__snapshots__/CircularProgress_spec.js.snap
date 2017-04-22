@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Circular One course 1`] = `
+<div>
+  <div
+    className="view-box"
+  >
+    <label
+      className="view-label"
+    >
+      Daily Goal
+    </label>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="edit-btn"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Edit
+    </Button>
+  </div>
+  <Form
+    bsClass="form"
+    className="circular-form"
+    componentClass="form"
+    horizontal={false}
+    inline={false}
+  >
+    <FormGroup
+      bsClass="form-group"
+      className="circular-component"
+    >
+      <t
+        align="middle"
+        classForPercentage={[Function]}
+        initialAnimation={false}
+        percentage={0}
+        strokeWidth={8}
+        textForPercentage={[Function]}
+      />
+    </FormGroup>
+    <FormGroup
+      bsClass="form-group"
+      className="information-text"
+    >
+      <h4>
+        Goal: 
+        (Expired)
+      </h4>
+      <h4 />
+      <h4>
+        Time spent today: 10 minutes
+      </h4>
+    </FormGroup>
+  </Form>
+  <div
+    className="view-box"
+  >
+    <label
+      className="view-label"
+    >
+      Weekly Goal
+    </label>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="edit-btn"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Edit
+    </Button>
+  </div>
+  <Form
+    bsClass="form"
+    className="circular-form"
+    componentClass="form"
+    horizontal={false}
+    inline={false}
+  >
+    <FormGroup
+      bsClass="form-group"
+      className="circular-component"
+    >
+      <t
+        align="middle"
+        classForPercentage={[Function]}
+        initialAnimation={false}
+        percentage={0}
+        strokeWidth={8}
+        textForPercentage={[Function]}
+      />
+    </FormGroup>
+    <FormGroup
+      bsClass="form-group"
+      className="information-text"
+    >
+      <h4>
+        Goal: 
+        Not Set
+      </h4>
+      <h4 />
+      <h4>
+        No progress recorded
+      </h4>
+    </FormGroup>
+  </Form>
+  <div
+    className="view-box"
+  >
+    <label
+      className="view-label"
+    >
+      Monthly Goal
+    </label>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="edit-btn"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Edit
+    </Button>
+  </div>
+  <Form
+    bsClass="form"
+    className="circular-form"
+    componentClass="form"
+    horizontal={false}
+    inline={false}
+  >
+    <FormGroup
+      bsClass="form-group"
+      className="circular-component"
+    >
+      <t
+        align="middle"
+        classForPercentage={[Function]}
+        initialAnimation={false}
+        percentage={0}
+        strokeWidth={8}
+        textForPercentage={[Function]}
+      />
+    </FormGroup>
+    <FormGroup
+      bsClass="form-group"
+      className="information-text"
+    >
+      <h4>
+        Goal: 
+        Not Set
+      </h4>
+      <h4 />
+      <h4>
+        No progress recorded
+      </h4>
+    </FormGroup>
+  </Form>
+  <EditGoal
+    closeModal={[Function]}
+    courseID="TES1000"
+    showModal={false}
+    view="Daily Goal"
+  />
+  <EditGoal
+    closeModal={[Function]}
+    courseID="TES1000"
+    showModal={false}
+    view="Weekly Goal"
+  />
+  <EditGoal
+    closeModal={[Function]}
+    courseID="TES1000"
+    showModal={false}
+    view="Monthly Goal"
+  />
+</div>
+`;

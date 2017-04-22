@@ -3,11 +3,11 @@ import { login } from '../../helpers/auth'
 
 export default class Login extends Component {
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     login(this.email.value, this.pw.value).catch(error => this.setState({errormess: "Email or Password is wrong."}) )
-  }
+  };
   constructor(props){
-    super(props)
+    super(props);
     this.state={errormess:""}
   }
 

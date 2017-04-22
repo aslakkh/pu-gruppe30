@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ManageCourses renders listgroup, searchbar and functional Modal 1`] = `
+exports[`AddCourse renders FormGroup and button No courses 1`] = `
 <h4>
   No courses in database
 </h4>
 `;
 
-exports[`ManageCourses renders listgroup, searchbar and functional Modal 2`] = `
+exports[`AddCourse renders FormGroup and button With courses 1`] = `
 <div>
   <h5>
     Here you can add and remove courses from the database. 

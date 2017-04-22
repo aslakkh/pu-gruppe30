@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfessorDashboard matches snapshot 1`] = `
+<Uncontrolled(Tabs)
+  defaultActiveKey={0}
+  id="dashboardTab"
+>
+  <Tab
+    eventKey={0}
+    title="My Courses"
+  >
+    <CoursesList
+      courses={undefined}
+    />
+  </Tab>
+  <Tab
+    eventKey={1}
+    title="Manage All Courses"
+  >
+    <ManageCourses />
+  </Tab>
+</Uncontrolled(Tabs)>
+`;

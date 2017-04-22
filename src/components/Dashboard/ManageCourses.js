@@ -97,7 +97,7 @@ export default class ManageCourses extends Component{
     //validates input textfield
     getValidationState(){
         var length = this.state.inputValue.length;
-        var re = /^[A-Z]{2,3}[0-9]{4}$/
+        var re = /^[A-Z]{2,3}[0-9]{4}$/;
 
         if(re.test(this.state.inputValue)){
             return 'success';
@@ -160,9 +160,9 @@ export default class ManageCourses extends Component{
 
     open(course){
         let warningString = "";
-        warningString += "Performing this action will permanently remove the course "
-        warningString += course
-        warningString += ". All information related to this course will be removed from the system. Student data will not be affected. "
+        warningString += "Performing this action will permanently remove the course ";
+        warningString += course;
+        warningString += ". All information related to this course will be removed from the system. Student data will not be affected. ";
 
         this.setState({ 
             showModal: true,

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
-import {disableCourse, courseExistsAtRoot} from '../../helpers/auth'
-import {CourseWarning} from '../various/CourseWarning'
+import {disableCourse} from '../../helpers/auth'
 import {styles} from './CoursesListStyles.js'
 
 

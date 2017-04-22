@@ -62,8 +62,8 @@ export default class CourseInformation extends Component{
                 <Panel bsStyle="info" collapsible defaultExpanded header="Messages from course staff" className="PanelHeader">
                     <ListGroup fill>
                         {Object.keys(this.state.messages).map((key) => {
-                                    return <ListGroupItem key={key} header={this.msToDateString(key)} className="MessagesListItem"> 
-                                                <h5>{this.state.messages[key].Message}</h5>
+                                    return <ListGroupItem key={key} header={this.state.messages[key].Message} className="MessagesListItem">
+                                                <h5>{this.msToDateString(key)}</h5>
                                             </ListGroupItem>
                                 })} 
                     </ListGroup>

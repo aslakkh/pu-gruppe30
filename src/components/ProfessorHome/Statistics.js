@@ -90,10 +90,10 @@ export default class Statistics extends Component {
 
 
 
-        this.getDataFromFirebase()
+
     }
     componentDidMount(){
-
+        this.getDataFromFirebase()
 
     }
 
@@ -102,23 +102,29 @@ export default class Statistics extends Component {
             show:false
         })
     }
-    getDataFromFirebase(){
+
+    data(snapshot){
         console.log(this.state.courseID);
         let that = this;
         let kurs = this.state.courseID;
         let ting = [];
+        if(snapshot.val().courses[kurs] !== undefined && snapshot.val().courses[kurs]['sessions']) {
+            ting.push(snapshot.val().courses[kurs]['sessions']);
+            ting.forEach(function (session) {
+                    Object.keys(session).map((session2) => {that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
+                    })
+                }
+            )
+        }
+    }
+
+    getDataFromFirebase(){
+        console.log(this.state.courseID);
+        let that = this;
         let messageRef = firebase.database().ref();
         messageRef.child('users/').on('child_added', function(snapshot) {
-            if(snapshot.val().courses[kurs] != undefined && snapshot.val().courses[kurs]['sessions']) {
-                ting.push(snapshot.val().courses[kurs]['sessions']);
-                ting.forEach(function (session) {
-                    Object.keys(session).map((session2) => {that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
-
-
-                })
-            }
-                )
-        }});
+            that.data(snapshot)
+});
 
     }
     sortNumber(a,b) {
@@ -150,7 +156,7 @@ export default class Statistics extends Component {
 
 
     render() {
-        if(!this.sessions.length > 0 ){
+        if(!this.sessions.length > 0 || this.state.courseID === null || this.state.courseID === undefined){
             return (
                 <h1>Loading2</h1>
 

@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase';
 import {ref } from '../../config/constants'
 import {FieldGroup, ListGroup, ListGroupItem, Button} from 'react-bootstrap'
+import {styles} from './../Dashboard/CoursesListStyles.js'
 
 
 /*
@@ -59,10 +60,10 @@ handleClick(key) {
 
                     <ListGroup >
                         {Object.keys(this.state.messages).map((key,i) => {
-                            return <ListGroupItem key={key} className="CoursesList">
-                                {this.state.messages[key][1]}
+                            return <ListGroupItem key={key} className="CoursesList" style={styles.coursesList}>
+                                <h4>{this.state.messages[key][1]}</h4>
 
-                                <Button bsStyle="danger" onClick={() => this.handleClick(this.state.messages[key][0])}>Delete</Button>
+                                <Button  bsStyle="danger" onClick={() => this.handleClick(this.state.messages[key][0])}>Delete</Button>
                             </ListGroupItem>
                         })}
                     </ListGroup>

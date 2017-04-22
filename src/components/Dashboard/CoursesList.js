@@ -24,7 +24,6 @@ export default class CoursesList extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			showModal: this.props.showModal,
 			courses: this.props.courses
 		}
 	}
@@ -33,20 +32,10 @@ export default class CoursesList extends Component {
 	componentWillReceiveProps(nextProps){
 		this.setState({
 				courses: nextProps.courses,
-				showModal: nextProps.showModal,
 			});
 		
 }
 
-	shouldComponentUpdate(){
-		console.log(this.state.showModal);
-		if(!this.state.showModal){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
 
 
 	//handles click
@@ -58,7 +47,6 @@ export default class CoursesList extends Component {
 
     //Component renders a header, followed by the keys of json object retrieved from firebase mapped to list
 	render(){
-		console.log(this.state.showModal);
 		if(this.state.courses === undefined || this.state.courses === null){
 			return(
 				<h5>You have no active courses. Add a course below.</h5>

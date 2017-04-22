@@ -6,6 +6,11 @@ import AddCourse from './AddCourse'
 import {HelpButton} from '../various/HelpButton'
 import {styles} from './AddCourseModalStyles.js'
 
+/*
+    Modal for adding courses to student user
+    Renders a modal split into one side for adding courses from database, and one for adding courses not found in database
+
+*/
 
 
 export default class AddCourseModal extends Component{
@@ -58,7 +63,6 @@ export default class AddCourseModal extends Component{
     }
 
     handleChange(e){
-        // this.setState({value: e.target.value.toUpperCase()});
         var text = e.target.value.toUpperCase();
         if(text.trim() === ""){ //if input form text is empty, set courses to all courses in database
             this.setState({

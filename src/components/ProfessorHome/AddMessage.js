@@ -26,6 +26,7 @@ export default class AddMessage extends Component {
         this.castMessageToFirebase()
 
 
+
     };
     /*
     * Send the message to firebase and uses timestap as ID

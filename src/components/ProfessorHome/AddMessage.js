@@ -19,10 +19,12 @@ export default class AddMessage extends Component {
             value: "",
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleSubmit(e){
         e.preventDefault();
         this.castMessageToFirebase()
+
 
     };
     /*

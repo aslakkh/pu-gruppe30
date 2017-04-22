@@ -103,28 +103,25 @@ export default class Statistics extends Component {
         })
     }
 
-    data(snapshot){
-        console.log(this.state.courseID);
-        let that = this;
-        let kurs = this.state.courseID;
-        let ting = [];
-        if(snapshot.val().courses[kurs] !== undefined && snapshot.val().courses[kurs]['sessions']) {
-            ting.push(snapshot.val().courses[kurs]['sessions']);
-            ting.forEach(function (session) {
-                    Object.keys(session).map((session2) => {that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
-                    })
-                }
-            )
-        }
-    }
+
 
     getDataFromFirebase(){
         console.log(this.state.courseID);
         let that = this;
+        let kurs = this.state.courseID;
+        let ting = [];
         let messageRef = firebase.database().ref();
         messageRef.child('users/').on('child_added', function(snapshot) {
-            that.data(snapshot)
-});
+            if(snapshot.val().courses[kurs] !== undefined && snapshot.val().courses[kurs]['sessions']) {
+                ting.push(snapshot.val().courses[kurs]['sessions']);
+                ting.forEach(function (session) {
+                    Object.keys(session).map((session2) => {that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
+
+
+                })
+            }
+                )
+        }});
 
     }
     sortNumber(a,b) {

@@ -24,7 +24,7 @@ export default class AddSession extends Component{
         console.log( new Date().getTime())
         this.state = {
             courseID: this.props.courseID,
-            date: new Date(new Date().getTime() + (24*60*60*1000)).toISOString(),
+            date: new Date(new Date().getTime()).toISOString(),
             show: false,
             hourSelected: 0,
             minSelected: 0,

@@ -56,7 +56,7 @@ componentWillMount(){
                 <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
                     {Object.keys(this.state.courses).map((emne,i) =>
 
-                    <NavItem eventKey={emne} className="navbar-link" key={i} >
+                    <NavItem eventKey={emne} className="navbar-link" key={i} onSelect={this.setState({key:emne})} >
                         {emne}
                     </NavItem>
 

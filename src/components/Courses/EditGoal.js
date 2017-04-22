@@ -17,6 +17,8 @@ export default class EditGoal extends Component {
         super(props);
         this.close = this.close.bind(this);
         this.handleSaveBtn = this.handleSaveBtn.bind(this);
+        this.handleUseBtn = this.handleUseBtn.bind(this);
+
 
         this.state = {
             showModal: this.props.showModal,

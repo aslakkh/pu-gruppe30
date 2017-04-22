@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ximport React, { Component } from 'react';
 import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem} from 'react-bootstrap';
 import './editGoals.css'
 import {getSec} from '../../helpers/auth';

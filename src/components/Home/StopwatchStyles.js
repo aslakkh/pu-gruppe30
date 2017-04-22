@@ -1,4 +1,28 @@
-body {
+import React from 'react';
+
+export const styles = {
+    timer: {
+        textAlign: 'center',
+        fontSize: '500%'
+},
+    greyText: {
+        color:'#999999'
+    },
+    plannedText: {
+        fontSize:'130%'
+    },
+    center: {
+        textAlign: 'center'
+    },
+    margin: {
+        marginTop: '4%'
+    }
+
+};
+
+
+
+/*body {
     font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight',
     'Helvetica Neueu', Helvetica, Arial, sans-serif;
     margin: 0;
@@ -7,7 +31,7 @@ body {
 
 .Stopwatch { text-align: center }
 .Stopwatch-timer {
-    font-size: 76px;
+    font-size: 200px;
     font-weight: 100;
     line-height: 160px;
 
@@ -58,4 +82,7 @@ body {
     outline: none;
     background: white;
 }
+.Stopwatch-app-timer {
+    font-size: 200px;
+}*/
 

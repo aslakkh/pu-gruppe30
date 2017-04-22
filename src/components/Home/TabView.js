@@ -18,6 +18,8 @@ export default class TabView extends Component{
             view: "Daily Goals",
         });
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
+        console.log("kurs")
+        console.log(this.props.course)
 
     }
     handleSelect(key){

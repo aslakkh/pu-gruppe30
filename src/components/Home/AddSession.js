@@ -5,10 +5,9 @@
 
 import React, { Component } from 'react';
 import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem,ControlLabel} from 'react-bootstrap';
-import { saveGoal } from '../../helpers/auth'
 import {ref } from '../../config/constants'
 import firebase from 'firebase';
-
+import { addSession} from '../../helpers/auth'
 
 
 let DatePicker = require("react-bootstrap-date-picker");
@@ -22,6 +21,7 @@ export default class AddSession extends Component{
         this.validateState = this.validateState.bind(this);
         this.setHours = this.setHours.bind(this);
         this.setMinutes = this.setMinutes.bind(this);
+        console.log( new Date().getTime())
         this.state = {
             courseID: this.props.courseID,
             date: new Date(new Date().getTime() + (24*60*60*1000)).toISOString(),
@@ -74,23 +74,24 @@ export default class AddSession extends Component{
     }
 
 
-    handleSave = (e) => {
+    handleSave(e){
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
         this.setState({secondsPlanned: (this.state.minSelected * 60) + (this.state.hourSelected * 3600)});
         //saveGoal(this.state.courseID, seconds);
         this.setState({
             show:false
-        })
-
-        this.castToFirebase();
+        });
+        addSession(this.state.date,this.state.courseID,this.state.minSelected,this.state.hourSelected);
+        this.setState({secondsplanned:0});
+        //this.castToFirebase();
 
     }
 
 
     castToFirebase(){
         const userUid = firebase.auth().currentUser.uid;
-        const variabel = new Date(this.state.date)
-        variabel.setMilliseconds(Math.random()*1000)
+        const variabel = new Date(this.state.date);
+        variabel.setMilliseconds(Math.random()*1000);
         const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime());
         timeRef.set({time:(this.state.minSelected * 60) + (this.state.hourSelected * 3600),desc: "secondsPlanned"});
         this.setState({
@@ -161,6 +162,7 @@ export default class AddSession extends Component{
 
         return (
             <div className="main" style={{marginBottom: 10}}>
+                <h4>Forgot to start timer?</h4>
                 <Button bsStyle="primary" bsSize="large" onClick={() => this.setState({show: true})}>
                     Set previous session
                 </Button>
@@ -182,7 +184,7 @@ export default class AddSession extends Component{
                     </Modal.Body>
                     <Modal.Footer>
                         <div>
-                            <Button onClick={this.handleSave}>Save</Button>
+                            <Button onClick={(e) => this.handleSave(e)}>Save</Button>
                             <Button onClick={close}>Close</Button>
                         </div>
                     </Modal.Footer>

@@ -13,10 +13,10 @@ export function HelpButton(props){
 
     var style = {
         marginLeft: '5px',
-    }
+    };
     const helpPopover = (
         <Popover id="help-popover" title={props.title}>{props.helpText}</Popover>
-    )
+    );
 
     return(
         <OverlayTrigger 

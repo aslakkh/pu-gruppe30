@@ -46,4 +46,4 @@ export const styles = {
                 backgroundColor: '#000'
         }
 
-}
+};

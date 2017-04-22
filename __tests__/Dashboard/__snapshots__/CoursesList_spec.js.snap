@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CoursesList renders with props 1`] = `
+<ListGroup
+  bsClass="list-group"
+>
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+        }
+      }
+    >
+      IT5555
+    </div>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Delete
+    </Button>
+  </ListGroupItem>
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "row",
+        }
+      }
+    >
+      TDT0000
+    </div>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Delete
+    </Button>
+  </ListGroupItem>
+</ListGroup>
+`;
+
+exports[`CoursesList renders without props 1`] = `
+<h5>
+  You have no active courses. Add a course below.
+</h5>
+`;

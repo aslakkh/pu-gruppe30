@@ -13,7 +13,7 @@ import {FieldGroup, ListGroup, ListGroupItem, Button} from 'react-bootstrap'
 
 export default class MessageList extends Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state={
             courseID: this.props.courseID,
             messages:undefined
@@ -23,17 +23,17 @@ export default class MessageList extends Component {
     getCommentsFromFirebase(){
         let messageRef = firebase.database().ref();
         let that = this;
-        var messages =[]
+        var messages =[];
         messageRef.child('courses/'+this.state.courseID+'/Messages').on('value', function(snapshot) {
             snapshot.forEach(function(data){
                 messages.unshift([ data.key,data.val().Message])
 
-            })
+            });
             that.setState({
                 messages:messages
-            })
+            });
             messages=[]
-    })
+    });
         console.log(this.state.messages)
     }
 

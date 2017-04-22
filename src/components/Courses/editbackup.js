@@ -47,8 +47,8 @@ export default class EditGoals extends React.Component {
     };
 
     getValidationState(){
-        console.log("val: ")
-        console.log(this.state.value)
+        console.log("val: ");
+        console.log(this.state.value);
         const length = this.state.value.length;
         const reg = /^\d+(\.\d{1,1})?$/;
         if(reg.test(this.state.value)){
@@ -127,23 +127,23 @@ export default class EditGoals extends React.Component {
 }
 
     .label {
-    background: white;
+    white;
     color: #000;
-    font-size: 18px;
+    font-size: 18px;;
     font-style: normal;
     font-weight: bold;
 
-}
+};;;
 
-.radio-inline {
-    font-size: 18px;
-    width:4em;
-    height:4em;
-    padding-top: 20px;
-    padding-right: 5px;
-}
+.radio-inline; {
+    font-size: 18px;;
+    4em;;
+    4em;;
+    padding-top: 20px;;
+    padding-right: 5px;;
+};;;
 
-.enter-form {
-    height: 80px;
+.enter-form; {
+    80px;;
 }
 

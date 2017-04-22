@@ -46,7 +46,7 @@ export default class PastGoals extends React.Component {
     }
 
     getResultText(millisec, timeSpent, goal) {
-        let result = ""
+        let result = "";
         let formattedDate = this.formatDate(millisec);
         if (this.state.view === 'Daily') {
             result = formattedDate[4] + " " + formattedDate[5] + "/" + formattedDate[2] + "/" + formattedDate[0] + ".";

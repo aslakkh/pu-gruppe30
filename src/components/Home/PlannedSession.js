@@ -2,8 +2,10 @@
  * Created by jan on 07/03/2017.
  */
 import React, { Component } from 'react'
-import {Button, ProgressBar, ListGroup, ListGroupItem, Grid,Col,Row} from 'react-bootstrap'
+import { ListGroup, ListGroupItem} from 'react-bootstrap'
 import firebase from 'firebase'
+import {styles} from './StopwatchStyles.js'
+import { plannedSession} from '../../helpers/auth'
 
 
 function Test(props){
@@ -24,7 +26,7 @@ export default class PlannedSession extends Component{
 
 
     constructor(props){
-        super(props)
+        super(props);
         this.state={
             desc: "hei",
             emne: this.props.emne,
@@ -33,17 +35,20 @@ export default class PlannedSession extends Component{
 
     }
 componentWillMount(){
-    let that = this
+
+    let that = this;
     const userUid = firebase.auth().currentUser.uid;
     firebase.database().ref().child('users/'+userUid+'/courses/'+that.state.emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
         that.setState({
             sessions: snap.val()
         })
+        console.log(snap.val())
 })
 }
 
     handleClick(key){
-    this.props.callbackParent(this.state.sessions[key].goal)
+    console.log(key);
+    this.props.callbackParent(this.state.sessions[key].goal, key);
         this.setState({activeTabClassName:key})
     }
 
@@ -51,18 +56,21 @@ componentWillMount(){
 
     render(){
         if(this.state.sessions == null || this.state.sessions == undefined){
-            return <h4></h4>
+            return <h4>No planned sessions</h4>
         }
         else{
             return(
+                <div>
+                    <h4>Planned Sessions</h4>
             <ListGroup >
                 {Object.keys(this.state.sessions).map((key) => {
                     return <ListGroupItem key={key}  className={(this.state.activeTabClassName === key) ? "active" : ""} onClick={() => this.handleClick(key)}>
-                        {this.state.sessions[key].goal}
-                        {new Date(parseInt(key)).toISOString()}
+                        <div style={styles.plannedText}>{this.state.sessions[key].goal}</div>
+                        <div style={styles.greyText}>{new Date(parseInt(key)).toDateString()}</div>
                     </ListGroupItem>
                 })}
             </ListGroup>
+                </div>
         )
         }
         

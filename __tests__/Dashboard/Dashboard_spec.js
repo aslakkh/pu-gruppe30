@@ -1,6 +1,9 @@
 import React from 'react';
+import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import renderer from 'react-test-renderer';
-import Dashboard from '../src/components/Dashboard/Dashboard.js';
+import TestUtils from "react-addons-test-utils";
+import Dashboard from '../../src/components/Dashboard/Dashboard.js';
 
 const courses = {
     IT5555: {
@@ -10,7 +13,20 @@ const courses = {
         oldGoals: {},
         time: 0,
     },
-}
+};
+
+describe("Dashboard", function(){
+
+    it('renders', () => {
+        shallow(<Dashboard />);
+    })
+
+    it('closeModal sets showModal to false', () => {
+        const wrapper = shallow(<Dashboard/>);
+        wrapper.find('Button').simulate('click');
+        
+    })
+})
 
 test('Dashboard renders student dashboard', () => {
     const component = renderer.create(
@@ -22,4 +38,4 @@ test('Dashboard renders student dashboard', () => {
         <Dashboard courses={courses} />
     ).toJSON();
     expect(component2).toMatchSnapshot();
-})
+});

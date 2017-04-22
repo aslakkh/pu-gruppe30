@@ -1,11 +1,18 @@
 /**
- * Created by jan on 19/04/2017.
+ * Created by jan on 20/04/2017.
  */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PlannedSession from '../src/components/Home/PlannedSession.js';
+import SessionPlanner from '../src/components/SessionPlanner/SessionPlanner.js';
 import TestUtils from "react-addons-test-utils"
 
+jest.useFakeTimers();
+const DATE_TO_USE = new Date('2016');
+const _Date = Date;
+global.Date = jest.fn(() => DATE_TO_USE);
+global.Date.UTC = _Date.UTC;
+global.Date.parse = _Date.parse;
+global.Date.now = _Date.now;
 const courses={
     TES1000:{active: true,
         goals: {dailyGoal:{active: false,
@@ -26,12 +33,15 @@ const courses={
         }
     }};
 const coursesNull=null;
-describe("Stopwatch", function () {
+describe("AddSession", function () {
     let renderer2;
     let component2;
+    jest.useFakeTimers();
+    Date.getTime = jest.fn(() => 1482363367071);
+    Date.now = jest.fn(() => 1482363367071);
     renderer2 = TestUtils.createRenderer();
     renderer2.render(
-        <PlannedSession emne={"TES1000"} callbackParent={(newState) => this.onChildChanged(newState) }/>
+        <SessionPlanner course={'TES1000'}/>
     );
     component2 = renderer2.getRenderOutput();
     it("One course", () => {

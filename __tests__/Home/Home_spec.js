@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Home from '../src/components/Home/Home.js';
+import Home from '../../src/components/Home/Home.js';
 import TestUtils from "react-addons-test-utils"
 
 const courses={

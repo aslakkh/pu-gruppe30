@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddSession One course 1`] = `
+<div>
+  <FormGroup
+    bsClass="form-group"
+    controlId="planSessionForm"
+    validationState="error"
+  >
+    <ControlLabel
+      bsClass="control-label"
+      srOnly={false}
+    >
+      Goal/Description
+    </ControlLabel>
+    <FormControl
+      bsClass="form-control"
+      componentClass="textarea"
+      onChange={[Function]}
+      placeholder="Write what you plan to do here."
+      type="text"
+      value=""
+    />
+  </FormGroup>
+  <FormGroup
+    bsClass="form-group"
+    controlId="datePicker"
+    validationState="error"
+  >
+    <ControlLabel
+      bsClass="control-label"
+      srOnly={false}
+    >
+      Date
+    </ControlLabel>
+    <DatePicker
+      autoFocus={false}
+      calendarPlacement="bottom"
+      cellPadding="5px"
+      clearButtonElement="×"
+      dateFormat="MM/DD/YYYY"
+      dayLabels={
+        Array [
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat",
+        ]
+      }
+      disabled={false}
+      id="example-datepicker"
+      instanceCount={0}
+      monthLabels={
+        Array [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ]
+      }
+      nextButtonElement=">"
+      onChange={[Function]}
+      previousButtonElement="<"
+      showClearButton={true}
+      showTodayButton={false}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+      todayButtonLabel="Today"
+      value="2016-01-01T00:00:00.000Z"
+    />
+  </FormGroup>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsSize="large"
+    bsStyle="primary"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Plan this session
+  </Button>
+</div>
+`;

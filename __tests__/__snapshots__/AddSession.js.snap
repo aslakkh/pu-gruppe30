@@ -106,7 +106,7 @@ exports[`AddSession One course 1`] = `
                               <FormGroup
                                       bsClass="form-group"
                                       controlId="datePicker"
-                                      validationState="error"
+                                      validationState="success"
                               >
                                       <ControlLabel
                                               bsClass="control-label"
@@ -161,7 +161,7 @@ exports[`AddSession One course 1`] = `
                                                             }
                                               }
                                               todayButtonLabel="Today"
-                                              value="2017-04-21T12:49:51.951Z"
+                                              value="2016-01-01T00:00:00.000Z"
                                       />
                               </FormGroup>
                       </ModalBody>
@@ -436,7 +436,7 @@ exports[`AddSession One course 1`] = `
                               <FormGroup
                                       bsClass="form-group"
                                       controlId="datePicker"
-                                      validationState="error"
+                                      validationState="success"
                               >
                                       <ControlLabel
                                               bsClass="control-label"
@@ -491,7 +491,7 @@ exports[`AddSession One course 1`] = `
                                                             }
                                               }
                                               todayButtonLabel="Today"
-                                              value="2017-04-21T12:49:51.951Z"
+                                              value="2016-01-01T00:00:00.000Z"
                                       />
                               </FormGroup>
                       </ModalBody>
@@ -727,7 +727,7 @@ exports[`AddSession One course 1`] = `
         "setMinutes": [Function],
         "state": Object {
           "courseID": "TES1000",
-          "date": "2017-04-21T12:49:51.951Z",
+          "date": "2016-01-01T00:00:00.000Z",
           "hourSelected": 0,
           "minSelected": 0,
           "secondsPlanned": 0,
@@ -774,7 +774,7 @@ exports[`AddSession One course 1`] = `
       <FormGroup
         bsClass="form-group"
         controlId="datePicker"
-        validationState="error"
+        validationState="success"
       >
         <ControlLabel
           bsClass="control-label"
@@ -829,7 +829,7 @@ exports[`AddSession One course 1`] = `
             }
           }
           todayButtonLabel="Today"
-          value="2017-04-21T12:49:51.951Z"
+          value="2016-01-01T00:00:00.000Z"
         />
       </FormGroup>
     </ModalBody>

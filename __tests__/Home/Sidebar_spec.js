@@ -3,10 +3,9 @@
  */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Sidebar from '../src/components/Home/Sidebar.js';
+import Sidebar from '../../src/components/Home/Sidebar.js';
 import TestUtils from "react-addons-test-utils"
-import TabView from '../src/components/Home/TabView.js';
-const course={
+const courses={
     TES1000:{active: true,
         goals: {dailyGoal:{active: false,
             timeSet: 0,
@@ -25,13 +24,25 @@ const course={
 
         }
     }};
-const emne = "TES1000";
-describe("TabView", function () {
+const courseNull = undefined;
+describe("Sidebar", function () {
     let renderer2;
+    let renderer3;
+    let renderer4;
     let component2;
+    let component3;
+    let component4;
     renderer2 = TestUtils.createRenderer();
     renderer2.render(
-        <TabView course={course} emne={emne}/>
+        <Sidebar courses={courseNull}/>
+    );
+    component2 = renderer2.getRenderOutput();
+    it("No courses", () => {
+        expect(component2).toMatchSnapshot();
+    });
+    //renderer3 = TestUtils.createRenderer();
+    renderer2.render(
+        <Sidebar courses={courses}/>
     );
     component2 = renderer2.getRenderOutput();
     it("One course", () => {

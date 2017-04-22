@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Not logged in 1`] = `
+<Courses
+  courses={
+    Object {
+      "TES1000": Object {
+        "active": true,
+        "goals": Object {
+          "dailyGoal": Object {
+            "active": false,
+            "timeSet": 0,
+            "timeSpent": 0,
+            "value": 0,
+          },
+          "monthlyGoal": Object {
+            "active": false,
+            "timeSet": 0,
+            "timeSpent": 0,
+            "value": 0,
+          },
+          "weeklyGoal": Object {
+            "active": false,
+            "timeSet": 0,
+            "timeSpent": 0,
+            "value": 0,
+          },
+        },
+      },
+    }
+  }
+/>
+`;

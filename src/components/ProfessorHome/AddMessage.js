@@ -20,7 +20,7 @@ export default class AddMessage extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
     }
-    handleSubmit = (e) =>{
+    handleSubmit(e){
         e.preventDefault();
         this.castMessageToFirebase()
 

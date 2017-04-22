@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List Message Not logged in 1`] = `
+<h1>
+  Loading2
+</h1>
+`;
+
+exports[`List Message Not logged in 2`] = `
+<h1>
+  Loading2
+</h1>
+`;

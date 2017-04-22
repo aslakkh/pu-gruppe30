@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add Message Not logged in 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <FormControl
+    bsClass="form-control"
+    componentClass="input"
+    id="formControlsText"
+    inputRef={[Function]}
+    label="Message"
+    onChange={[Function]}
+    placeholder="Message"
+    type="text"
+    value=""
+  />
+  <button
+    className="btn btn-primary"
+    disabled={true}
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;

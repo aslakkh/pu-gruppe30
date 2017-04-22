@@ -50,9 +50,6 @@ componentDidMount(){
   
 }
 	render (){
-/*        if(!this.state.done) {
-        return (<div className="chatapp">Loading...</div>);
-    }*/
 		return (
 			<Sidebar courses={this.state.courses}/>
 

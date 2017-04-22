@@ -2,9 +2,8 @@
  * Created by jan on 19/04/2017.
  */
 import React from 'react';
-import renderer from 'react-test-renderer';
-import SpecificCourse from '../src/components/Home/specificCourse.js';
-import TestUtils from "react-addons-test-utils"
+import { shallow } from 'enzyme';
+import Sidebar from '../../src/components/Home/Sidebar.js';
 
 const courses={
     TES1000:{active: true,
@@ -25,16 +24,13 @@ const courses={
 
         }
     }};
-const coursesNull=null;
-describe("Specific Course", function () {
-    let renderer2;
-    let component2;
-    renderer2 = TestUtils.createRenderer();
-    renderer2.render(
-        <SpecificCourse course={courses} courseID={"TES1000"}/>
-    );
-    component2 = renderer2.getRenderOutput();
-    it("One course", () => {
-        expect(component2).toMatchSnapshot();
+
+describe('Sidebar', () => {
+    it('Renders Sidebar without courses', () => {
+        const sidebar = shallow(<Sidebar courses={undefined} />);
+        expect(sidebar.find('h4').text()).toEqual('ingenting');
     });
+
+
+
 });

@@ -1,17 +1,27 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import ManageCourses from '../../src/components/Dashboard/ManageCourses.js';
+import shallow from 'enzyme'
 
+import mount from 'enzyme'
 const courses = ["IT1010", "TDT4100"];
+describe('AddCourse renders FormGroup and button', function() {
 
-test('ManageCourses renders listgroup, searchbar and functional Modal', () => {
+
     const component = renderer.create(
         <ManageCourses />
     ).toJSON();
-    expect(component).toMatchSnapshot(); //renders h4 if no courses in props
+     //renders h4 if no courses in props
+    it("No courses", () => {
+        expect(component).toMatchSnapshot();
+    });
 
     const componentWithProps = renderer.create(
         <ManageCourses courses={courses} />
     ).toJSON();
-    expect(componentWithProps).toMatchSnapshot();
+
+    it("With courses", () => {
+        expect(componentWithProps).toMatchSnapshot();
+    });
+
 });

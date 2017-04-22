@@ -2,8 +2,7 @@
 
 exports[`Sidebar No courses 1`] = `
 <Uncontrolled(TabContainer)
-  activeKey={undefined}
-  defaultActiveKey="TES1000"
+  defaultActiveKey={0}
   id="left-tabs"
 >
   <Row
@@ -53,32 +52,13 @@ exports[`Sidebar No courses 1`] = `
           <h1>
             TES1000
           </h1>
-          <SpecificCourse
-            course={
-              Object {
-                "active": true,
-                "goals": Object {
-                  "dailyGoal": Object {
-                    "active": false,
-                    "timeSet": 0,
-                    "timeSpent": 0,
-                    "value": 0,
-                  },
-                  "monthlyGoal": Object {
-                    "active": false,
-                    "timeSet": 0,
-                    "timeSpent": 0,
-                    "value": 0,
-                  },
-                  "weeklyGoal": Object {
-                    "active": false,
-                    "timeSet": 0,
-                    "timeSpent": 0,
-                    "value": 0,
-                  },
-                },
-              }
-            }
+          <AddMessage
+            courseID="TES1000"
+          />
+          <MessageList
+            courseID="TES1000"
+          />
+          <Statistics
             courseID="TES1000"
           />
         </TabPane>
@@ -90,8 +70,7 @@ exports[`Sidebar No courses 1`] = `
 
 exports[`Sidebar One course 1`] = `
 <Uncontrolled(TabContainer)
-  activeKey={undefined}
-  defaultActiveKey="TES1000"
+  defaultActiveKey={0}
   id="left-tabs"
 >
   <Row
@@ -141,32 +120,13 @@ exports[`Sidebar One course 1`] = `
           <h1>
             TES1000
           </h1>
-          <SpecificCourse
-            course={
-              Object {
-                "active": true,
-                "goals": Object {
-                  "dailyGoal": Object {
-                    "active": false,
-                    "timeSet": 0,
-                    "timeSpent": 0,
-                    "value": 0,
-                  },
-                  "monthlyGoal": Object {
-                    "active": false,
-                    "timeSet": 0,
-                    "timeSpent": 0,
-                    "value": 0,
-                  },
-                  "weeklyGoal": Object {
-                    "active": false,
-                    "timeSet": 0,
-                    "timeSpent": 0,
-                    "value": 0,
-                  },
-                },
-              }
-            }
+          <AddMessage
+            courseID="TES1000"
+          />
+          <MessageList
+            courseID="TES1000"
+          />
+          <Statistics
             courseID="TES1000"
           />
         </TabPane>

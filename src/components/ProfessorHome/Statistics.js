@@ -87,6 +87,9 @@ export default class Statistics extends Component {
 
 
     componentWillMount(){
+
+
+
         this.getDataFromFirebase()
     }
     componentDidMount(){

@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Sidebar from '../src/components/Home/Sidebar.js';
+import Sidebar from '../../src/components/ProfessorHome/Sidebar.js';
 import TestUtils from "react-addons-test-utils"
 const courses={
     TES1000:{active: true,

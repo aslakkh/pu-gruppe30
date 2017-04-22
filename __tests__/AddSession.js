@@ -8,11 +8,16 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import AddSession from '../src/components/Home/AddSession.js';
 import TestUtils from "react-addons-test-utils"
+import {shallow, render} from 'enzyme';
 
 //jest.mock('../src/helpers/auth.js');
 jest.useFakeTimers();
-Date.getTime = jest.fn(() => 1482363367071);
-Date.now = jest.fn(() => 1482363367071);
+const DATE_TO_USE = new Date('2016');
+const _Date = Date;
+global.Date = jest.fn(() => DATE_TO_USE);
+global.Date.UTC = _Date.UTC;
+global.Date.parse = _Date.parse;
+global.Date.now = _Date.now;
 const courses={
     TES1000:{active: true,
         goals: {dailyGoal:{active: false,
@@ -50,4 +55,12 @@ describe("AddSession", function () {
         Date.now = jest.fn(() => 1482363367071);
         expect(component2).toMatchSnapshot();
     });
+    it('Open set old session', () => {
+        const wrapper = shallow(<AddSession courseID={"TES1000"}/>);
+        wrapper.find('Button').first().simulate('click');
+        wrapper.find('Button').at(1).simulate('click');
+
+
+
+    })
 });

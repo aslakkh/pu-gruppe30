@@ -42,6 +42,7 @@ componentWillMount(){
         that.setState({
             sessions: snap.val()
         })
+        console.log(snap.val())
 })
 }
 

@@ -102,6 +102,9 @@ export default class Statistics extends Component {
             show:false
         })
     }
+    /*
+    get sessions from database and selects only for the specific course
+     */
     getDataFromFirebase(){
         console.log(this.state.courseID);
         let that = this;
@@ -121,10 +124,15 @@ export default class Statistics extends Component {
         }});
 
     }
+    /*
+    Sorting function
+     */
     sortNumber(a,b) {
         return a - b;
     }
-
+/*
+formats the sessions to usable data for chart.js
+ */
     handleClick2(){
         if(this.sessions.length >0 &&!this.state.done){
             var list = this.sessions;

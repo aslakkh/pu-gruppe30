@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
+
+/*
+Start-site for students
+ */
+
 export default class Home extends Component {
   constructor(props){
     super(props);
@@ -34,7 +39,7 @@ export default class Home extends Component {
       }
     else{return (
       <div>
-        Home. Not Protected. Anyone can see this.
+        Loading.
       </div>
     )}
   } 

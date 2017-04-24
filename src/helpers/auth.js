@@ -259,7 +259,7 @@ export function addSession(date,courseID,minSelected, hourSelected){
     const userUid = firebase.auth().currentUser.uid;
     const variabel = new Date(date);
     variabel.setMilliseconds(Math.random()*1000);
-    const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime());
+    const timeRef = ref.child('users/'+userUid+'/courses/'+courseID+'/sessions/'+ variabel.getTime());
     timeRef.set({time:(minSelected * 60) + (hourSelected * 3600),desc: "secondsPlanned"});
     return true;
 }

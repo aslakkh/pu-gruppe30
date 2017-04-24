@@ -1,13 +1,8 @@
-
-/**
- * Created by anderssalvesen on 08.04.2017.
- */
-
 import React, { Component } from 'react';
 import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem} from 'react-bootstrap';
 import { ref } from '../../config/constants'
 import {getDaysHoursMins} from '../../helpers/helperFunctions';
-import { saveGoal2 } from '../../helpers/auth'
+import { setGoal } from '../../helpers/auth'
 import './editGoal.css'
 
 
@@ -17,8 +12,6 @@ export default class EditGoal extends Component {
         super(props);
         this.close = this.close.bind(this);
         this.handleSaveBtn = this.handleSaveBtn.bind(this);
-        this.handleUseBtn = this.handleUseBtn.bind(this);
-
 
         this.state = {
             showModal: this.props.showModal,
@@ -32,6 +25,9 @@ export default class EditGoal extends Component {
     }
 
     componentWillMount(){
+        /*
+         Fetches teacher recommendation from firebase.
+         */
         let that = this;
         let coursesRef = ref.child("/courses/" + this.state.courseID + "/weekly");
         coursesRef.on("value", function(snapshot){
@@ -47,8 +43,12 @@ export default class EditGoal extends Component {
         });
     }
 
-    handleUseBtn(e){
-        e.preventDefault(); //prevents default browser behaviour on click, whatever that means
+
+    handleUseBtn(e) {
+        /*
+         When use-button is clicked, dropdown menu is set with teacher recommendation.
+         */
+        e.preventDefault(); //prevents default browser behaviour on click
         if (this.state.view == 'Weekly Goal') {
             let time = getDaysHoursMins(this.state.teacherRecommendation);
             this.setDays(time[0]);
@@ -63,7 +63,10 @@ export default class EditGoal extends Component {
     };
 
     handleSaveBtn(e){
-        e.preventDefault(); //prevents default browser behaviour on click, whatever that means
+        /*
+         On save-click dropdown values are converted into seconds and stored in firebase
+         */
+        e.preventDefault(); //prevents default browser behaviour on click
         let seconds = 0;
         if (this.state.view === 'Monthly Goal' || this.state.view === 'Weekly Goal') {
             seconds = (parseInt(this.state.minSelected) * 60) + (parseInt(this.state.hourSelected) * 60 * 60) + (parseInt(this.state.daySelected) * 12 * 60 * 60);
@@ -72,11 +75,14 @@ export default class EditGoal extends Component {
         }
         if (seconds > 0) {
             let view = (this.state.view === "Monthly Goal") ? "monthlyGoal" :(this.state.view === "Weekly Goal") ? "weeklyGoal": "dailyGoal";
-            saveGoal2(view, this.state.courseID, seconds, Date.now());
+            setGoal(view, this.state.courseID, seconds, Date.now());
         }
     };
 
     getDropdowns(view) {
+        /*
+         Helper method for render method. Populates the dropdownmenus with correct information.
+         */
         let items = [];
         if (view === 'Monthly Goal' || view === 'Weekly Goal') {
             items.push(<Label className="plain-label" key={1}>Days:</Label>);
@@ -119,16 +125,16 @@ export default class EditGoal extends Component {
     }
 
     setDays(num) {
-        num != 0 ? this.setState({daySelected: num}) : this.setState({daySelected : '0'});
+        num !== 0 ? this.setState({daySelected: num}) : this.setState({daySelected : '0'});
     }
 
     setHours(num) {
-        num != 0 ? this.setState({hourSelected: num}) : this.setState({hourSelected : '0'});
+        num !== 0 ? this.setState({hourSelected: num}) : this.setState({hourSelected : '0'});
 
     }
 
     setMinutes(num) {
-        num != 0 ? this.setState({minSelected: num}) : this.setState({minSelected : '0'});
+        num !== 0 ? this.setState({minSelected: num}) : this.setState({minSelected : '0'});
     }
 
     close(){
@@ -151,17 +157,17 @@ export default class EditGoal extends Component {
                         <div>
                             {this.getDropdowns(this.state.view)}
                             <div>
-                                <Label className="help-label">{this.state.view != 'Daily Goal' ? "1 day is considered 12 hours" : null}</Label>
+                                <Label className="help-label">{this.state.view !== 'Daily Goal' ? "1 day is considered 12 hours" : null}</Label>
                             </div>
                             <Label className="help-label">
-                                {this.state.teacherRecommendation != null && this.state.view == 'Monthly Goal' ?
+                                {this.state.teacherRecommendation !== null && this.state.view == 'Monthly Goal' ?
                                     "Teacher expectation: " +  getDaysHoursMins(this.state.teacherRecommendation * 4)[4] :
-                                    (this.state.teacherRecommendation != null && this.state.view == 'Weekly Goal') ?
+                                    (this.state.teacherRecommendation !== null && this.state.view == 'Weekly Goal') ?
                                         "Teacher expectation: " +  getDaysHoursMins(this.state.teacherRecommendation)[4] :
-                                        (this.state.teacherRecommendation != null && this.state.view === 'Daily Goal' ?
+                                        (this.state.teacherRecommendation !== null && this.state.view === 'Daily Goal' ?
                                             null : "Teacher expectation not set")}
                             </Label>
-                            {this.state.teacherRecommendation != null && this.state.view != 'Daily Goal' ?
+                            {this.state.teacherRecommendation !== null && this.state.view !== 'Daily Goal' ?
                                 <Button bsSize="small" onClick={this.handleUseBtn}>Use</Button> : null}
                         </div>
 

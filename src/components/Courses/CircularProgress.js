@@ -1,9 +1,6 @@
-/**
- * Created by anderssalvesen on 06.04.2017.
- */
 import React, { Component } from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
-import {Label, Form, FormGroup, Button} from 'react-bootstrap'
+import {Form, FormGroup, Button} from 'react-bootstrap'
 import {secondsToString, getFirstInMonthWeekDay} from '../../helpers/helperFunctions';
 import { saveProgress, activateGoal, saveExpiredGoal, isGoalActive } from '../../helpers/auth'
 
@@ -36,7 +33,6 @@ export default class CircularProgress extends Component {
             monthlySet: this.props.course.goals.monthlyGoal.timeSet,
 
         };
-
     }
 
     componentWillReceiveProps(nextProps){
@@ -105,7 +101,7 @@ export default class CircularProgress extends Component {
 
     deactivateGoal() {
         /*
-         Checks if the goal has expired. If expired the goal is set to inactive.
+         Checks if the goal has expired. If expired the goal is set to inactive in firebase.
          */
 
         let dates = getFirstInMonthWeekDay();
@@ -132,19 +128,19 @@ export default class CircularProgress extends Component {
          Checks if the goal is active.
          If the goal is inactive and some amount of time has been spent on the course, the goal is stored in oldGoals in firebase.
          */
-        if (!isGoalActive(this.state.courseID, "dailyGoal") && this.state.dailySet != 0) {
-            if (this.state.dailyTimeSpent != 0) {
+        if (!isGoalActive(this.state.courseID, "dailyGoal") && this.state.dailySet !== 0) {
+            if (this.state.dailyTimeSpent !== 0) {
                 saveExpiredGoal('daily',this.state.dailySet, this.state.courseID, this.state.dailyGoal, this.state.dailyTimeSpent);
             }
         }
-        if (!isGoalActive(this.state.courseID, "weeklyGoal") && this.state.weeklySet != 0) {
-            if (this.state.weeklyTimeSpent != 0 ) {
+        if (!isGoalActive(this.state.courseID, "weeklyGoal") && this.state.weeklySet !== 0) {
+            if (this.state.weeklyTimeSpent !== 0 ) {
                 saveExpiredGoal('weekly',this.state.weeklySet, this.state.courseID, this.state.weeklyGoal, this.state.weeklyTimeSpent);
             }
 
         }
-        if (!isGoalActive(this.state.courseID, "monthlyGoal") && this.state.monthlySet != 0) {
-            if (this.state.monthlyTimeSpent != 0) {
+        if (!isGoalActive(this.state.courseID, "monthlyGoal") && this.state.monthlySet !== 0) {
+            if (this.state.monthlyTimeSpent !== 0) {
                 saveExpiredGoal('monthly',this.state.monthlySet, this.state.courseID, this.state.monthlyGoal, this.state.monthlyTimeSpent);
             }
 
@@ -153,6 +149,11 @@ export default class CircularProgress extends Component {
     }
 
     handleModal(view) {
+        /*
+         -param: view (daily/weekly/monthly)
+         -On edit-button click edit-modal based on view is shown.
+         */
+
         if (view === "Daily Goal") {
             this.setState({showDailyEdit: true});
         }
@@ -173,7 +174,7 @@ export default class CircularProgress extends Component {
 
     createInfoComponent(view, percentage, goal, remaining, timeSpent) {
         /*
-         Sets the progress percentage, color on progressbar and displays the goal if set.
+         -Sets the progress percentage, color on progressbar and displays the goal if set.
          */
 
         let items = [];
@@ -214,16 +215,14 @@ export default class CircularProgress extends Component {
 
     getStrings(goalValue, timeSpent, view) {
 
-        /*
-         Determines the text to be presented to the user
-         */
+        //Determines the text to be presented to the user.
 
         let percent, goal, remaining, spent;
-        timeSpent != 0 ? spent = "Time spent " + view + secondsToString(timeSpent) : spent = "No progress recorded";
-        if (goalValue != 0) {
+        timeSpent !== 0 ? spent = "Time spent " + view + secondsToString(timeSpent) : spent = "No progress recorded";
+        if (goalValue !== 0) {
             goal = secondsToString(goalValue);
             percent = Math.floor((timeSpent / goalValue) * 100);
-            if (timeSpent != 0) {
+            if (timeSpent !== 0) {
                 percent < 100 ? remaining = "Remaining: " + secondsToString(goalValue - timeSpent + 60): remaining = "Completed";
                 if (percent > 100) percent = 100;
             }
@@ -231,7 +230,6 @@ export default class CircularProgress extends Component {
             goal = "Not Set";
             percent = 0;
         }
-        console.log("P: " + percent);
         return [percent, goal, remaining, spent];
 
     }

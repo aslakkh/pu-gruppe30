@@ -1,6 +1,3 @@
-/**
- * Created by anderssalvesen on 06.04.2017.
- */
 import React, { Component } from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
 import {Form, FormGroup, Button} from 'react-bootstrap'

@@ -9,6 +9,9 @@ import PlannedSession from './PlannedSession'
 import AddSession from './AddSession'
 import {styles} from './StopwatchStyles.js'
 
+/*
+Format from seconds to hh:mm:ss
+ */
 const formattedSeconds = ((sec) => //formats to hh:mm:ss
 Math.floor (sec/3600)+ ':' + Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2));
 
@@ -29,6 +32,9 @@ class Stopwatch extends Component {
         this.started = false
     }
 
+    /*
+    Sends the time spent to firebase
+     */
     castToFirebase(){
         console.log("desc");
         console.log(this.state.desc.value);
@@ -43,6 +49,9 @@ class Stopwatch extends Component {
         planRef.remove();
         }
 }
+/*
+Starts the timer
+ */
     handleStartClick() {
         if(!this.started){ //Makes sure the button isnt clicked twice
             this.started = true;
@@ -82,6 +91,10 @@ class Stopwatch extends Component {
         this.castToFirebase();
         clearInterval(this.incrementer);
     }
+
+    /*
+    Gets the selected planned session, if selected
+     */
     onChildChanged(newState,newState2){
         console.log(newState,newState2);
         this.setState({

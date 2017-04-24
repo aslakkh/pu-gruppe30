@@ -10,6 +10,11 @@ import CourseInformation from './../Courses/CourseInformation'
 import Results from './../Courses/Results'
 import './../Courses/results.css'
 
+/*
+Renders the tab-menu on the top, and calls
+ */
+
+
 export default class TabView extends Component{
     constructor(props){
         super(props);

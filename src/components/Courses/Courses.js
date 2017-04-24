@@ -1,26 +1,5 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
-import CourseView from './CourseView'
-
-//unused
-/*function getCourses(props){
-  const that = props;
-    const userUid = firebase.auth().currentUser.uid;
-    ref.child('users/'+userUid+'/courses').once("value").then(function(snapshot){
-      snapshot.forEach(function(data){
-        that.emner.push(data.key)
-
-    })})
-    
-
-
-}*/
-
-//unused
-/*
-function loadedDone(props){
-
-}*/
 
 export default class Courses extends Component {
 constructor(props) {

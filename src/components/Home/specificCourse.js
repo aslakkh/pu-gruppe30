@@ -5,9 +5,9 @@ export default class SpecificCourse extends Component {
 	constructor(props){
 		super(props);
 		this.state = ({
-			courseID:props.courseID,
+			courseID: this.props.courseID,
 			points: undefined,
-			course: props.course
+			course: this.props.course
 
 		})
 
@@ -15,7 +15,13 @@ export default class SpecificCourse extends Component {
 	}
 
 
-
+	componentWillReceiveProps(nextProps){
+		console.log("specificCourse: " + nextProps.courseID);
+		this.setState({
+			courseID: nextProps.courseID,
+			course: nextProps.course
+		})
+	}
 
 
 

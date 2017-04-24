@@ -42,6 +42,7 @@ export default class CircularProgress extends Component {
     componentWillReceiveProps(nextProps){
         this.setState({
             course: nextProps.course,
+            courseID: nextProps.courseID,
             dailyGoal: this.props.course.goals.dailyGoal.value,
             dailySet: this.props.course.goals.dailyGoal.timeSet,
             weeklyGoal: this.props.course.goals.weeklyGoal.value,
@@ -175,7 +176,7 @@ export default class CircularProgress extends Component {
         /*
          Sets the progress percentage, color on progressbar and displays the goal if set.
          */
-
+ 
         let items = [];
         items.push(
             <div key={1} className="view-box" >
@@ -237,6 +238,7 @@ export default class CircularProgress extends Component {
     }
 
     render() {
+        console.log("Inside circularProgress: " + this.state.courseID);
         let goals = this.state.course.goals;
         let dailyInfo = this.getStrings(goals.dailyGoal.value, this.state.dailyTimeSpent, "today: ");
         let weeklyInfo = this.getStrings(goals.weeklyGoal.value, this.state.weeklyTimeSpent, "this week: ");

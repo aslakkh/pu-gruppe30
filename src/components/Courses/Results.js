@@ -28,7 +28,9 @@ export default class Results extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            view: nextProps.view
+            view: nextProps.view,
+            course: nextProps.course,
+            courseID: nextProps.courseID,
         })
     }
 

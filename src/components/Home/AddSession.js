@@ -32,6 +32,12 @@ export default class AddSession extends Component{
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            courseID: nextProps.courseID,
+        })
+    }
+
     handleDropdownClick(time) {
         this.setState({activeDropdownBtn: time})
     }

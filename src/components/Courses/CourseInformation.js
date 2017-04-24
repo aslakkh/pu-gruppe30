@@ -24,17 +24,37 @@ export default class CourseInformation extends Component{
         
     }
 
+    componentWillReceiveProps(nextProps){
+        var messages = this.getMessages();
+        this.setState({
+            courseID: nextProps.courseID,
+            messages: messages,
+        })
+    }
     //retreive messages from firebase, set component state
     componentDidMount(){
+        var messages = this.getMessages();
+        this.setState({
+            messages: messages,
+        })
+        // let that = this;
+        // var courseRef = firebase.database().ref().child('courses/'+this.state.courseID+'/Messages');
+        // courseRef.on('value', snap => {
+        //     that.setState({
+        //         messages: snap.val(),
+        //     });
+        // });
         
+    }
+
+    getMessages(){
         let that = this;
         var courseRef = firebase.database().ref().child('courses/'+this.state.courseID+'/Messages');
+        var messages;
         courseRef.on('value', snap => {
-            that.setState({
-                messages: snap.val(),
-            });
+            messages = snap.val();
         });
-        
+        return messages;
     }
 
     msToDateString(dateInMs){
@@ -45,6 +65,7 @@ export default class CourseInformation extends Component{
 
     render(){
         //render based on if course has messages
+        console.log("COURSE INFO: " + this.state.courseID);
         if(this.state.messages === null || this.state.messages === undefined){
             return(
                 <div>

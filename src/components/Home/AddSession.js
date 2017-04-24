@@ -8,7 +8,9 @@ import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem,ControlL
 import {ref } from '../../config/constants'
 import firebase from 'firebase';
 import { addSession} from '../../helpers/auth'
-
+/*
+    Add an old session
+ */
 
 let DatePicker = require("react-bootstrap-date-picker");
 export default class AddSession extends Component{
@@ -51,6 +53,7 @@ export default class AddSession extends Component{
 
 
 
+
     validateState(){
         //validates that date is after today
         //validates that goal is not empty
@@ -83,21 +86,9 @@ export default class AddSession extends Component{
         });
         addSession(this.state.date,this.state.courseID,this.state.minSelected,this.state.hourSelected);
         this.setState({secondsplanned:0});
-        //this.castToFirebase();
 
     }
 
-
-    castToFirebase(){
-        const userUid = firebase.auth().currentUser.uid;
-        const variabel = new Date(this.state.date);
-        variabel.setMilliseconds(Math.random()*1000);
-        const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.courseID+'/sessions/'+ variabel.getTime());
-        timeRef.set({time:(this.state.minSelected * 60) + (this.state.hourSelected * 3600),desc: "secondsPlanned"});
-        this.setState({
-            secondsPlanned: 0
-        })
-    }
 
 
 

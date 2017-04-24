@@ -14,8 +14,6 @@ import firebase from 'firebase';
 import ProfessorHome from './ProfessorHome/ProfessorHome'
 import './index.css'
 function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
-  //console.log("Inside MatchWhenAuthed - courses = ");
-  //console.log(rest.courses);
   return (
     <Route
       {...rest}
@@ -26,19 +24,6 @@ function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
   )
 }
 
-//Unused
-/*function getCourse(user){
-    let emner = []
-    let that = this
-    const userUid = user;
-    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
-      snapshot.forEach(function(data){
-        emner.push(data.key)
-        that.setState({})
-    })})
-    return(emner)
-
-}*/
 
 function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   return (
@@ -111,9 +96,6 @@ export default class App extends Component {
     this.removeListener()
   }
 
-  //                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
-//                    <NavItem><Link to="/Courses" className="navbar-link">Courses</Link></NavItem>
-    //<Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Home/>}/>
   homeDecide(){
       if(this.state.admin === true){
           return (<ProfessorHome courses={this.state.courses}/>)

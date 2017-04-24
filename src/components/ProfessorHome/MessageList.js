@@ -35,14 +35,15 @@ export default class MessageList extends Component {
             });
             messages=[]
     });
-        console.log(this.state.messages)
     }
 
     componentWillMount(){
         this.getCommentsFromFirebase()
     }
 
-
+/*
+    Deletes selected message
+ */
 handleClick(key) {
     var userRef = ref.child('courses/' + this.state.courseID + '/Messages/');
     userRef.child(key).remove();

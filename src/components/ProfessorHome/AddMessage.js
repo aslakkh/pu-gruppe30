@@ -49,7 +49,9 @@ export default class AddMessage extends Component {
     handleChange(event) {
         this.setState({value: event.target.value});
       }
-
+/*
+Checks if message is not empty
+ */
     checkMessage(){
         if (this.state.value === ""){
             return true

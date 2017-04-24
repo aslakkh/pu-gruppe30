@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import SpecificCourse from './specificCourse'
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
 
 /*Maps the courses to make the sidebar and the site for the specific courses
 *
@@ -49,7 +50,8 @@ componentWillMount(){
     }
     else{
       return (
-
+          <Router>
+              <div>
             <Tab.Container id="left-tabs" defaultActiveKey={(Object.keys(this.state.courses)[0])} activeKey={this.state.key}>
                 <Row className="clearfix">
                 <Col sm={3}>
@@ -77,7 +79,8 @@ componentWillMount(){
                 </Col>
                 </Row>
                 </Tab.Container>
-
+              </div>
+            </Router>
 
 
 

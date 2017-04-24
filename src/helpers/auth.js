@@ -188,15 +188,15 @@ export function test(course){
     });
     return s;
 }
-
-export function getSec(course) {
-    var ratingRef = firebase.database().ref("courses/" + course);
-    var s;
-    ratingRef.on("value", function (data) {
-        s = data.val().weekly;
-    });
-    return s;
+export function addSession(date,courseID,minSelected, hourSelected){
+    const userUid = firebase.auth().currentUser.uid;
+    const variabel = new Date(date);
+    variabel.setMilliseconds(Math.random()*1000);
+    const timeRef = ref.child('users/'+userUid+'/courses/'+courseID+'/sessions/'+ variabel.getTime());
+    timeRef.set({time:(minSelected * 60) + (hourSelected * 3600),desc: "secondsPlanned"});
+    return true;
 }
+
 
 export function isGoalActive(course, view) {
     const userUid = firebase.auth().currentUser.uid;
@@ -211,6 +211,5 @@ export function isGoalActive(course, view) {
 export function removeOldGoal(course, type, key) {
     const userUid = firebase.auth().currentUser.uid;
     let oldGoalRef = ref.child('users/'+userUid+'/courses/'+course + '/oldGoals/' + type + "/");
-    console.log(oldGoalRef);
     oldGoalRef.child(key).remove();
 }

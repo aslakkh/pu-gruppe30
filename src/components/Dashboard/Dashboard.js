@@ -6,9 +6,14 @@ import firebase from 'firebase';
 import {getUserUid} from '../../helpers/auth'
 
 const styles = {
-  dashboard: {
+  Dashboard: {
     display: 'flex',
     flexDirection: 'column',
+  },
+
+  AddCourseButton: {
+    marginTop: '5px',
+    marginBottom: '5px',
   }
 };
 
@@ -59,10 +64,10 @@ export default class Dashboard extends Component {
 
   render () {
     return (
-    	<div style={styles.dashboard}>
+    	<div style={styles.Dashboard}>
         <h4>My courses</h4>
+        <Button onClick={this.handleModal} bsStyle="primary" style={styles.AddCourseButton}><b>Add new course</b></Button>
         <CoursesList courses={this.state.courses}/>
-        <Button onClick={this.handleModal} bsStyle="primary"><b>Add new course</b></Button>
         <AddCourseModal showModal={this.state.showModal} closeModal={this.closeModal.bind(this)}/>
       </div>
     )

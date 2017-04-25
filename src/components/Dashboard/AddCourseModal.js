@@ -3,6 +3,7 @@ import { saveCourse } from '../../helpers/auth'
 import {Modal, Panel, FormGroup, FormControl, Button, HelpBlock, ListGroup, ListGroupItem} from 'react-bootstrap'
 import firebase from 'firebase'
 import AddCourse from './AddCourse'
+import FeedbackMessage from'../FeedbackMessage'
 import {HelpButton} from '../various/HelpButton'
 import {styles} from './AddCourseModalStyles.js'
 
@@ -60,6 +61,11 @@ export default class AddCourseModal extends Component{
         e.preventDefault();
         //add to users courses in firebase
         saveCourse(course);
+        this.setState({
+                    displayFeedbackMessage: true,
+                    feedbackMessage: course + " has been added to your courses!",
+                    bsStyle: 'success',
+        });
     }
 
     handleChange(e){
@@ -123,6 +129,7 @@ export default class AddCourseModal extends Component{
                                 <FormControl.Feedback/>
                                 <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
                             </FormGroup>
+                            <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} bsStyle={this.state.bsStyle}/>
                             <Panel style={styles.modalPane}>
                                 <ListGroup style={styles.modalList}>
                                     {(this.state.courses).map((key) => {

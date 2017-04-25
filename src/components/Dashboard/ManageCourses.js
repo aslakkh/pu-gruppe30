@@ -35,7 +35,7 @@ export default class ManageCourses extends Component{
             inputValue: "",
             displayFeedbackMessage: false,
             feedbackMessage: "", //passed to FeedbackMessage component
-            feedbackMessagePositive: false,
+            bsStyle: 'danger',
         }
     }
 
@@ -68,11 +68,12 @@ export default class ManageCourses extends Component{
         this.setState({
                     displayFeedbackMessage: true,
                     feedbackMessage: course + " has been added to your courses!",
-                    feedbackMessagePositive: true,
+                    bsStyle: 'success',
         });
     }
 
     //handles add to firebase/courses
+    //displays appropriate feedbackmessage 
     handleAddCourse(e){
         e.preventDefault();
         if(this.getValidationState() === 'success'){
@@ -81,15 +82,15 @@ export default class ManageCourses extends Component{
                 this.setState({
                     displayFeedbackMessage: true,
                     feedbackMessage: "Course already exists in database!",
-                    feedbackMessagePositive: false,
+                    bsStyle: 'danger',
                 });
             }
             else{ 
                 addCourseToRoot(this.state.inputValue);
                 this.setState({
                     displayFeedbackMessage: true,
-                    feedbackMessage: this.state.inputValue + " added to courses!",
-                    feedbackMessagePositive: true,
+                    feedbackMessage: this.state.inputValue + " added to database!",
+                    bsStyle: 'success',
                 });
             }
             
@@ -98,7 +99,7 @@ export default class ManageCourses extends Component{
             this.setState({
                     displayFeedbackMessage: true,
                     feedbackMessage: "Course code must be two or three letters followed by four numbers.",
-                    feedbackMessagePositive: false,
+                    bsStyle: 'warning',
                 });
             console.log("Error: Tried submitting invalid value: " + this.state.inputValue);
         }
@@ -209,7 +210,7 @@ export default class ManageCourses extends Component{
                     </FormGroup>
                     <Button type="submit" bsStyle="primary" onClick={this.handleAddCourse} style={styles.Button}>Add Course </Button>
                 </div>
-                <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} positive={this.state.feedbackMessagePositive}/>
+                <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} bsStyle={this.state.bsStyle}/>
                 
                 <Panel style={styles.ListPane}>
                     <ListGroup style={styles.ListGroup}>

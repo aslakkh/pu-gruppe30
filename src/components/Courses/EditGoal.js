@@ -3,6 +3,7 @@ import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem} from 'r
 import { ref } from '../../config/constants'
 import {getDaysHoursMins} from '../../helpers/helperFunctions';
 import { setGoal } from '../../helpers/auth'
+import FeedbackMessage from '../FeedbackMessage'
 import './editGoal.css'
 
 
@@ -38,11 +39,13 @@ export default class EditGoal extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        
         this.setState({
             showModal: nextProps.showModal,
             courseID: nextProps.courseID,
         });
     }
+    
 
 
     handleUseBtn(e) {
@@ -77,6 +80,11 @@ export default class EditGoal extends Component {
         if (seconds > 0) {
             let view = (this.state.view === "Monthly Goal") ? "monthlyGoal" :(this.state.view === "Weekly Goal") ? "weeklyGoal": "dailyGoal";
             setGoal(view, this.state.courseID, seconds, Date.now());
+            this.setState({
+                displayFeedbackMessage: true,
+                feedbackMessage: this.state.view + " set. ",
+                bsStyle: 'success',
+            });
         }
     };
 
@@ -172,6 +180,7 @@ export default class EditGoal extends Component {
                                 <Button bsSize="small" onClick={this.handleUseBtn}>Use</Button> : null}
                         </div>
 
+                        <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} bsStyle={this.state.bsStyle}/>
                     </Modal.Body>
                     <Modal.Footer>
                         <div>

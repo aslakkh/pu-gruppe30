@@ -12,7 +12,8 @@ export const styles = {
         fontSize:'130%'
     },
     center: {
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: '10px',
     },
     margin: {
         marginTop: '4%'

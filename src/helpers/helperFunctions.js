@@ -1,7 +1,3 @@
-/**
- * Created by anderssalvesen on 07.04.2017.
- */
-
 export function secondsToString(seconds) {
     /*
      Converts seconds to a readable string containing hours and minutes
@@ -10,17 +6,17 @@ export function secondsToString(seconds) {
     let remainder = seconds % (60 * 60);
     let minutes = Math.floor(remainder / 60);
     let s = "";
-    if (hours != 0) {
+    if (hours !== 0) {
         if (hours === 1) {
             s = hours + " hour"
         } else {
             s = hours + " hours"
         }
     }
-    if (hours != 0 && minutes != 0) {
+    if (hours !== 0 && minutes !== 0) {
         s = s + " and ";
     }
-    if (minutes != 0) {
+    if (minutes !== 0) {
         s = s + minutes + " minutes"
     }
     return s;
@@ -59,17 +55,17 @@ export function getDaysHoursMins(sec) {
     let minutes = Math.floor(remainder / 60);
     let seconds = remainder - (minutes * 60);
     let longString = "";
-    if ((hours + days * 12) != 0) {
+    if ((hours + days * 12) !== 0) {
         if ((hours + days * 12) === 1) {
             longString = (hours + days * 12) + " hour"
         } else {
             longString = (hours + days * 12) + " hours"
         }
     }
-    if ((hours + days * 12) != 0 && minutes != 0) {
+    if ((hours + days * 12) !== 0 && minutes !== 0) {
         longString = longString + " and ";
     }
-    if (minutes != 0) {
+    if (minutes !== 0) {
         longString = longString + minutes + " minutes"
     }
     let shortString = (hours + days * 12) + ":" + minutes + ":" + seconds;
@@ -78,6 +74,12 @@ export function getDaysHoursMins(sec) {
 
 
 export function formatDate(millisec) {
+    /*
+     -param: timestamp in milliseconds
+     -returns a list containing various information from the timestamp such as year, month (digit and textual representation)
+     week number, day etc.
+
+     */
     let months = ['January', 'February', 'Mars', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let formatDigit = [];
     for(let i = 0; i < 61; i++) {
@@ -94,6 +96,7 @@ export function formatDate(millisec) {
 }
 
 export function getWeekNumber(millisec) {
+    //param: timestamp in milliseconds. Returns week number.
     let date = new Date(millisec);
     date.setHours(0,0,0,0);
     date.setDate(date.getDate() + 4 - (date.getDay()||7));

@@ -1,6 +1,3 @@
-/**
- * Created by anderssalvesen on 08.04.2017.
- */
 import React, { Component } from 'react';
 import './results.css'
 import {DropdownButton, MenuItem} from 'react-bootstrap';
@@ -24,7 +21,6 @@ export default class Results extends Component {
             courseID: props.courseID,
             view: "Daily Goals",
         };
-
     }
 
     componentWillReceiveProps(nextProps) {
@@ -43,7 +39,8 @@ export default class Results extends Component {
 
     componentWillUnmount() {
         /*
-         Iterates toDelete-list, fetches the key to oldGoal and firebase and deletes the entry in OldGoals.
+         Iterates toDelete-list, fetches the key to oldGoal in firebase and deletes the entry in OldGoals.
+         Data is deleted from firebase on component unmount.
          */
         for (let i = 0; i < toDelete.length; i++) {
             for(let key in dayRowDict) {
@@ -71,6 +68,8 @@ export default class Results extends Component {
 
 
     createTableRows() {
+        // Information on old goals is fetched from firebase based on current view (daily, weekly, monthly) and stored
+        // in goalList.
         let rows = [];
         let goalList;
         if (this.state.view === "Daily Goals") {
@@ -81,8 +80,11 @@ export default class Results extends Component {
             goalList = this.state.course.oldGoals.monthly;
         }
 
+
+        //Iterates through goalList, formats information to be displayed in result-table.
+
         {Object.keys(goalList).map((key) => {
-            if (key != 1) {
+            if (key !== 1) {
                 let date = formatDate(new Date(goalList[key].timeSet));
 
                 let idString = date[5] + "/" + date[2] + "-" + date[0] + " " + date[6] + ":" + date[7] + ":" + date[8];
@@ -120,11 +122,8 @@ export default class Results extends Component {
     }
 
     onAfterDeleteRow(rowKeys) {
-        /*
-         adds rows to delete in toDelete-list
-         */
-
-        while (rowKeys.length != 0) {
+        //adds rows to delete in toDelete-list
+        while (rowKeys.length !== 0) {
             let element = rowKeys[0];
             toDelete.push(element);
             rowKeys.splice(0,1);

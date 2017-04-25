@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Panel} from 'react-bootstrap'
 import { getCourseMessages } from '../../helpers/auth'
 import firebase from 'firebase';
-import './CourseInformation.css';
-
 
 export default class CourseInformation extends Component{
     /*get information from Firebase (course/messages/something)

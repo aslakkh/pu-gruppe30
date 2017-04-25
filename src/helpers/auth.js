@@ -1,19 +1,10 @@
 import { ref, firebaseAuth } from '../config/constants'
 import firebase from 'firebase';
 
-
-export function plannedSession(emne){
-
-    const userUid = firebase.auth().currentUser.uid;
-    firebase.database().ref().child('users/'+userUid+'/courses/'+emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
-        return snap.val()
-    })
-}
-
-
 export function auth (email, pw) {
     return firebaseAuth().createUserWithEmailAndPassword(email, pw)
         .then(saveUser)
+        .catch((error) => console.log('Oops', error))
 }
 
 export function privilige(user, auth0) {
@@ -95,7 +86,6 @@ export function saveCourse (course){
         timeSet: 0,
         timeSpent: 0,
     });
-
 }
 
 //add course to courses/course
@@ -108,7 +98,7 @@ export function addCourseToRoot(course){
     })
 }
 
-//check for existing course at root 
+//check for existing course at root
 export function courseExistsAtRoot(course){
     var courseRef = ref.child('courses/');
     var courseExists;
@@ -126,17 +116,10 @@ export function getCourse(){
     });
 }
 
-//Function for getting all courses of a student (not fully implemented, see componentDidMount() in Courses.js)
-
-
-
-
 export function getUserUid(){
     const userUid = firebase.auth().currentUser.uid;
     return userUid;
 }
-
-//function for removing course from user
 
 
 export function removeCourseFromRoot(course){
@@ -153,7 +136,6 @@ export function disableCourse(course){
     });
 }
 
-
 export function planSession(course, date, goal){
     const userUid = getUserUid();
     var userRef = ref.child('users/'+userUid+'/courses/'+course+'/plannedSessions/');
@@ -162,31 +144,17 @@ export function planSession(course, date, goal){
     });
 }
 
-
-export function saveGoal(course, goal) {
+export function setGoal(view, course, seconds, date) {
     const userUid = firebase.auth().currentUser.uid;
-    let courseRef = ref.child('users/'+userUid+'/courses/'+course);
-    courseRef.update({
-        goal:goal
-    });
-}
-export function saveGoal2(view, course, seconds, date) {
-    const userUid = firebase.auth().currentUser.uid;
-    let courseRef = ref.child('users/'+userUid+'/courses/'+course + '/goals/' + view);
+    let courseRef = ref.child('users/'+userUid+'/courses/'+ course + '/goals/' + view);
     courseRef.update({
         value:seconds,
         timeSet:date
     });
 }
 
-
-// saves goal and links seconds elapsed to a specific goal
-//daily/monthly, weekly goal functions as active goal. Need a method that checks if goal expired
-
 export function saveExpiredGoal(goalType, timeCreated, course, goalInSeconds, secondsSpent) {
     const userUid = firebase.auth().currentUser.uid;
-    console.log("halloiluken");
-    console.log('users/'+userUid+'/courses/'+ course + '/oldGoals/' + goalType + "/" + timeCreated);
     const goalRef = ref.child('users/'+userUid+'/courses/'+ course + '/oldGoals/' + goalType + "/" + timeCreated);
     goalRef.set({
         goal: goalInSeconds,
@@ -204,18 +172,6 @@ export function saveProgress(course, view, timeSpent) {
 
 }
 
-/*
- export function gg(course, goalType, dateNow) {
- const userUid = firebase.auth().currentUser.uid;
- var goalRef = ref.child('users/'+userUid+"/courses/" + course +'/goals/'+ '/goalRegister/');
- var s;
- ratingRef.on("value", function (data) {
- s = data.val().weekly;
- });
- return s;
- }
- */
-
 export function activateGoal(type, course, boolean) {
     const userUid = firebase.auth().currentUser.uid;
     let courseRef = ref.child('users/'+userUid+'/courses/'+course + '/goals/' + type);
@@ -225,8 +181,6 @@ export function activateGoal(type, course, boolean) {
 }
 
 export function test(course){
-    //const userUid = firebase.auth().currentUser.uid;
-    //firebase.database().ref(userUid).once();
     var s;
     let coursesRef = ref.child("/courses/" + course + "/weekly");
     coursesRef.on("value", function(snapshot){
@@ -234,15 +188,15 @@ export function test(course){
     });
     return s;
 }
-
-export function getSec(course) {
-    var ratingRef = firebase.database().ref("courses/" + course);
-    var s;
-    ratingRef.on("value", function (data) {
-        s = data.val().weekly;
-    });
-    return s;
+export function addSession(date,courseID,minSelected, hourSelected){
+    const userUid = firebase.auth().currentUser.uid;
+    const variabel = new Date(date);
+    variabel.setMilliseconds(Math.random()*1000);
+    const timeRef = ref.child('users/'+userUid+'/courses/'+courseID+'/sessions/'+ variabel.getTime());
+    timeRef.set({time:(minSelected * 60) + (hourSelected * 3600),desc: "secondsPlanned"});
+    return true;
 }
+
 
 export function isGoalActive(course, view) {
     const userUid = firebase.auth().currentUser.uid;
@@ -254,18 +208,9 @@ export function isGoalActive(course, view) {
     return out;
 }
 
-
-export function addSession(date,courseID,minSelected, hourSelected){
-    const userUid = firebase.auth().currentUser.uid;
-    const variabel = new Date(date);
-    variabel.setMilliseconds(Math.random()*1000);
-    const timeRef = ref.child('users/'+userUid+'/courses/'+courseID+'/sessions/'+ variabel.getTime());
-    timeRef.set({time:(minSelected * 60) + (hourSelected * 3600),desc: "secondsPlanned"});
-    return true;
-}
-
 export function removeOldGoal(course, type, key) {
     const userUid = firebase.auth().currentUser.uid;
     let oldGoalRef = ref.child('users/'+userUid+'/courses/'+course + '/oldGoals/' + type + "/");
     oldGoalRef.child(key).remove();
 }
+

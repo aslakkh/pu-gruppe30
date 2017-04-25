@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import CoursesList from './CoursesList'
 import AddCourseModal from './AddCourseModal'
 import {Button} from 'react-bootstrap'
+import firebase from 'firebase';
+import {getUserUid} from '../../helpers/auth'
 
 const styles = {
   dashboard: {
@@ -26,6 +28,23 @@ export default class Dashboard extends Component {
     }
   }
 
+  componentDidMount(){
+    let courseRef = firebase.database().ref();
+    let userUid = getUserUid();
+    courseRef.child('users/'+userUid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
+      this.setState({
+        courses: snap.val()
+      });
+
+    })
+  }
+
+  componentWillUnmount(){
+    let courseRef = firebase.database().ref();
+    let userUid = getUserUid();
+    courseRef.child('users/'+userUid+'/courses').orderByChild('active').equalTo(true).off();
+  }
+
   closeModal(){
         this.setState({ showModal: false });
     }
@@ -42,7 +61,7 @@ export default class Dashboard extends Component {
     return (
     	<div style={styles.dashboard}>
         <h4>My courses</h4>
-        <CoursesList courses={this.props.courses}/>
+        <CoursesList courses={this.state.courses}/>
         <Button onClick={this.handleModal} bsStyle="primary"><b>Add new course</b></Button>
         <AddCourseModal showModal={this.state.showModal} closeModal={this.closeModal.bind(this)}/>
       </div>

@@ -93,16 +93,28 @@ export default class AddSession extends Component{
         e.preventDefault(); //prevents default browser behaviour on click, whatever that means
 
         if(this.datePickerValidateState() === 'success'){
-            var d = new Date(this.state.date);
-            var message = "Saved " + this.state.hourSelected + " hours, " + this.state.minSelected + " minutes " + " on " + d.toDateString();
-            this.setState({
-                show: false,
-                displayFeedbackMessage: true,
-                feedbackMessage: message,
-                bsStyle: 'success',
-            });
+            if(this.state.hourSelected === 0 && this.state.minSelected === 0){
 
-            addSession(this.state.date,this.state.courseID,this.state.minSelected,this.state.hourSelected);
+                this.setState({ //display negative feedbackmessage
+                    show: false,
+                    displayFeedbackMessage: true,
+                    feedbackMessage: "Session not saved: Can not add previous session of 0 hours and 0 minutes.",
+                    bsStyle: 'danger',
+                });
+            }
+            else{ //save and display positive feedbackmessage
+                var d = new Date(this.state.date);
+                var message = "Saved " + this.state.hourSelected + " hours, " + this.state.minSelected + " minutes " + " on " + d.toDateString();
+                this.setState({
+                    show: false,
+                    displayFeedbackMessage: true,
+                    feedbackMessage: message,
+                    bsStyle: 'success',
+                });
+
+                addSession(this.state.date,this.state.courseID,this.state.minSelected,this.state.hourSelected);
+            }
+            
         }
         
 

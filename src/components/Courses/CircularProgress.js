@@ -246,9 +246,9 @@ export default class CircularProgress extends Component {
                 {this.createInfoComponent("Daily Goal", dailyInfo[0], dailyInfo[1], dailyInfo[2], dailyInfo[3])}
                 {this.createInfoComponent("Weekly Goal", weeklyInfo[0], weeklyInfo[1], weeklyInfo[2], weeklyInfo[3])}
                 {this.createInfoComponent("Monthly Goal", monthlyInfo[0], monthlyInfo[1], monthlyInfo[2], monthlyInfo[3])}
-                <EditGoal courseID={this.props.courseID} showModal={this.state.showDailyEdit} view={"Daily Goal"} closeModal={this.closeModal.bind(this)}/>
-                <EditGoal courseID={this.props.courseID} showModal={this.state.showWeeklyEdit} view={"Weekly Goal"} closeModal={this.closeModal.bind(this)}/>
-                <EditGoal courseID={this.props.courseID} showModal={this.state.showMonthlyEdit} view={"Monthly Goal"} closeModal={this.closeModal.bind(this)}/>
+                <EditGoal courseID={this.state.courseID} showModal={this.state.showDailyEdit} view={"Daily Goal"} closeModal={this.closeModal.bind(this)}/>
+                <EditGoal courseID={this.state.courseID} showModal={this.state.showWeeklyEdit} view={"Weekly Goal"} closeModal={this.closeModal.bind(this)}/>
+                <EditGoal courseID={this.state.courseID} showModal={this.state.showMonthlyEdit} view={"Monthly Goal"} closeModal={this.closeModal.bind(this)}/>
             </div>
         );
     }

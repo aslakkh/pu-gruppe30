@@ -264,3 +264,8 @@ export function addSession(date,courseID,minSelected, hourSelected){
     return true;
 }
 
+export function removeOldGoal(course, type, key) {
+    const userUid = firebase.auth().currentUser.uid;
+    let oldGoalRef = ref.child('users/'+userUid+'/courses/'+course + '/oldGoals/' + type + "/");
+    oldGoalRef.child(key).remove();
+}

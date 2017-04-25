@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import './results.css'
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import {secondsToString, formatDate } from '../../helpers/helperFunctions';
 import { removeOldGoal } from '../../helpers/auth'
@@ -21,7 +22,7 @@ export default class Results extends Component {
         this.state = {
             course: this.props.course,
             courseID: props.courseID,
-            view: props.view,
+            view: "Daily Goals",
         };
 
     }
@@ -31,6 +32,7 @@ export default class Results extends Component {
             view: nextProps.view,
             course: nextProps.course,
             courseID: nextProps.courseID,
+            view: this.state.view,
         })
     }
 
@@ -130,6 +132,10 @@ export default class Results extends Component {
 
     }
 
+    handleDropdownClick(view) {
+        this.setState({view: view})
+    }
+
     render() {
         const selectRowProp = {
             mode: 'checkbox',
@@ -144,6 +150,11 @@ export default class Results extends Component {
         return(
 
             <div className="table-module">
+                <DropdownButton className="info-dropdown" bsStyle="primary" title={this.state.view} key={0} id={0}>
+                    <MenuItem eventKey="1" onClick={() => this.handleDropdownClick('Daily Goals')}>Daily Goals</MenuItem>
+                    <MenuItem eventKey="2" onClick={() => this.handleDropdownClick('Weekly Goals')}>Weekly Goals</MenuItem>
+                    <MenuItem eventKey="3" onClick={() => this.handleDropdownClick('Monthly Goals')}>Monthly Goals</MenuItem>
+                </DropdownButton>
 
                 <BootstrapTable data={ rows } options={ options } selectRow={ selectRowProp } deleteRow={ true }>
                     <TableHeaderColumn className="column" dataField='id' isKey={ true } dataSort>Goal set</TableHeaderColumn>

@@ -190,7 +190,7 @@ formats the sessions to usable data for chart.js
     render() {
         if(!this.sessions.length > 0 || this.state.courseID === null || this.state.courseID === undefined){
             return (
-                <h1>Loading2</h1>
+                <h4>No statistics</h4>
 
             )}
             else{

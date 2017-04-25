@@ -19,40 +19,6 @@ import {LinkContainer} from 'react-router-bootstrap'
  *
  * */
 
-/*
- <Tab.Container id="left-tabs" defaultActiveKey={0}>
- <Row className="clearfix">
- <Col sm={3}>
- <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
- {Object.keys(this.state.courses).map((emne,i) =>
-
- <NavItem eventKey={emne} className="navbar-link" key={i} >
- {emne}
- </NavItem>
-
-
- )}
- </Nav>
- </Col>
- <Col sm={9}>
- <Tab.Content animation>
- {Object.keys(this.state.courses).map((emne,i) =>
- <Tab.Pane eventKey={emne} key={i}>
- <h1>{emne}</h1>
- <AddMessage courseID={emne}/>
- <MessageList courseID={emne}/>
- <Statistics courseID={emne}/>
-
- </Tab.Pane>)}
- </Tab.Content>
- </Col>
- </Row>
- </Tab.Container>
-
-
- <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
- </Nav>
- */
 export default class Courses extends Component {
 constructor(props) {
   super(props);
@@ -107,7 +73,7 @@ componentWillMount(){
 
                                           <NavItem key={i} eventKey={i} className="navbar-link">
                                               <Link to={emne} key={i}>
-                                                  <div style={{marginTop: '-0.3em', fontSize:'2em',marginBottom: '-0.3em', color:'darkgrey'}}>
+                                                  <div style={{marginTop: '-0.3em', fontSize:'1.5em',marginBottom: '-0.3em', color:'darkgrey'}}>
                                               {emne}
                                                   </div>
                                       </Link>

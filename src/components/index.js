@@ -13,14 +13,14 @@ import {Navbar,NavItem, Nav} from 'react-bootstrap'
 import firebase from 'firebase';
 import ProfessorHome from './ProfessorHome/ProfessorHome'
 import './index.css'
-function MatchWhenAuthed ({component: Component, authed, courses, ...rest}) {
+function MatchWhenAuthed ({component: Component, authed, ...rest}) {
   //console.log("Inside MatchWhenAuthed - courses = ");
   //console.log(rest.courses);
   return (
     <Route
       {...rest}
       render={(props) => authed === true
-        ? <Component courses={courses}/>
+        ? <Component />
         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
     />
   )
@@ -58,6 +58,27 @@ export default class App extends Component {
     loading: true
 
   };
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log("INDEX SHOULDUPDATE");
+    console.log(nextState);
+    return true;
+    // if(this.state.courses && nextState.courses){
+    //   if(Object.keys(this.state.courses).length !== Object.keys(nextState.courses).length){
+    //   console.log("Index will update");
+    //   return true;
+    //   }
+    //   else
+    //   {return false;}
+    // }
+    // else{
+    //   return true;
+    // }
+    
+  }
+
+
+
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
@@ -81,18 +102,18 @@ export default class App extends Component {
           user : this.useruid
         });
 
-        let courseRef = firebase.database().ref();
-        courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
-          that.setState({
-            courses: snap.val()
-          });
-          firebase.database().ref().child('courses').on('value', snap => {
-            console.log(snap.val())
+        // let courseRef = firebase.database().ref();
+        // courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
+        //   that.setState({
+        //     courses: snap.val()
+        //   });
+        //   firebase.database().ref().child('courses').on('value', snap => {
+        //     console.log(snap.val())
 
-          })
+        //   })
           
 
-        })
+        // })
 
 
 
@@ -116,25 +137,26 @@ export default class App extends Component {
     //<Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Home/>}/>
   homeDecide(){
       if(this.state.admin === true){
-          return (<ProfessorHome courses={this.state.courses}/>)
+          return (<ProfessorHome />)
       }
       else{
           return(
-              <Home courses={this.state.courses} authed={this.state.authed} admin={this.state.admin}/>
+              <Home authed={this.state.authed} admin={this.state.admin}/>
           )
       }
   }
 
   dashboardDecide(){
     if(this.state.admin === true){
-      return (<ProfessorDashboard courses={this.state.courses}/>)
+      return (<ProfessorDashboard />)
     }
     else{
-      return (<Dashboard courses={this.state.courses}/>);
+      return (<Dashboard />);
     }
   }
 
   render() {
+    console.log("rendering index");
     return this.state.loading === true ? <h1>Loading</h1> : (
       <Router>
           <div>
@@ -172,7 +194,7 @@ export default class App extends Component {
                     <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                     <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
                     <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={() => this.dashboardDecide()}/>
-                    <MatchWhenAuthed authed={this.state.authed} path='/SessionPlanner' component={SessionPlanner} courses={this.state.courses}/>
+                    <MatchWhenAuthed authed={this.state.authed} path='/SessionPlanner' component={SessionPlanner} />
                     <Route path='/'  component={() => this.state.authed ? this.homeDecide() : <Login/>}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>

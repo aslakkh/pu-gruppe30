@@ -60,6 +60,8 @@ constructor(props) {
 };
 
 componentWillReceiveProps(nextProps){
+    console.log("SIDEBAAAAAAR");
+    console.log(nextProps.courses);
   this.setState({
     courses: nextProps.courses
   });
@@ -71,6 +73,7 @@ componentWillReceiveProps(nextProps){
         })
 
     }
+
 
 
 
@@ -90,7 +93,8 @@ componentWillReceiveProps(nextProps){
     }
     else{
         return (
-        <Router>
+        <Router 
+        >
             <div>
                 {/*<Link to={"IT1111"}>
                     <Button>IT1111</Button>
@@ -107,7 +111,7 @@ componentWillReceiveProps(nextProps){
                                     
                                         
                                             <NavItem eventKey={emne} className="navbar-link" key={i}  >
-                                                <Link to={emne} key={i}>
+                                                <Link to={"/"+emne} key={i}>
                                                 {emne}
                                                 </Link>
                                             </NavItem>

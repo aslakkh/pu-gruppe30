@@ -1,24 +1,45 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
+import firebase from 'firebase';
+import {getUserUid} from '../../helpers/auth'
+
 export default class Home extends Component {
   constructor(props){
     super(props);
-    console.log("Home got: ");
-    console.log(this.props.courses);
+
     this.state=({
-        courses: this.props.courses,
         authed: this.props.authed,
         admin: this.props.admin
     })
   };
   componentWillReceiveProps(nextProps){
-      console.log("Home Receives: ");
-      console.log(nextProps.courses);
+      // if(Object.keys(nextProps.courses).length !== Object.keys(this.state.courses).length){
+      //   console.log("updating home state");
+      //   this.setState({
+      //     courses: nextProps.courses,
+      //   })
+      // }
       this.setState({
-          courses: nextProps.courses,
           authed: nextProps.authed,
           admin: nextProps.admin
       });
+  }
+
+  componentDidMount(){
+    let courseRef = firebase.database().ref();
+    let userUid = getUserUid();
+    courseRef.child('users/'+userUid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
+      this.setState({
+        courses: snap.val()
+      });
+
+    })
+  }
+  
+  componentWillUnmount(){
+    let courseRef = firebase.database().ref();
+    let userUid = getUserUid();
+    courseRef.child('users/'+userUid+'/courses').orderByChild('active').equalTo(true).off();
   }
 
   render () {

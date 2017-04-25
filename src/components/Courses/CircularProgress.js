@@ -43,15 +43,15 @@ export default class CircularProgress extends Component {
         this.setState({
             course: nextProps.course,
             courseID: nextProps.courseID,
-            dailyGoal: this.props.course.goals.dailyGoal.value,
-            dailySet: this.props.course.goals.dailyGoal.timeSet,
-            weeklyGoal: this.props.course.goals.weeklyGoal.value,
-            weeklySet: this.props.course.goals.weeklyGoal.timeSet,
-            monthlyGoal: this.props.course.goals.monthlyGoal.value,
-            monthlySet: this.props.course.goals.monthlyGoal.timeSet,
-            dailyTimeSpent: this.props.course.goals.dailyGoal.timeSpent,
-            weeklyTimeSpent: this.props.course.goals.weeklyGoal.timeSpent,
-            monthlyTimeSpent: this.props.course.goals.monthlyGoal.timeSpent,
+            // dailyGoal: this.props.course.goals.dailyGoal.value,
+            // dailySet: this.props.course.goals.dailyGoal.timeSet,
+            // weeklyGoal: this.props.course.goals.weeklyGoal.value,
+            // weeklySet: this.props.course.goals.weeklyGoal.timeSet,
+            // monthlyGoal: this.props.course.goals.monthlyGoal.value,
+            // monthlySet: this.props.course.goals.monthlyGoal.timeSet,
+            // dailyTimeSpent: this.props.course.goals.dailyGoal.timeSpent,
+            // weeklyTimeSpent: this.props.course.goals.weeklyGoal.timeSpent,
+            // monthlyTimeSpent: this.props.course.goals.monthlyGoal.timeSpent,
         });
     }
 

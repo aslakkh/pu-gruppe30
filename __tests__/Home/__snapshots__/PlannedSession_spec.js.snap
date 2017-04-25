@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stopwatch One course 1`] = `
+<div>
+  <h4>
+    Planned Sessions
+  </h4>
+  <ListGroup
+    bsClass="list-group"
+  >
+    <ListGroupItem
+      bsClass="list-group-item"
+      className=""
+      listItem={false}
+      onClick={[Function]}
+    >
+      <div
+        style={
+          Object {
+            "fontSize": "130%",
+          }
+        }
+      >
+        hello
+      </div>
+      <div
+        style={
+          Object {
+            "color": "#999999",
+          }
+        }
+      >
+        Wed Apr 26 2017
+      </div>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      className=""
+      listItem={false}
+      onClick={[Function]}
+    >
+      <div
+        style={
+          Object {
+            "fontSize": "130%",
+          }
+        }
+      >
+        hello
+      </div>
+      <div
+        style={
+          Object {
+            "color": "#999999",
+          }
+        }
+      >
+        Wed Apr 26 2017
+      </div>
+    </ListGroupItem>
+  </ListGroup>
+</div>
+`;
+
+exports[`Stopwatch Welcome renders hello world 1`] = `
+<h4>
+  No planned sessions
+</h4>
+`;
+
+exports[`Stopwatch new course 1`] = `
+<div>
+  <h4>
+    Planned Sessions
+  </h4>
+  <ListGroup
+    bsClass="list-group"
+  >
+    <ListGroupItem
+      bsClass="list-group-item"
+      className=""
+      listItem={false}
+      onClick={[Function]}
+    >
+      <div
+        style={
+          Object {
+            "fontSize": "130%",
+          }
+        }
+      >
+        hello
+      </div>
+      <div
+        style={
+          Object {
+            "color": "#999999",
+          }
+        }
+      >
+        Wed Apr 26 2017
+      </div>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      className=""
+      listItem={false}
+      onClick={[Function]}
+    >
+      <div
+        style={
+          Object {
+            "fontSize": "130%",
+          }
+        }
+      >
+        hello
+      </div>
+      <div
+        style={
+          Object {
+            "color": "#999999",
+          }
+        }
+      >
+        Wed Apr 26 2017
+      </div>
+    </ListGroupItem>
+  </ListGroup>
+</div>
+`;

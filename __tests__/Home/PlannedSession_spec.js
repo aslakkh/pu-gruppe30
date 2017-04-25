@@ -6,10 +6,10 @@ import renderer from 'react-test-renderer';
 import PlannedSession from '../../src/components/Home/PlannedSession.js';
 import TestUtils from "react-addons-test-utils"
 import firebase from 'firebase'
-import shallow from 'enzyme'
+import render from 'enzyme'
 //state.sessions = jest.fn(() => {return {1492786690143: {goal: "grsg"}}});
 const courses={
-    TES1000:{active: true,
+    active: true,
         goals: {dailyGoal:{active: false,
             timeSet: 0,
             timeSpent: 0,
@@ -24,27 +24,64 @@ const courses={
                     timeSet:0,
                     timeSpent:0,
                     value:0}
-
         }
-    }};
+        ,
+        plannedSessions:{
+            1493219881898:{
+                goal: "hello"
+            },
+            1493219881000:{
+                goal: "hello"
+            }
+        }
+
+    };
+const courses2={
+    active: true,
+    goals: {dailyGoal:{active: false,
+        timeSet: 0,
+        timeSpent: 0,
+        value: 0},
+        monthlyGoal:
+            {active:false,
+                timeSet:0,
+                timeSpent:0,
+                value:0},
+        weeklyGoal:
+            {active:false,
+                timeSet:0,
+                timeSpent:0,
+                value:0}
+    }
+
+
+};
 const coursesNull=null;
 describe("Stopwatch", function () {
+    const spy = jest.fn();
+
+    it('Welcome renders hello world', () => {
+        const component = renderer.create(<PlannedSession course={courses2} emne={"TES1000"} callbackParent={(newState, newState2) => spy(newState, newState2)}/>);
+        const json = component.toJSON();
+        expect(json).toMatchSnapshot();
+    });
+
     let renderer2;
     let component2;
     renderer2 = TestUtils.createRenderer();
     renderer2.render(
-        <PlannedSession emne={"TES1000"} callbackParent={(newState) => this.onChildChanged(newState) }/>
+        <PlannedSession course={courses} emne={"TES1000"} callbackParent={(newState) => this.onChildChanged(newState) }/>
     );
     component2 = renderer2.getRenderOutput();
     it("One course", () => {
         expect(component2).toMatchSnapshot();
     });
-    it('Open set old session', () => {
-        const wrapper = shallow(<AddSession courseID={"TES1000"}/>);
-        wrapper.find('Button').first().simulate('click');
-        wrapper.find('Button').at(1).simulate('click');
+    renderer2.render(
+        <PlannedSession course={courses} emne={"TDT4100"} callbackParent={(newState) => this.onChildChanged(newState) }/>
+    );
+    component2 = renderer2.getRenderOutput();
+    it("new course", () => {
+        expect(component2).toMatchSnapshot();
+    });
 
-
-
-    })
 });

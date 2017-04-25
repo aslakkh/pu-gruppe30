@@ -14,106 +14,6 @@ exports[`AddCourse renders FormGroup and button With courses 1`] = `
   <h5>
     You can also add a course to the list of courses you manage.
   </h5>
-  <ul
-    className="list-group"
-  >
-    <li
-      className="list-group-item"
-      style={
-        Object {
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "flexBasis": "90%",
-          }
-        }
-      >
-        IT1010
-      </div>
-      <button
-        className="btn btn-success"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "marginLeft": "5px",
-            "marginRight": "5px",
-          }
-        }
-        type="button"
-      >
-        Add to My Courses
-      </button>
-      <button
-        className="btn btn-danger"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "marginLeft": "5px",
-            "marginRight": "5px",
-          }
-        }
-        type="button"
-      >
-        Delete
-      </button>
-    </li>
-    <li
-      className="list-group-item"
-      style={
-        Object {
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "flex-end",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "flexBasis": "90%",
-          }
-        }
-      >
-        TDT4100
-      </div>
-      <button
-        className="btn btn-success"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "marginLeft": "5px",
-            "marginRight": "5px",
-          }
-        }
-        type="button"
-      >
-        Add to My Courses
-      </button>
-      <button
-        className="btn btn-danger"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "marginLeft": "5px",
-            "marginRight": "5px",
-          }
-        }
-        type="button"
-      >
-        Delete
-      </button>
-    </li>
-  </ul>
   <div
     style={
       Object {
@@ -153,5 +53,125 @@ exports[`AddCourse renders FormGroup and button With courses 1`] = `
     </button>
   </div>
   <div />
+  <div
+    className="panel panel-default"
+    id={undefined}
+    style={
+      Object {
+        "backgroundColor": "darkslategray",
+      }
+    }
+  >
+    <div
+      className="panel-body"
+    >
+      <ul
+        className="list-group"
+        style={
+          Object {
+            "height": "400px",
+            "overflowY": "scroll",
+          }
+        }
+      >
+        <li
+          className="list-group-item"
+          style={
+            Object {
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "flexBasis": "90%",
+              }
+            }
+          >
+            IT1010
+          </div>
+          <button
+            className="btn btn-success"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": "5px",
+                "marginRight": "5px",
+              }
+            }
+            type="button"
+          >
+            Add to My Courses
+          </button>
+          <button
+            className="btn btn-danger"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": "5px",
+                "marginRight": "5px",
+              }
+            }
+            type="button"
+          >
+            Delete
+          </button>
+        </li>
+        <li
+          className="list-group-item"
+          style={
+            Object {
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "flexBasis": "90%",
+              }
+            }
+          >
+            TDT4100
+          </div>
+          <button
+            className="btn btn-success"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": "5px",
+                "marginRight": "5px",
+              }
+            }
+            type="button"
+          >
+            Add to My Courses
+          </button>
+          <button
+            className="btn btn-danger"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "marginLeft": "5px",
+                "marginRight": "5px",
+              }
+            }
+            type="button"
+          >
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 `;

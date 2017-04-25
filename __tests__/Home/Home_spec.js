@@ -7,6 +7,7 @@ import Home from '../../src/components/Home/Home.js';
 import TestUtils from "react-addons-test-utils"
 
 const courses={
+    courses:{
   TES1000:{active: true,
       goals: {dailyGoal:{active: false,
           timeSet: 0,
@@ -23,7 +24,7 @@ const courses={
           timeSpent:0,
           value:0}
 
-  }
+  }}
 }};
 const coursesNull=null;
 
@@ -46,7 +47,7 @@ describe("Home", function () {
 
     renderer3 = TestUtils.createRenderer();
     renderer2.render(
-        <Home courses={courses} authed={true} admin={false}/>
+        <Home authed={true} admin={false}/>
     );
     component3 = renderer3.getRenderOutput();
     it("log in, with courses", () => {
@@ -54,7 +55,7 @@ describe("Home", function () {
     });
     renderer4 = TestUtils.createRenderer();
     renderer4.render(
-        <Home courses={coursesNull} authed={true} admin={false}/>
+        <Home authed={true} admin={false}/>
     );
     component4 = renderer4.getRenderOutput();
     it("log in, no courses", () => {

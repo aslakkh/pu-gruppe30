@@ -17,7 +17,8 @@ export function privilige(user, auth0) {
 }
 
 export function logout () {
-    return firebaseAuth().signOut()
+    return firebaseAuth().signOut();
+
 }
 
 export function login (email, pw) {

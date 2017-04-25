@@ -53,7 +53,7 @@ componentWillReceiveProps(nextProps){
 
 
     //gets url parameter (match) and returns TabView with props corresponding to url parameter
-    handleRoute = ({match}) => {
+    handleRoute ({match}) {
         return(
             <TabView emne={match.params.id} course={this.state.courses[match.params.id]}/>
             

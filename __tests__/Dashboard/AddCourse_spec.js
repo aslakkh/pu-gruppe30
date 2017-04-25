@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import AddCourse from '../../src/components/Dashboard/AddCourse.js';
-import shallow from 'enzyme'
+import render from 'enzyme'
 import TestUtils from "react-addons-test-utils"
 describe('AddCourse renders FormGroup and button', function() {
 /*    const component = renderer.create(
@@ -20,7 +20,7 @@ describe('AddCourse renders FormGroup and button', function() {
         expect(component2).toMatchSnapshot();
     });
     it('addsession', () => {
-        const wrapper = renderer(<AddCourse/>);
+        const wrapper = render(<AddCourse/>);
         wrapper.find('Button').simulate('click');
 
 

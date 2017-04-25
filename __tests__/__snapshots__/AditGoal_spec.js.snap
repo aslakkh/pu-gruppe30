@@ -629,7 +629,6 @@ exports[`Edit Goal One course 1`] = `
         "close": [Function],
         "context": Object {},
         "handleSaveBtn": [Function],
-        "handleUseBtn": [Function],
         "props": Object {
           "courseID": "TES1000",
           "showModal": true,

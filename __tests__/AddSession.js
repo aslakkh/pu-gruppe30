@@ -58,7 +58,6 @@ describe("AddSession", function () {
     it('Open set old session', () => {
         const wrapper = shallow(<AddSession courseID={"TES1000"}/>);
         wrapper.find('Button').first().simulate('click');
-        wrapper.find('Button').at(1).simulate('click');
 
 
 

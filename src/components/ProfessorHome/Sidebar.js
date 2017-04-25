@@ -72,11 +72,11 @@ componentWillMount(){
 
 
                                           <NavItem key={i} eventKey={i} className="navbar-link">
-                                              <Link to={emne} key={i}>
-                                                  <div style={{marginTop: '-0.3em', fontSize:'1.5em',marginBottom: '-0.3em', color:'darkgrey'}}>
-                                              {emne}
-                                                  </div>
-                                      </Link>
+                                            <Link to={"/"+emne} key={i}>
+                                                <div style={{marginTop: '-0.3em', fontSize:'1.5em',marginBottom: '-0.3em', color:'darkgrey'}}>
+                                                {emne}
+                                                </div>
+                                            </Link>
                                     </NavItem>
 
 

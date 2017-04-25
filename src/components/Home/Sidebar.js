@@ -105,9 +105,11 @@ componentWillReceiveProps(nextProps){
                                 {Object.keys(this.state.courses).map((emne,i) =>
                                 
                                     
-                                        <NavItem eventKey={emne} className="navbar-link" key={i}  >
+                                        <NavItem eventKey={i} key={i} className="navbar-link"   >
                                             <Link to={"/"+emne} key={i}>
-                                            {emne}
+                                                <div style={{marginTop: '-0.3em', fontSize:'1.5em',marginBottom: '-0.3em', color:'darkgrey'}}>
+                                                    {emne}
+                                                </div>
                                             </Link>
                                         </NavItem>
                                 )}

@@ -17,13 +17,6 @@ export default class CourseInformation extends Component{
         }
     }
 
-    componentWillMount(){
-        /*console.log("inside courseinformation");
-        console.log(this.props.courseID);
-        console.log(getCourseMessages(this.props.courseID))*/
-        
-    }
-
     componentWillReceiveProps(nextProps){
         var messages = this.getMessages();
         this.setState({
@@ -33,17 +26,13 @@ export default class CourseInformation extends Component{
     }
     //retreive messages from firebase, set component state
     componentDidMount(){
-        var messages = this.getMessages();
-        this.setState({
-            messages: messages,
-        })
-        // let that = this;
-        // var courseRef = firebase.database().ref().child('courses/'+this.state.courseID+'/Messages');
-        // courseRef.on('value', snap => {
-        //     that.setState({
-        //         messages: snap.val(),
-        //     });
-        // });
+        let that = this;
+        var courseRef = firebase.database().ref().child('courses/'+this.state.courseID+'/Messages');
+        courseRef.on('value', snap => {
+            that.setState({
+                messages: snap.val(),
+            });
+        });
         
     }
 

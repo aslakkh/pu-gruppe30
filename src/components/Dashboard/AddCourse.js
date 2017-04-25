@@ -77,15 +77,21 @@ export default class AddCourse extends Component{
 
         if(this.getValidationState() === 'success'){
             saveCourse(this.state.value); //saveCourse(course) adds course to currently logged in user in Firebase
-            this.setState({
-                value: '',
+            this.setState({ //reset value to empty string, display feedbackmessage
                 displayFeedbackMessage: true,
                 feedbackMessage: this.state.value + " has been added to your courses!",
                 bsStyle: 'success',
-            }); //resets value to empty string
+                value: '',
+            }); 
         }
         else{
             console.log("Error: Tried submitting invalid value: " + this.state.value);
+            this.setState({
+                displayFeedbackMessage: true,
+                feedbackMessage: this.state.value + " is not a valid course.",
+                bsStyle: 'warning',
+            }); 
+            
         }
     }
 

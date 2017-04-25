@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { saveCourse } from '../../helpers/auth'
 import {FormGroup, FormControl, Button, HelpBlock} from 'react-bootstrap'
+import FeedbackMessage from '../FeedbackMessage'
 
 
 const styles = {
@@ -76,10 +77,21 @@ export default class AddCourse extends Component{
 
         if(this.getValidationState() === 'success'){
             saveCourse(this.state.value); //saveCourse(course) adds course to currently logged in user in Firebase
-            this.setState({value: ''}); //resets value to empty string
+            this.setState({ //reset value to empty string, display feedbackmessage
+                displayFeedbackMessage: true,
+                feedbackMessage: this.state.value + " has been added to your courses!",
+                bsStyle: 'success',
+                value: '',
+            }); 
         }
         else{
             console.log("Error: Tried submitting invalid value: " + this.state.value);
+            this.setState({
+                displayFeedbackMessage: true,
+                feedbackMessage: this.state.value + " is not a valid course.",
+                bsStyle: 'warning',
+            }); 
+            
         }
     }
 
@@ -90,7 +102,7 @@ export default class AddCourse extends Component{
         this.setState({
                     displayFeedbackMessage: true,
                     feedbackMessage: course + " has been added to your courses!",
-                    feedbackMessagePositive: true,
+                    bsStyle: 'success',
         });
     }
 
@@ -98,25 +110,27 @@ export default class AddCourse extends Component{
 
     //Renders a form and a button for submission
     render(){
-        return(   
-                <div style={styles.AddCourse}>
-                            <FormGroup controlId="addCourseForm" validationState={this.getValidationState()} >
-                                <FormControl 
-                                id="addCourseForm" 
-                                componentClass='input'
-                                value={this.state.value}
-                                type="text" 
-                                placeholder="Course name"
-                                onChange={this.handleChange}
-                                onKeyPress={this.handleKeyPress}
-                                
-                                />
-                                <FormControl.Feedback/>
-                                <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
-                            </FormGroup>
-                    <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.handleAdd}>Add</Button>
+        return(  
+                <div> 
+                    <div style={styles.AddCourse}>
+                                <FormGroup controlId="addCourseForm" validationState={this.getValidationState()} >
+                                    <FormControl 
+                                    id="addCourseForm" 
+                                    componentClass='input'
+                                    value={this.state.value}
+                                    type="text" 
+                                    placeholder="Course name"
+                                    onChange={this.handleChange}
+                                    onKeyPress={this.handleKeyPress}
+                                    
+                                    />
+                                    <FormControl.Feedback/>
+                                    <HelpBlock>Enter course code (up to three letters followed by four digits)</HelpBlock>
+                                </FormGroup>
+                        <Button type="submit" bsStyle="primary" bsSize="large" onClick={this.handleAdd}>Add</Button>
+                    </div>
+                    <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} bsStyle={this.state.bsStyle}/>
                 </div>
-                
         )
     } 
 

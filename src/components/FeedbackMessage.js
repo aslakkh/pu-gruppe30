@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Alert} from 'react-bootstrap'
 
 export default class FeedbackMessage extends Component{
 
@@ -7,7 +8,7 @@ export default class FeedbackMessage extends Component{
         this.state = {
             active: this.props.active,
             message: this.props.message,
-            positive: this.props.positive,
+            bsStyle: this.props.bsStyle,
         }
     }
 
@@ -15,23 +16,17 @@ export default class FeedbackMessage extends Component{
         this.setState({
             active: nextProps.active,
             message: nextProps.message,
-            positive: nextProps.positive,
+            bsStyle: nextProps.bsStyle,
         })
     }
 
     render(){
         if(this.state.active){
-            if(this.state.positive){
-                return(
-                    <h4 style={{color: 'green'}}>{this.state.message}</h4>
-                );
-            }
-            else{
-                return(
-                    <h4 style={{color: 'red'}}>{this.state.message}</h4>
-                );
-            }
-            
+            return(
+                <Alert bsStyle={this.state.bsStyle}>
+                    {this.state.message}
+                </Alert>
+            )
         }
         else{
             return(

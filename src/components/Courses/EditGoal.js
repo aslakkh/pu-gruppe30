@@ -3,6 +3,7 @@ import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem} from 'r
 import { ref } from '../../config/constants'
 import {getDaysHoursMins} from '../../helpers/helperFunctions';
 import { setGoal } from '../../helpers/auth'
+import FeedbackMessage from '../FeedbackMessage'
 import './editGoal.css'
 
 
@@ -12,7 +13,7 @@ export default class EditGoal extends Component {
         super(props);
         this.close = this.close.bind(this);
         this.handleSaveBtn = this.handleSaveBtn.bind(this);
-
+        this.handleUseBtn = this.handleUseBtn.bind(this);
         this.state = {
             showModal: this.props.showModal,
             courseID: this.props.courseID,
@@ -38,17 +39,20 @@ export default class EditGoal extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        
         this.setState({
             showModal: nextProps.showModal,
             courseID: nextProps.courseID,
         });
     }
+    
 
 
     handleUseBtn(e) {
         /*
          When use-button is clicked, dropdown menu is set with teacher recommendation.
          */
+        
         e.preventDefault(); //prevents default browser behaviour on click
         if (this.state.view == 'Weekly Goal') {
             let time = getDaysHoursMins(this.state.teacherRecommendation);
@@ -77,6 +81,12 @@ export default class EditGoal extends Component {
         if (seconds > 0) {
             let view = (this.state.view === "Monthly Goal") ? "monthlyGoal" :(this.state.view === "Weekly Goal") ? "weeklyGoal": "dailyGoal";
             setGoal(view, this.state.courseID, seconds, Date.now());
+            var time = getDaysHoursMins(seconds);
+            this.setState({
+                displayFeedbackMessage: true,
+                feedbackMessage: this.state.view + " set to " + time[0] + " days, " + time[1] + " hours, " + time[2] + " minutes ",
+                bsStyle: 'success',
+            });
         }
     };
 
@@ -172,6 +182,7 @@ export default class EditGoal extends Component {
                                 <Button bsSize="small" onClick={this.handleUseBtn}>Use</Button> : null}
                         </div>
 
+                        <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} bsStyle={this.state.bsStyle}/>
                     </Modal.Body>
                     <Modal.Footer>
                         <div>

@@ -84,7 +84,7 @@ export default class Results extends Component {
         //Iterates through goalList, formats information to be displayed in result-table.
 
         {Object.keys(goalList).map((key) => {
-            if (key !== 1) {
+            if (key !== "1") { //Ignore first element in database
                 let date = formatDate(new Date(goalList[key].timeSet));
 
                 let idString = date[5] + "/" + date[2] + "-" + date[0] + " " + date[6] + ":" + date[7] + ":" + date[8];

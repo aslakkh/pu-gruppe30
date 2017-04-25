@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import {Button, Grid,Col,Row} from 'react-bootstrap'
 import PlannedSession from './PlannedSession'
 import AddSession from './AddSession'
+import FeedbackMessage from '../FeedbackMessage'
 import {styles} from './StopwatchStyles.js'
 
 /*
@@ -96,9 +97,18 @@ Starts the timer
         this.started = false;
 
     }
+    
+    //handles click on save button
     handleResetClick() {
         this.castToFirebase();
         clearInterval(this.incrementer);
+
+        //display feedbackMessage
+        this.setState({
+                displayFeedbackMessage: true,
+                feedbackMessage: "Session saved!",
+                bsStyle: 'success',
+            }); 
     }
 
     /*
@@ -136,9 +146,11 @@ Starts the timer
                         : null
                 )}
 
-            </div><div>
-                        <AddSession courseID={this.state.emne}/>
-                    </div>
+            </div>
+            <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} bsStyle={this.state.bsStyle}/>
+            <div>
+                <AddSession courseID={this.state.emne}/>
+            </div>
 
                     </Col>
                     <Col md={1}/>

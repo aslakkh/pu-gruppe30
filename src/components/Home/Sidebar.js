@@ -13,7 +13,6 @@ import SessionPlanner from './../SessionPlanner/SessionPlanner'
 import CircularProgress from './../Courses/CircularProgress'
 import PlannedSession from './PlannedSession'
 import CourseInformation from './../Courses/CourseInformation'
-
 /*Maps the courses to make the sidebar and the site for the specific courses
 *
 *
@@ -56,7 +55,7 @@ constructor(props) {
 			
 			courses: this.props.courses
 		}
-  
+
 };
 
 componentWillReceiveProps(nextProps){
@@ -74,7 +73,11 @@ componentWillReceiveProps(nextProps){
 
     }
 
+    handleLink(path) {
+        this.props.history.push(path);
+    }
 
+    /* */
 
 
 
@@ -93,45 +96,32 @@ componentWillReceiveProps(nextProps){
     }
     else{
         return (
-        <Router 
-        >
+        <Router>
             <div>
-                {/*<Link to={"IT1111"}>
-                    <Button>IT1111</Button>
-                </Link>
-                <Link to={"IT1273"}>
-                    <Button>IT1273</Button>
-                </Link>*/}
-                
-                    <Tab.Container id="left-tabs" activeKey={this.state.key} onSelect={this.handleSelect}>
-                        <Row className="clearfix">
-                            <Col sm={3}>
-                                <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
-                                    {Object.keys(this.state.courses).map((emne,i) =>
+                <Tab.Container id="left-tabs" activeKey={this.state.key} onSelect={this.handleSelect}>
+                    <Row className="clearfix">
+                        <Col sm={3}>
+                            <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
+                                {Object.keys(this.state.courses).map((emne,i) =>
+                                
                                     
-                                        
-                                            <NavItem eventKey={emne} className="navbar-link" key={i}  >
-                                                <Link to={"/"+emne} key={i}>
-                                                {emne}
-                                                </Link>
-                                            </NavItem>
-                                        
-                                    
+                                        <NavItem eventKey={emne} className="navbar-link" key={i}  >
+                                            <Link to={"/"+emne} key={i}>
+                                            {emne}
+                                            </Link>
+                                        </NavItem>
+                                )}
+                            </Nav>
+                        </Col>
+                        <Col sm={9}>
+                            <Tab.Content animation>
 
-
-                                    )}
-                                </Nav>
-                            </Col>
-                            <Col sm={9}>
-                                <Tab.Content animation>
-
-                                    <Route path="/:id" render={this.handleRoute} />
-                                </Tab.Content>
-                            </Col>
-                        </Row>
-                    </Tab.Container>
+                                <Route path="/:id" render={this.handleRoute} />
+                            </Tab.Content>
+                        </Col>
+                    </Row>
+                </Tab.Container>
                     
-                    {/*<Route path="/:id" render={this.handleRoute} />*/}
             </div>
             
           

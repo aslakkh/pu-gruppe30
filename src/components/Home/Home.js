@@ -3,6 +3,10 @@ import Sidebar from './Sidebar'
 import firebase from 'firebase';
 import {getUserUid} from '../../helpers/auth'
 
+/*
+Start-site for students
+ */
+
 export default class Home extends Component {
   constructor(props){
     super(props);
@@ -55,7 +59,7 @@ export default class Home extends Component {
       }
     else{return (
       <div>
-        Home. Not Protected. Anyone can see this.
+        Loading.
       </div>
     )}
   } 

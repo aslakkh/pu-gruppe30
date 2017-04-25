@@ -63,6 +63,7 @@ export default class Statistics extends Component {
         this.list2=[];
         this.labels=[];
         this.show=false;
+        this.kurs = this.props.courseID
         this.state = {
             show: false,
             done:false,
@@ -84,47 +85,84 @@ export default class Statistics extends Component {
         };
         this.sessions =[]
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            show: false,
+            done:false,
+            courseID: nextProps.courseID,
+            daily:0,
+            weekly:0,
+            monthly:0,
+            data:{
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Time',
+                        backgroundColor: "rgba(0,220,0,0.5)",
+                        data: []
+                    }
+                ]
+            }
 
+        })
+        this.list2=[];
+        this.kurs= nextProps.courseID;
+        this.labels=[];
+        this.show=false;
+        this.sessions =[]
+        this.forceUpdate()
+        this.getDataFromFirebase()
+
+
+        ;
+    }
 
     componentWillMount(){
 
-
-
-        this.getDataFromFirebase()
     }
     componentDidMount(){
-
+        this.getDataFromFirebase()
 
     }
 
     componentWillUnmount(){
-        this.setState({
-            show:false
-        })
     }
+    /*
+    get sessions from database and selects only for the specific course
+     */
     getDataFromFirebase(){
-        console.log(this.state.courseID);
         let that = this;
-        let kurs = this.state.courseID;
+        let kurs = this.kurs;
         let ting = [];
+        that.sessions = []
         let messageRef = firebase.database().ref();
         messageRef.child('users/').on('child_added', function(snapshot) {
-            if(snapshot.val().courses[kurs] != undefined && snapshot.val().courses[kurs]['sessions']) {
-                ting.push(snapshot.val().courses[kurs]['sessions']);
-                ting.forEach(function (session) {
-                    Object.keys(session).map((session2) => {that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
+            if(snapshot.val()['courses'] != undefined){
+            if(snapshot.val().courses[that.kurs] != undefined) {
+                if(snapshot.val().courses[that.kurs]['sessions'] != undefined) {
+                    ting.push(snapshot.val().courses[that.kurs]['sessions']);
+                    ting.forEach(function (session) {
+                            Object.keys(session).map((session2) => {
+                                that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
 
 
-                })
-            }
-                )
-        }});
+                            })
+                        }
+                    )
+
+                    that.forceUpdate()
+                }}}})
 
     }
+    /*
+    Sorting function
+     */
     sortNumber(a,b) {
         return a - b;
     }
-
+/*
+formats the sessions to usable data for chart.js
+ */
     handleClick2(){
         if(this.sessions.length >0 &&!this.state.done){
             var list = this.sessions;
@@ -133,7 +171,7 @@ export default class Statistics extends Component {
                 if(isNaN(this.list2[day.getWeek()])){
                    this.list2[day.getWeek()]=0;
                 }
-                this.labels.indexOf(day.getWeek()) === -1 ? this.labels.push(day.getWeek()) : console.log("This item already exists");
+                this.labels.indexOf(day.getWeek()) === -1 ? this.labels.push(day.getWeek()) : console.log();
                 this.list2[day.getWeek()]=this.list2[day.getWeek()]+list[key]["time"]
             });
             this.list2 = this.list2.map((x) => x/3600);
@@ -152,7 +190,7 @@ export default class Statistics extends Component {
     render() {
         if(!this.sessions.length > 0 || this.state.courseID === null || this.state.courseID === undefined){
             return (
-                <h1>Loading2</h1>
+                <h4>No statistics</h4>
 
             )}
             else{

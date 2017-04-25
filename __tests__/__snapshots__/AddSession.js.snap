@@ -92,6 +92,7 @@ exports[`AddSession One course 1`] = `
                       }
                       onHide={[Function]}
                       renderBackdrop={[Function]}
+                      restoreFocus={true}
                       show={false}
               >
                       <ModalHeader
@@ -422,6 +423,7 @@ exports[`AddSession One course 1`] = `
                       }
                       onHide={[Function]}
                       renderBackdrop={[Function]}
+                      restoreFocus={true}
                       show={false}
               >
                       <ModalHeader
@@ -760,6 +762,7 @@ exports[`AddSession One course 1`] = `
     }
     onHide={[Function]}
     renderBackdrop={[Function]}
+    restoreFocus={true}
     show={false}
   >
     <ModalHeader

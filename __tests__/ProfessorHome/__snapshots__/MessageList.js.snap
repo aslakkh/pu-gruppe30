@@ -2,6 +2,6 @@
 
 exports[`List Message Not logged in 1`] = `
 <h5>
-  You have no active courses. Add a course below.
+  No Messages
 </h5>
 `;

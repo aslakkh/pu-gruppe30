@@ -31,7 +31,7 @@ const courseNull = null;
 describe('Welcome', () => {
     it('Renders home', () => {
         const home = shallow(<Home />);
-        expect(home.find('div').text()).toEqual('Home. Not Protected. Anyone can see this.');
+        expect(home.find('div').text()).toEqual('Loading.');
     });
     it('renders without courses', () => {
         const home = shallow(<Home courses={courseNull} authed={true} admin={false}/>);

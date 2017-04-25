@@ -26,19 +26,7 @@ function MatchWhenAuthed ({component: Component, authed, ...rest}) {
   )
 }
 
-//Unused
-/*function getCourse(user){
-    let emner = []
-    let that = this
-    const userUid = user;
-    ref.child('users/'+userUid+'/courses').once("value",function(snapshot){
-      snapshot.forEach(function(data){
-        emner.push(data.key)
-        that.setState({})
-    })})
-    return(emner)
 
-}*/
 
 function MatchWhenUnauthed ({component: Component, authed, ...rest}) {
   return (
@@ -193,8 +181,10 @@ export default class App extends Component {
                 <Switch>
                     <MatchWhenUnauthed authed={this.state.authed} path='/login' component={Login} />
                     <MatchWhenUnauthed authed={this.state.authed} path='/register' component={Register} />
+
                     <MatchWhenAuthed authed={this.state.authed} path='/dashboard' component={() => this.dashboardDecide()}/>
                     <MatchWhenAuthed authed={this.state.authed} path='/SessionPlanner' component={SessionPlanner} />
+
                     <Route path='/'  component={() => this.state.authed ? this.homeDecide() : <Login/>}/>
                   <Route render={() => <h3>No Match</h3>} />
                 </Switch>

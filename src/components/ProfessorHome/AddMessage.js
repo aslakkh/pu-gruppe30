@@ -49,7 +49,9 @@ export default class AddMessage extends Component {
     handleChange(event) {
         this.setState({value: event.target.value});
       }
-
+/*
+Checks if message is not empty
+ */
     checkMessage(){
         if (this.state.value === ""){
             return true
@@ -59,10 +61,16 @@ export default class AddMessage extends Component {
         }
 
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            courseID: nextProps.courseID
+        });
+    }
 
     render(){
         return(
-
+        <div>
+            <h3>{this.state.courseID}</h3>
 
             <form onSubmit={this.handleSubmit}>
                 <FormControl
@@ -77,7 +85,7 @@ export default class AddMessage extends Component {
                 <button disabled={this.checkMessage()} type="submit" className="btn btn-primary">Submit</button>
 
             </form>
-
+        </div>
         )
     }
 

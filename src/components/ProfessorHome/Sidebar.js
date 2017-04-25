@@ -34,7 +34,6 @@ componentWillReceiveProps(nextProps){
   });
 }
     handleRoute({match}){
-        console.log("handleroute " + match.params.id);
         return(<div>
                 <AddMessage courseID={match.params.id}/>
                 <MessageList courseID={match.params.id}/>
@@ -43,12 +42,7 @@ componentWillReceiveProps(nextProps){
             </div>
         )
     }
-/*
-
-
-
-
- */
+    
 componentWillMount(){
 }
 	render (){

@@ -21,27 +21,6 @@ import CourseInformation from './../Courses/CourseInformation'
 *
 * */
 
-///TODO: Try updating index to match new routes
-
-
-
-
-
-class Test extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            emne: this.props.emne,
-            courses: this.props.courses,
-        }
-    }
-    render()
-    {
-        return(
-        <h4>{this.state.emne}</h4>
-    )
-}
-}
 
 
 
@@ -59,12 +38,11 @@ constructor(props) {
 };
 
 componentWillReceiveProps(nextProps){
-    console.log("SIDEBAAAAAAR");
-    console.log(nextProps.courses);
   this.setState({
     courses: nextProps.courses
   });
 }
+    //handles select for TAB
     handleSelect(key){
         this.setState({
             key:key
@@ -73,21 +51,15 @@ componentWillReceiveProps(nextProps){
 
     }
 
-    handleLink(path) {
-        this.props.history.push(path);
-    }
 
-    /* */
-
-
-
+    //gets url parameter (match) and returns TabView with props corresponding to url parameter
     handleRoute = ({match}) => {
-        console.log("handleroute " + match.params.id);
         return(
             <TabView emne={match.params.id} course={this.state.courses[match.params.id]}/>
             
         )
     }
+
 	render (){
     if(this.state.courses === undefined){ //checks if props are loaded
       return(

@@ -17,7 +17,7 @@ import {styles} from './TabViewStyles.js'
 import './../Courses/results.css'
 
 /*
-Renders the tab-menu on the top, and calls
+Renders the Tab (five buttons) and routes to each component
  */
 
 
@@ -32,8 +32,6 @@ export default class TabView extends Component{
             activeButton: 0,
         });
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
-        console.log("kurs")
-        console.log(this.props.course)
 
     }
 
@@ -58,7 +56,6 @@ export default class TabView extends Component{
     }
 
     handleRoute = ({match}) => {
-        console.log("TABVIEW handleroute " + match.params.id);
         if(match.params.id === "session"){
             return(
                 <StopWatch course={this.state.course} emne={this.state.emne}/>
@@ -96,34 +93,6 @@ export default class TabView extends Component{
                             <Link to={"/"+this.state.emne+"/past-goals"}> <Button onClick={() => this.handleClick(4)} active={this.state.activeButton === 4} bsStyle="primary" style={styles.SingleTab}>Past goals</Button></Link>
                             <Link to={"/"+this.state.emne+"/messages"}> <Button onClick={() => this.handleClick(5)} active={this.state.activeButton === 5} bsStyle="primary" style={styles.SingleTab}>Messages</Button></Link>
                         </div>
-
-                        {/*<Tabs activeKey={this.state.key} unmountOnExit={true} defaultActiveKey={"session"} onSelect={this.handleSelect} id="montlyweeklyselecter">
-                            <Tab eventKey={"session"} title="Session">
-                                <Link to={"/"+this.state.emne+"/session"}> Hey</Link>
-                                
-                            </Tab>
-                            <Tab eventKey={"planSession"} title={"Plan Session"}>
-                                <Link to={"/"+this.state.emne+"/plan-session"}> Hey</Link>
-                               
-                            </Tab>
-                            <Tab eventKey={"goals"} title={"Goals"}>
-                                <Link to={"/"+this.state.emne+"/goals"}> Hey</Link>
-                                
-                            </Tab>
-                            <Tab eventKey="5" title="Past Goals">
-                                <DropdownButton className="info-dropdown" bsStyle="primary" title={this.state.view} key={0} id={0}>
-                                    <MenuItem eventKey="1" onClick={() => this.handleDropdownClick('Daily Goals')}>Daily Goals</MenuItem>
-                                    <MenuItem eventKey="2" onClick={() => this.handleDropdownClick('Weekly Goals')}>Weekly Goals</MenuItem>
-                                    <MenuItem eventKey="3" onClick={() => this.handleDropdownClick('Monthly Goals')}>Monthly Goals</MenuItem>
-                                </DropdownButton>
-                                <Link to={"/"+this.state.emne+"/past-goals"}> Hey</Link>
-                                
-                            </Tab>
-                            <Tab eventKey={"Message"} title="Messages">
-                                <Link to={"/"+this.state.emne+"/messages"}> Hey</Link>
-                                
-                            </Tab>
-                        </Tabs>*/}
 
                         <hr/>
                         

@@ -47,32 +47,14 @@ export default class App extends Component {
 
   };
 
-  shouldComponentUpdate(nextProps, nextState){
-    console.log("INDEX SHOULDUPDATE");
-    console.log(nextState);
-    return true;
-    // if(this.state.courses && nextState.courses){
-    //   if(Object.keys(this.state.courses).length !== Object.keys(nextState.courses).length){
-    //   console.log("Index will update");
-    //   return true;
-    //   }
-    //   else
-    //   {return false;}
-    // }
-    // else{
-    //   return true;
-    // }
-    
-  }
 
 
-
+  //gets all necessary information from firebase (useruid, admin value)
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.useruid = user.uid;
           let that = this;
-        console.log(user);
           firebase.database().ref().child('users/'+ this.useruid+'/info/privilege').once('value').then(function(snapshot){
               if(snapshot.val() === "99"){
                   that.setState({
@@ -90,18 +72,6 @@ export default class App extends Component {
           user : this.useruid
         });
 
-        // let courseRef = firebase.database().ref();
-        // courseRef.child('users/'+this.useruid+'/courses').orderByChild('active').equalTo(true).on('value', snap => {
-        //   that.setState({
-        //     courses: snap.val()
-        //   });
-        //   firebase.database().ref().child('courses').on('value', snap => {
-        //     console.log(snap.val())
-
-        //   })
-          
-
-        // })
 
 
 
@@ -120,9 +90,8 @@ export default class App extends Component {
     this.removeListener()
   }
 
-  //                  <MatchWhenAuthed authed={this.state.authed} path='/Courses' component={Courses} courses={this.state.courses}/>
-//                    <NavItem><Link to="/Courses" className="navbar-link">Courses</Link></NavItem>
-    //<Route exact path='/'  component={() => this.state.authed ? this.homeDecide() : <Home/>}/>
+
+  //used to decide whether to render professorHome or studentHome
   homeDecide(){
       if(this.state.admin === true){
           return (<ProfessorHome />)
@@ -134,6 +103,7 @@ export default class App extends Component {
       }
   }
 
+  //used to decide whether to render ProfessorDashboard or Dashboard
   dashboardDecide(){
     if(this.state.admin === true){
       return (<ProfessorDashboard />)
@@ -144,8 +114,7 @@ export default class App extends Component {
   }
 
   render() {
-    console.log("rendering index");
-    return this.state.loading === true ? <h1>Loading</h1> : (
+    return this.state.loading === true ? <h1>Loading</h1> : ( 
       <Router>
           <div>
 

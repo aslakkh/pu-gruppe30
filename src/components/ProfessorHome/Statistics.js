@@ -161,6 +161,7 @@ export default class Statistics extends Component {
         return a - b;
     }
 /*
+Handles click on getStatistics-button
 formats the sessions to usable data for chart.js
  */
     handleClick2(){
@@ -197,7 +198,12 @@ formats the sessions to usable data for chart.js
             return(<div>
                     <Button bsStyle="primary" bsSize="large" onClick={this.handleClick2.bind(this)}>Get Statistics</Button>
 
-                    {this.state.show ? <BarChart data={this.state.data}  options={options}/> : <h5>Loading statistics may take a while.</h5>}
+                    {this.state.show ? 
+                    <div>
+                        <BarChart data={this.state.data}  options={options}/>
+                        <h4>X-axis displays week. Y-axis displays students' total time logged</h4>
+                    </div>
+                    : <h5>Loading statistics may take a while.</h5>}
 
                 </div>
             )

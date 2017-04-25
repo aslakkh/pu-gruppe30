@@ -33,8 +33,10 @@ componentWillReceiveProps(nextProps){
     courses: nextProps.courses
   });
 }
+    //matches URl (match.params.id) to course
     handleRoute({match}){
-        return(<div>
+        return(
+            <div>
                 <AddMessage courseID={match.params.id}/>
                 <MessageList courseID={match.params.id}/>
                 <Statistics courseID={match.params.id}/>

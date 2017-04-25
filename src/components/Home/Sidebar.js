@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import SpecificCourse from './specificCourse'
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom'
-
 /*Maps the courses to make the sidebar and the site for the specific courses
 *
 *
@@ -21,7 +20,7 @@ constructor(props) {
 			
 			courses: this.props.courses
 		}
-  
+
 };
 
 componentWillReceiveProps(nextProps){
@@ -37,7 +36,11 @@ componentWillReceiveProps(nextProps){
 
     }
 
+    handleLink(path) {
+        this.props.history.push(path);
+    }
 
+    /* */
 
 componentWillMount(){
 }
@@ -50,37 +53,39 @@ componentWillMount(){
     }
     else{
       return (
-          <Router>
-              <div>
-            <Tab.Container id="left-tabs" defaultActiveKey={(Object.keys(this.state.courses)[0])} activeKey={this.state.key}>
-                <Row className="clearfix">
-                <Col sm={3}>
-                <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
-                    {Object.keys(this.state.courses).map((emne,i) =>
 
-                    <NavItem eventKey={emne} className="navbar-link" key={i}  >
-                        {emne}
-                    </NavItem>
+          <div>
+              <Tab.Container id="left-tabs" defaultActiveKey={(Object.keys(this.state.courses)[0])} activeKey={this.state.key}>
+                  <Row className="clearfix">
+                      <Col sm={3}>
+                          <Nav bsStyle="pills" className="navbar navbar-inverse" stacked>
+                              {Object.keys(this.state.courses).map((emne,i) =>
+
+                                  <NavItem eventKey={emne} className="navbar-link" key={i}  >
+                                      {emne}
+                                  </NavItem>
 
 
-                    )}
-                </Nav>
-                </Col>
-                <Col sm={9}>
-                <Tab.Content animation>
-                    {Object.keys(this.state.courses).map((emne,i) =>
-                    <Tab.Pane eventKey={emne} key={i}>
-                        <h1>{emne}</h1>
-                        <SpecificCourse courseID={emne} course={this.state.courses[emne]}/>
-                    </Tab.Pane>
+                              )}
+                          </Nav>
+                      </Col>
+                      <Col sm={9}>
+                          <Tab.Content animation>
+                              {Object.keys(this.state.courses).map((emne,i) =>
+                                  <Tab.Pane eventKey={emne} key={i}>
+                                      <h1>{emne}</h1>
+                                      <SpecificCourse courseID={emne} course={this.state.courses[emne]}/>
+                                  </Tab.Pane>
 
-                    )}
-                </Tab.Content>
-                </Col>
-                </Row>
-                </Tab.Container>
-              </div>
-            </Router>
+                              )}
+                          </Tab.Content>
+                      </Col>
+                  </Row>
+              </Tab.Container>
+          </div>
+
+
+
 
 
 

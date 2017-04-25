@@ -20,27 +20,37 @@ export default class MessageList extends Component {
             messages:undefined
         }
     }
+    componentWillReceiveProps(nextProps){
+        console.log("reciveve")
+        this.setState({
+            courseID: nextProps.courseID
+        })
+        this.getCommentsFromFirebase(nextProps.courseID)
 
-    getCommentsFromFirebase(){
-        let messageRef = firebase.database().ref();
+    }
+
+    getCommentsFromFirebase(id){
+        this.messageRef = firebase.database().ref();
         let that = this;
         var messages =[];
-        messageRef.child('courses/'+this.state.courseID+'/Messages').on('value', function(snapshot) {
+        this.messageRef.child('courses/'+id+'/Messages').on('value', function(snapshot) {
+            messages=[]
             snapshot.forEach(function(data){
                 messages.unshift([ data.key,data.val().Message])
-
             });
-            that.setState({
-                messages:messages
-            });
-            messages=[]
-    });
+            that.messages = messages
+            that.forceUpdate()
+            console.log(that.messages);
+    })
     }
 
-    componentWillMount(){
-        this.getCommentsFromFirebase()
+    componentDidMount(){
+        console.log("heihei")
+        this.getCommentsFromFirebase(this.state.courseID)
     }
-
+    componentWillUnmount(){
+        this.messageRef
+    }
 /*
     Deletes selected message
  */
@@ -50,21 +60,20 @@ handleClick(key) {
 }
     render(){
 
-        if(this.state.messages === undefined || this.state.messages === null){
+        if(this.messages === undefined || this.messages.length === 0){
             return(
-                <h5>You have no active courses. Add a course below.</h5>
+                <h5>No Messages</h5>
             );
         }
         else{
             return(
                 <div>
-
                     <ListGroup >
-                        {Object.keys(this.state.messages).map((key,i) => {
+                        {Object.keys(this.messages).map((key,i) => {
                             return <ListGroupItem key={key} className="CoursesList" style={styles.coursesList}>
-                                <h4>{this.state.messages[key][1]}</h4>
+                                <h4>{this.messages[key][1]}</h4>
 
-                                <Button  bsStyle="danger" onClick={() => this.handleClick(this.state.messages[key][0])}>Delete</Button>
+                                <Button  bsStyle="danger" onClick={() => this.handleClick(this.messages[key][0])}>Delete</Button>
                             </ListGroupItem>
                         })}
                     </ListGroup>

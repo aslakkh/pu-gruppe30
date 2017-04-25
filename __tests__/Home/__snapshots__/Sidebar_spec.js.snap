@@ -4,7 +4,9 @@ exports[`Sidebar No courses 1`] = `
 <BrowserRouter>
   <div>
     <Uncontrolled(TabContainer)
+      activeKey={undefined}
       id="left-tabs"
+      onSelect={[Function]}
     >
       <Row
         bsClass="row"
@@ -79,7 +81,9 @@ exports[`Sidebar One course 1`] = `
 <BrowserRouter>
   <div>
     <Uncontrolled(TabContainer)
+      activeKey={undefined}
       id="left-tabs"
+      onSelect={[Function]}
     >
       <Row
         bsClass="row"

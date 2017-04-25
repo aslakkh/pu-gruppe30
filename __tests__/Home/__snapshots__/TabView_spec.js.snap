@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabView One course 1`] = `
+<BrowserRouter>
+  <div>
+    <div
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <Link
+        replace={false}
+        to="/TES1000/session"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          onClick={[Function]}
+          style={
+            Object {
+              "float": "left",
+              "width": "20%",
+            }
+          }
+        >
+          Session
+        </Button>
+      </Link>
+      <Link
+        replace={false}
+        to="/TES1000/plan-session"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          onClick={[Function]}
+          style={
+            Object {
+              "float": "left",
+              "width": "20%",
+            }
+          }
+        >
+          Plan session
+        </Button>
+      </Link>
+      <Link
+        replace={false}
+        to="/TES1000/goals"
+      >
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          onClick={[Function]}
+          style={
+            Object {
+              "float": "left",
+              "width": "20%",
+            }
+          }
+        >
+          Goals
+        </Button>
+      </Link>
+      <Link
+        replace={false}
+        to="/TES1000/past-goals"
+      >
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          onClick={[Function]}
+          style={
+            Object {
+              "float": "left",
+              "width": "20%",
+            }
+          }
+        >
+          Past goals
+        </Button>
+      </Link>
+      <Link
+        replace={false}
+        to="/TES1000/messages"
+      >
+         
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          onClick={[Function]}
+          style={
+            Object {
+              "float": "left",
+              "width": "20%",
+            }
+          }
+        >
+          Messages
+        </Button>
+      </Link>
+    </div>
+    <hr />
+    <div
+      style={
+        Object {
+          "marginTop": "50px",
+        }
+      }
+    >
+      <Route
+        path="/TES1000/session"
+        render={[Function]}
+      />
+      <Route
+        path="/TES1000/plan-session"
+        render={[Function]}
+      />
+      <Route
+        path="/TES1000/goals"
+        render={[Function]}
+      />
+      <Route
+        path="/TES1000/past-goals"
+        render={[Function]}
+      />
+      <Route
+        path="/TES1000/messages"
+        render={[Function]}
+      />
+    </div>
+  </div>
+</BrowserRouter>
+`;

@@ -4,6 +4,43 @@ exports[`Results Daily 1`] = `
 <div
   className="table-module"
 >
+  <DropdownButton
+    bsStyle="primary"
+    className="info-dropdown"
+    id={0}
+    title="Daily Goals"
+  >
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="1"
+      header={false}
+      onClick={[Function]}
+    >
+      Daily Goals
+    </MenuItem>
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="2"
+      header={false}
+      onClick={[Function]}
+    >
+      Weekly Goals
+    </MenuItem>
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="3"
+      header={false}
+      onClick={[Function]}
+    >
+      Monthly Goals
+    </MenuItem>
+  </DropdownButton>
   <BootstrapTable
     bodyContainerClass={null}
     bodyStyle={undefined}
@@ -28,21 +65,21 @@ exports[`Results Daily 1`] = `
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
         Object {
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
         Object {
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
       ]
@@ -290,6 +327,43 @@ exports[`Results Monthly 1`] = `
 <div
   className="table-module"
 >
+  <DropdownButton
+    bsStyle="primary"
+    className="info-dropdown"
+    id={0}
+    title="Daily Goals"
+  >
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="1"
+      header={false}
+      onClick={[Function]}
+    >
+      Daily Goals
+    </MenuItem>
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="2"
+      header={false}
+      onClick={[Function]}
+    >
+      Weekly Goals
+    </MenuItem>
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="3"
+      header={false}
+      onClick={[Function]}
+    >
+      Monthly Goals
+    </MenuItem>
+  </DropdownButton>
   <BootstrapTable
     bodyContainerClass={null}
     bodyStyle={undefined}
@@ -314,21 +388,21 @@ exports[`Results Monthly 1`] = `
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
         Object {
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
         Object {
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
       ]
@@ -576,6 +650,43 @@ exports[`Results Weekly 1`] = `
 <div
   className="table-module"
 >
+  <DropdownButton
+    bsStyle="primary"
+    className="info-dropdown"
+    id={0}
+    title="Daily Goals"
+  >
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="1"
+      header={false}
+      onClick={[Function]}
+    >
+      Daily Goals
+    </MenuItem>
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="2"
+      header={false}
+      onClick={[Function]}
+    >
+      Weekly Goals
+    </MenuItem>
+    <MenuItem
+      bsClass="dropdown"
+      disabled={false}
+      divider={false}
+      eventKey="3"
+      header={false}
+      onClick={[Function]}
+    >
+      Monthly Goals
+    </MenuItem>
+  </DropdownButton>
   <BootstrapTable
     bodyContainerClass={null}
     bodyStyle={undefined}
@@ -600,21 +711,21 @@ exports[`Results Weekly 1`] = `
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
         Object {
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
         Object {
           "goal": "NaN hours and NaN minutes",
           "id": "undefined/undefined-NaN undefined:undefined:undefined",
           "percent": NaN,
-          "set": "undefined, NaN",
+          "set": "undefined/undefined/NaN",
           "spent": "NaN hours and NaN minutes",
         },
       ]

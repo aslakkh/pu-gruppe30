@@ -32,10 +32,10 @@ export default class TabView extends Component{
             activeButton: 0,
         });
         this.handleDropdownClick = this.handleDropdownClick.bind(this);
-
+        this.handleRoute = this.handleRoute.bind(this)
     }
 
-    componentWillReceiveProps(nextProps){
+       componentWillReceiveProps(nextProps){
         var tempActiveButton;
         tempActiveButton = (nextProps.emne === this.state.emne) ? this.state.activeButton : 0; //reset active button when switching course
         this.state=({
@@ -55,7 +55,7 @@ export default class TabView extends Component{
         this.setState({view: view})
     }
 
-    handleRoute = ({match}) => {
+    handleRoute ({match}) {
         if(match.params.id === "session"){
             return(
                 <StopWatch course={this.state.course} emne={this.state.emne}/>

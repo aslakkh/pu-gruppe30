@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
+import {FormGroup, FormControl, ControlLabel, Button, Alert} from 'react-bootstrap'
 import { planSession } from '../../helpers/auth'
 import './SessionPlanner.css'
 
@@ -25,6 +25,7 @@ export default class SessionPlanner extends Component{
             date: new Date(new Date().getTime() + (24*60*60*1000)).toISOString(),
             goal: "",
             course: this.props.course,
+            show:false
         }
     }
 
@@ -64,6 +65,11 @@ export default class SessionPlanner extends Component{
             //TODO: provide better user feedback
             console.log("Error: tried submitting invalid values");
         }
+        this.setState({
+            goal:"",
+            show:true
+        })
+        this.forceUpdate()
         
     }
 
@@ -106,6 +112,10 @@ export default class SessionPlanner extends Component{
         //<DatePicker defaultValue={this.state.date}/>
         return(
             <div>
+                {this.state.show ?
+                    <Alert bsStyle='success'>
+                        Session planned!
+                    </Alert> : <div></div>}
                 <FormGroup 
                 controlId="planSessionForm"
                 validationState={this.formValidateState()}

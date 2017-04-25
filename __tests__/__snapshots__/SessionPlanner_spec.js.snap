@@ -2,6 +2,7 @@
 
 exports[`AddSession One course 1`] = `
 <div>
+  <div />
   <FormGroup
     bsClass="form-group"
     controlId="planSessionForm"

@@ -135,7 +135,8 @@ export default class App extends Component {
                           onClick={() => {
                             logout();
                             this.setState({authed: false});
-                            Router.transitionTo('/')
+
+
                           }}
                           className="navbar-link"><span className="glyphicon glyphicon-log-out"></span> Logout</button></NavItem>
                       :<Nav >

@@ -35,6 +35,7 @@ export default class PlannedSession extends Component{
             sessions: this.props.course.plannedSessions,
             activeTabClassName: "tab1"
         }
+        console.log(this.props.course.plannedSessions)
 
     }
 
@@ -52,7 +53,7 @@ export default class PlannedSession extends Component{
 
 getSessions(){
     const userUid = firebase.auth().currentUser.uid;
-    firebase.database().ref().child('users/'+userUid+'/courses/'+this.state.emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
+    firebase.database().ref().child('users/'+userUid+'/courses/'+this.state.emne+'/plannedSessions/').orderByValue().startAt().once('value', snap => {
         this.setState({
             sessions: snap.val()
         })

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CourseInformation Different course 1`] = `
+<div>
+  <Panel
+    bsClass="panel"
+    bsStyle="info"
+    className="PanelHeader"
+    collapsible={true}
+    defaultExpanded={true}
+    header="Messages from course staff"
+  >
+    <ListGroup
+      bsClass="list-group"
+      fill={true}
+    >
+      <ListGroupItem
+        bsClass="list-group-item"
+        listItem={false}
+      >
+        <h5>
+          No messages to be displayed.
+        </h5>
+      </ListGroupItem>
+    </ListGroup>
+  </Panel>
+</div>
+`;
+
+exports[`CourseInformation One course 1`] = `
+<div>
+  <Panel
+    bsClass="panel"
+    bsStyle="info"
+    className="PanelHeader"
+    collapsible={true}
+    defaultExpanded={true}
+    header="Messages from course staff"
+  >
+    <ListGroup
+      bsClass="list-group"
+      fill={true}
+    >
+      <ListGroupItem
+        bsClass="list-group-item"
+        listItem={false}
+      >
+        <h5>
+          No messages to be displayed.
+        </h5>
+      </ListGroupItem>
+    </ListGroup>
+  </Panel>
+</div>
+`;

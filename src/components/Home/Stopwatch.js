@@ -52,8 +52,10 @@ class Stopwatch extends Component {
     this.setState({
         secondsElapsed: 0
     });
+    console.log(this.state.key)
+        console.log(this.state.desc.value)
         if(this.state.key !== null){
-        const planRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/planned-sessions/'+ this.state.key);
+        const planRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/plannedSessions/'+ this.state.key);
         planRef.remove();
         }
 }

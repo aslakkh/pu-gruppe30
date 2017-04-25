@@ -45,8 +45,7 @@ class Stopwatch extends Component {
     Sends the time spent to firebase
      */
     castToFirebase(){
-        console.log("CASTING TO: " + this.state.emne);
-        console.log(this.state.desc.value);
+
     const userUid = firebase.auth().currentUser.uid;
     const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now());
     timeRef.set({time:this.state.secondsElapsed,desc: this.state.desc.value});
@@ -104,7 +103,6 @@ Starts the timer
     Gets the selected planned session, if selected
      */
     onChildChanged(newState,newState2){
-        console.log(newState,newState2);
         this.setState({
             theme:newState,
             key: newState2
@@ -113,7 +111,6 @@ Starts the timer
     }
 
     render() {
-        console.log("inside stopwatch: " + this.state.emne)
         return (
             <Grid fluid={true}>
                 <Row>

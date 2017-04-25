@@ -40,8 +40,6 @@ export default class PlannedSession extends Component{
 
 
     componentWillReceiveProps(nextProps){
-        console.log("EMNE: ");
-        console.log(nextProps.course.plannedSessions);
         this.setState({
             course: nextProps.course,
             emne: nextProps.emne,
@@ -58,12 +56,10 @@ getSessions(){
         this.setState({
             sessions: snap.val()
         })
-        console.log(snap.val())
 })
 }
 
     handleClick(key){
-    console.log(key);
     this.props.callbackParent(this.state.sessions[key].goal, key);
         this.setState({activeTabClassName:key})
     }
@@ -71,8 +67,6 @@ getSessions(){
 
 
     render(){
-        console.log("Plannedsessions: " + this.state.emne);
-        console.log("Sessions: " + this.state.sessions);
         if(this.state.sessions == null || this.state.sessions == undefined){
             return <h4>No planned sessions</h4>
         }

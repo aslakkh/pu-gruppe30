@@ -54,7 +54,6 @@ export default class CourseInformation extends Component{
 
     render(){
         //render based on if course has messages
-        console.log("COURSE INFO: " + this.state.courseID);
         if(this.state.messages === null || this.state.messages === undefined){
             return(
                 <div>

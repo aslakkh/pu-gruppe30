@@ -232,13 +232,11 @@ export default class CircularProgress extends Component {
             goal = "Not Set";
             percent = 0;
         }
-        console.log("P: " + percent);
         return [percent, goal, remaining, spent];
 
     }
 
     render() {
-        console.log("Inside circularProgress: " + this.state.courseID);
         let goals = this.state.course.goals;
         let dailyInfo = this.getStrings(goals.dailyGoal.value, this.state.dailyTimeSpent, "today: ");
         let weeklyInfo = this.getStrings(goals.weeklyGoal.value, this.state.weeklyTimeSpent, "this week: ");

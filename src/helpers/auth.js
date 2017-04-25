@@ -138,7 +138,7 @@ export function disableCourse(course){
 
 export function planSession(course, date, goal){
     const userUid = getUserUid();
-    var userRef = ref.child('users/'+userUid+'/courses/'+course+'/planned-sessions/');
+    var userRef = ref.child('users/'+userUid+'/courses/'+course+'/plannedSessions/');
     userRef.child(date).update({
         goal: goal,
     });
@@ -213,3 +213,4 @@ export function removeOldGoal(course, type, key) {
     let oldGoalRef = ref.child('users/'+userUid+'/courses/'+course + '/oldGoals/' + type + "/");
     oldGoalRef.child(key).remove();
 }
+

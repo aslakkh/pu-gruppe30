@@ -21,6 +21,8 @@ class Stopwatch extends Component {
         super(props);
 
         this.state = {
+            emne: this.props.emne,
+            course: this.props.course,
             secondsElapsed: 0,
             lastClearedIncrementer: null,
             goal: 400,
@@ -32,12 +34,18 @@ class Stopwatch extends Component {
         this.started = false
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            emne: nextProps.emne,
+            course: nextProps.course,
+        })
+    }
+
     /*
     Sends the time spent to firebase
      */
     castToFirebase(){
-        console.log("desc");
-        console.log(this.state.desc.value);
+
     const userUid = firebase.auth().currentUser.uid;
     const timeRef = ref.child('users/'+userUid+'/courses/'+this.state.emne+'/sessions/'+ Date.now());
     timeRef.set({time:this.state.secondsElapsed,desc: this.state.desc.value});
@@ -84,7 +92,6 @@ Starts the timer
         });
         this.incrementer = null;
         this.started = false;
-        console.log(this.props.emne)
 
     }
     handleResetClick() {
@@ -96,7 +103,6 @@ Starts the timer
     Gets the selected planned session, if selected
      */
     onChildChanged(newState,newState2){
-        console.log(newState,newState2);
         this.setState({
             theme:newState,
             key: newState2
@@ -129,7 +135,7 @@ Starts the timer
                 )}
 
             </div><div>
-                        <AddSession courseID = {this.props.emne}/>
+                        <AddSession courseID={this.state.emne}/>
                     </div>
 
                     </Col>
@@ -137,7 +143,7 @@ Starts the timer
             <Col md={4}>
 
                 <div>
-                    <PlannedSession emne={this.props.emne} callbackParent={(newState,newState2) => this.onChildChanged(newState, newState2) }/>
+                    <PlannedSession course={this.state.course} emne={this.state.emne} callbackParent={(newState,newState2) => this.onChildChanged(newState, newState2) }/>
                 </div>
 </Col>
                 </Row>

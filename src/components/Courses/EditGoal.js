@@ -40,6 +40,7 @@ export default class EditGoal extends Component {
     componentWillReceiveProps(nextProps) {
         this.setState({
             showModal: nextProps.showModal,
+            courseID: nextProps.courseID,
         });
     }
 

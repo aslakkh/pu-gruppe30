@@ -9,6 +9,7 @@ import { plannedSession} from '../../helpers/auth'
 
 
 function Test(props){
+    this.getSessions = this.getSessions.bind(this);
     return(
         <ListGroup>
             <ListGroupItem>Link 1</ListGroupItem>
@@ -30,24 +31,35 @@ export default class PlannedSession extends Component{
         this.state={
             desc: "hei",
             emne: this.props.emne,
+            course: this.props.course,
+            sessions: this.props.course.plannedSessions,
             activeTabClassName: "tab1"
         }
 
     }
-componentWillMount(){
 
-    let that = this;
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            course: nextProps.course,
+            emne: nextProps.emne,
+            sessions: nextProps.course.plannedSessions,
+        })
+        //this.getSessions();
+    }
+
+
+
+getSessions(){
     const userUid = firebase.auth().currentUser.uid;
-    firebase.database().ref().child('users/'+userUid+'/courses/'+that.state.emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
-        that.setState({
+    firebase.database().ref().child('users/'+userUid+'/courses/'+this.state.emne+'/planned-sessions/').orderByValue().startAt().once('value', snap => {
+        this.setState({
             sessions: snap.val()
         })
-        console.log(snap.val())
 })
 }
 
     handleClick(key){
-    console.log(key);
     this.props.callbackParent(this.state.sessions[key].goal, key);
         this.setState({activeTabClassName:key})
     }

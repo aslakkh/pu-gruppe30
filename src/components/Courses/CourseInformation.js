@@ -15,16 +15,15 @@ export default class CourseInformation extends Component{
         }
     }
 
-    componentWillMount(){
-        /*console.log("inside courseinformation");
-        console.log(this.props.courseID);
-        console.log(getCourseMessages(this.props.courseID))*/
-        
+    componentWillReceiveProps(nextProps){
+        var messages = this.getMessages();
+        this.setState({
+            courseID: nextProps.courseID,
+            messages: messages,
+        })
     }
-
     //retreive messages from firebase, set component state
     componentDidMount(){
-        
         let that = this;
         var courseRef = firebase.database().ref().child('courses/'+this.state.courseID+'/Messages');
         courseRef.on('value', snap => {
@@ -33,6 +32,16 @@ export default class CourseInformation extends Component{
             });
         });
         
+    }
+
+    getMessages(){
+        let that = this;
+        var courseRef = firebase.database().ref().child('courses/'+this.state.courseID+'/Messages');
+        var messages;
+        courseRef.on('value', snap => {
+            messages = snap.val();
+        });
+        return messages;
     }
 
     msToDateString(dateInMs){

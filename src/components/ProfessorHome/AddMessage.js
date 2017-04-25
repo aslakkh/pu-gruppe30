@@ -61,10 +61,16 @@ Checks if message is not empty
         }
 
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            courseID: nextProps.courseID
+        });
+    }
 
     render(){
         return(
-
+        <div>
+            <h3>{this.state.courseID}</h3>
 
             <form onSubmit={this.handleSubmit}>
                 <FormControl
@@ -79,7 +85,7 @@ Checks if message is not empty
                 <button disabled={this.checkMessage()} type="submit" className="btn btn-primary">Submit</button>
 
             </form>
-
+        </div>
         )
     }
 

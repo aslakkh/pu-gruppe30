@@ -28,13 +28,11 @@ export default class SessionPlanner extends Component{
         }
     }
 
-    /*
-    getInitialState(){
-        var d = new Date(new Date().getTime() + (24*60*60*1000)).toISOString();
-        return{
-            date: d
-        }
-    }*/
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            course: nextProps.course,
+        })
+    }
 
     //handler for change in datepicker. Sets state.date to the ISO-string provided by datepicker
     handleDateChange(e){

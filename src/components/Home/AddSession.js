@@ -23,7 +23,6 @@ export default class AddSession extends Component{
         this.validateState = this.validateState.bind(this);
         this.setHours = this.setHours.bind(this);
         this.setMinutes = this.setMinutes.bind(this);
-        console.log( new Date().getTime())
         this.state = {
             courseID: this.props.courseID,
             date: new Date(new Date().getTime()).toISOString(),
@@ -32,6 +31,12 @@ export default class AddSession extends Component{
             minSelected: 0,
             secondsPlanned: 0,
         }
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            courseID: nextProps.courseID,
+        })
     }
 
     handleDropdownClick(time) {

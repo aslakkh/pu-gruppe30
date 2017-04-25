@@ -1,6 +1,46 @@
+/*
 {
   "rules": {
     ".read": true,
     ".write": true
+  }
+}
+*/
+
+/*
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+*/
+
+{
+  "rules": {
+    "users": {
+      ".read": "root.child('users').child(auth.uid).child('info').child('privilege').val() == '99'",
+      "$uid": {
+        ".read": "auth.uid == $uid || root.child('users').child(auth.uid).child('info').child('privilege').val() == '99'",
+        ".write": "auth.uid === $uid",
+        "courses":{
+          ".indexOn": "active",
+          "$kurs": {
+            "planned-sessions":{
+              ".indexOn": ".value"
+            }
+          }
+        }
+
+      }
+    }
+  ,
+    "courses":{
+      ".read": "root.child('users').child(auth.uid).exists()",
+      ".write": "root.child('users').child(auth.uid).child('info').child('privilege').val() == '99'",
+      "$kurs":{
+        ".read":  "root.child('users').child(auth.uid).exists() && root.child('users').child(auth.uid).child('courses').child('active').val()== true"
+      }
+    }
   }
 }

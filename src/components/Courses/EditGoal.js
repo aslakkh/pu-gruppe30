@@ -81,9 +81,10 @@ export default class EditGoal extends Component {
         if (seconds > 0) {
             let view = (this.state.view === "Monthly Goal") ? "monthlyGoal" :(this.state.view === "Weekly Goal") ? "weeklyGoal": "dailyGoal";
             setGoal(view, this.state.courseID, seconds, Date.now());
+            var time = getDaysHoursMins(seconds);
             this.setState({
                 displayFeedbackMessage: true,
-                feedbackMessage: this.state.view + " set. ",
+                feedbackMessage: this.state.view + " set to " + time[0] + " days, " + time[1] + " hours, " + time[2] + " minutes ",
                 bsStyle: 'success',
             });
         }

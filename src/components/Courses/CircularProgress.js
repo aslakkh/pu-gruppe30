@@ -39,15 +39,6 @@ export default class CircularProgress extends Component {
         this.setState({
             course: nextProps.course,
             courseID: nextProps.courseID,
-            // dailyGoal: this.props.course.goals.dailyGoal.value,
-            // dailySet: this.props.course.goals.dailyGoal.timeSet,
-            // weeklyGoal: this.props.course.goals.weeklyGoal.value,
-            // weeklySet: this.props.course.goals.weeklyGoal.timeSet,
-            // monthlyGoal: this.props.course.goals.monthlyGoal.value,
-            // monthlySet: this.props.course.goals.monthlyGoal.timeSet,
-            // dailyTimeSpent: this.props.course.goals.dailyGoal.timeSpent,
-            // weeklyTimeSpent: this.props.course.goals.weeklyGoal.timeSpent,
-            // monthlyTimeSpent: this.props.course.goals.monthlyGoal.timeSpent,
         });
     }
 
@@ -177,7 +168,6 @@ export default class CircularProgress extends Component {
         /*
          -Sets the progress percentage, color on progressbar and displays the goal if set.
          */
- 
         let items = [];
         items.push(
             <div key={1} className="view-box" >
@@ -224,7 +214,9 @@ export default class CircularProgress extends Component {
             goal = secondsToString(goalValue);
             percent = Math.floor((timeSpent / goalValue) * 100);
             if (timeSpent !== 0) {
-                percent < 100 ? remaining = "Remaining: " + secondsToString(goalValue - timeSpent + 60): remaining = "Completed";
+                let remainingSeconds = goalValue - timeSpent + 60;
+                if (remainingSeconds % 60 === 0) remainingSeconds = remainingSeconds -1;
+                percent < 100 ? remaining = "Remaining: " + secondsToString(remainingSeconds): remaining = "Completed";
                 if (percent > 100) percent = 100;
             }
         } else if (goalValue === 0) {
@@ -232,7 +224,6 @@ export default class CircularProgress extends Component {
             percent = 0;
         }
         return [percent, goal, remaining, spent];
-
     }
 
     render() {

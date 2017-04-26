@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import { planSession } from '../../helpers/auth'
 import FeedbackMessage from '../FeedbackMessage'
-import './SessionPlanner.css'
 
 
 var DatePicker = require("react-bootstrap-date-picker");

@@ -10,15 +10,8 @@ import {styles} from './CoursesListStyles.js'
 Returns courses as ListGroup
 Renders upon change in DB
 
-TODO: 
-- Ask for confirmation on Delete
-- Submit with enter
-- Add courses in chronological order?
-- ()
-Could probably be split into a Course-component for each courses
 */ 
 
-//http://stackoverflow.com/questions/40494787/get-user-object-properties-from-firebase-in-react
 
 export default class CoursesList extends Component {
 
@@ -30,23 +23,6 @@ export default class CoursesList extends Component {
 		}
 	}
 
-	componentDidMount(){
-		//should be implemented in auth.js
-		/*var self = this;
-		var userUid = getUserUid(); //gets userid of user currently logged in
-
-        //following code gets users courses from firebase and updates the components state
-        //Should maybe be implemented in a function in auth.js
-		self.firebaseRef = firebase.database().ref().child("users/"+userUid+"/courses");
-		self.firebaseRef.orderByChild("active").equalTo(true).on('value', snap => {
-			console.log(snap.val());
-			self.setState({
-				
-				courses: snap.val() //sets courses to whatever is at users/userUid/courses in database
-			});
-		});*/
-		
-	}
 
 	componentWillReceiveProps(nextProps){
 		this.setState({
@@ -55,10 +31,6 @@ export default class CoursesList extends Component {
 
 }
 
-	componentWillUnmount(){
-
-		//this.firebaseRef.off('value');
-	}
 
 	//handles click
 	handleClick(key){
@@ -79,13 +51,10 @@ export default class CoursesList extends Component {
 			return(
 				<ListGroup>
 						{Object.keys(this.state.courses).map((key) => {
-							
-							return <ListGroupItem key={key} /*className="CoursesList"*/ style={styles.coursesList}> 
+							return <ListGroupItem key={key} style={styles.coursesList}> 
 								<div style={styles.listElement}>{key}</div>
 								<Button bsStyle="danger" onClick={() => this.handleClick(key)}>Delete</Button>
 								</ListGroupItem>
-			
-							
 						})} 
 				</ListGroup>
 		);

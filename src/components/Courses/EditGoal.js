@@ -135,6 +135,8 @@ export default class EditGoal extends Component {
         return items;
     }
 
+
+    //setters for day/hour/minSelected
     setDays(num) {
         num !== 0 ? this.setState({daySelected: num}) : this.setState({daySelected : '0'});
     }
@@ -148,6 +150,8 @@ export default class EditGoal extends Component {
         num !== 0 ? this.setState({minSelected: num}) : this.setState({minSelected : '0'});
     }
 
+
+    //closer for modal
     close(){
         this.props.closeModal(this.state.view);
     }

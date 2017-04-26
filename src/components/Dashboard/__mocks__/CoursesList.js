@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap'
 import {disableCourse, courseExistsAtRoot} from '../../helpers/auth'
-import {CourseWarning} from '../various/CourseWarning'
 import {styles} from './CoursesListStyles.js'
 
 
@@ -29,15 +28,12 @@ export default class CoursesList extends Component {
 			courses: nextProps.courses
 		});
 
-}
-
-
+	}
+	
 	//handles click
 	handleClick(key){
 		return true;
 	}
-
-
 
     //Component renders a header, followed by the keys of json object retrieved from firebase mapped to list
 	render(){

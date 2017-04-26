@@ -4,12 +4,9 @@ import firebase from 'firebase';
 export function auth (email, pw) {
     return firebaseAuth().createUserWithEmailAndPassword(email, pw)
         .then(saveUser)
-        .catch((error) => console.log('Error in auth:', error))
 }
 
 export function privilige(user, auth0) {
-    // console.log(user.uid);
-    // console.log(auth0);
     return ref.child(`users/${user.uid}/info`)
         .update({
             privilege: auth0

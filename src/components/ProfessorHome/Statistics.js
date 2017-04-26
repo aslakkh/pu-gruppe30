@@ -117,16 +117,10 @@ export default class Statistics extends Component {
         ;
     }
 
-    componentWillMount(){
-
-    }
     componentDidMount(){
         this.getDataFromFirebase()
-
     }
 
-    componentWillUnmount(){
-    }
     /*
     get sessions from database and selects only for the specific course
      */
@@ -142,14 +136,11 @@ export default class Statistics extends Component {
                 if(snapshot.val().courses[that.kurs]['sessions'] != undefined) {
                     ting.push(snapshot.val().courses[that.kurs]['sessions']);
                     ting.forEach(function (session) {
-                            Object.keys(session).map((session2) => {
-                                that.sessions.push({'key': parseInt(session2), 'time': session[session2]['time']});
-
-
+                            Object.keys(session).map((singleSession) => {  //maps sessions as singleSession
+                                that.sessions.push({'key': parseInt(singleSession), 'time': session[singleSession]['time']});
                             })
                         }
                     )
-
                     that.forceUpdate()
                 }}}})
 
@@ -167,7 +158,7 @@ formats the sessions to usable data for chart.js
     handleClick2(){
         if(this.sessions.length >0 &&!this.state.done){
             var list = this.sessions;
-            Object.keys(list).map((key) => {
+            Object.keys(list).map((key) => { //maps sessions to correct week
                let day = new Date(list[key]["key"]);
                 if(isNaN(this.list2[day.getWeek()])){
                    this.list2[day.getWeek()]=0;
@@ -179,8 +170,7 @@ formats the sessions to usable data for chart.js
             this.list2 = this.list2.filter(function(n){ return n != undefined });
 
             this.state.data.labels=this.labels.sort(this.sortNumber);
-            this.state.data.datasets[0].data=this.list2;//.slice(this.list2.length-11,this.list2.length-1)
-            //this.state.data.labels=this.state.data.labels;//.slice(this.state.data.labels.length-11,this.state.data.labels.length-1)
+            this.state.data.datasets[0].data=this.list2;
         this.setState({
             show:true,
             done:true
@@ -192,19 +182,16 @@ formats the sessions to usable data for chart.js
         if(!this.sessions.length > 0 || this.state.courseID === null || this.state.courseID === undefined){
             return (
                 <h4>No statistics</h4>
-
             )}
             else{
             return(<div>
                     <Button bsStyle="primary" bsSize="large" onClick={this.handleClick2.bind(this)}>Get Statistics</Button>
-
                     {this.state.show ? 
                     <div>
                         <BarChart data={this.state.data}  options={options}/>
                         <h4>X-axis displays week. Y-axis displays students' total time logged</h4>
                     </div>
                     : <h5>Loading statistics may take a while.</h5>}
-
                 </div>
             )
 

@@ -59,8 +59,6 @@ componentWillMount(){
       return (
           <Router>
               <div>
-
-
                   <Tab.Container id="left-tabs" >
                       <Row className="clearfix">
                           <Col sm={3}>
@@ -75,20 +73,16 @@ componentWillMount(){
                                                 </div>
                                             </Link>
                                     </NavItem>
-
-
                                   )}
                               </Nav>
                           </Col>
                           <Col sm={9}>
                               <Tab.Content animation>
-
                                   <Route path="/:id" render={this.handleRoute} />
                               </Tab.Content>
                           </Col>
                       </Row>
                   </Tab.Container>
-
               </div>
           </Router>
       )

@@ -64,7 +64,8 @@ handleClick(key) {
         }
         else{
             return(
-                <div>
+                <div style={{marginTop: '10px'}}>
+                    <h4 style={{marginTop: '10px', marginBottom: '10px',}}>Currently displaying following messages to students: </h4>
                     <ListGroup >
                         {Object.keys(this.messages).map((key,i) => {
                             return <ListGroupItem key={key} className="CoursesList" style={styles.coursesList}>

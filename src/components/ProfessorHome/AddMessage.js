@@ -82,7 +82,7 @@ Checks if message is not empty
                     value={this.state.value}
                     onChange={this.handleChange}
                 />
-                <button disabled={this.checkMessage()} type="submit" className="btn btn-primary">Submit</button>
+                <button disabled={this.checkMessage()} type="submit" className="btn btn-primary" style={{marginTop: '10px'}}>Submit</button>
 
             </form>
         </div>

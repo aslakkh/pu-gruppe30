@@ -168,7 +168,6 @@ export default class CircularProgress extends Component {
         /*
          -Sets the progress percentage, color on progressbar and displays the goal if set.
          */
- 
         let items = [];
         items.push(
             <div key={1} className="view-box" >

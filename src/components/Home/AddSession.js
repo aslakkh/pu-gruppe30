@@ -127,7 +127,7 @@ export default class AddSession extends Component{
         }
     }
 
-    //Populates dropdowns
+    //Populates hours and minutes-dropdowns
     getView() {
         let items = [];
         items.push(<Label style={styles.timeLabel} key={3}>Hours:</Label>);

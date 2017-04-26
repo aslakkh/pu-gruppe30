@@ -225,7 +225,6 @@ export default class CircularProgress extends Component {
             percent = 0;
         }
         return [percent, goal, remaining, spent];
-
     }
 
     render() {

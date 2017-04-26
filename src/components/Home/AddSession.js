@@ -127,7 +127,7 @@ export default class AddSession extends Component{
         }
     }
 
-
+    //Populates dropdowns
     getView() {
         let items = [];
         items.push(<Label style={styles.timeLabel} key={3}>Hours:</Label>);
@@ -142,7 +142,7 @@ export default class AddSession extends Component{
         )
     }
 
-
+    //helper method for getView
     getMenuItems(box) {
         let items = [];
         if (box==='hours') {

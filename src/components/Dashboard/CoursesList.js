@@ -41,7 +41,7 @@ export default class CoursesList extends Component {
 	render(){
 		if(this.state.courses === undefined || this.state.courses === null){
 			return(
-				<h5>You have no active courses. Add a course below.</h5>
+				<h5>You have no active courses. Add a course above.</h5>
 			);
 		}
 		else{

@@ -21,7 +21,6 @@ export default class MessageList extends Component {
         }
     }
     componentWillReceiveProps(nextProps){
-        console.log("reciveve")
         this.setState({
             courseID: nextProps.courseID
         })
@@ -40,12 +39,10 @@ export default class MessageList extends Component {
             });
             that.messages = messages
             that.forceUpdate()
-            console.log(that.messages);
     })
     }
 
     componentDidMount(){
-        console.log("heihei")
         this.getCommentsFromFirebase(this.state.courseID)
     }
     componentWillUnmount(){

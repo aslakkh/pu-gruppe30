@@ -151,9 +151,9 @@ export default class SetTime extends Component {
     //helper returning h4 displaying current teacher recommendation
     displayTeacherRecommendation(){
         if(this.state.teacherRecommendation !== undefined){
-            return (<h4>Current reccomendation: {this.state.teacherRecommendation[0]} days, {this.state.teacherRecommendation[1]} hours, {this.state.teacherRecommendation[2]} minutes.</h4>)
+            return (<h4>Current recommendation: {this.state.teacherRecommendation[0]} days, {this.state.teacherRecommendation[1]} hours, {this.state.teacherRecommendation[2]} minutes.</h4>)
         }else{
-            return (<h4>No current reccomendation set </h4>)
+            return (<h4>No current recommendation set </h4>)
         }
     }
 

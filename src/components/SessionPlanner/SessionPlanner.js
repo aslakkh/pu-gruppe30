@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import {FormGroup, FormControl, ControlLabel, Button, Alert} from 'react-bootstrap'
+import {FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import { planSession } from '../../helpers/auth'
+import FeedbackMessage from '../FeedbackMessage'
 import './SessionPlanner.css'
 
-/*
-TODO:
-- prevent from moving back to homepage on submit
-- Add better feedback to user (about validation state)
-
-*/
 
 var DatePicker = require("react-bootstrap-date-picker");
 
@@ -60,16 +55,23 @@ export default class SessionPlanner extends Component{
             let today = new Date();
             d.setHours(today.getHours()+1, today.getMinutes(), today.getSeconds(), today.getMilliseconds());
             planSession(this.state.course, d.getTime(), this.state.goal);
+            this.setState({
+                goal:"",
+                displayFeedbackMessage: true,
+                feedbackMessage: "Session planned!", 
+                bsStyle: 'success',
+            })
+            this.forceUpdate()
         }
         else{
-            //TODO: provide better user feedback
             console.log("Error: tried submitting invalid values");
+            this.setState({
+                displayFeedbackMessage: true,
+                feedbackMessage: "Date must be after today. Goal/Description can't be empty.", 
+                bsStyle: 'danger',
+            })
         }
-        this.setState({
-            goal:"",
-            show:true
-        })
-        this.forceUpdate()
+        
         
     }
 
@@ -103,19 +105,13 @@ export default class SessionPlanner extends Component{
         }
     }
 
-    componentDidMount(){
-    }
 
 
     //Component renders a Formgroup containing a textarea and a datepicker, and a button for submitting data
     render(){
-        //<DatePicker defaultValue={this.state.date}/>
         return(
             <div>
-                {this.state.show ?
-                    <Alert bsStyle='success'>
-                        Session planned!
-                    </Alert> : <div></div>}
+                <FeedbackMessage active={this.state.displayFeedbackMessage} message={this.state.feedbackMessage} bsStyle={this.state.bsStyle}/>
                 <FormGroup 
                 controlId="planSessionForm"
                 validationState={this.formValidateState()}

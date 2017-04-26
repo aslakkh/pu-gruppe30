@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Set Time load with TES9000 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": "10px",
+    }
+  }
+>
+  <button
+    className="btn btn-primary btn-block"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    <h4>
+      Set recommended weekly time
+    </h4>
+  </button>
+</div>
+`;

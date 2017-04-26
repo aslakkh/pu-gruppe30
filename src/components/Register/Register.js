@@ -7,7 +7,7 @@ export default class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if(this.pw.value === this.pwcon.value){
-        (auth(this.email.value, this.pw.value)).then( (user)=>  privilige(user, this.state.authUser)).catch( error => this.setState({error: error.message}))
+        (auth(this.email.value, this.pw.value)).then( (user)=>  {if(user != undefined){privilige(user, this.state.authUser)}}).catch( error => this.setState({error: error.message}))
     }
   
   else{
@@ -25,6 +25,7 @@ export default class Register extends Component {
   }
 
   handleOptionChange(changeEvent){
+    console.log(changeEvent.target.value)
     this.setState({
       authUser: changeEvent.target.value})
   }

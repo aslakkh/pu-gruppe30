@@ -3,6 +3,7 @@ import {Tab,NavItem, Nav, Col,Row} from 'react-bootstrap'
 import AddMessage from './AddMessage'
 import MessageList from './MessageList'
 import Statistics from './Statistics'
+import SetTime from './SetTime'
 import {
     BrowserRouter as Router,
     Route,
@@ -39,8 +40,8 @@ componentWillReceiveProps(nextProps){
             <div>
                 <AddMessage courseID={match.params.id}/>
                 <MessageList courseID={match.params.id}/>
+                <SetTime courseID={match.params.id} />
                 <Statistics courseID={match.params.id}/>
-
             </div>
         )
     }

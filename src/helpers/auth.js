@@ -99,12 +99,22 @@ export function addCourseToRoot(course){
     })
 }
 
+//sets the teachers recommended time for course to time
+export function setRecommendedTime(course, time){
+    var courseRef = ref.child('courses/');
+    courseRef.child(course).update({
+        weekly: time,
+    })
+    
+}
+
 //check for existing course at root
 export function courseExistsAtRoot(course){
     var courseRef = ref.child('courses/');
     var courseExists;
     courseRef.once('value', function(snapshot) {
         courseExists = snapshot.hasChild(course);
+        console.log(courseExists);
     });
     return courseExists;
 }

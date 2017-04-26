@@ -5,8 +5,6 @@
 
 import React, { Component } from 'react';
 import {Button, Modal, FormGroup, Label, Form, DropdownButton, MenuItem,ControlLabel} from 'react-bootstrap';
-import {ref } from '../../config/constants'
-import firebase from 'firebase';
 import { addSession} from '../../helpers/auth'
 import FeedbackMessage from '../FeedbackMessage'
 /*
@@ -16,8 +14,15 @@ import FeedbackMessage from '../FeedbackMessage'
 const styles = {
     Feedback: {
         marginTop: '10px',
+    },
+    timeLabel: {
+        background: 'white',
+        color: '#000',
+        fontSize: '18px',
+        fontStyle: 'normal',
+        fontWeight: 'normal'
     }
-}
+};
 
 let DatePicker = require("react-bootstrap-date-picker");
 export default class AddSession extends Component{
@@ -34,9 +39,9 @@ export default class AddSession extends Component{
             courseID: this.props.courseID,
             date: new Date(new Date().getTime()).toISOString(),
             show: false,
-            hourSelected: 0,
-            minSelected: 0,
-            secondsPlanned: 0,
+            hourSelected: '0',
+            minSelected: '0',
+            secondsPlanned: '0',
         }
     }
 
@@ -51,19 +56,13 @@ export default class AddSession extends Component{
     }
 
     setHours(num) {
-        this.setState({
-            hourSelected: num
-        })
+        num !== 0 ? this.setState({hourSelected: num}) : this.setState({hourSelected : '0'});
+
     }
 
     setMinutes(num) {
-        this.setState({
-            minSelected: num
-        })
+        num !== 0 ? this.setState({minSelected: num}) : this.setState({minSelected : '0'});
     }
-
-
-
 
 
     validateState(){
@@ -114,25 +113,6 @@ export default class AddSession extends Component{
 
                 addSession(this.state.date,this.state.courseID,this.state.minSelected,this.state.hourSelected);
             }
-            
-        }
-        
-
-        
-
-
-    }
-
-
-
-
-    formValidateState(){
-
-        if(this.state.goal.trim() !== ""){
-            return 'success';
-        }
-        else{
-            return 'error';
         }
     }
 
@@ -150,9 +130,9 @@ export default class AddSession extends Component{
 
     getView() {
         let items = [];
-        items.push(<Label key={3}>Hours:</Label>);
+        items.push(<Label style={styles.timeLabel} key={3}>Hours:</Label>);
         items.push(<DropdownButton key={4} title={this.state.hourSelected} id={'dropdown-basic'} >{this.getMenuItems('hours')}</DropdownButton>);
-        items.push(<Label key={5}>Minutes:</Label>);
+        items.push(<Label style={styles.timeLabel} key={5}>Minutes:</Label>);
         items.push(<DropdownButton key={6} title={this.state.minSelected} id={'dropdown-basic'}>{this.getMenuItems('mins')}</DropdownButton>);
 
         return (
@@ -165,7 +145,6 @@ export default class AddSession extends Component{
 
     getMenuItems(box) {
         let items = [];
-        let max = 0;
         if (box==='hours') {
             for(let i=0; i<13; i++) {
                 items.push(<MenuItem onClick={() => this.setHours(i)} key={i}>{i}</MenuItem>);

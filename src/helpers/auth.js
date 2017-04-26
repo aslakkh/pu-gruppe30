@@ -4,12 +4,12 @@ import firebase from 'firebase';
 export function auth (email, pw) {
     return firebaseAuth().createUserWithEmailAndPassword(email, pw)
         .then(saveUser)
-        .catch((error) => console.log('Oops', error))
+        .catch((error) => console.log('Error in auth:', error))
 }
 
 export function privilige(user, auth0) {
-    console.log(user.uid);
-    console.log(auth0);
+    // console.log(user.uid);
+    // console.log(auth0);
     return ref.child(`users/${user.uid}/info`)
         .update({
             privilege: auth0
@@ -114,7 +114,6 @@ export function courseExistsAtRoot(course){
     var courseExists;
     courseRef.once('value', function(snapshot) {
         courseExists = snapshot.hasChild(course);
-        console.log(courseExists);
     });
     return courseExists;
 }
@@ -123,7 +122,7 @@ export function getCourse(){
     const userUid = firebase.auth().currentUser.uid;
     this.firebase.database().ref(userUid).once();
     return firebase.database().ref(userUid).on("value", function(snapshot) {
-        console.log(snapshot.val());
+        //console.log(snapshot.val());
     });
 }
 

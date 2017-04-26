@@ -294,6 +294,11 @@ exports[`Edit Goal One course 1`] = `
                                               Teacher expectation not set
                                       </Label>
                               </div>
+                              <FeedbackMessage
+                                      active={undefined}
+                                      bsStyle={undefined}
+                                      message={undefined}
+                              />
                       </ModalBody>
                       <ModalFooter
                               bsClass="modal-footer"
@@ -588,6 +593,11 @@ exports[`Edit Goal One course 1`] = `
                                               Teacher expectation not set
                                       </Label>
                               </div>
+                              <FeedbackMessage
+                                      active={undefined}
+                                      bsStyle={undefined}
+                                      message={undefined}
+                              />
                       </ModalBody>
                       <ModalFooter
                               bsClass="modal-footer"
@@ -629,6 +639,7 @@ exports[`Edit Goal One course 1`] = `
         "close": [Function],
         "context": Object {},
         "handleSaveBtn": [Function],
+        "handleUseBtn": [Function],
         "props": Object {
           "courseID": "TES1000",
           "showModal": true,
@@ -908,6 +919,11 @@ exports[`Edit Goal One course 1`] = `
           Teacher expectation not set
         </Label>
       </div>
+      <FeedbackMessage
+        active={undefined}
+        bsStyle={undefined}
+        message={undefined}
+      />
     </ModalBody>
     <ModalFooter
       bsClass="modal-footer"

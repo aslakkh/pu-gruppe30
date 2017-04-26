@@ -3,11 +3,6 @@
 exports[`AddSession One course 1`] = `
 <div
   className="main"
-  style={
-    Object {
-      "marginBottom": 10,
-    }
-  }
 >
   <h4>
     Forgot to start timer?
@@ -23,6 +18,16 @@ exports[`AddSession One course 1`] = `
   >
     Set previous session
   </Button>
+  <FeedbackMessage
+    active={undefined}
+    bsStyle={undefined}
+    message={undefined}
+    style={
+      Object {
+        "marginTop": "10px",
+      }
+    }
+  />
   <Modal
     animation={true}
     autoFocus={true}
@@ -51,11 +56,6 @@ exports[`AddSession One course 1`] = `
           "_renderedComponent": NoopInternalComponent {
             "_currentElement": <div
               className="main"
-              style={
-                      Object {
-                              "marginBottom": 10,
-                            }
-              }
       >
               <h4>
                       Forgot to start timer?
@@ -71,6 +71,16 @@ exports[`AddSession One course 1`] = `
               >
                       Set previous session
               </Button>
+              <FeedbackMessage
+                      active={undefined}
+                      bsStyle={undefined}
+                      message={undefined}
+                      style={
+                              Object {
+                                      "marginTop": "10px",
+                                    }
+                      }
+              />
               <Modal
                       animation={true}
                       autoFocus={true}
@@ -180,12 +190,21 @@ exports[`AddSession One course 1`] = `
                                       <Label
                                               bsClass="label"
                                               bsStyle="default"
+                                              style={
+                                                      Object {
+                                                              "background": "white",
+                                                              "color": "#000",
+                                                              "fontSize": "18px",
+                                                              "fontStyle": "normal",
+                                                              "fontWeight": "normal",
+                                                            }
+                                              }
                                       >
                                               Hours:
                                       </Label>
                                       <DropdownButton
                                               id="dropdown-basic"
-                                              title={0}
+                                              title="0"
                                       >
                                               <MenuItem
                                                       bsClass="dropdown"
@@ -306,12 +325,21 @@ exports[`AddSession One course 1`] = `
                                       <Label
                                               bsClass="label"
                                               bsStyle="default"
+                                              style={
+                                                      Object {
+                                                              "background": "white",
+                                                              "color": "#000",
+                                                              "fontSize": "18px",
+                                                              "fontStyle": "normal",
+                                                              "fontWeight": "normal",
+                                                            }
+                                              }
                                       >
                                               Minutes:
                                       </Label>
                                       <DropdownButton
                                               id="dropdown-basic"
-                                              title={0}
+                                              title="0"
                                       >
                                               <MenuItem
                                                       bsClass="dropdown"
@@ -382,11 +410,6 @@ exports[`AddSession One course 1`] = `
             "_debugID": 2,
             "_renderedOutput": <div
               className="main"
-              style={
-                      Object {
-                              "marginBottom": 10,
-                            }
-              }
       >
               <h4>
                       Forgot to start timer?
@@ -402,6 +425,16 @@ exports[`AddSession One course 1`] = `
               >
                       Set previous session
               </Button>
+              <FeedbackMessage
+                      active={undefined}
+                      bsStyle={undefined}
+                      message={undefined}
+                      style={
+                              Object {
+                                      "marginTop": "10px",
+                                    }
+                      }
+              />
               <Modal
                       animation={true}
                       autoFocus={true}
@@ -511,12 +544,21 @@ exports[`AddSession One course 1`] = `
                                       <Label
                                               bsClass="label"
                                               bsStyle="default"
+                                              style={
+                                                      Object {
+                                                              "background": "white",
+                                                              "color": "#000",
+                                                              "fontSize": "18px",
+                                                              "fontStyle": "normal",
+                                                              "fontWeight": "normal",
+                                                            }
+                                              }
                                       >
                                               Hours:
                                       </Label>
                                       <DropdownButton
                                               id="dropdown-basic"
-                                              title={0}
+                                              title="0"
                                       >
                                               <MenuItem
                                                       bsClass="dropdown"
@@ -637,12 +679,21 @@ exports[`AddSession One course 1`] = `
                                       <Label
                                               bsClass="label"
                                               bsStyle="default"
+                                              style={
+                                                      Object {
+                                                              "background": "white",
+                                                              "color": "#000",
+                                                              "fontSize": "18px",
+                                                              "fontStyle": "normal",
+                                                              "fontWeight": "normal",
+                                                            }
+                                              }
                                       >
                                               Minutes:
                                       </Label>
                                       <DropdownButton
                                               id="dropdown-basic"
-                                              title={0}
+                                              title="0"
                                       >
                                               <MenuItem
                                                       bsClass="dropdown"
@@ -730,9 +781,9 @@ exports[`AddSession One course 1`] = `
         "state": Object {
           "courseID": "TES1000",
           "date": "2016-01-01T00:00:00.000Z",
-          "hourSelected": 0,
-          "minSelected": 0,
-          "secondsPlanned": 0,
+          "hourSelected": "0",
+          "minSelected": "0",
+          "secondsPlanned": "0",
           "show": false,
         },
         "updater": Object {
@@ -850,12 +901,21 @@ exports[`AddSession One course 1`] = `
         <Label
           bsClass="label"
           bsStyle="default"
+          style={
+            Object {
+              "background": "white",
+              "color": "#000",
+              "fontSize": "18px",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            }
+          }
         >
           Hours:
         </Label>
         <DropdownButton
           id="dropdown-basic"
-          title={0}
+          title="0"
         >
           <MenuItem
             bsClass="dropdown"
@@ -976,12 +1036,21 @@ exports[`AddSession One course 1`] = `
         <Label
           bsClass="label"
           bsStyle="default"
+          style={
+            Object {
+              "background": "white",
+              "color": "#000",
+              "fontSize": "18px",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            }
+          }
         >
           Minutes:
         </Label>
         <DropdownButton
           id="dropdown-basic"
-          title={0}
+          title="0"
         >
           <MenuItem
             bsClass="dropdown"

@@ -42,6 +42,7 @@ exports[`Stopwatch One course 1`] = `
           onClick={[Function]}
           style={
             Object {
+              "marginBottom": "10px",
               "textAlign": "center",
             }
           }
@@ -49,6 +50,11 @@ exports[`Stopwatch One course 1`] = `
           Start
         </Button>
       </div>
+      <FeedbackMessage
+        active={undefined}
+        bsStyle={undefined}
+        message={undefined}
+      />
       <div>
         <AddSession
           courseID="TES1000"

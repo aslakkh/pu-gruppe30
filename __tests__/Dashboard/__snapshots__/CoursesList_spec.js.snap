@@ -73,6 +73,6 @@ exports[`CoursesList renders with props 1`] = `
 
 exports[`CoursesList renders without props 1`] = `
 <h5>
-  You have no active courses. Add a course below.
+  You have no active courses. Add a course above.
 </h5>
 `;

@@ -30,6 +30,7 @@ const coursesNull=null;
 describe("Stopwatch", function () {
     let renderer2;
     let component2;
+    const wrapper = shallow(<Stopwatch course={courses} emne={"TES1000"}/>);
     renderer2 = TestUtils.createRenderer();
     renderer2.render(
         <Stopwatch course={courses} emne={"TES1000"}/>
@@ -39,9 +40,9 @@ describe("Stopwatch", function () {
         expect(component2).toMatchSnapshot();
     });
     it('Test start button', () => {
-        const wrapper = shallow(<Stopwatch course={courses} emne={"TES1000"}/>);
+
         wrapper.find('Button').first().simulate('click');
-        wrapper.find('Button').at(1).simulate('click')
+
 
     })
 });

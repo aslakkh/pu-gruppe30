@@ -20,6 +20,7 @@ exports[`AddCourse renders FormGroup and button With courses 1`] = `
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "flex-start",
+        "marginBottom": "10px",
         "marginTop": "10px",
       }
     }

@@ -2,7 +2,11 @@
 
 exports[`AddSession One course 1`] = `
 <div>
-  <div />
+  <FeedbackMessage
+    active={undefined}
+    bsStyle={undefined}
+    message={undefined}
+  />
   <FormGroup
     bsClass="form-group"
     controlId="planSessionForm"

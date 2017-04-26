@@ -1,53 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddCourse renders FormGroup and button One course 1`] = `
-<div
-  style={
-    Object {
-      "alignItems": "flex-start",
-      "display": "flex",
-      "flexDirection": "row",
-      "justifyContent": "flex-start",
-      "marginTop": "10px",
+<div>
+  <div
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "marginTop": "10px",
+      }
     }
-  }
->
-  <FormGroup
-    bsClass="form-group"
-    controlId="addCourseForm"
-    validationState={undefined}
   >
-    <FormControl
-      bsClass="form-control"
-      componentClass="input"
-      id="addCourseForm"
-      onChange={[Function]}
-      onKeyPress={[Function]}
-      placeholder="Course name"
-      type="text"
-      value=""
-    />
-    <FormControlFeedback
-      bsClass="form-control-feedback"
-      bsRole="feedback"
-    />
-    <HelpBlock
-      bsClass="help-block"
+    <FormGroup
+      bsClass="form-group"
+      controlId="addCourseForm"
+      validationState={undefined}
     >
-      Enter course code (up to three letters followed by four digits)
-    </HelpBlock>
-  </FormGroup>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsSize="large"
-    bsStyle="primary"
-    disabled={false}
-    onClick={[Function]}
-    type="submit"
-  >
-    Add
-  </Button>
+      <FormControl
+        bsClass="form-control"
+        componentClass="input"
+        id="addCourseForm"
+        onChange={[Function]}
+        onKeyPress={[Function]}
+        placeholder="Course name"
+        type="text"
+        value=""
+      />
+      <FormControlFeedback
+        bsClass="form-control-feedback"
+        bsRole="feedback"
+      />
+      <HelpBlock
+        bsClass="help-block"
+      >
+        Enter course code (up to three letters followed by four digits)
+      </HelpBlock>
+    </FormGroup>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsSize="large"
+      bsStyle="primary"
+      disabled={false}
+      onClick={[Function]}
+      type="submit"
+    >
+      Add
+    </Button>
+  </div>
+  <FeedbackMessage
+    active={undefined}
+    bsStyle={undefined}
+    message={undefined}
+  />
 </div>
 `;

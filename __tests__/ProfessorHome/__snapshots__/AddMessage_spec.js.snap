@@ -22,6 +22,11 @@ exports[`Add Message Not logged in 1`] = `
     <button
       className="btn btn-primary"
       disabled={true}
+      style={
+        Object {
+          "marginTop": "10px",
+        }
+      }
       type="submit"
     >
       Submit

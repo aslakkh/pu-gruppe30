@@ -34,9 +34,6 @@ export default class AddMessage extends Component {
      castMessageToFirebase(){
 
          const userUid = firebase.auth().currentUser.uid;
-         console.log(this.state.courseID);
-         console.log(this.message.value);
-         console.log('courses/'+this.state.courseID+'/Messages/'+ Date.now());
          const timeRef = ref.child('courses/'+this.state.courseID+'/Messages/'+ Date.now());
          timeRef.set({
              Message: this.message.value

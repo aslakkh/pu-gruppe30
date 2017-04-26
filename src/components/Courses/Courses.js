@@ -5,8 +5,7 @@ export default class Courses extends Component {
 constructor(props) {
   super(props);
   this.state=({
-    courses: this.props.courses,
-    emner: ["tma","bull"]
+    courses: this.props.courses
   })
 };
 
